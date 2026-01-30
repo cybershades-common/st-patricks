@@ -2,11 +2,17 @@
 
 .hero {
   position: relative;
-  padding-top: 18.0625rem;
   padding-bottom: @spacing-base;
   background-color: @primary-gold-4;
   overflow: hidden;
-  min-height: 100vh;
+
+  .hero-content-wrap {
+    height: 75vh;
+    //min-height: 675px;
+    display: flex;
+    align-items: flex-end;
+  }
+
 }
 
 .hero .container-fluid {
@@ -15,9 +21,6 @@
   position: relative;
   z-index: 2;
   
-  @media (min-width: @breakpoint-lg) {
-    max-width: 86.125rem;
-  }
 }
 
 .hero .row {
