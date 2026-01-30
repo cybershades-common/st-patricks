@@ -413,25 +413,32 @@ body {
   transition-delay: 0.7s;
 }
 .menu-main-item:hover {
-  color: #84754e;
+  color: #10069f;
 }
 .menu-main-item.active {
   color: #10069f;
 }
 .menu-sub-items {
-  gap: 1rem;
-  padding-left: 2rem;
+  gap: 0.5rem;
+  padding-left: 0;
 }
 .menu-sub-item {
   font-family: 'Helvetica Neue LT Pro', sans-serif;
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 300;
   line-height: 1.3;
   color: #27251f;
   text-decoration: none;
+  white-space: pre-wrap;
   opacity: 0;
   transform: translateX(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
+  display: block;
+  width: 100%;
+}
+.menu-sub-item.active,
+.menu-sub-item:first-child {
+  color: #10069f;
 }
 .mega-menu.active .menu-sub-item {
   opacity: 1;

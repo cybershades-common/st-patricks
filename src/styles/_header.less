@@ -241,7 +241,7 @@
 }
 
 .menu-main-item:hover {
-  color: @primary-gold;
+  color: @primary-blue; // Blue color on hover like active state
 }
 
 .menu-main-item.active {
@@ -249,20 +249,28 @@
 }
 
 .menu-sub-items {
-  gap: 1rem;
-  padding-left: @spacing-xs;
+  gap: 0.5rem; // Figma: gap-[5px]
+  padding-left: 0;
 }
 
 .menu-sub-item {
   font-family: @font-family-helvetica-neue;
-  font-size: 1.25rem;
+  font-size: 2rem; // Figma: text-[20px]
   font-weight: @font-weight-light;
-  line-height: 1.3;
-  color: @basic-black;
+  line-height: 1.3; // Figma: leading-[1.3]
+  color: @basic-black; // Figma: text-[color:var(--primary/black-c,#27251f)]
   text-decoration: none;
+  white-space: pre-wrap;
   opacity: 0;
   transform: translateX(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
+  display: block;
+  width: 100%;
+}
+
+.menu-sub-item.active,
+.menu-sub-item:first-child {
+  color: @primary-blue; // Figma: text-[color:var(--primary/blue,#10069f)]
 }
 
 .mega-menu.active .menu-sub-item {
