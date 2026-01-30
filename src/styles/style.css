@@ -1014,14 +1014,19 @@ body {
 .footer-logos {
   margin-top: 4.4rem;
   margin-left: 3.4rem;
-  gap: 0;
+  gap: 3.072rem;
   height: 8.316rem;
   align-items: center;
+  width: 41rem;
 }
 .footer-logo-centenary {
   width: 9.064rem;
   height: 7.9235rem;
   flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.196rem;
 }
 .footer-logo-centenary img {
   width: 100%;
@@ -1032,6 +1037,9 @@ body {
   width: 8.316rem;
   height: 8.316rem;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .footer-logo-oldboys img {
   width: 100%;
@@ -1042,6 +1050,10 @@ body {
   width: 11.205rem;
   height: 7.0065rem;
   flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.655rem;
 }
 .footer-logo-erea img {
   width: 100%;
@@ -1049,10 +1061,11 @@ body {
   object-fit: contain;
 }
 .footer-divider-vertical {
-  width: 0.0637rem;
-  height: 8.316rem;
-  background-color: #ffffff;
+  width: 0.03981rem;
+  align-self: stretch;
+  background-color: #a29061;
   flex-shrink: 0;
+  margin: 0;
 }
 .footer-right {
   padding-left: 7.32rem;
