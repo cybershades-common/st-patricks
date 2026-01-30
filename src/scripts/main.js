@@ -64,12 +64,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hero animations
     function initHeroAnimations() {
-        gsap.to('.hero-gradient', {
-            opacity: 1,
-            duration: 2,
-            delay: 0.3,
-            ease: 'power2.out'
-        });
+        const heroGradient = document.querySelector('.hero-gradient');
+        if (heroGradient) {
+            const viewportHeight = window.innerHeight;
+            const startY = viewportHeight + 200; // 100vh + 20rem (approximately)
+            
+            // Set initial state
+            gsap.set(heroGradient, {
+                y: startY,
+                x: '-10%',
+                opacity: 0,
+                visibility: 'visible'
+            });
+            
+            // Animate to final position
+            gsap.to(heroGradient, {
+                y: 0,
+                x: 0,
+                opacity: 1, // Darker gradient
+                duration: 1.5,
+                delay: 0.2,
+                ease: 'power2.out'
+            });
+        }
 
         gsap.fromTo('.header-logo',
             { y: -50, opacity: 0 },

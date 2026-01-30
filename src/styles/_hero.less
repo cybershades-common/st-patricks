@@ -2,7 +2,7 @@
 
 .hero {
   position: relative;
-  padding-top: 28.9rem; // Figma: Hero Header Content frame y="289" (28.9rem from top of hero section)
+  padding-top: 28.9rem; 
   padding-bottom: @spacing-base;
   background-color: @primary-gold-4;
   overflow: hidden;
@@ -10,13 +10,13 @@
 }
 
 .hero .container-fluid {
-  padding-left: 3.2rem; // Figma: Hero Header Content frame x="32" (3.2rem from left)
+  padding-left: 3.2rem; 
   padding-right: 3.2rem;
   position: relative;
   z-index: 2;
   
   @media (min-width: @breakpoint-lg) {
-    max-width: 137.8rem; // Figma: Hero Header Content frame width="1378" (137.8rem)
+    max-width: 137.8rem; 
   }
 }
 
@@ -30,14 +30,15 @@
   position: absolute;
   bottom: -20rem; // Position below the text content
   left: 0;
-  width: 40rem;
-  height: 40rem;
+  width: 20rem;
+  height: 20rem;
   border-radius: 128.1875rem;
-  background: @primary-yellow-bright;
+  background: radial-gradient(circle, @primary-yellow-bright 0%, rgba(223, 210, 34, 0.6) 50%, rgba(255, 240, 42, 0.2) 100%);
   filter: blur(250px);
   pointer-events: none;
-  opacity: 1;
+  opacity: 0; // Start hidden, will be animated by GSAP
   z-index: 1; // Above background but below text
+  visibility: hidden; // Start hidden
 }
 
 .hero-content {

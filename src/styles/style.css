@@ -310,7 +310,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.3rem;
+  align-items: center;
+  gap: 0.7rem;
 }
 .hamburger-line {
   display: block;
@@ -319,12 +320,13 @@ body {
   background-color: #27251f;
   transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   transform-origin: center;
+  border-radius: 0.1rem;
 }
 .hamburger.active .hamburger-line:nth-child(1) {
-  transform: translateY(0.5rem) rotate(45deg);
+  transform: translateY(0.25rem) rotate(45deg);
 }
 .hamburger.active .hamburger-line:nth-child(2) {
-  transform: translateY(-0.5rem) rotate(-45deg);
+  transform: translateY(-0.25rem) rotate(-45deg);
 }
 .mega-menu {
   position: fixed;
@@ -703,14 +705,15 @@ body {
   position: absolute;
   bottom: -20rem;
   left: 0;
-  width: 40rem;
-  height: 40rem;
+  width: 20rem;
+  height: 20rem;
   border-radius: 128.1875rem;
-  background: #fff02a;
+  background: radial-gradient(circle, #fff02a 0%, rgba(223, 210, 34, 0.6) 50%, rgba(255, 240, 42, 0.2) 100%);
   filter: blur(250px);
   pointer-events: none;
-  opacity: 1;
+  opacity: 0;
   z-index: 1;
+  visibility: hidden;
 }
 .hero-content {
   padding-left: 0;
