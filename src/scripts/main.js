@@ -13,10 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdownWrappers = document.querySelectorAll('.dropdown-wrapper');
 
     let isMenuOpen = false;
+    let isHeaderHidden = false;
+    let lastScrollY = window.scrollY;
+    let scrollTicking = false;
 
     function openMenu() {
         isMenuOpen = true;
         header.classList.add('menu-open');
+        header.classList.remove('header-hidden');
+        isHeaderHidden = false;
         megaMenu.classList.add('active');
         menuOverlay.classList.add('active');
         hamburger.classList.add('active');
@@ -50,6 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdownWrappers.forEach(wrapper => {
             wrapper.style.display = 'none';
         });
+
+        updateHeaderOnScroll();
     }
 
     menuToggle.addEventListener('click', function() {
@@ -61,6 +68,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     menuOverlay.addEventListener('click', closeMenu);
+
+    function updateHeaderOnScroll() {
+        const currentScrollY = window.scrollY;
+        const headerHeight = header.offsetHeight || 0;
+        const delta = currentScrollY - lastScrollY;
+
+        if (!isMenuOpen) {
+            if (currentScrollY > 0) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+
+            if (currentScrollY > headerHeight && delta > 0) {
+                if (!isHeaderHidden) {
+                    header.classList.add('header-hidden');
+                    isHeaderHidden = true;
+                }
+            } else if (delta < -5 || currentScrollY <= headerHeight) {
+                if (isHeaderHidden) {
+                    header.classList.remove('header-hidden');
+                    isHeaderHidden = false;
+                }
+            }
+        }
+
+        lastScrollY = currentScrollY;
+        scrollTicking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(updateHeaderOnScroll);
+            scrollTicking = true;
+        }
+    });
+    updateHeaderOnScroll();
 
     // Hero animations
     function initHeroAnimations() {

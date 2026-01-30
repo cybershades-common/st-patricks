@@ -216,8 +216,16 @@ body {
   z-index: 1000;
   padding: 2.5rem 0;
   background-color: transparent;
-  transition: all 0.3s ease;
+  transition: transform 0.35s ease, background-color 0.3s ease, border-color 0.3s ease;
+  will-change: transform;
   border-bottom: 0.1rem solid transparent;
+}
+.header.header-hidden {
+  transform: translateY(-110%);
+}
+.header.header-scrolled {
+  background-color: #ffffff;
+  border-bottom-color: transparent;
 }
 .header.menu-open {
   background-color: #ffffff;
