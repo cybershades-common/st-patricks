@@ -8,7 +8,7 @@ html {
 }
 .wrapper {
   max-width: 100vw;
-  overflow: hidden;
+  overflow: visible;
 }
 img,
 object,
@@ -217,6 +217,7 @@ body {
   background-color: var(--primary-gold-4);
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
 }
 .btn-rounded-large {
   display: inline-flex;
@@ -823,6 +824,9 @@ body {
   color: var(--basic-black);
   margin: 0;
 }
+.sticky-wrapper {
+  position: relative;
+}
 .hero-media {
   position: relative;
   width: 100%;
@@ -830,6 +834,11 @@ body {
   min-height: 31.25rem;
   overflow: hidden;
   z-index: 2;
+}
+.sticky-wrapper .hero-media {
+  position: sticky !important;
+  top: 0;
+  z-index: 1;
 }
 .hero-media-wrapper {
   position: relative;
@@ -907,6 +916,10 @@ body {
   .hero-media {
     min-height: 25rem;
   }
+  .sticky-wrapper .hero-media {
+    position: relative !important;
+    top: auto;
+  }
 }
 @media (max-width: 767px) {
   .hero {
@@ -946,6 +959,8 @@ body {
   padding-bottom: var(--spacing-base);
   background-color: var(--primary-gold-4);
   position: relative;
+  z-index: 3;
+  overflow: hidden;
 }
 .about-section .container-fluid {
   position: relative;
@@ -1000,6 +1015,10 @@ body {
   object-fit: cover;
 }
 .about-gradient {
+  position: absolute;
+  top: -18rem;
+  left: 50%;
+  transform: translateX(-50%);
   width: 62.6875rem;
   height: 62.6875rem;
   aspect-ratio: 1/1;
@@ -1007,11 +1026,13 @@ body {
   background: var(--primary-yellow-bright, #FFF02A);
   filter: blur(250px);
   z-index: 1;
+  pointer-events: none;
 }
 @media (max-width: 991px) {
   .about-section {
     padding-top: 1.25rem;
     padding-bottom: 1.875rem;
+    overflow: hidden;
   }
   .about-section .container-fluid {
     padding-left: 1.25rem;
@@ -1047,6 +1068,13 @@ body {
   }
   .about-image {
     height: 18.75rem;
+  }
+}
+@media (max-width: 575px) {
+  .about-gradient {
+    width: 38rem;
+    height: 38rem;
+    top: -10rem;
   }
 }
 .strategic-section {
