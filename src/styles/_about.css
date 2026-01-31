@@ -1,8 +1,10 @@
 .about-section {
   padding-top: 2.1875rem;
   padding-bottom: var(--spacing-base);
-  background-color: var(--primary-gold-4);
   position: relative;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--primary-gold-4);
 }
 .about-section .container-fluid {
   position: relative;
@@ -19,8 +21,12 @@
   white-space: pre-wrap;
 }
 .about-heading .underline {
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 3px;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
 .about-content-row {
   margin-top: 7.8125rem;
@@ -56,19 +62,11 @@
   height: 100%;
   object-fit: cover;
 }
-.about-gradient {
-  width: 62.6875rem;
-  height: 62.6875rem;
-  aspect-ratio: 1/1;
-  border-radius: 62.6875rem;
-  background: var(--primary-yellow-bright, #FFF02A);
-  filter: blur(250px);
-  z-index: 1;
-}
 @media (max-width: 991px) {
   .about-section {
     padding-top: 1.25rem;
     padding-bottom: 1.875rem;
+    overflow: hidden;
   }
   .about-section .container-fluid {
     padding-left: 1.25rem;

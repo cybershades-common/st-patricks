@@ -988,8 +988,12 @@ body {
   white-space: pre-wrap;
 }
 .about-heading .underline {
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 3px;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
 .about-content-row {
   margin-top: 7.8125rem;
