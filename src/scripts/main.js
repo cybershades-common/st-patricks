@@ -212,13 +212,61 @@ document.addEventListener('DOMContentLoaded', function () {
                 { x: 50, opacity: 0 },
                 { x: 0, opacity: 1, duration: 1.2, ease: 'Power1.easeOut' },
                 1.5
-            )
-            // Hero CTA button
-            .fromTo('.hero-text button',
-                { x: 50, opacity: 0 },
-                { x: 0, opacity: 1, duration: 0.8, ease: 'Power1.easeOut' },
-                1.7
             );
+
+        // Hero CTA button - btn-clip-reveal animation
+        const heroCTA = document.querySelector('.hero-text button');
+        if (heroCTA) {
+            // Set initial state for button fill (hidden from right)
+            gsap.set(heroCTA, {
+                autoAlpha: 1,
+                clipPath: 'inset(0 100% 0 0)',
+                webkitClipPath: 'inset(0 100% 0 0)',
+                willChange: 'clip-path'
+            });
+
+            // Wrap text in span if it doesn't exist for clip reveal animation
+            let ctaText = heroCTA.querySelector('span');
+            if (!ctaText && heroCTA.textContent) {
+                const text = heroCTA.textContent.trim();
+                heroCTA.innerHTML = `<span>${text}</span>`;
+                ctaText = heroCTA.querySelector('span');
+            }
+
+            // Set initial clip reveal state for text (hidden from right)
+            if (ctaText) {
+                gsap.set(ctaText, {
+                    clipPath: 'inset(0 100% 0 0)',
+                    webkitClipPath: 'inset(0 100% 0 0)',
+                    display: 'inline-block',
+                    willChange: 'clip-path'
+                });
+            }
+
+            // Add button fill animation to timeline
+            heroTimeline
+                // Step 1: Fill color from right to left
+                .to(heroCTA, {
+                    clipPath: 'inset(0 0% 0 0)',
+                    webkitClipPath: 'inset(0 0% 0 0)',
+                    duration: 0.6,
+                    ease: 'none',
+                    force3D: true,
+                    autoRound: false
+                }, 1.7);
+
+            // Step 2: Reveal text (left to right)
+            if (ctaText) {
+                heroTimeline.to(ctaText, {
+                    clipPath: 'inset(0 0% 0 0)',
+                    webkitClipPath: 'inset(0 0% 0 0)',
+                    duration: 0.9,
+                    ease: 'none',
+                    force3D: true,
+                    autoRound: false
+                }, 2.35); // Start text reveal 0.65s after fill begins
+            }
+        }
 
         // Hero gradient - subtle fade in from background
         const heroGradient = document.querySelector('.hero-gradient');
