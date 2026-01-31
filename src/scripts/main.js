@@ -74,10 +74,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 { opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: 'power1.out', force3D: true },
                 '-=0.2'
             )
-            // Menu image (after sub menu)
+            // Menu image - curtain drop reveal (after sub menu)
             .fromTo(menuImage,
-                { opacity: 0, scale: 0.95 },
-                { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' },
+                { clipPath: 'inset(0 0 100% 0)' },
+                { clipPath: 'inset(0 0 0% 0)', duration: 0.6, ease: 'power2.inOut' },
                 '-=0.2'
             )
             // Menu footer (after image)
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         gsap.set(menuMainItems, { opacity: 0, x: -60 });
         gsap.set(menuSubItems, { opacity: 0, x: -20 });
-        gsap.set(menuImage, { opacity: 0, scale: 0.95 });
+        gsap.set(menuImage, { clipPath: 'inset(0 0 100% 0)' });
         gsap.set(menuFooter, { opacity: 0, y: 20 });
 
         btnEnquire.style.display = 'none';
