@@ -22,7 +22,7 @@
 }
 
 .cocurricular-overlay {
-  background-color: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.3) 100%);
   top: 0;
   left: 0;
   z-index: 2;
@@ -30,16 +30,13 @@
 }
 
 .cocurricular-section .container-fluid {
-
-  padding-top: 1.875rem;
-  padding-bottom: 1.875rem;
+  padding-top: 3.125rem;
+  padding-bottom: 3.125rem;
   position: relative;
   z-index: 3;
   min-height: 50.625rem;
   display: flex;
   flex-direction: column;
-
-
 }
 
 .cocurricular-content {
@@ -47,10 +44,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 100%;
 }
 
 .cocurricular-left {
   padding-right: 0;
+  padding-top: 1.25rem;
 }
 
 .cocurricular-label {
@@ -61,7 +60,7 @@
   letter-spacing: 0.046875rem;
   color: @basic-white;
   text-transform: uppercase;
-  margin-bottom: 1.6875rem;
+  margin-bottom: 1.875rem;
   white-space: nowrap;
 }
 
@@ -69,26 +68,25 @@
   font-family: @font-family-helvetica-neue;
   font-size: @font-size-h2;
   font-weight: @font-weight-light;
-  line-height: 1.05;
+  line-height: 1.15;
   letter-spacing: -0.0375rem;
   color: @basic-white;
   margin: 0;
-  margin-bottom: 1.5625rem;
-  white-space: pre-wrap;
+  margin-bottom: 1.875rem;
+  max-width: 35rem;
 }
 
 .cocurricular-text {
   font-family: @font-family-helvetica-neue;
   font-size: @font-size-b1;
   font-weight: @font-weight-light;
-  line-height: @line-height-b1;
+  line-height: 1.5;
   letter-spacing: 0;
-  color: @basic-white-secondary;
+  color: rgba(255, 255, 255, 0.85);
   width: 34.9375rem;
   max-width: 100%;
   margin: 0;
-  margin-bottom: 1.6875rem;
-  white-space: pre-wrap;
+  margin-bottom: 2.5rem;
 }
 
 .cocurricular-button {
@@ -101,26 +99,9 @@
   color: @basic-black;
 }
 
-.cocurricular-right {
-  padding-left: 0;
-}
-
-.cocurricular-image {
-  width: 100%;
-  height: 100%;
-  min-height: 31.25rem;
-  overflow: hidden;
-}
-
-.cocurricular-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .cocurricular-nav {
   margin-top: auto;
-  padding-top: 1.25rem;
+  padding-top: 3.125rem;
 }
 
 .cocurricular-nav-buttons {
@@ -152,19 +133,15 @@
   .cocurricular-section .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
     min-height: auto;
   }
 
   .cocurricular-left {
     padding-right: 0;
-    margin-bottom: 1.875rem;
-  }
-
-  .cocurricular-right {
-    padding-left: 0;
-    margin-bottom: 1.875rem;
+    padding-top: 0;
+    margin-bottom: 2.5rem;
   }
 
   .cocurricular-heading {
@@ -175,13 +152,9 @@
     width: 100%;
   }
 
-  .cocurricular-image {
-    min-height: 21.875rem;
-  }
-
   .cocurricular-nav {
-    margin-top: 0;
-    padding-top: 0;
+    margin-top: auto;
+    padding-top: 1.875rem;
   }
 
   .cocurricular-nav-buttons {
@@ -196,10 +169,6 @@
 
   .cocurricular-text {
     font-size: 1.125rem;
-  }
-
-  .cocurricular-image {
-    min-height: 18.75rem;
   }
 
   .cocurricular-nav-buttons {
