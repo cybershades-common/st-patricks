@@ -5,8 +5,9 @@
   padding-bottom: var(--spacing-base);
   background-color: var(--primary-gold-4);
   position: relative;
-  z-index: 3;
+  z-index: 0;
   overflow: hidden;
+  background-color: var(--primary-gold-4);
 }
 
 .about-section .container-fluid {
@@ -74,20 +75,6 @@
   object-fit: cover;
 }
 
-.about-gradient {
-  position: absolute;
-  top: -18rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 62.6875rem;
-  height: 62.6875rem;
-  aspect-ratio: 1/1;
-  border-radius: 62.6875rem;
-  background: var(--primary-yellow-bright, #FFF02A);
-  filter: blur(250px);
-  z-index: 1;
-  pointer-events: none;
-}
 
 @media (max-width: 991px) {
   .about-section {
@@ -138,13 +125,5 @@
 
   .about-image {
     height: 18.75rem;
-  }
-}
-
-@media (max-width: 575px) {
-  .about-gradient {
-    width: 38rem;
-    height: 38rem;
-    top: -10rem;
   }
 }
