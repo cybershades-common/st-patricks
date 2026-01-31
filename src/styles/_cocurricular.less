@@ -53,33 +53,33 @@
 }
 
 .cocurricular-label {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b2;
-  font-weight: @font-weight-regular;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b2);
+  font-weight: var(--font-weight-regular);
   line-height: 1;
   letter-spacing: 0.046875rem;
-  color: @basic-white;
+  color: var(--basic-white);
   text-transform: uppercase;
   margin-bottom: 1.875rem;
   white-space: nowrap;
 }
 
 .cocurricular-heading {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-h2;
-  font-weight: @font-weight-light;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-light);
   line-height: 1.15;
   letter-spacing: -0.0375rem;
-  color: @basic-white;
+  color: var(--basic-white);
   margin: 0;
   margin-bottom: 1.875rem;
   max-width: 35rem;
 }
 
 .cocurricular-text {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b1;
-  font-weight: @font-weight-light;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b1);
+  font-weight: var(--font-weight-light);
   line-height: 1.5;
   letter-spacing: 0;
   color: rgba(255, 255, 255, 0.85);
@@ -90,13 +90,13 @@
 }
 
 .cocurricular-button {
-  border-color: @basic-white;
-  color: @basic-white;
+  border-color: var(--basic-white);
+  color: var(--basic-white);
 }
 
 .cocurricular-button:hover {
-  background-color: @basic-white;
-  color: @basic-black;
+  background-color: var(--basic-white);
+  color: var(--basic-black);
 }
 
 .cocurricular-nav {
@@ -110,22 +110,22 @@
 }
 
 .cocurricular-nav-btn {
-  border-color: @basic-white;
-  color: @basic-white;
+  border-color: var(--basic-white);
+  color: var(--basic-white);
   white-space: nowrap;
 }
 
 .cocurricular-nav-btn:hover {
-  background-color: @basic-white;
-  color: @basic-black;
+  background-color: var(--basic-white);
+  color: var(--basic-black);
 }
 
 .cocurricular-nav-btn.active {
-  background-color: @basic-white;
-  color: @basic-black;
+  background-color: var(--basic-white);
+  color: var(--basic-black);
 }
 
-@media (max-width: @breakpoint-lg - 1px) {
+@media (max-width: 991px) {
   .cocurricular-section {
     min-height: auto;
   }
@@ -162,7 +162,7 @@
   }
 }
 
-@media (max-width: @breakpoint-md - 1px) {
+@media (max-width: 767px) {
   .cocurricular-heading {
     font-size: 1.875rem;
   }

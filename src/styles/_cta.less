@@ -43,7 +43,7 @@
   max-height: 100vh;
   padding-bottom: 4.375rem; // 70px to ensure buttons aren't cut
   
-  @media (min-width: @breakpoint-lg) {
+  @media (min-width: 992px) {
     max-width: 90rem;
   }
 }
@@ -66,12 +66,12 @@
 }
 
 .cta-heading {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-h1;
-  font-weight: @font-weight-light;
-  line-height: @line-height-h1;
-  letter-spacing: @letter-spacing-h1; // -2.7px
-  color: @basic-white;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-h1);
+  letter-spacing: var(--letter-spacing-h1); // -2.7px
+  color: var(--basic-white);
   margin: 0;
   white-space: pre-wrap;
 }
@@ -87,58 +87,58 @@
   gap: 1.8125rem; // 29px
   align-items: flex-start;
   
-  @media (max-width: @breakpoint-lg - 1px) {
+  @media (max-width: 991px) {
     position: relative;
     left: auto;
     top: auto;
     bottom: auto;
     width: 100%;
     max-width: 100%;
-    margin-top: @spacing-base;
+    margin-top: var(--spacing-base);
   }
 }
 
 .cta-text {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b1;
-  font-weight: @font-weight-light;
-  line-height: @line-height-b1;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b1);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-b1);
   letter-spacing: 0;
-  color: @basic-white;
+  color: var(--basic-white);
   margin: 0;
   white-space: pre-wrap;
 }
 
 .cta-buttons {
-  gap: @spacing-xs; // 20px
+  gap: var(--spacing-xs); // 20px
   flex-wrap: wrap;
 }
 
 .cta-button-solid {
-  background-color: @basic-white;
-  color: @basic-black;
-  border-color: @basic-white;
+  background-color: var(--basic-white);
+  color: var(--basic-black);
+  border-color: var(--basic-white);
   margin: 0;
 }
 
 .cta-button-solid:hover {
   background-color: rgba(255, 255, 255, 0.9);
-  color: @basic-black;
+  color: var(--basic-black);
 }
 
 .cta-button-outline {
-  border-color: @basic-white;
-  color: @basic-white;
+  border-color: var(--basic-white);
+  color: var(--basic-white);
   background-color: transparent;
   margin: 0;
 }
 
 .cta-button-outline:hover {
-  background-color: @basic-white;
-  color: @basic-black;
+  background-color: var(--basic-white);
+  color: var(--basic-black);
 }
 
-@media (max-width: @breakpoint-lg - 1px) {
+@media (max-width: 991px) {
   .cta-section {
     min-height: auto;
     padding-top: 3.75rem;
@@ -163,7 +163,7 @@
     transform: none;
     width: 100%;
     max-width: 100%;
-    margin-bottom: @spacing-small;
+    margin-bottom: var(--spacing-small);
   }
 
   .cta-heading {
@@ -180,11 +180,11 @@
   }
 
   .cta-buttons {
-    gap: @spacing-xs;
+    gap: var(--spacing-xs);
   }
 }
 
-@media (max-width: @breakpoint-md - 1px) {
+@media (max-width: 767px) {
   .cta-heading {
     font-size: 2.5rem;
   }

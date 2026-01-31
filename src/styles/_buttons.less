@@ -5,12 +5,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: @spacing-super-small;
-  padding: @spacing-2xs @spacing-half-base;
-  border-radius: @radius-huge;
-  font-family: @font-family-helvetica-neue;
+  gap: var(--spacing-super-small);
+  padding: var(--spacing-2xs) var(--spacing-half-base);
+  border-radius: var(--radius-huge);
+  font-family: var(--font-family-helvetica-neue);
   font-size: 0.9375rem; // 15px
-  font-weight: @font-weight-regular;
+  font-weight: var(--font-weight-regular);
   line-height: 0.9;
   letter-spacing: 0;
   text-align: center;
@@ -23,42 +23,42 @@
 
 .btn-rounded-large-outline {
   .btn-rounded-large();
-  border-color: @primary-blue;
-  color: @primary-blue;
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
 }
 
 .btn-rounded-large-outline:hover {
-  background-color: @primary-blue;
-  color: @basic-white;
+  background-color: var(--primary-blue);
+  color: var(--basic-white);
 }
 
 .btn-rounded-large-outline.btn-header {
-  border-color: @basic-black;
-  color: @basic-black;
+  border-color: var(--basic-black);
+  color: var(--basic-black);
 }
 
 .btn-rounded-large-outline.btn-header:hover {
-  background-color: @basic-black;
-  color: @basic-white;
+  background-color: var(--basic-black);
+  color: var(--basic-white);
 }
 
 .btn-rounded-large-no-border {
   .btn-rounded-large();
   border-color: transparent;
-  color: @primary-blue;
+  color: var(--primary-blue);
 }
 
 .btn-rounded-large-no-border:hover {
-  color: @primary-blue-tint;
+  color: var(--primary-blue-tint);
 }
 
 .btn-rounded-large-solid {
   .btn-rounded-large();
-  background-color: @primary-blue;
-  color: @basic-white;
-  border-color: @primary-blue;
+  background-color: var(--primary-blue);
+  color: var(--basic-white);
+  border-color: var(--primary-blue);
 }
 
 .btn-rounded-large-solid:hover {
-  background-color: @primary-blue-tint;
+  background-color: var(--primary-blue-tint);
 }

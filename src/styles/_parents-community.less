@@ -39,7 +39,7 @@
   z-index: 4;
   min-height: 50.625rem;
   
-  @media (min-width: @breakpoint-lg) {
+  @media (min-width: 992px) {
     max-width: 90rem;
   }
 }
@@ -50,7 +50,7 @@
   min-height: 50.625rem;
   display: flex;
   flex-direction: column;
-  gap: @spacing-super-small; // 10px
+  gap: var(--spacing-super-small); // 10px
   align-items: flex-start;
   width: 45.8125rem; // 733px
   max-width: 100%;
@@ -61,23 +61,23 @@
 }
 
 .parents-community-heading {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-h2;
-  font-weight: @font-weight-light;
-  line-height: @line-height-h2;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-h2);
   letter-spacing: -0.0375rem; // -0.6px
-  color: @basic-white;
+  color: var(--basic-white);
   margin: 0;
   white-space: pre-wrap;
 }
 
 .parents-community-text {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b1;
-  font-weight: @font-weight-regular;
-  line-height: @line-height-b1;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b1);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-b1);
   letter-spacing: -0.0125rem; // -0.2px
-  color: @basic-white-secondary;
+  color: var(--basic-white-secondary);
   margin: 0;
   width: 33.4375rem; // 535px
   max-width: 100%;
@@ -85,17 +85,17 @@
 }
 
 .parents-community-button {
-  border-color: @basic-white;
-  color: @basic-white;
+  border-color: var(--basic-white);
+  color: var(--basic-white);
   margin-top: 0;
 }
 
 .parents-community-button:hover {
-  background-color: @basic-white;
-  color: @basic-black;
+  background-color: var(--basic-white);
+  color: var(--basic-black);
 }
 
-@media (max-width: @breakpoint-lg - 1px) {
+@media (max-width: 991px) {
   .parents-community-section {
     min-height: auto;
   }
@@ -116,16 +116,16 @@
 
   .parents-community-heading {
     font-size: 2.5rem;
-    margin-bottom: @spacing-xs;
+    margin-bottom: var(--spacing-xs);
   }
 
   .parents-community-text {
     width: 100%;
-    margin-bottom: @spacing-xs;
+    margin-bottom: var(--spacing-xs);
   }
 }
 
-@media (max-width: @breakpoint-md - 1px) {
+@media (max-width: 767px) {
   .parents-community-heading {
     font-size: 1.875rem;
   }

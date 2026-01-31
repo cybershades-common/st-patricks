@@ -1,7 +1,7 @@
 // Academics Section Styles
 
 .academics-section {
-  background-color: @primary-gold-4;
+  background-color: var(--primary-gold-4);
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
   position: relative;
@@ -36,12 +36,12 @@
 }
 
 .academics-heading {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-h2;
-  font-weight: @font-weight-light;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-light);
   line-height: 1.05;
   letter-spacing: -0.0375rem;
-  color: @primary-blue;
+  color: var(--primary-blue);
   margin: 0;
   white-space: pre-wrap;
 }
@@ -51,12 +51,12 @@
 }
 
 .academics-text {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b1;
-  font-weight: @font-weight-light;
-  line-height: @line-height-b1;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b1);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-b1);
   letter-spacing: 0;
-  color: @basic-black-secondary;
+  color: var(--basic-black-secondary);
   width: 35.3125rem;
   max-width: 100%;
   margin: 0;
@@ -76,7 +76,7 @@
 .academics-card {
   padding: 0;
   
-  @media (min-width: @breakpoint-lg) {
+  @media (min-width: 992px) {
     &:first-child {
       padding-right: 0.625rem; // 1.25rem / 2 = 0.625rem per side
     }
@@ -101,17 +101,17 @@
 }
 
 .academics-card-title {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-h4;
-  font-weight: @font-weight-light;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-light);
   line-height: 1;
   letter-spacing: 0;
-  color: @primary-blue;
+  color: var(--primary-blue);
   margin: 0;
   white-space: pre-wrap;
 }
 
-@media (max-width: @breakpoint-lg - 1px) {
+@media (max-width: 991px) {
   .academics-section {
     padding-top: 1.875rem;
     padding-bottom: 1.875rem;
@@ -157,7 +157,7 @@
   }
 }
 
-@media (max-width: @breakpoint-md - 1px) {
+@media (max-width: 767px) {
   .academics-heading {
     font-size: 2.5rem;
   }

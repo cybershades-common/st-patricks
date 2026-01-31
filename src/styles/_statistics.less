@@ -1,9 +1,9 @@
 // Statistics Section Styles
 
 .statistics-section {
-  background-color: @basic-white;
-  padding-top: @spacing-small-2;
-  padding-bottom: @spacing-small-2;
+  background-color: var(--basic-white);
+  padding-top: var(--spacing-small-2);
+  padding-bottom: var(--spacing-small-2);
 }
 
 .statistics-section .container-fluid {
@@ -21,18 +21,18 @@
 .statistics-heading-col {
   padding-right: 0;
   
-  @media (min-width: @breakpoint-lg) {
+  @media (min-width: 992px) {
     padding-right: 8.5625rem; // 137px gap
   }
 }
 
 .statistics-heading {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-h2;
-  font-weight: @font-weight-light;
-  line-height: @line-height-h2;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-h2);
   letter-spacing: -0.0375rem; // -0.6px
-  color: @primary-blue;
+  color: var(--primary-blue);
   margin: 0;
   white-space: pre-wrap;
 }
@@ -40,20 +40,20 @@
 .statistics-content-col {
   padding-left: 0;
   
-  @media (min-width: @breakpoint-lg) {
+  @media (min-width: 992px) {
     padding-left: 0;
   }
 }
 
 .statistics-text {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b1;
-  font-weight: @font-weight-light;
-  line-height: @line-height-b1;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b1);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-b1);
   letter-spacing: 0;
-  color: @basic-black;
+  color: var(--basic-black);
   margin: 0;
-  margin-bottom: @spacing-base;
+  margin-bottom: var(--spacing-base);
   white-space: pre-wrap;
 }
 
@@ -66,12 +66,12 @@
   position: relative;
   height: 17.625rem; // 282px
   display: flex;
-  gap: @spacing-xs; // 20px
+  gap: var(--spacing-xs); // 20px
   align-items: flex-start;
   
-  @media (min-width: @breakpoint-lg) {
+  @media (min-width: 992px) {
     &:not(:last-child) {
-      padding-right: @spacing-xs; // 20px gap between cards
+      padding-right: var(--spacing-xs); // 20px gap between cards
     }
     
     &:last-child {
@@ -79,17 +79,17 @@
     }
   }
   
-  @media (max-width: @breakpoint-lg - 1px) {
+  @media (max-width: 991px) {
     height: auto;
     min-height: 17.625rem;
     padding-right: 0;
-    margin-bottom: @spacing-base;
-    padding-bottom: @spacing-base;
+    margin-bottom: var(--spacing-base);
+    padding-bottom: var(--spacing-base);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   
   &:last-child {
-    @media (max-width: @breakpoint-lg - 1px) {
+    @media (max-width: 991px) {
       margin-bottom: 0;
       padding-bottom: 0;
       border-bottom: none;
@@ -103,7 +103,7 @@
   background-color: rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
   
-  @media (max-width: @breakpoint-lg - 1px) {
+  @media (max-width: 991px) {
     display: none;
   }
 }
@@ -117,48 +117,48 @@
 }
 
 .statistics-card-label {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b2;
-  font-weight: @font-weight-regular;
-  line-height: @line-height-b2;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b2);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-b2);
   letter-spacing: 0;
-  color: @basic-black;
+  color: var(--basic-black);
   margin: 0;
   white-space: pre-wrap;
 }
 
 .statistics-card-number {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-h1;
-  font-weight: @font-weight-light;
-  line-height: @line-height-h1;
-  letter-spacing: @letter-spacing-h1; // -2.7px
-  color: @primary-blue;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-h1);
+  letter-spacing: var(--letter-spacing-h1); // -2.7px
+  color: var(--primary-blue);
   margin: 0;
 }
 
-@media (max-width: @breakpoint-lg - 1px) {
+@media (max-width: 991px) {
   .statistics-section {
-    padding-top: @spacing-small;
-    padding-bottom: @spacing-small;
+    padding-top: var(--spacing-small);
+    padding-bottom: var(--spacing-small);
   }
 
   .statistics-section .container-fluid {
-    padding-left: @spacing-xs;
-    padding-right: @spacing-xs;
+    padding-left: var(--spacing-xs);
+    padding-right: var(--spacing-xs);
   }
 
   .statistics-top {
-    margin-bottom: @spacing-small;
+    margin-bottom: var(--spacing-small);
   }
 
   .statistics-cards {
-    margin-top: @spacing-small;
+    margin-top: var(--spacing-small);
   }
 
   .statistics-heading-col {
     padding-right: 0;
-    margin-bottom: @spacing-xs;
+    margin-bottom: var(--spacing-xs);
   }
 
   .statistics-content-col {
@@ -166,7 +166,7 @@
   }
 
   .statistics-text {
-    margin-bottom: @spacing-xs;
+    margin-bottom: var(--spacing-xs);
   }
 
   .statistics-button {
@@ -174,7 +174,7 @@
   }
 }
 
-@media (max-width: @breakpoint-md - 1px) {
+@media (max-width: 767px) {
   .statistics-heading {
     font-size: 2.5rem;
   }

@@ -2,8 +2,8 @@
 
 .hero {
   position: relative;
-  padding-bottom: @spacing-base;
-  background-color: @primary-gold-4;
+  padding-bottom: var(--spacing-base);
+  background-color: var(--primary-gold-4);
   overflow: hidden;
 
   .hero-content-wrap {
@@ -34,7 +34,7 @@
   width: 43.75rem;
   height: 43.75rem;
   border-radius: 80.1171875rem;
-  background: radial-gradient(circle, @primary-yellow-bright 0%, rgba(223, 210, 34, 0.6) 50%, rgba(255, 240, 42, 0.2) 100%);
+  background: radial-gradient(circle, var(--primary-yellow-bright) 0%, rgba(223, 210, 34, 0.6) 50%, rgba(255, 240, 42, 0.2) 100%);
   filter: blur(140px);
   pointer-events: none;
   opacity: 0;
@@ -52,12 +52,12 @@
 }
 
 .hero-title {
-  font-family: @font-family-helvetica-neue;
+  font-family: var(--font-family-helvetica-neue);
   font-size: 11.25rem;
-  font-weight: @font-weight-light;
+  font-weight: var(--font-weight-light);
   line-height: 1;
   letter-spacing: -0.3375rem;
-  color: @primary-blue-tint;
+  color: var(--primary-blue-tint);
   margin: 0;
   padding: 0;
   overflow: visible;
@@ -75,12 +75,12 @@
   height: 100%;
   padding-bottom: 2.5rem;
   p {
-    font-family: @font-family-helvetica-neue;
-    font-size: @font-size-b1;
-    font-weight: @font-weight-light;
-    line-height: @line-height-b1;
+    font-family: var(--font-family-helvetica-neue);
+    font-size: var(--font-size-b1);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-b1);
     letter-spacing: 0;
-    color: @basic-black;
+    color: var(--basic-black);
     margin: 0;
 
   }
@@ -134,11 +134,11 @@
   pointer-events: none;
 }
 
-@media (max-width: @breakpoint-xl - 1px) {
+@media (max-width: 1199px) {
   .hero-content {
     flex: 1 1 100%;
     max-width: 100%;
-    margin-bottom: @spacing-small;
+    margin-bottom: var(--spacing-small);
   }
 
   .hero-text {
@@ -153,18 +153,18 @@
   }
 }
 
-@media (max-width: @breakpoint-lg - 1px) {
+@media (max-width: 991px) {
   .hero {
     padding-top: 7.5rem;
   }
 
   .hero .container-fluid {
-    padding-left: @spacing-xs;
-    padding-right: @spacing-xs;
+    padding-left: var(--spacing-xs);
+    padding-right: var(--spacing-xs);
   }
 
   .hero-content {
-    margin-bottom: @spacing-small;
+    margin-bottom: var(--spacing-small);
   }
 
   .hero-title {
@@ -181,7 +181,7 @@
   }
 }
 
-@media (max-width: @breakpoint-md - 1px) {
+@media (max-width: 767px) {
   .hero {
     padding-top: 6.25rem;
     min-height: auto;
@@ -193,7 +193,7 @@
   }
 
   .hero-text p {
-    font-size: @font-size-b2;
+    font-size: var(--font-size-b2);
   }
 
   .hero-media {
@@ -202,7 +202,7 @@
   }
 }
 
-@media (max-width: @breakpoint-sm - 1px) {
+@media (max-width: 575px) {
   .hero {
     padding-top: 5rem;
   }
@@ -213,7 +213,7 @@
   }
 
   .hero-text {
-    gap: @spacing-xs;
+    gap: var(--spacing-xs);
   }
 
   .hero-media {

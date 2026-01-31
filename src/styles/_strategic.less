@@ -35,7 +35,7 @@
   z-index: 5;
   min-height: 50.625rem;
   
-  @media (min-width: @breakpoint-lg) {
+  @media (min-width: 992px) {
     max-width: 90rem;
   }
 }
@@ -52,26 +52,26 @@
 }
 
 .strategic-heading {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-h2;
-  font-weight: @font-weight-light;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-light);
   line-height: 1.05;
   letter-spacing: -0.0375rem;
-  color: @basic-white;
+  color: var(--basic-white);
   margin: 0;
   margin-bottom: 0.625rem;
   white-space: pre-wrap;
 }
 
 .strategic-button {
-  border-color: @basic-white;
-  color: @basic-white;
+  border-color: var(--basic-white);
+  color: var(--basic-white);
   margin-top: 0.625rem;
 }
 
 .strategic-button:hover {
-  background-color: @basic-white;
-  color: @basic-black;
+  background-color: var(--basic-white);
+  color: var(--basic-black);
 }
 
 .strategic-text-wrapper {
@@ -91,17 +91,17 @@
 }
 
 .strategic-text-col p {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b2;
-  font-weight: @font-weight-regular;
-  line-height: @line-height-b2;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b2);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-b2);
   letter-spacing: 0;
-  color: @basic-white;
+  color: var(--basic-white);
   white-space: pre-wrap;
   margin: 0;
 }
 
-@media (max-width: @breakpoint-lg - 1px) {
+@media (max-width: 991px) {
   .strategic-section {
     min-height: auto;
   }
@@ -150,7 +150,7 @@
   }
 }
 
-@media (max-width: @breakpoint-md - 1px) {
+@media (max-width: 767px) {
   .strategic-heading {
     font-size: 1.875rem;
   }

@@ -2,8 +2,8 @@
 
 .about-section {
   padding-top: 2.1875rem;
-  padding-bottom: @spacing-base;
-  background-color: @primary-gold-4;
+  padding-bottom: var(--spacing-base);
+  background-color: var(--primary-gold-4);
   position: relative;
 }
 
@@ -15,12 +15,12 @@
 }
 
 .about-heading {
-  font-family: @font-family-helvetica-neue;
+  font-family: var(--font-family-helvetica-neue);
   font-size: 3.75rem;
-  font-weight: @font-weight-light;
+  font-weight: var(--font-weight-light);
   line-height: 1.05;
   letter-spacing: -0.0375rem;
-  color: @primary-blue;
+  color: var(--primary-blue);
   margin: 0;
   padding: 0;
   white-space: pre-wrap;
@@ -48,12 +48,12 @@
 }
 
 .about-text p {
-  font-family: @font-family-helvetica-neue;
-  font-size: @font-size-b2;
-  font-weight: @font-weight-regular;
-  line-height: @line-height-b2;
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b2);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-b2);
   letter-spacing: 0;
-  color: @basic-black;
+  color: var(--basic-black);
   margin: 0;
   white-space: pre-wrap;
 }
@@ -74,7 +74,7 @@
   object-fit: cover;
 }
 
-@media (max-width: @breakpoint-lg - 1px) {
+@media (max-width: 991px) {
   .about-section {
     padding-top: 1.25rem;
     padding-bottom: 1.875rem;
@@ -115,7 +115,7 @@
   }
 }
 
-@media (max-width: @breakpoint-md - 1px) {
+@media (max-width: 767px) {
   .about-heading {
     font-size: 1.5625rem;
   }
