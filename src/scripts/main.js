@@ -20,6 +20,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openMenu() {
         isMenuOpen = true;
+
+        // Calculate scrollbar width
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+        // Apply padding to body AND header
+        if (scrollbarWidth > 0) {
+            document.body.style.paddingRight = scrollbarWidth + 'px';
+            header.style.paddingRight = scrollbarWidth + 'px';
+        }
+
         header.classList.add('menu-open');
         header.classList.remove('header-hidden');
         isHeaderHidden = false;
@@ -44,6 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function closeMenu() {
         isMenuOpen = false;
+
+        // Remove padding from body AND header
+        document.body.style.paddingRight = '';
+        header.style.paddingRight = '';
+
         header.classList.remove('menu-open');
         hamburger.classList.remove('active');
         menuText.textContent = 'MENU';
