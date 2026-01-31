@@ -4,9 +4,9 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: var(--spacing-half-base) 0;
+  padding: 1.25rem 0;
   background-color: transparent;
-  transition: transform 0.35s ease, background-color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.35s ease;
   will-change: transform;
   border-bottom: 0.0625rem solid transparent;
 }
@@ -16,6 +16,7 @@
 .header.header-scrolled {
   background-color: var(--basic-white);
   border-bottom-color: transparent;
+  padding: 0.5rem 0;
 }
 .header.menu-open {
   background-color: var(--basic-white);
