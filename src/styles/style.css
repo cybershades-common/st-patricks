@@ -1717,6 +1717,206 @@ body {
     font-size: 1.125rem;
   }
 }
+.testimonials-section {
+  background-color: #f6f3ec;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.testimonials-gradient {
+  position: absolute;
+  left: 75%;
+  top: 31.25rem;
+  width: 62.6875rem;
+  height: 62.6875rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 240, 42, 0.15) 0%, rgba(255, 240, 42, 0.05) 50%, transparent 100%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 1;
+}
+.testimonials-section .container-fluid {
+  position: relative;
+  z-index: 2;
+  max-width: 78.9375rem;
+}
+.testimonials-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.testimonials-top-row {
+  margin-bottom: 2.8125rem;
+}
+.testimonials-image-col {
+  padding-right: 0;
+}
+@media (min-width: 992px) {
+  .testimonials-image-col {
+    padding-right: 15.875rem;
+  }
+}
+.testimonials-image-wrapper {
+  position: relative;
+  width: 27.875rem;
+  height: 34.4375rem;
+  max-width: 100%;
+  overflow: hidden;
+}
+.testimonials-image-background {
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.testimonials-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.testimonials-image-overlay {
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 2;
+}
+.testimonials-bg-img-overlay {
+  position: absolute;
+  height: 114.76%;
+  left: -45.45%;
+  top: -14.76%;
+  width: 219.09%;
+  object-fit: cover;
+  z-index: 1;
+}
+.testimonials-text-col {
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 34.4375rem;
+}
+.testimonials-quote-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 34.25rem;
+  max-width: 100%;
+}
+.testimonials-quote {
+  font-family: 'Helvetica Neue LT Pro', sans-serif;
+  font-size: 2.8125rem;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: #10069f;
+  margin: 0;
+  white-space: pre-wrap;
+}
+.testimonials-attribution {
+  font-family: 'Helvetica Neue LT Pro', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.3125rem;
+  color: #27251f;
+  text-transform: uppercase;
+  margin: 0;
+  white-space: pre-wrap;
+}
+.testimonials-button-col {
+  padding-right: 0;
+}
+.testimonials-button {
+  margin-top: 0;
+}
+.testimonials-arrows-col {
+  padding-left: 0;
+}
+@media (min-width: 992px) {
+  .testimonials-arrows-col {
+    margin-left: auto;
+    padding-left: 0;
+  }
+}
+.testimonials-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.testimonials-arrows {
+  gap: 0.5rem;
+}
+.testimonials-arrow-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #10069f;
+  transition: opacity 0.3s ease;
+}
+.testimonials-arrow-btn:hover {
+  opacity: 0.7;
+}
+.testimonials-arrow-btn svg {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 991px) {
+  .testimonials-section {
+    padding-top: 1.875rem;
+    padding-bottom: 1.875rem;
+  }
+  .testimonials-section .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .testimonials-content {
+    gap: 1.875rem;
+  }
+  .testimonials-image-col {
+    padding-right: 0;
+    margin-bottom: 1.875rem;
+  }
+  .testimonials-image-wrapper {
+    width: 100%;
+    height: 25rem;
+  }
+  .testimonials-text-col {
+    padding-left: 0;
+    margin-bottom: 1.875rem;
+  }
+  .testimonials-quote-wrapper {
+    width: 100%;
+  }
+  .testimonials-button-col {
+    padding-right: 0;
+    margin-bottom: 1.25rem;
+  }
+  .testimonials-arrows-col {
+    padding-left: 0;
+    margin-left: 0;
+  }
+}
+@media (max-width: 767px) {
+  .testimonials-quote {
+    font-size: 2rem;
+  }
+  .testimonials-image-wrapper {
+    height: 20rem;
+  }
+}
 .footer {
   background-color: #eeeae0;
   padding-top: 2.75rem;
