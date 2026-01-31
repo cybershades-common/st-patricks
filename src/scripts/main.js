@@ -373,6 +373,176 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initAboutReveal();
 
+    // Latest news slider (custom)
+    function initLatestNewsSlider() {
+        const track = document.getElementById('latestNewsTrack');
+        const slides = document.querySelectorAll('.latest-news-slide');
+        const prevBtn = document.getElementById('latestNewsPrev');
+        const nextBtn = document.getElementById('latestNewsNext');
+
+        if (!track || !slides.length || !prevBtn || !nextBtn) {
+            return;
+        }
+
+        let currentIndex = 0;
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID;
+
+        const activeWidth = 42.5 * 16;
+        const inactiveWidth = 20.8125 * 16;
+        const gap = 1.25 * 16;
+
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        function getDimensions() {
+            if (isMobile()) {
+                const activeW = Math.min(window.innerWidth * 0.9, 25 * 16);
+                const inactiveW = Math.min(window.innerWidth * 0.85, 20 * 16);
+                return { activeWidth: activeW, inactiveWidth: inactiveW, gap: gap };
+            }
+            return { activeWidth, inactiveWidth, gap };
+        }
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function getSlidePosition(index) {
+            const dims = getDimensions();
+            let position = 0;
+            for (let i = 0; i < index; i++) {
+                if (i === currentIndex) {
+                    position += dims.activeWidth + dims.gap;
+                } else {
+                    position += dims.inactiveWidth + dims.gap;
+                }
+            }
+            if (isMobile()) {
+                const containerWidth = window.innerWidth;
+                const activeSlideCenter = position + dims.activeWidth / 2;
+                const screenCenter = containerWidth / 2;
+                return -(activeSlideCenter - screenCenter);
+            }
+            return -position;
+        }
+
+        function moveToSlide(newIndex) {
+            if (newIndex < 0) {
+                newIndex = slides.length - 1;
+            } else if (newIndex >= slides.length) {
+                newIndex = 0;
+            }
+
+            if (newIndex === currentIndex) {
+                return;
+            }
+
+            currentIndex = newIndex;
+            updateSlides();
+
+            requestAnimationFrame(() => {
+                const position = getSlidePosition(currentIndex);
+                track.style.transform = `translateX(${position}px)`;
+                currentTranslate = position;
+                prevTranslate = position;
+            });
+        }
+
+        function touchStart(event) {
+            isDragging = true;
+            track.classList.add('dragging');
+            startPos = getPositionX(event);
+            animationID = requestAnimationFrame(animation);
+        }
+
+        function touchMove(event) {
+            if (isDragging) {
+                const currentPosition = getPositionX(event);
+                currentTranslate = prevTranslate + currentPosition - startPos;
+            }
+        }
+
+        function touchEnd() {
+            isDragging = false;
+            track.classList.remove('dragging');
+            cancelAnimationFrame(animationID);
+
+            const movedBy = currentTranslate - prevTranslate;
+            if (movedBy < -100) {
+                moveToSlide(currentIndex + 1);
+            } else if (movedBy > 100) {
+                moveToSlide(currentIndex - 1);
+            } else {
+                const position = getSlidePosition(currentIndex);
+                track.style.transform = `translateX(${position}px)`;
+                currentTranslate = position;
+            }
+        }
+
+        function getPositionX(event) {
+            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        }
+
+        function animation() {
+            if (isDragging) {
+                track.style.transform = `translateX(${currentTranslate}px)`;
+                requestAnimationFrame(animation);
+            }
+        }
+
+        prevBtn.addEventListener('click', () => moveToSlide(currentIndex - 1));
+        nextBtn.addEventListener('click', () => moveToSlide(currentIndex + 1));
+
+        track.addEventListener('mousedown', touchStart);
+        track.addEventListener('mousemove', touchMove);
+        track.addEventListener('mouseup', touchEnd);
+        track.addEventListener('mouseleave', () => {
+            if (isDragging) touchEnd();
+        });
+        track.addEventListener('touchstart', touchStart);
+        track.addEventListener('touchmove', touchMove);
+        track.addEventListener('touchend', touchEnd);
+        track.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        const filterTabs = document.querySelectorAll('.latest-news-filter-btn');
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                filterTabs.forEach(t => t.classList.remove('latest-news-filter-btn-active'));
+                this.classList.add('latest-news-filter-btn-active');
+            });
+        });
+
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const position = getSlidePosition(currentIndex);
+                track.style.transition = 'none';
+                track.style.transform = `translateX(${position}px)`;
+                currentTranslate = position;
+                prevTranslate = position;
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                }, 50);
+            }, 100);
+        });
+
+        updateSlides();
+        const initialPosition = getSlidePosition(0);
+        track.style.transform = `translateX(${initialPosition}px)`;
+        currentTranslate = initialPosition;
+        prevTranslate = initialPosition;
+    }
+
+    initLatestNewsSlider();
+
     // ==========================================================================
     // STATISTICS SECTION ANIMATION - START
     // ==========================================================================

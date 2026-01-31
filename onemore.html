@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest News and Happenings - SPC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8f8f8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
+            gap: 40px;
+        }
+
+        .header-left h1 {
+            font-size: 72px;
+            font-weight: 400;
+            color: #1e2a8c;
+            line-height: 1.1;
+            margin-bottom: 0;
+        }
+
+        .header-right {
+            max-width: 500px;
+        }
+
+        .header-right p {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1e2a8c;
+            border: 2px solid #1e2a8c;
+        }
+
+        .btn-primary:hover {
+            background: #1e2a8c;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1e2a8c;
+            border: 2px solid transparent;
+        }
+
+        .btn-secondary:hover {
+            border-color: #1e2a8c;
+        }
+
+        .controls-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 15px;
+        }
+
+        .filter-tab {
+            padding: 12px 28px;
+            border-radius: 30px;
+            border: 2px solid #ddd;
+            background: white;
+            color: #666;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab.active {
+            background: #1e2a8c;
+            color: white;
+            border-color: #1e2a8c;
+        }
+
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+            min-height: 600px;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            gap: 1.25rem;
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            align-items: flex-start;
+            will-change: transform;
+        }
+
+        .slider-wrapper.dragging {
+            cursor: grabbing;
+            transition: none;
+        }
+
+        .slide {
+            flex-shrink: 0;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            width: 20.8125rem;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.25rem;
+            opacity: 1;
+            transform: scale(1);
+            background: white;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            will-change: width;
+        }
+
+        .slide.active {
+            width: 42.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .slide.active .slide-image {
+            height: 500px;
+        }
+
+        .slide:hover .slide-image {
+            transform: scale(1.05);
+        }
+
+        .slide-content {
+            padding: 0;
+            background: white;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 100%;
+            padding: 0 18px 18px 18px;
+        }
+
+        .slide.active .slide-content {
+            padding: 0 24px 24px 24px;
+        }
+
+        .slide-title {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #1e2a8c;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            line-height: 1.3;
+        }
+
+        .slide.active .slide-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .slide-date {
+            font-size: 11px;
+            color: #666;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slide.active .slide-date {
+            font-size: 15px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-btn:hover {
+            background: #1e2a8c;
+            border-color: #1e2a8c;
+            transform: scale(1.05);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-top: 2.5px solid #333;
+            border-right: 2.5px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover::before {
+            border-color: white;
+        }
+
+        .nav-btn.prev::before {
+            transform: rotate(-135deg);
+            margin-left: 2px;
+        }
+
+        .nav-btn.next::before {
+            transform: rotate(45deg);
+            margin-right: 2px;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-btn:disabled:hover {
+            background: transparent;
+            border-color: #333;
+            transform: scale(1);
+        }
+
+        .nav-btn:disabled:hover::before {
+            border-color: #333;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        @media (max-width: 1200px) {
+            .slide {
+                width: 18rem;
+            }
+
+            .slide.active {
+                width: 36rem;
+            }
+
+            .slide-image {
+                height: 200px;
+            }
+
+            .slide.active .slide-image {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+            }
+
+            .header-left h1 {
+                font-size: 48px;
+            }
+
+            .controls-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .nav-buttons {
+                align-self: flex-end;
+            }
+
+            .slider-container {
+                overflow: hidden;
+                width: 100%;
+                padding: 20px 0;
+            }
+
+            .slide {
+                width: 85vw;
+                max-width: 20rem;
+            }
+
+            .slide.active {
+                width: 90vw;
+                max-width: 25rem;
+            }
+
+            .slide-image {
+                height: 170px;
+            }
+
+            .slide.active .slide-image {
+                height: 300px;
+            }
+
+            .slide-content {
+                padding: 0 14px 14px 14px;
+            }
+
+            .slide.active .slide-content {
+                padding: 0 20px 20px 20px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <h1>Latest News<br>and Happenings</h1>
+            </div>
+            <div class="header-right">
+                <p>Stay up to date with what's happening at SPC, from Open Days and community events, to student achievements and campus news, this is your window into our life as a college.</p>
+                <div class="header-buttons">
+                    <a href="#" class="btn btn-primary">View Latest News</a>
+                    <a href="#" class="btn btn-secondary">Events and Bookings →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-wrapper">
+            <div class="filter-tabs">
+                <button class="filter-tab active">All News</button>
+                <button class="filter-tab">Junior</button>
+                <button class="filter-tab">Senior</button>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn prev" id="prevBtn"></button>
+                <button class="nav-btn next" id="nextBtn"></button>
+            </div>
+        </div>
+
+        <div class="slider-container">
+            <div class="slider-wrapper" id="sliderWrapper">
+                <!-- Slide 1 -->
+                <div class="slide active">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&h=600&fit=crop" alt="Black Tie Liturgy" class="slide-image">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Black Tie Liturgy</h3>
+                        <p class="slide-date">22.09.25</p>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&h=600&fit=crop" alt="Farewell to the Class of 2025" class="slide-image">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Farewell to the Class of 2025!</h3>
+                        <p class="slide-date">18.09.25</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=800&h=600&fit=crop" alt="Celebrating Father's Day" class="slide-image">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Celebrating Father's Day</h3>
+                        <p class="slide-date">10.09.25</p>
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=600&fit=crop" alt="Sports Day Excellence" class="slide-image">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Sports Day Excellence</h3>
+                        <p class="slide-date">05.09.25</p>
+                    </div>
+                </div>
+
+                <!-- Slide 5 -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop" alt="Community Outreach Program" class="slide-image">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Community Outreach Program</h3>
+                        <p class="slide-date">28.08.25</p>
+                    </div>
+                </div>
+
+                <!-- Slide 6 -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop" alt="Academic Awards Night" class="slide-image">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Academic Awards Night</h3>
+                        <p class="slide-date">20.08.25</p>
+                    </div>
+                </div>
+
+                <!-- Slide 7 -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=600&fit=crop" alt="College Open Day" class="slide-image">
+                    <div class="slide-content">
+                        <h3 class="slide-title">College Open Day</h3>
+                        <p class="slide-date">15.08.25</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sliderWrapper = document.getElementById('sliderWrapper');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentIndex = 0;
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID;
+
+        const activeWidth = 42.5 * 16; // 680px
+        const inactiveWidth = 20.8125 * 16; // 333px
+        const gap = 1.25 * 16; // 20px
+        
+        // Check if mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+        
+        // Get dimensions based on device
+        function getDimensions() {
+            if (isMobile()) {
+                const activeW = Math.min(window.innerWidth * 0.9, 25 * 16);
+                const inactiveW = Math.min(window.innerWidth * 0.85, 20 * 16);
+                return { activeWidth: activeW, inactiveWidth: inactiveW, gap: gap };
+            }
+            return { activeWidth, inactiveWidth, gap };
+        }
+
+        // Update active slide
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                }
+            });
+            updateNavButtons();
+        }
+
+        // Update navigation buttons - for infinite loop, buttons are always enabled
+        function updateNavButtons() {
+            // Buttons always enabled for infinite loop
+            prevBtn.disabled = false;
+            nextBtn.disabled = false;
+        }
+
+        // Calculate slide position
+        function getSlidePosition(index) {
+            const dims = getDimensions();
+            let position = 0;
+            
+            for (let i = 0; i < index; i++) {
+                if (i === currentIndex) {
+                    position += dims.activeWidth + dims.gap;
+                } else {
+                    position += dims.inactiveWidth + dims.gap;
+                }
+            }
+            
+            // On mobile, center the active slide
+            if (isMobile()) {
+                const containerWidth = window.innerWidth;
+                const activeSlideCenter = position + dims.activeWidth / 2;
+                const screenCenter = containerWidth / 2;
+                return -(activeSlideCenter - screenCenter);
+            }
+            
+            return -position;
+        }
+
+        // Move to slide with smooth animation and loop functionality
+        function moveToSlide(newIndex) {
+            // Handle looping
+            if (newIndex < 0) {
+                newIndex = slides.length - 1; // Go to last slide
+            } else if (newIndex >= slides.length) {
+                newIndex = 0; // Go to first slide
+            }
+            
+            if (newIndex === currentIndex) return;
+            
+            // Update active class first
+            currentIndex = newIndex;
+            updateSlides();
+            
+            // Use requestAnimationFrame for smooth transition
+            requestAnimationFrame(() => {
+                const position = getSlidePosition(currentIndex);
+                sliderWrapper.style.transform = `translateX(${position}px)`;
+                currentTranslate = position;
+                prevTranslate = position;
+            });
+        }
+
+        // Navigation buttons
+        prevBtn.addEventListener('click', () => {
+            moveToSlide(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            moveToSlide(currentIndex + 1);
+        });
+
+        // Touch and mouse events for dragging
+        function touchStart(event) {
+            isDragging = true;
+            sliderWrapper.classList.add('dragging');
+            startPos = getPositionX(event);
+            animationID = requestAnimationFrame(animation);
+        }
+
+        function touchMove(event) {
+            if (isDragging) {
+                const currentPosition = getPositionX(event);
+                currentTranslate = prevTranslate + currentPosition - startPos;
+            }
+        }
+
+        function touchEnd() {
+            isDragging = false;
+            sliderWrapper.classList.remove('dragging');
+            cancelAnimationFrame(animationID);
+            
+            const movedBy = currentTranslate - prevTranslate;
+            
+            // Determine if we should move to next/prev slide
+            if (movedBy < -100) {
+                // Swipe left - go to next (with loop)
+                moveToSlide(currentIndex + 1);
+            } else if (movedBy > 100) {
+                // Swipe right - go to previous (with loop)
+                moveToSlide(currentIndex - 1);
+            } else {
+                // Snap back to current position
+                const position = getSlidePosition(currentIndex);
+                sliderWrapper.style.transform = `translateX(${position}px)`;
+                currentTranslate = position;
+            }
+        }
+
+        function getPositionX(event) {
+            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        }
+
+        function animation() {
+            if (isDragging) {
+                sliderWrapper.style.transform = `translateX(${currentTranslate}px)`;
+                requestAnimationFrame(animation);
+            }
+        }
+
+        // Mouse events
+        sliderWrapper.addEventListener('mousedown', touchStart);
+        sliderWrapper.addEventListener('mousemove', touchMove);
+        sliderWrapper.addEventListener('mouseup', touchEnd);
+        sliderWrapper.addEventListener('mouseleave', () => {
+            if (isDragging) touchEnd();
+        });
+
+        // Touch events
+        sliderWrapper.addEventListener('touchstart', touchStart);
+        sliderWrapper.addEventListener('touchmove', touchMove);
+        sliderWrapper.addEventListener('touchend', touchEnd);
+
+        // Prevent context menu on long press
+        sliderWrapper.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Filter tabs functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const position = getSlidePosition(currentIndex);
+                sliderWrapper.style.transition = 'none';
+                sliderWrapper.style.transform = `translateX(${position}px)`;
+                currentTranslate = position;
+                prevTranslate = position;
+                
+                // Re-enable transition after repositioning
+                setTimeout(() => {
+                    sliderWrapper.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                }, 50);
+            }, 100);
+        });
+
+        // Initialize
+        updateNavButtons();
+        const initialPosition = getSlidePosition(0);
+        sliderWrapper.style.transform = `translateX(${initialPosition}px)`;
+        currentTranslate = initialPosition;
+        prevTranslate = initialPosition;
+    </script>
+</body>
+</html>

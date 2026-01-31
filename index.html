@@ -459,12 +459,12 @@
                         </div>
                         <div class="col-12 col-lg-auto latest-news-arrows-col">
                             <div class="latest-news-arrows d-flex align-items-center">
-                                <button class="latest-news-arrow-btn latest-news-prev" aria-label="Previous news">
+                                <button class="latest-news-arrow-btn latest-news-prev" id="latestNewsPrev" aria-label="Previous news">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20 10L10 20L20 30M10 20H30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
-                                <button class="latest-news-arrow-btn latest-news-next" aria-label="Next news">
+                                <button class="latest-news-arrow-btn latest-news-next" id="latestNewsNext" aria-label="Next news">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20 10L30 20L20 30M30 20H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -472,70 +472,58 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper latest-news-swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide latest-news-slide">
-                                <div class="latest-news-card latest-news-card-large">
-                                    <div class="latest-news-card-image">
-                                        <img src="assets/images/news-1.jpg" alt="Black Tie Liturgy" class="w-100 h-100">
-                                    </div>
+                    <div class="latest-news-slider">
+                        <div class="latest-news-track" id="latestNewsTrack">
+                            <div class="latest-news-slide active">
+                                <div class="latest-news-card">
+                                    <img src="assets/images/news-1.jpg" alt="Black Tie Liturgy" class="latest-news-image">
                                     <div class="latest-news-card-content">
-                                        <h3 class="latest-news-card-title-large">Black Tie Liturgy</h3>
+                                        <h3 class="latest-news-card-title">Black Tie Liturgy</h3>
                                         <p class="latest-news-card-date">22.09.25</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide latest-news-slide">
-                                <div class="latest-news-card latest-news-card-small">
-                                    <div class="latest-news-card-image">
-                                        <img src="assets/images/news-2.jpg" alt="Farewell to the Class of 2025!" class="w-100 h-100">
-                                    </div>
+                            <div class="latest-news-slide">
+                                <div class="latest-news-card">
+                                    <img src="assets/images/news-2.jpg" alt="Farewell to the Class of 2025!" class="latest-news-image">
                                     <div class="latest-news-card-content">
-                                        <h4 class="latest-news-card-title-small">Farewell to the Class of 2025!</h4>
+                                        <h3 class="latest-news-card-title">Farewell to the Class of 2025!</h3>
                                         <p class="latest-news-card-date">18.09.25</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide latest-news-slide">
-                                <div class="latest-news-card latest-news-card-small">
-                                    <div class="latest-news-card-image">
-                                        <img src="assets/images/news-3.jpg" alt="Celebrating Father's Day" class="w-100 h-100">
-                                    </div>
+                            <div class="latest-news-slide">
+                                <div class="latest-news-card">
+                                    <img src="assets/images/news-3.jpg" alt="Celebrating Father's Day" class="latest-news-image">
                                     <div class="latest-news-card-content">
-                                        <h4 class="latest-news-card-title-small">Celebrating Father's Day</h4>
+                                        <h3 class="latest-news-card-title">Celebrating Father's Day</h3>
                                         <p class="latest-news-card-date">10.09.25</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide latest-news-slide">
-                                <div class="latest-news-card latest-news-card-small">
-                                    <div class="latest-news-card-image">
-                                        <img src="assets/images/news-1.jpg" alt="News Article" class="w-100 h-100" onerror="this.style.display='none'">
-                                    </div>
+                            <div class="latest-news-slide">
+                                <div class="latest-news-card">
+                                    <img src="assets/images/news-1.jpg" alt="News Article" class="latest-news-image" onerror="this.style.display='none'">
                                     <div class="latest-news-card-content">
-                                        <h4 class="latest-news-card-title-small">Example Headline</h4>
+                                        <h3 class="latest-news-card-title">Example Headline</h3>
                                         <p class="latest-news-card-date">05.09.25</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide latest-news-slide">
-                                <div class="latest-news-card latest-news-card-small">
-                                    <div class="latest-news-card-image">
-                                        <img src="assets/images/news-2.jpg" alt="News Article" class="w-100 h-100" onerror="this.style.display='none'">
-                                    </div>
+                            <div class="latest-news-slide">
+                                <div class="latest-news-card">
+                                    <img src="assets/images/news-2.jpg" alt="News Article" class="latest-news-image" onerror="this.style.display='none'">
                                     <div class="latest-news-card-content">
-                                        <h4 class="latest-news-card-title-small">Example Headline</h4>
+                                        <h3 class="latest-news-card-title">Example Headline</h3>
                                         <p class="latest-news-card-date">01.09.25</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide latest-news-slide">
-                                <div class="latest-news-card latest-news-card-small">
-                                    <div class="latest-news-card-image">
-                                        <img src="assets/images/news-3.jpg" alt="News Article" class="w-100 h-100" onerror="this.style.display='none'">
-                                    </div>
+                            <div class="latest-news-slide">
+                                <div class="latest-news-card">
+                                    <img src="assets/images/news-3.jpg" alt="News Article" class="latest-news-image" onerror="this.style.display='none'">
                                     <div class="latest-news-card-content">
-                                        <h4 class="latest-news-card-title-small">Example Headline</h4>
+                                        <h3 class="latest-news-card-title">Example Headline</h3>
                                         <p class="latest-news-card-date">28.08.25</p>
                                     </div>
                                 </div>
