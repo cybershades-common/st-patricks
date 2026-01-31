@@ -373,6 +373,168 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initAboutReveal();
 
+    // ==========================================================================
+    // STATISTICS SECTION ANIMATION - START
+    // ==========================================================================
+    // Animates stats cards with:
+    // 1. Line growth from top to bottom
+    // 2. Label fade-up animation
+    // 3. Counter animation from start value to target value
+    // ==========================================================================
+
+    function initStatsAnimation() {
+        const statsContainer = document.querySelector('.statistics-cards');
+        if (!statsContainer) return;
+
+        const cards = statsContainer.querySelectorAll('.statistics-card');
+        if (!cards.length) return;
+
+        // Animation timing configuration
+        const TIMING = {
+            lineDuration: 2.5,        // Line growth duration
+            lineEase: 'power2.out',
+            lineStagger: 0.2,          // Delay between each card
+            labelDuration: 1.2,        // Label fade-up duration
+            labelEase: 'power2.out',
+            labelDelay: 0.5,           // When label starts after line
+            counterDuration: 4.5,      // Counter animation duration
+            counterEase: 'power2.out',
+            counterDelay: 0.6          // When counter starts after line
+        };
+
+        // Set initial states for all cards
+        cards.forEach(card => {
+            const divider = card.querySelector('.statistics-card-divider');
+            const label = card.querySelector('.statistics-card-label');
+            const number = card.querySelector('.statistics-card-number');
+
+            // Line starts at 0 height (will grow from top)
+            if (divider) {
+                gsap.set(divider, {
+                    scaleY: 0,
+                    transformOrigin: 'top center',
+                    willChange: 'transform'
+                });
+            }
+
+            // Label starts hidden and below
+            if (label) {
+                gsap.set(label, {
+                    y: 30,
+                    autoAlpha: 0
+                });
+            }
+
+            // Number starts hidden
+            if (number) {
+                gsap.set(number, {
+                    autoAlpha: 0
+                });
+            }
+        });
+
+        // Create timeline with ScrollTrigger
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: statsContainer,
+                start: 'top 75%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        // Animate each card
+        cards.forEach((card, index) => {
+            const divider = card.querySelector('.statistics-card-divider');
+            const label = card.querySelector('.statistics-card-label');
+            const number = card.querySelector('.statistics-card-number');
+
+            const cardStart = index * TIMING.lineStagger;
+
+            // 1. Line grows from top to bottom
+            if (divider) {
+                tl.to(divider, {
+                    scaleY: 1,
+                    duration: TIMING.lineDuration,
+                    ease: TIMING.lineEase
+                }, cardStart);
+            }
+
+            // 2. Label fades up
+            if (label) {
+                tl.to(label, {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: TIMING.labelDuration,
+                    ease: TIMING.labelEase
+                }, cardStart + TIMING.labelDelay);
+            }
+
+            // 3. Number counter animation
+            if (number) {
+                const text = number.textContent.trim();
+                const numMatch = text.match(/[\d,]+/);
+
+                if (numMatch) {
+                    const targetValue = parseInt(numMatch[0].replace(/,/g, ''));
+                    const prefix = text.substring(0, numMatch.index);
+                    const suffix = text.substring(numMatch.index + numMatch[0].length);
+
+                    // Determine start value based on target number
+                    let startValue = 0;
+                    if (targetValue > 1800 && targetValue < 2100) {
+                        // Years (like 1928) start from 1800
+                        startValue = 1800;
+                    } else if (targetValue >= 700 && targetValue <= 900) {
+                        // Student count (800+) starts from 700
+                        startValue = 700;
+                    }
+
+                    // Create counter object
+                    const counter = { value: startValue };
+
+                    // Show the number element
+                    tl.set(number, { autoAlpha: 1 }, cardStart + TIMING.counterDelay);
+
+                    // Animate the counter
+                    tl.to(counter, {
+                        value: targetValue,
+                        duration: TIMING.counterDuration,
+                        ease: TIMING.counterEase,
+                        onUpdate: function() {
+                            const currentValue = Math.round(counter.value);
+                            // Format number with commas if needed
+                            const formattedValue = currentValue.toLocaleString();
+                            number.textContent = prefix + formattedValue + suffix;
+                        }
+                    }, cardStart + TIMING.counterDelay);
+                } else {
+                    // If no number found, just fade in the text
+                    tl.to(number, {
+                        autoAlpha: 1,
+                        duration: TIMING.labelDuration,
+                        ease: TIMING.labelEase
+                    }, cardStart + TIMING.counterDelay);
+                }
+            }
+        });
+
+        // Clean up willChange after animation
+        tl.eventCallback('onComplete', () => {
+            cards.forEach(card => {
+                const divider = card.querySelector('.statistics-card-divider');
+                if (divider) {
+                    gsap.set(divider, { clearProps: 'will-change' });
+                }
+            });
+        });
+    }
+
+    initStatsAnimation();
+
+    // ==========================================================================
+    // STATISTICS SECTION ANIMATION - END
+    // ==========================================================================
+
     // Hero video lazy loading
     const heroVideo = document.getElementById('heroVideo');
     if (heroVideo) {

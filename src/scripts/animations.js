@@ -951,6 +951,19 @@ class GSAPAnimations {
     };
   }
 
+  // Helper to get children that don't have their own data-gsap animation
+  // This prevents parent animations from affecting children with their own animations
+  getAnimatableChildren(el) {
+    if (!el || !el.children || el.children.length === 0) return null;
+
+    const children = Array.from(el.children).filter(child => {
+      // Exclude children that have their own animation attributes
+      return !child.hasAttribute('data-gsap') && !child.hasAttribute('data-gsap-mobile');
+    });
+
+    return children.length > 0 ? children : null;
+  }
+
   // Stagger content - animates all paragraphs within container on scroll
   staggerContent(el, config) {
     if (!el) return;
@@ -1094,8 +1107,8 @@ class GSAPAnimations {
 
   // Fade animations
   fadeUp(el, config) {
-    // Check if stagger is defined and has children
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    // Check if stagger is defined and has children (excluding children with their own animations)
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
 
@@ -1115,7 +1128,7 @@ class GSAPAnimations {
   }
 
   fadeDown(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { y: -50, autoAlpha: 0 });
@@ -1134,7 +1147,7 @@ class GSAPAnimations {
   }
 
   fadeLeft(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { x: -50, autoAlpha: 0 });
@@ -1153,7 +1166,7 @@ class GSAPAnimations {
   }
 
   fadeRight(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { x: 50, autoAlpha: 0 });
@@ -1172,7 +1185,7 @@ class GSAPAnimations {
   }
 
   fadeIn(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { autoAlpha: 0 });
@@ -1191,7 +1204,7 @@ class GSAPAnimations {
 
   // Zoom animations
   zoomIn(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { scale: 0.7, autoAlpha: 0 });
@@ -1210,7 +1223,7 @@ class GSAPAnimations {
   }
 
   zoomOut(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { scale: 1.3 });
@@ -1229,7 +1242,7 @@ class GSAPAnimations {
 
   // Slide animations
   slideLeft(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { x: -300, autoAlpha: 0 });
@@ -1248,7 +1261,7 @@ class GSAPAnimations {
   }
 
   slideRight(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { x: 300, autoAlpha: 0 });
@@ -1267,7 +1280,7 @@ class GSAPAnimations {
   }
 
   slideUp(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { y: 100, autoAlpha: 0 });
@@ -1286,7 +1299,7 @@ class GSAPAnimations {
   }
 
   slideDown(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { y: -100, autoAlpha: 0 });
@@ -1306,7 +1319,7 @@ class GSAPAnimations {
 
   // Scale animation
   scaleUp(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     gsap.set(target, { scale: 0, transformOrigin: 'center center' });
@@ -1325,7 +1338,7 @@ class GSAPAnimations {
 
   // Clip reveal animation
   clipReveal(el, config) {
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     if (children && config.stagger) {
@@ -4177,7 +4190,7 @@ class GSAPAnimations {
   imageClipTop(el, config) {
     if (!el) return;
 
-    const children = el.children.length > 0 ? Array.from(el.children) : null;
+    const children = this.getAnimatableChildren(el);
     const target = children && config.stagger ? children : el;
 
     // Set initial state - clipped from bottom (only top edge visible)
@@ -4206,7 +4219,6 @@ class GSAPAnimations {
       }
     });
   }
-
 
   // Helper: Split text into characters
   splitChars(el) {

@@ -265,13 +265,13 @@
                             <div class="academics-card-image">
                                 <img data-gsap="image-clip-top" src="assets/images/Entry Point Card-1.jpg" alt="Middle School" class="w-100 h-100">
                             </div>
-                            <h4 data-gsap="fade-up" class="academics-card-title">Middle School (Years 5 to 8)</h4>
+                            <h4 data-gsap="fade-up" data-gsap-start="top 100%" class="academics-card-title">Middle School (Years 5 to 8)</h4>
                         </div>
                         <div class="col-12 col-lg-6 academics-card">
                             <div class="academics-card-image">
                                 <img data-gsap="image-clip-top" data-gsap-delay="0.3" src="assets/images/Entry Point Card.jpg" alt="Senior School" class="w-100 h-100">
                             </div>
-                            <h4 data-gsap="fade-up"   class="academics-card-title">Senior School (Years 9 to 12)</h4>
+                            <h4 data-gsap="fade-up" data-gsap-start="top 100%"  class="academics-card-title">Senior School (Years 9 to 12)</h4>
                         </div>
                     </div>
                 </div>
@@ -293,12 +293,12 @@
                             <div class="cocurricular-label">CO-CURRICULAR</div>
                             <h2 class="cocurricular-heading">Music, drama and creative expression across the College</h2>
                             <p class="cocurricular-text">Students take part in ensembles, bands, drama groups and productions that develop skill, discipline and joy in performance.</p>
-                            <button data-gsap="btn-clip-reveal" class="btn-rounded-large-outline cocurricular-button">See performing arts opportunities</button>
+                            <button data-gsap="btn-clip-reveal" data-gsap-delay="0.5" class="btn-rounded-large-outline cocurricular-button">See performing arts opportunities</button>
                         </div>
                     </div>
                     <div class="row g-0">
                         <div class="col-12 cocurricular-nav">
-                            <div class="cocurricular-nav-buttons d-flex align-items-center">
+                            <div data-gsap="slide-right" data-gsap-stagger="0.2" data-gsap-ease="back.out(1.1)" class="cocurricular-nav-buttons d-flex align-items-center">
                                 <button class="btn-rounded-large-outline cocurricular-nav-btn">Sports</button>
                                 <button class="btn-rounded-large-outline cocurricular-nav-btn active">Performing Arts</button>
                                 <button class="btn-rounded-large-outline cocurricular-nav-btn">Justice, Peace and Advocacy</button>
@@ -320,11 +320,11 @@
                 <div class="col-12 statistics-top">
                     <div class="row g-0 align-items-start">
                         <div class="col-12 col-lg-5 statistics-heading-col">
-                            <h2 class="statistics-heading">Nearly a century of formative education</h2>
+                            <h2 data-gsap="slide-left" class="statistics-heading">Nearly a century of formative education</h2>
                         </div>
                         <div class="col-12 col-lg-7 statistics-content-col">
-                            <p class="statistics-text">St Patrick's College has built generations of leaders grounded in faith and integrity. Our students thrive academically and grow as people of conscience.</p>
-                            <button class="btn-rounded-large-outline statistics-button">Discover our Impact</button>
+                            <p data-gsap="lines" class="statistics-text">St Patrick's College has built generations of leaders grounded in faith and integrity. Our students thrive academically and grow as people of conscience.</p>
+                            <button data-gsap="btn-clip-reveal" class="btn-rounded-large-outline statistics-button">Discover our Impact</button>
                         </div>
                     </div>
                 </div>
@@ -373,10 +373,10 @@
         </div>
         <div class="container-fluid position-relative">
             <div class="row g-0">
-                <div class="col-12 parents-community-content">
-                    <h2 class="parents-community-heading">Parents and Friends Community</h2>
+                <div data-gsap="fade-left" data-gsap-stagger="0.3" class="col-12 parents-community-content">
+                    <h2  class="parents-community-heading">Parents and Friends Community</h2>
                     <p class="parents-community-text">Faith is at the heart of our life. Grounded in Gospel spirituality, we foster meaningful relationships and service. Through retreats, prayer, and community projects, our young men learn compassion, justice, and solidarity in action.</p>
-                    <button class="btn-rounded-large-outline parents-community-button">Button Label</button>
+                    <button data-gsap="btn-clip-reveal" class="btn-rounded-large-outline parents-community-button">Button Label</button>
                 </div>
             </div>
         </div>
@@ -392,7 +392,7 @@
                         <div class="col-12 col-lg-6 testimonials-image-col">
                             <div class="testimonials-image-wrapper">
                                 <div class="testimonials-image-background position-absolute w-100 h-100">
-                                    <img src="assets/images/testimonial-1.jpg" alt="Testimonial Background 1" class="testimonials-bg-img" onerror="this.style.display='none'">
+                                    <img data-gsap="image-clip-top" src="assets/images/testimonial-1.jpg" alt="Testimonial Background 1" class="testimonials-bg-img" onerror="this.style.display='none'">
                                     <div class="testimonials-image-overlay position-absolute w-100 h-100">
                                         <img src="assets/images/testimonial-bg-2.jpg" alt="Testimonial Background 2" class="testimonials-bg-img-overlay" onerror="this.style.display='none'" style="display: none;">
                                     </div>
@@ -401,17 +401,17 @@
                         </div>
                         <div class="col-12 col-lg-6 testimonials-text-col">
                             <div class="testimonials-quote-wrapper">
-                                <p class="testimonials-quote">"St Patrick's has given me confidence I never knew I had. My teachers push me, my mates back me and every day I feel like I am becoming a better version of myself."</p>
-                                <p class="testimonials-attribution">Liam Dossi, Year 10 Student</p>
+                                <p data-gsap="lines" class="testimonials-quote">"St Patrick's has given me confidence I never knew I had. My teachers push me, my mates back me and every day I feel like I am becoming a better version of myself."</p>
+                                <p data-gsap="fade-up" class="testimonials-attribution">Liam Dossi, Year 10 Student</p>
                             </div>
                         </div>
                     </div>
                     <div class="row g-0 align-items-center testimonials-bottom-row">
                         <div class="col-12 col-lg-auto testimonials-button-col">
-                            <button class="btn-rounded-large-outline testimonials-button">Button Label</button>
+                            <button data-gsap="btn-clip-reveal" class="btn-rounded-large-outline testimonials-button">Button Label</button>
                         </div>
                         <div class="col-12 col-lg-auto testimonials-arrows-col">
-                            <div class="testimonials-arrows d-flex align-items-center">
+                            <div data-gsap="fade-up" class="testimonials-arrows d-flex align-items-center">
                                 <button class="testimonials-arrow-btn" aria-label="Previous testimonial">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20 10L10 20L20 30M10 20H30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
