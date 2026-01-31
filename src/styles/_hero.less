@@ -27,15 +27,19 @@
   width: 100%;
 }
 
+// Hero gradient positioning variables
+@hero-gradient-bottom: -31.5rem;
+@hero-gradient-left: -16.25rem;
+
 .hero-gradient {
   position: absolute;
-  bottom: -7.5rem;
-  left: -6.25rem;
+  bottom: @hero-gradient-bottom;
+  left: @hero-gradient-left;
   width: 43.75rem;
   height: 43.75rem;
-  border-radius: 80.1171875rem;
-  background: radial-gradient(circle, var(--primary-yellow-bright) 0%, rgba(223, 210, 34, 0.6) 50%, rgba(255, 240, 42, 0.2) 100%);
-  filter: blur(140px);
+  border-radius: 128.1875rem;
+  background: var(--primary-yellow-bright, #FFF02A);
+  filter: blur(100px);
   pointer-events: none;
   opacity: 0;
   z-index: 0;
@@ -114,6 +118,7 @@
   top: 0;
   left: 0;
   z-index: 1;
+  object-position: center;
 }
 
 .hero-image {

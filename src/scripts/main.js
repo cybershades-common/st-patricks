@@ -111,61 +111,82 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hero animations
     function initHeroAnimations() {
+        // Create master timeline
+        const heroTimeline = gsap.timeline();
+
+        // Set initial states for title spans
+        const heroTitleSpans = document.querySelectorAll('.hero-title span');
+        gsap.set(heroTitleSpans, {
+            display: 'inline-block',
+            opacity: 0,
+            y: 150
+        });
+
+        // Build timeline sequence
+        heroTimeline
+            // Header logo
+            .fromTo('.header-logo',
+                { y: -50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.7, ease: 'Power1.easeOut' },
+                0.2
+            )
+            // Header navigation
+            .fromTo('.header-nav',
+                { y: -50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.7, ease: 'Power1.easeOut' },
+                0.2
+            )
+            // Hero title words (staggered)
+            .to(heroTitleSpans, {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.4,
+                ease: 'Power1.easeOut'
+            }, 0.5)
+            // Hero description text
+            .fromTo('.hero-text p',
+                { x: 50, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1.2, ease: 'Power1.easeOut' },
+                1.5
+            )
+            // Hero CTA button
+            .fromTo('.hero-text button',
+                { x: 50, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.8, ease: 'Power1.easeOut' },
+                1.7
+            );
+
+        // Hero gradient - subtle fade in from background
         const heroGradient = document.querySelector('.hero-gradient');
         if (heroGradient) {
             gsap.set(heroGradient, {
-                x: '-10%',
-                y: '5vh',
-                opacity: 0,
-                visibility: 'visible'
+                opacity: 0
             });
 
-            gsap.to(heroGradient, {
-                x: '-6vw',
-                y: '38vh',
-                opacity: 0.9,
-                duration: 3.3,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: '.hero',
-                    start: 'top 95%',
-                    toggleActions: 'play none none reverse'
-                }
-            });
+            heroTimeline.to(heroGradient, {
+                opacity: 0.6,
+                duration: 2.5,
+                ease: 'power1.inOut'
+            }, 0.3);
         }
-
-        gsap.fromTo('.header-logo',
-            { y: -50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, delay: 0.2, ease: 'power2.out' }
-        );
-
-        gsap.fromTo('.header-nav',
-            { y: -50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, delay: 0.3, ease: 'power2.out' }
-        );
-
-        const heroTitleText = document.querySelector('.hero-title');
-        if (heroTitleText) {
-            gsap.fromTo(heroTitleText,
-                { y: 100, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: 'power3.out' }
-            );
-        }
-
-        gsap.fromTo('.hero-text p',
-            { x: 50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.8, delay: 0.8, ease: 'power2.out' }
-        );
-
-        gsap.fromTo('.hero-text button',
-            { x: 50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.8, delay: 1, ease: 'power2.out' }
-        );
     }
 
     initHeroAnimations();
 
-    
+    // Hero video lazy loading
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+        // Load video after page load to not delay initial render
+        window.addEventListener('load', function() {
+            heroVideo.load();
+            // Ensure video plays (some browsers require user interaction)
+            heroVideo.play().catch(function(error) {
+                console.log('Video autoplay prevented:', error);
+            });
+        });
+    }
+
     if (footerArrowUp) {
         footerArrowUp.addEventListener('click', function() {
             window.scrollTo({
@@ -175,5 +196,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    
+
 });
