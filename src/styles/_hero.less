@@ -78,6 +78,7 @@
 .hero-text {
   height: 100%;
   padding-bottom: 2.5rem;
+  gap: 2rem 0;
   p {
     font-family: var(--font-family-helvetica-neue);
     font-size: var(--font-size-b1);
@@ -191,6 +192,11 @@
 @media (max-width: 991px) {
   .hero {
     padding-top: 7.5rem;
+    .hero-content-wrap{
+      padding: 5rem 0 0;
+      height: auto;
+      min-height: auto;
+    }
   }
 
   .hero .container-fluid {
@@ -240,6 +246,14 @@
   .hero-media-overlay {
     mix-blend-mode: normal;
   }
+  .hero-content{
+    .hero-gradient{
+      width: 20rem;
+      height: 20rem;
+      left: -10rem;
+      bottom: -28rem;
+    }
+  }
 }
 
 @media (max-width: 575px) {
@@ -247,10 +261,6 @@
     padding-top: 5rem;
   }
 
-  .hero-title {
-    font-size: 2.5rem;
-    letter-spacing: -0.0625rem;
-  }
 
   .hero-text {
     gap: var(--spacing-xs);

@@ -1,50 +1,43 @@
-// Statistics Section Styles
-
 .statistics-section {
   background-color: var(--basic-white);
   padding-top: var(--spacing-small-2);
   padding-bottom: var(--spacing-small-2);
 }
-
 .statistics-section .container-fluid {
-  max-width: 86.25rem; // 1380px
+  max-width: 86.25rem;
 }
-
 .statistics-top {
   margin-bottom: 0;
 }
-
 .statistics-cards {
-  margin-top: 12.0625rem; // 193px gap from top section
+  margin-top: 12.0625rem;
 }
-
 .statistics-heading-col {
   padding-right: 0;
-  
-  @media (min-width: 992px) {
-    padding-right: 8.5625rem; // 137px gap
+}
+@media (min-width: 992px) {
+  .statistics-heading-col {
+    padding-right: 8.5625rem;
   }
 }
-
 .statistics-heading {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-h2);
   font-weight: var(--font-weight-light);
   line-height: var(--line-height-h2);
-  letter-spacing: -0.0375rem; // -0.6px
+  letter-spacing: -0.0375rem;
   color: var(--primary-blue);
   margin: 0;
   white-space: pre-wrap;
 }
-
 .statistics-content-col {
   padding-left: 0;
-  
-  @media (min-width: 992px) {
+}
+@media (min-width: 992px) {
+  .statistics-content-col {
     padding-left: 0;
   }
 }
-
 .statistics-text {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-b1);
@@ -56,62 +49,55 @@
   margin-bottom: var(--spacing-base);
   white-space: pre-wrap;
 }
-
 .statistics-button {
   margin-top: 0;
 }
-
-
 .statistics-card {
   position: relative;
-  height: 17.625rem; // 282px
+  height: 17.625rem;
   display: flex;
-  gap: var(--spacing-xs); // 20px
+  gap: var(--spacing-xs);
   align-items: flex-start;
-  
-  @media (min-width: 992px) {
-    &:not(:last-child) {
-      padding-right: var(--spacing-xs); // 20px gap between cards
-    }
-    
-    &:last-child {
-      padding-right: 0;
-    }
+}
+@media (min-width: 992px) {
+  .statistics-card:not(:last-child) {
+    padding-right: var(--spacing-xs);
   }
-  
-  @media (max-width: 991px) {
+  .statistics-card:last-child {
+    padding-right: 0;
+  }
+}
+@media (max-width: 991px) {
+  .statistics-card {
     height: auto;
-    min-height:inherit;
+    min-height: inherit;
     padding-right: 0;
     margin-bottom: var(--spacing-base);
     padding-bottom: var(--spacing-base);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
-  &:last-child {
-    @media (max-width: 991px) {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-  }
-
-  .statistics-card-content{
-    gap: 2rem;
+}
+@media (max-width: 991px) {
+  .statistics-card:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
   }
 }
-
+.statistics-card .statistics-card-content {
+  gap: 2rem;
+}
 .statistics-card-divider {
-  width: 0.0625rem; // 1px
+  width: 0.0625rem;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
-  
-  @media (max-width: 991px) {
+}
+@media (max-width: 991px) {
+  .statistics-card-divider {
     display: none;
   }
 }
-
 .statistics-card-content {
   display: flex;
   flex-direction: column;
@@ -119,7 +105,6 @@
   justify-content: space-between;
   flex: 1;
 }
-
 .statistics-card-label {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-b2);
@@ -130,63 +115,51 @@
   margin: 0;
   white-space: pre-wrap;
 }
-
 .statistics-card-number {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-h1);
   font-weight: var(--font-weight-light);
   line-height: var(--line-height-h1);
-  letter-spacing: var(--letter-spacing-h1); // -2.7px
+  letter-spacing: var(--letter-spacing-h1);
   color: var(--primary-blue);
   margin: 0;
 }
-
 @media (max-width: 991px) {
   .statistics-section {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
   }
-
   .statistics-section .container-fluid {
     padding-left: var(--spacing-xs);
     padding-right: var(--spacing-xs);
   }
-
   .statistics-top {
     margin-bottom: var(--spacing-small);
   }
-
   .statistics-cards {
     margin-top: var(--spacing-small);
   }
-
   .statistics-heading-col {
     padding-right: 0;
     margin-bottom: var(--spacing-xs);
   }
-
   .statistics-content-col {
     padding-left: 0;
   }
-
   .statistics-text {
     margin-bottom: var(--spacing-xs);
   }
-
   .statistics-button {
     margin-top: 0;
   }
 }
-
 @media (max-width: 767px) {
   .statistics-heading {
     font-size: 2.5rem;
   }
-
   .statistics-text {
     font-size: 1.125rem;
   }
-
   .statistics-card-number {
     font-size: 4.5rem;
   }
