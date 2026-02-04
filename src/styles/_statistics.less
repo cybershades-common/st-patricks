@@ -82,10 +82,11 @@
   @media (max-width: 991px) {
     height: auto;
     min-height: inherit;
-    padding-right: 0;
+    padding: 1.875rem;
     margin-bottom: var(--spacing-base);
     padding-bottom: var(--spacing-base);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
   }
 
   &:last-child {
@@ -150,7 +151,8 @@
     }
 
   }
-  .statistics-card{
+
+  .statistics-card {
     height: 13rem;
   }
 }
@@ -172,6 +174,21 @@
 
   .statistics-cards {
     margin-top: var(--spacing-small);
+
+    .row {
+      justify-content: space-between;
+
+      .statistics-card {
+        max-width: 48%;
+
+        &:last-child {
+          padding: 1.875rem;
+          margin-bottom: var(--spacing-base);
+          padding-bottom: var(--spacing-base);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
   }
 
   .statistics-heading-col {

@@ -133,8 +133,14 @@
     min-height: auto;
     padding-bottom: 0;
   }
-  .hero .hero-content-wrap h1 {
+  .hero .hero-content-wrap .hero-content h1 {
     font-size: 9.25rem;
+  }
+  .hero .hero-content-wrap .hero-content .hero-gradient {
+    bottom: -16.5rem;
+    left: -0.25rem;
+    width: 20.75rem;
+    height: 26.75rem;
   }
 }
 @media (max-width: 1199px) {
@@ -161,6 +167,12 @@
     height: auto;
     min-height: auto;
   }
+  .hero .hero-content-wrap .hero-gradient {
+    bottom: -38.5rem;
+    left: -6.25rem;
+    width: 20.75rem;
+    height: 26.75rem;
+  }
   .hero .container-fluid {
     padding-left: var(--spacing-xs);
     padding-right: var(--spacing-xs);
@@ -169,7 +181,7 @@
     margin-bottom: var(--spacing-small);
   }
   .hero-title {
-    font-size: 4.375rem;
+    font-size: 6.375rem;
     letter-spacing: -0.125rem;
   }
   .hero-text {

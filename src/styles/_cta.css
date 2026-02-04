@@ -101,8 +101,10 @@
 @media (max-width: 991px) {
   .cta-section {
     min-height: auto;
-    padding-top: 3.75rem;
-    padding-bottom: 3.75rem;
+  }
+  .cta-section .cta-block-wrap {
+    min-height: auto;
+    gap: 5rem 0;
   }
   .cta-section .container-fluid {
     padding-left: 1.25rem;

@@ -624,6 +624,9 @@ body {
     padding-left: var(--spacing-xs);
     padding-right: var(--spacing-xs);
   }
+  .header .container-fluid > .row {
+    align-items: center;
+  }
   .mega-menu-content .container-fluid {
     padding-left: var(--spacing-xs);
     padding-right: var(--spacing-xs);
@@ -898,8 +901,14 @@ body {
     min-height: auto;
     padding-bottom: 0;
   }
-  .hero .hero-content-wrap h1 {
+  .hero .hero-content-wrap .hero-content h1 {
     font-size: 9.25rem;
+  }
+  .hero .hero-content-wrap .hero-content .hero-gradient {
+    bottom: -16.5rem;
+    left: -0.25rem;
+    width: 20.75rem;
+    height: 26.75rem;
   }
 }
 @media (max-width: 1199px) {
@@ -926,6 +935,12 @@ body {
     height: auto;
     min-height: auto;
   }
+  .hero .hero-content-wrap .hero-gradient {
+    bottom: -38.5rem;
+    left: -6.25rem;
+    width: 20.75rem;
+    height: 26.75rem;
+  }
   .hero .container-fluid {
     padding-left: var(--spacing-xs);
     padding-right: var(--spacing-xs);
@@ -934,7 +949,7 @@ body {
     margin-bottom: var(--spacing-small);
   }
   .hero-title {
-    font-size: 4.375rem;
+    font-size: 6.375rem;
     letter-spacing: -0.125rem;
   }
   .hero-text {
@@ -1325,6 +1340,9 @@ body {
     padding-top: 1.875rem;
     padding-bottom: 1.875rem;
   }
+  .academics-card {
+    padding: 0 0.625rem;
+  }
   .academics-section .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
@@ -1354,6 +1372,9 @@ body {
   }
   .academics-card-image {
     height: 21.875rem;
+  }
+  .academics-card-title {
+    font-size: 1.725rem;
   }
 }
 @media (max-width: 767px) {
@@ -1590,7 +1611,7 @@ body {
   .statistics-card {
     height: auto;
     min-height: inherit;
-    padding-right: 0;
+    padding: 1.875rem;
     margin-bottom: var(--spacing-base);
     padding-bottom: var(--spacing-base);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -1667,6 +1688,18 @@ body {
   }
   .statistics-cards {
     margin-top: var(--spacing-small);
+  }
+  .statistics-cards .row {
+    justify-content: space-between;
+  }
+  .statistics-cards .row .statistics-card {
+    max-width: 48%;
+  }
+  .statistics-cards .row .statistics-card:last-child {
+    padding: 1.875rem;
+    margin-bottom: var(--spacing-base);
+    padding-bottom: var(--spacing-base);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .statistics-heading-col {
     padding-right: 0;
@@ -1864,6 +1897,7 @@ body {
 .testimonials-bg-img {
   aspect-ratio: 446/551;
   object-fit: cover;
+  height: 100%;
   z-index: 1;
 }
 .testimonials-image-overlay {
@@ -1973,7 +2007,7 @@ body {
   }
   .testimonials-image-col {
     padding-right: 0;
-    margin-bottom: var(--spacing-small);
+    margin-bottom: 0;
   }
   .testimonials-image-wrapper {
     width: 100%;
@@ -1998,11 +2032,11 @@ body {
   .testimonials-quote-wrapper {
     gap: 2rem;
   }
-}
-@media (max-width: 767px) {
-  .testimonials-quote {
+  .testimonials-quote-wrapper .testimonials-quote {
     font-size: 2rem;
   }
+}
+@media (max-width: 767px) {
   .testimonials-image-wrapper {
     height: 20rem;
   }
@@ -2379,8 +2413,10 @@ body {
 @media (max-width: 991px) {
   .cta-section {
     min-height: auto;
-    padding-top: 3.75rem;
-    padding-bottom: 3.75rem;
+  }
+  .cta-section .cta-block-wrap {
+    min-height: auto;
+    gap: 5rem 0;
   }
   .cta-section .container-fluid {
     padding-left: 1.25rem;
@@ -2779,6 +2815,10 @@ body {
     padding-bottom: 0.9375rem;
     min-height: auto;
   }
+  .footer .footer-mission,
+  .footer .footer-logo {
+    max-width: 50%;
+  }
   .footer .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
@@ -2786,6 +2826,9 @@ body {
   .footer-left {
     min-height: auto;
     margin-bottom: 1.875rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
   }
   .footer-crest {
     position: relative;
@@ -2820,6 +2863,7 @@ body {
     margin-bottom: 1.875rem;
     flex-wrap: wrap;
     width: 100%;
+    justify-content: center;
     height: auto;
   }
   .footer-right {
@@ -2865,8 +2909,8 @@ body {
     position: relative;
     bottom: auto;
     margin-top: 1.875rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 0;
+    padding-right: 0;
   }
   .footer-bottom .row {
     width: 100%;
@@ -2882,7 +2926,7 @@ body {
   }
   .footer-bottom-links-left {
     flex-wrap: wrap;
-    gap: 0.625rem;
+    gap: 1.875rem;
     width: 100%;
   }
 }

@@ -302,6 +302,9 @@
     padding-left: var(--spacing-xs);
     padding-right: var(--spacing-xs);
   }
+  .header .container-fluid > .row {
+    align-items: center;
+  }
   .mega-menu-content .container-fluid {
     padding-left: var(--spacing-xs);
     padding-right: var(--spacing-xs);

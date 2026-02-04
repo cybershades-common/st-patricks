@@ -1,12 +1,13 @@
 // CTA Section Styles
 
-.cta-block-wrap{
+.cta-block-wrap {
   display: flex;
   justify-content: space-between;
   height: auto;
   flex-direction: column;
   min-height: 88vh;
 }
+
 .cta-section {
   position: relative;
   min-height: 100vh;
@@ -29,7 +30,7 @@
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
-  
+
   &:nth-child(2) {
     z-index: 2;
   }
@@ -47,7 +48,7 @@
   position: relative;
   z-index: 4;
 
-  
+
   @media (min-width: 992px) {
     max-width: 90rem;
   }
@@ -69,8 +70,8 @@
 
 .cta-text-wrapper {
   display: flex;
-   gap: 1.8125rem;
-   flex-direction: column;
+  gap: 1.8125rem;
+  flex-direction: column;
 }
 
 .cta-text {
@@ -113,9 +114,9 @@
   color: var(--basic-black);
 }
 
-@media (min-width:992px) and (max-width:1200px){
-  .cta-block-wrap{
-    .cta-heading{
+@media (min-width:992px) and (max-width:1200px) {
+  .cta-block-wrap {
+    .cta-heading {
       font-size: 4.5rem;
       letter-spacing: -0.0625rem;
     }
@@ -123,10 +124,15 @@
 }
 
 @media (max-width: 991px) {
+
+
   .cta-section {
     min-height: auto;
-    padding-top: 3.75rem;
-    padding-bottom: 3.75rem;
+
+    .cta-block-wrap {
+      min-height: auto;
+      gap: 5rem 0;
+    }
   }
 
   .cta-section .container-fluid {
@@ -178,4 +184,3 @@
     font-size: 1.125rem;
   }
 }
-

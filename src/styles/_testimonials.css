@@ -52,6 +52,7 @@
 .testimonials-bg-img {
   aspect-ratio: 446/551;
   object-fit: cover;
+  height: 100%;
   z-index: 1;
 }
 .testimonials-image-overlay {
@@ -161,7 +162,7 @@
   }
   .testimonials-image-col {
     padding-right: 0;
-    margin-bottom: var(--spacing-small);
+    margin-bottom: 0;
   }
   .testimonials-image-wrapper {
     width: 100%;
@@ -186,11 +187,11 @@
   .testimonials-quote-wrapper {
     gap: 2rem;
   }
-}
-@media (max-width: 767px) {
-  .testimonials-quote {
+  .testimonials-quote-wrapper .testimonials-quote {
     font-size: 2rem;
   }
+}
+@media (max-width: 767px) {
   .testimonials-image-wrapper {
     height: 20rem;
   }
