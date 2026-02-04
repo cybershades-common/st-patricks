@@ -355,8 +355,6 @@
     padding-right: 1.25rem;
   }
   .footer-left {
-    padding-left: 1.25rem;
-    padding-top: 1.25rem;
     min-height: auto;
     margin-bottom: 1.875rem;
   }
@@ -432,7 +430,7 @@
   }
   .footer-large-text h1 {
     font-size: 5rem;
-    white-space: normal;
+    letter-spacing: -0.0625rem;
   }
   .footer-bottom {
     position: relative;
@@ -460,10 +458,15 @@
   }
 }
 @media (max-width: 767px) {
-  .footer-college-name h2 {
-    font-size: 1.25rem;
+  .footer-logos {
+    gap: 0;
+    justify-content: space-between;
   }
-  .footer-large-text h1 {
-    font-size: 3.125rem;
+  .footer-bottom {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .footer .footer-right {
+    padding: 0 0.75rem;
   }
 }

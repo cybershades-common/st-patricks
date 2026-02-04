@@ -39,13 +39,10 @@
 }
 .parents-community-content {
   padding-top: 2.0625rem;
-  padding-left: 1.875rem;
-  min-height: 50.625rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-super-small);
   align-items: flex-start;
-  width: 45.8125rem;
   max-width: 100%;
 }
 .parents-community-heading {
@@ -80,6 +77,11 @@
   background-color: var(--basic-white);
   color: var(--basic-black);
 }
+@media (min-width: 992px) and (max-width: 1200px) {
+  .parents-community-heading {
+    font-size: 3rem;
+  }
+}
 @media (max-width: 991px) {
   .parents-community-section {
     min-height: auto;
@@ -92,7 +94,7 @@
   .parents-community-content {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
-    padding-left: 0;
+    padding-left: 1rem;
     min-height: auto;
     width: 100%;
   }

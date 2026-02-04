@@ -121,6 +121,17 @@
   color: var(--primary-blue);
   margin: 0;
 }
+@media (min-width: 992px) and (max-width: 1200px) {
+  .statistics-heading-col {
+    padding-right: 6rem;
+  }
+  .statistics-heading-col .statistics-heading {
+    font-size: 2.75rem;
+  }
+  .statistics-card {
+    height: 13rem;
+  }
+}
 @media (max-width: 991px) {
   .statistics-section {
     padding-top: var(--spacing-small);

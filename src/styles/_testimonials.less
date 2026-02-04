@@ -24,13 +24,14 @@
 .testimonials-section .container-fluid {
   position: relative;
   z-index: 2;
-  max-width: 78.9375rem; // 1263px
+
+
 }
 
 .testimonials-content {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2.5rem 0;
 }
 
 .testimonials-top-row {
@@ -39,7 +40,7 @@
 
 .testimonials-image-col {
   padding-right: 0;
-  
+
   @media (min-width: 992px) {
     padding-right: 15.875rem; // 254px gap (700 - 446 = 254px)
   }
@@ -60,11 +61,7 @@
 }
 
 .testimonials-bg-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 446/551;
   object-fit: cover;
   z-index: 1;
 }
@@ -136,7 +133,7 @@
 
 .testimonials-arrows-col {
   padding-left: 0;
-  
+
   @media (min-width: 992px) {
     margin-left: auto;
     padding-left: 0;
@@ -221,7 +218,8 @@
     padding-left: 0;
     margin-left: 0;
   }
-  .testimonials-quote-wrapper{
+
+  .testimonials-quote-wrapper {
     gap: 2rem;
   }
 }

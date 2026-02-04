@@ -46,13 +46,10 @@
 
 .parents-community-content {
   padding-top: 2.0625rem; // 33px
-  padding-left: 1.875rem; // 30px
-  min-height: 50.625rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-super-small); // 10px
   align-items: flex-start;
-  width: 45.8125rem; // 733px
   max-width: 100%;
 }
 
@@ -95,6 +92,11 @@
   color: var(--basic-black);
 }
 
+@media (min-width:992px) and (max-width:1200px){
+  .parents-community-heading {
+font-size: 3rem;
+  }}
+
 @media (max-width: 991px) {
   .parents-community-section {
     min-height: auto;
@@ -109,7 +111,7 @@
   .parents-community-content {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
-    padding-left: 0;
+    padding-left: 1rem;
     min-height: auto;
     width: 100%;
   }

@@ -20,12 +20,11 @@
 .testimonials-section .container-fluid {
   position: relative;
   z-index: 2;
-  max-width: 78.9375rem;
 }
 .testimonials-content {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2.5rem 0;
 }
 .testimonials-top-row {
   margin-bottom: 2.8125rem;
@@ -51,11 +50,7 @@
   z-index: 1;
 }
 .testimonials-bg-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 446/551;
   object-fit: cover;
   z-index: 1;
 }

@@ -129,6 +129,10 @@
   pointer-events: none;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
+  .hero .hero-content-wrap {
+    min-height: auto;
+    padding-bottom: 0;
+  }
   .hero .hero-content-wrap h1 {
     font-size: 9.25rem;
   }
@@ -180,17 +184,12 @@
     padding-top: 6.25rem;
     min-height: auto;
   }
-  .hero-title {
-    font-size: 3.125rem;
-    letter-spacing: -0.09375rem;
-  }
   .hero-text p {
     font-size: var(--font-size-b2);
   }
   .hero-media {
-    height: 100vh;
-    height: 100svh;
-    min-height: 25rem;
+    height: auto;
+    max-height: 25rem;
   }
   .hero-media-overlay {
     mix-blend-mode: normal;
