@@ -47,6 +47,7 @@ class GSAPAnimations {
           case 'image-clip-bottom': this.imageClipBottom(el, cfg); break;
           case 'image-clip-left':   this.imageClipLeft(el, cfg);   break;
           case 'image-clip-right':  this.imageClipRight(el, cfg);  break;
+          case 'image-fade-in':     this.imageFadeIn(el, cfg);    break;
           case 'parallax-bg':     this.parallaxBg(el, cfg);    break;
           default: console.warn(`Unknown data-gsap: "${type}"`);
         }
@@ -528,6 +529,26 @@ class GSAPAnimations {
           gsap.set(e, { clearProps: 'will-change' })
         );
       }
+    });
+  }
+
+  // Smooth fade-in with zoom out (scale 1.15 → 1)
+  imageFadeIn(el, cfg) {
+    if (!el) return;
+
+    const kids    = this.animChildren(el);
+    const target  = kids && cfg.stagger ? kids : el;
+    const stagger = kids && cfg.stagger ? cfg.stagger : 0;
+
+    gsap.set(target, { scale: 1.15, opacity: 0, force3D: true });
+    gsap.to(target, {
+      scale: 1, opacity: 1,
+      duration: cfg.duration || 1.2,
+      ease:     cfg.ease || 'power2.out',
+      delay:    cfg.delay,
+      stagger,
+      force3D:  true,
+      scrollTrigger: this.triggerCfg(el, cfg)
     });
   }
 

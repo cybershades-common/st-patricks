@@ -279,14 +279,12 @@ document.addEventListener('DOMContentLoaded', function () {
         //     }, 0.3);
         // }
 
-        // Hero video - clip reveal left to right
+        // Hero video - fade in after title
         heroTimeline.to('.hero-media-wrapper', {
-            clipPath: 'inset(0 0% 0 0)',
-            webkitClipPath: 'inset(0 0% 0 0)',
-            duration: 0.9,
-            ease: 'power2.inOut',
-            force3D: true
-        }, 2.5);
+            opacity: 1,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 1.1);
     }
 
     initHeroAnimations();
@@ -572,9 +570,9 @@ document.addEventListener('DOMContentLoaded', function () {
             lineEase: 'power2.out',
             lineStagger: 0.2,          // Delay between each card
             labelDuration: 1.2,        // Label fade-up duration
-            labelEase: 'power2.out',
+            labelEase: 'back.out(1.1)',
             labelDelay: 0.5,           // When label starts after line
-            counterDuration: 4.5,      // Counter animation duration
+            counterDuration: 2.5,      // Counter animation duration
             counterEase: 'power2.out',
             counterDelay: 0.6          // When counter starts after line
         };
@@ -585,12 +583,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const label = card.querySelector('.statistics-card-label');
             const number = card.querySelector('.statistics-card-number');
 
-            // Line starts at 0 height (will grow from top)
+            // Line starts fully clipped (will reveal top to bottom)
             if (divider) {
                 gsap.set(divider, {
-                    scaleY: 0,
-                    transformOrigin: 'top center',
-                    willChange: 'transform'
+                    clipPath: 'inset(0 0 100% 0)',
+                    webkitClipPath: 'inset(0 0 100% 0)',
+                    willChange: 'clip-path'
                 });
             }
 
@@ -627,10 +625,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const cardStart = index * TIMING.lineStagger;
 
-            // 1. Line grows from top to bottom
+            // 1. Line reveals from top to bottom
             if (divider) {
                 tl.to(divider, {
-                    scaleY: 1,
+                    clipPath: 'inset(0 0 0% 0)',
+                    webkitClipPath: 'inset(0 0 0% 0)',
                     duration: TIMING.lineDuration,
                     ease: TIMING.lineEase
                 }, cardStart);
