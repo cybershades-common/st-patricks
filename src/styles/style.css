@@ -789,15 +789,14 @@ body {
 }
 .hero-gradient {
   position: absolute;
-  bottom: -31.5rem;
-  left: -16.25rem;
+  bottom: -33.5rem;
+  left: -13.25rem;
   width: 43.75rem;
   height: 43.75rem;
   border-radius: 128.1875rem;
   background: var(--primary-yellow-bright, #FFF02A);
-  filter: blur(100px);
+  filter: blur(11.625rem);
   pointer-events: none;
-  opacity: 0;
   z-index: 0;
   visibility: visible;
 }
@@ -1127,25 +1126,18 @@ body {
 }
 .strategic-section {
   position: relative;
-  min-height: 50.625rem;
   overflow: hidden;
+  height: 810px;
+  max-height: 90vh;
 }
 .strategic-background {
   top: 0;
   left: 0;
   z-index: 1;
 }
-.strategic-bg-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
 .strategic-overlay {
   background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 4;
@@ -1154,7 +1146,8 @@ body {
 .strategic-section .container-fluid {
   position: relative;
   z-index: 5;
-  min-height: 50.625rem;
+  display: flex;
+  height: 100%;
 }
 @media (min-width: 992px) {
   .strategic-section .container-fluid {
@@ -1163,7 +1156,6 @@ body {
 }
 .strategic-content {
   padding-top: 2.0625rem;
-  min-height: 50.625rem;
   position: relative;
 }
 .strategic-top {
@@ -1213,20 +1205,20 @@ body {
 }
 @media (max-width: 991px) {
   .strategic-section {
-    min-height: auto;
+    min-height: 600px;
   }
   .strategic-section .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-    min-height: auto;
+    display: flex;
+    height: 100%;
   }
   .strategic-content {
     padding-top: 3rem;
     padding-bottom: 3rem;
-    min-height: auto;
+    justify-content: space-between;
     display: flex;
     flex-direction: column;
-    gap: 5rem 0;
   }
   .strategic-content .full {
     width: initial;
