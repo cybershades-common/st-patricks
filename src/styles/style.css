@@ -79,6 +79,10 @@ select:focus-within {
   left: -50%;
   bottom: -75%;
 }
+a[href^=tel] {
+  color: var(--basic-black);
+  text-decoration: none;
+}
 @font-face {
   font-family: 'Helvetica Neue LT Pro';
   src: url('../../assets/fonts/HelveticaNeueLTProLt.otf') format('opentype');
@@ -3140,5 +3144,8 @@ body {
   }
   .footer .footer-right {
     padding: 0 0.75rem;
+  }
+  .footer-follow-wrapper {
+    margin: 2rem 0;
   }
 }
