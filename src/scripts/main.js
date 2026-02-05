@@ -842,6 +842,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const totalSlides = testimonials.length;
 
+        const isMobile = window.matchMedia('(max-width: 991px)').matches;
+
         const picSlider = new Swiper('.testimonials-pic-slider', {
             direction: 'vertical',
             slidesPerView: 1,
@@ -857,19 +859,29 @@ document.addEventListener('DOMContentLoaded', function () {
             fadeEffect: {
                 crossFade: true
             },
-            allowTouchMove: true,
+            allowTouchMove: isMobile,
+            touchStartPreventDefault: false,
+            touchMoveStopPropagation: false,
             on: {
                 slideChange: function() {
                     const index = this.activeIndex;
                     picSlider.slideTo(index);
-                    prevBtn.disabled = index === 0;
-                    nextBtn.disabled = index === totalSlides - 1;
+                    const prevDisabled = index === 0;
+                    const nextDisabled = index === totalSlides - 1;
+                    prevBtn.disabled = prevDisabled;
+                    nextBtn.disabled = nextDisabled;
+                    prevBtn.classList.toggle('is-disabled', prevDisabled);
+                    nextBtn.classList.toggle('is-disabled', nextDisabled);
                 }
             }
         });
 
         prevBtn.disabled = true;
         nextBtn.disabled = totalSlides <= 1;
+        prevBtn.classList.add('is-disabled');
+        if (totalSlides <= 1) {
+            nextBtn.classList.add('is-disabled');
+        }
 
         prevBtn.addEventListener('click', function() {
             textSlider.slidePrev();
@@ -879,7 +891,9 @@ document.addEventListener('DOMContentLoaded', function () {
             textSlider.slideNext();
         });
 
-        // Navigation only (buttons)
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
     }
 
     initTestimonialsSlider();
