@@ -2766,6 +2766,9 @@ body {
   width: 100vw;
   overflow: hidden;
 }
+.marquee-track {
+  display: flex;
+}
 .footer-large-text h1 {
   font-family: var(--font-family-helvetica-neue);
   font-size: 13.5449375rem;
@@ -2777,15 +2780,6 @@ body {
   margin: 0;
   padding: 0;
   display: inline-block;
-  animation: marquee 30s linear infinite;
-}
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 .footer-bottom {
   margin: 2rem auto 0;

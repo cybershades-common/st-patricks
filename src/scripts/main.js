@@ -733,5 +733,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Footer marquee - clone-based seamless loop via Web Animations API
+    const marqueeWrapper = document.querySelector('.footer-large-text');
+    const marqueeH1 = marqueeWrapper?.querySelector('h1');
+    if (marqueeH1) {
+        const track = document.createElement('div');
+        track.className = 'marquee-track';
+        const clone = marqueeH1.cloneNode(true);
+        marqueeWrapper.appendChild(track);
+        track.appendChild(marqueeH1);
+        track.appendChild(clone);
+
+        const loopWidth = marqueeH1.offsetWidth;
+        track.animate([
+            { transform: 'translate3d(0, 0, 0)' },
+            { transform: `translate3d(-${loopWidth}px, 0, 0)` }
+        ], {
+            duration: 10000,
+            iterations: Infinity,
+            easing: 'linear'
+        });
+    }
 
 });
