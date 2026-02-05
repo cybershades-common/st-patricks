@@ -38,7 +38,8 @@ class GSAPAnimations {
           case 'slide-left':      this.slideLeft(el, cfg);     break;
           case 'slide-right':     this.slideRight(el, cfg);    break;
           case 'zoom-in':         this.zoomIn(el, cfg);        break;
-          case 'lines':           this.linesAnimation(el, cfg);break;
+          case 'lines':           this.linesAnimation(el, cfg);  break;
+          case 'lines-scrub':     this.linesScrub(el, cfg);     break;
           case 'writing-text':    this.writingText(el, cfg);   break;
           case 'btn-clip-reveal': this.btnClipReveal(el, cfg); break;
           case 'image-clip-top':  this.imageClipTop(el, cfg);  break;
@@ -127,7 +128,10 @@ class GSAPAnimations {
       const wrapper       = document.createElement('span');
       wrapper.className     = 'gsap-line';
       wrapper.style.display = 'block';
-      words.forEach(w => wrapper.appendChild(w));
+      words.forEach((w, i) => {
+        if (i > 0) wrapper.appendChild(document.createTextNode(' '));
+        wrapper.appendChild(w);
+      });
       el.appendChild(wrapper);
       return wrapper;
     });
@@ -244,6 +248,33 @@ class GSAPAnimations {
       stagger:  cfg.stagger || 0.15,
       delay:    cfg.delay,
       scrollTrigger: this.triggerCfg(el, cfg)
+    });
+  }
+
+  // Line-by-line fade up, scrub-driven, plays once then stays
+  linesScrub(el, cfg) {
+    const lines = this.splitLines(el);
+    if (!lines.length) return;
+
+    gsap.set(lines, { y: 20, autoAlpha: 0, force3D: true });
+
+    const end = el.getAttribute('data-gsap-end') || 'top 40%';
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start:   'top 90%',
+        end:     end,
+        scrub:   1,
+        once:    true
+      }
+    });
+
+    tl.to(lines, {
+      y: 0, autoAlpha: 1, force3D: true,
+      duration: 1,
+      ease:     cfg.ease || this.defaults.ease.fade,
+      stagger:  cfg.stagger || 0.1
     });
   }
 
