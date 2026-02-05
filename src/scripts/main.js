@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const aboutTl = gsap.timeline({
             scrollTrigger: {
                 trigger: '.about-section',
-                start: 'top 80%',
+                start: 'top 90%',
                 end: 'top 40%',
                 scrub: 1,
                 once: true

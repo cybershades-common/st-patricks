@@ -40,6 +40,7 @@ class GSAPAnimations {
           case 'zoom-in':         this.zoomIn(el, cfg);        break;
           case 'lines':           this.linesAnimation(el, cfg);  break;
           case 'lines-scrub':     this.linesScrub(el, cfg);     break;
+          case 'masked-title':    this.maskedTitle(el, cfg);    break;
           case 'writing-text':    this.writingText(el, cfg);   break;
           case 'btn-clip-reveal': this.btnClipReveal(el, cfg); break;
           case 'image-clip-top':  this.imageClipTop(el, cfg);  break;
@@ -275,6 +276,70 @@ class GSAPAnimations {
       duration: 1,
       ease:     cfg.ease || this.defaults.ease.fade,
       stagger:  cfg.stagger || 0.1
+    });
+  }
+
+  // Title lines slide up under overflow mask, scrub-driven, once.
+  // Splits on <br> only — all other nodes (spans, text) moved intact.
+  maskedTitle(el, cfg) {
+    const segments = [];
+    let current    = [];
+
+    [...el.childNodes].forEach(node => {
+      if (node.nodeName === 'BR') {
+        if (current.length) segments.push(current);
+        current = [];
+      } else {
+        current.push(node);
+      }
+    });
+    if (current.length) segments.push(current);
+
+    // Rebuild: each segment inside mask (overflow:hidden) + inner (animated)
+    // paddingBottom gives descender room; negative marginBottom compensates layout
+    const inners = [];
+    segments.forEach(nodes => {
+      const mask  = document.createElement('span');
+      mask.style.display       = 'block';
+      mask.style.overflow      = 'hidden';
+      mask.style.paddingBottom = '0.2em';
+      mask.style.marginBottom  = '-0.2em';
+
+      const inner = document.createElement('span');
+      inner.style.display = 'block';
+      nodes.forEach(node => inner.appendChild(node));
+
+      mask.appendChild(inner);
+      el.appendChild(mask);
+      inners.push(inner);
+    });
+
+    // Force layout so offsetHeight is accurate, then set each line
+    // below its mask using pixels (includes the padding)
+    void el.offsetHeight;
+    inners.forEach(inner => {
+      gsap.set(inner, { y: inner.parentElement.offsetHeight, force3D: true });
+    });
+
+    const end = el.getAttribute('data-gsap-end') || 'top 40%';
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start:   cfg.start,
+        end:     end,
+        scrub:   1,
+        once:    true
+      }
+    });
+
+    inners.forEach((inner, i) => {
+      tl.to(inner, {
+        y: 0,
+        duration: 0.6,
+        ease:     cfg.ease || this.defaults.ease.fade,
+        force3D:  true
+      }, i * (cfg.stagger || 0.65));
     });
   }
 
