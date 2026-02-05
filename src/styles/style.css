@@ -68,6 +68,8 @@ select:focus-within {
   background: var(--primary-yellow-bright, #FFF02A);
   filter: blur(9.375rem);
   position: absolute;
+  opacity: 0;
+  visibility: hidden;
 }
 .section .gradient-circle.right {
   right: -50%;
@@ -814,7 +816,8 @@ body {
   filter: blur(11.625rem);
   pointer-events: none;
   z-index: 0;
-  visibility: visible;
+  opacity: 0;
+  visibility: hidden;
 }
 .hero-content {
   padding-left: 0;
@@ -2561,6 +2564,8 @@ body {
   filter: blur(15.625rem);
   pointer-events: none;
   background: var(--primary-yellow-bright, #FFF02A);
+  opacity: 0;
+  visibility: hidden;
 }
 .footer .container-fluid {
   position: relative;
@@ -2768,6 +2773,7 @@ body {
 }
 .marquee-track {
   display: flex;
+  will-change: transform;
 }
 .footer-large-text h1 {
   font-family: var(--font-family-helvetica-neue);

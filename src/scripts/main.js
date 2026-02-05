@@ -266,18 +266,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Hero gradient - subtle fade in from background
-        // const heroGradient = document.querySelector('.hero-gradient');
-        // if (heroGradient) {
-        //     gsap.set(heroGradient, {
-        //         opacity: 0
-        //     });
+        const heroGradient = document.querySelector('.hero-gradient');
+        if (heroGradient) {
+            gsap.set(heroGradient, {
+                autoAlpha: 0
+            });
 
-        //     heroTimeline.to(heroGradient, {
-        //         opacity: 0.6,
-        //         duration: 2.5,
-        //         ease: 'power1.inOut'
-        //     }, 0.3);
-        // }
+            heroTimeline.to(heroGradient, {
+                autoAlpha: 0.6,
+                duration: 2.5,
+                ease: 'power1.inOut'
+            }, 0.3);
+        }
 
         // Hero video - fade in after title
         heroTimeline.to('.hero-media-wrapper', {
@@ -288,6 +288,50 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initHeroAnimations();
+
+    // Section gradient circles - fade in on section reveal
+    function initGradientCircleFades() {
+        const circles = gsap.utils.toArray('.section .gradient-circle');
+        if (!circles.length) return;
+
+        circles.forEach(circle => {
+            const section = circle.closest('section') || circle.parentElement;
+            gsap.set(circle, { autoAlpha: 0 });
+            gsap.to(circle, {
+                autoAlpha: 1,
+                duration: 1.6,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 70%',
+                    once: true
+                }
+            });
+        });
+    }
+
+    initGradientCircleFades();
+
+    // Footer gradient - fade in when footer enters
+    function initFooterGradientFade() {
+        const footerGradient = document.querySelector('.footer-gradient');
+        const footer = document.querySelector('footer.footer');
+        if (!footerGradient || !footer) return;
+
+        gsap.set(footerGradient, { autoAlpha: 0 });
+        gsap.to(footerGradient, {
+            autoAlpha: 1,
+            duration: 4.5,
+            ease: 'power1.out',
+            scrollTrigger: {
+                trigger: footer,
+                start: 'top 65%',
+                once: true
+            }
+        });
+    }
+
+    initFooterGradientFade();
 
     // About section reveal animation (word and sentence)
     function wrapWords(el) {
@@ -733,10 +777,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Footer marquee - clone-based seamless loop via Web Animations API
-    const marqueeWrapper = document.querySelector('.footer-large-text');
-    const marqueeH1 = marqueeWrapper?.querySelector('h1');
-    if (marqueeH1) {
+    // Footer marquee - ScrollVelocity-style wrap loop (no reset, no snap)
+    document.fonts.ready.then(() => {
+        const marqueeWrapper = document.querySelector('.footer-large-text');
+        const marqueeH1 = marqueeWrapper?.querySelector('h1');
+        if (!marqueeH1) return;
+
         const track = document.createElement('div');
         track.className = 'marquee-track';
         const clone = marqueeH1.cloneNode(true);
@@ -744,15 +790,26 @@ document.addEventListener('DOMContentLoaded', function () {
         track.appendChild(marqueeH1);
         track.appendChild(clone);
 
-        const loopWidth = marqueeH1.offsetWidth;
-        track.animate([
-            { transform: 'translate3d(0, 0, 0)' },
-            { transform: `translate3d(-${loopWidth}px, 0, 0)` }
-        ], {
-            duration: 10000,
-            iterations: Infinity,
-            easing: 'linear'
-        });
-    }
+        const copyWidth = marqueeH1.offsetWidth;
+        const duration = Number(marqueeWrapper.getAttribute('data-marquee-duration') || '10');
+        const speed = copyWidth / duration; // px per second
+
+        // Same wrap as ScrollVelocity.tsx — modulo loop, never resets
+        function wrap(min, max, v) {
+            const range = max - min;
+            return (((v - min) % range) + range) % range + min;
+        }
+
+        let pos = 0;
+        let lastTime = performance.now();
+
+        function tick(now) {
+            pos -= speed * ((now - lastTime) / 1000);
+            lastTime = now;
+            track.style.transform = `translate3d(${wrap(-copyWidth, 0, pos)}px, 0, 0)`;
+            requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    });
 
 });
