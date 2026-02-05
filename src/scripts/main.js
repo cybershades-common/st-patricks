@@ -235,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     clipPath: 'inset(0 100% 0 0)',
                     webkitClipPath: 'inset(0 100% 0 0)',
                     display: 'inline-block',
+                    lineHeight: 'normal',
                     willChange: 'clip-path'
                 });
             }
