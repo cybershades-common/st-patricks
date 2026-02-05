@@ -1,5 +1,3 @@
-// Academics Section Styles
-
 .academics-section {
   background-color: var(--primary-gold-4);
   padding-top: 2.5rem;
@@ -7,7 +5,6 @@
   position: relative;
   overflow: hidden;
 }
-
 .academics-gradient {
   position: absolute;
   bottom: 4.375rem;
@@ -20,21 +17,16 @@
   pointer-events: none;
   z-index: 1;
 }
-
 .academics-section .container-fluid {
   position: relative;
-  z-index: 2;  
-
+  z-index: 2;
 }
-
 .academics-top {
   margin-bottom: 7rem;
 }
-
 .academics-heading-col {
   padding-right: 0;
 }
-
 .academics-heading {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-h2);
@@ -43,13 +35,10 @@
   letter-spacing: -0.0375rem;
   color: var(--primary-blue);
   margin: 0;
-
 }
-
 .academics-content-col {
   padding-left: 0;
 }
-
 .academics-text {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-b1);
@@ -61,46 +50,36 @@
   max-width: 100%;
   margin: 0;
   margin-bottom: 1rem;
-
 }
-
 .academics-buttons {
   gap: 1.25rem;
   flex-wrap: wrap;
 }
-
 .academics-cards {
   margin-top: 0;
 }
-
 .academics-card {
   padding: 0;
-  
-  @media (min-width: 992px) {
-
-    &:first-child {
-      padding-right: 0.625rem; // 1.25rem / 2 = 0.625rem per side
-    }
-    
-    &:last-child {
-      padding-left: 0.625rem; // 1.25rem / 2 = 0.625rem per side
-    }
+}
+@media (min-width: 992px) {
+  .academics-card:first-child {
+    padding-right: 0.625rem;
+  }
+  .academics-card:last-child {
+    padding-left: 0.625rem;
   }
 }
-
 .academics-card-image {
   width: 100%;
   height: 28.75rem;
   overflow: hidden;
   margin-bottom: 1rem;
 }
-
 .academics-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .academics-card-title {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-h4);
@@ -109,75 +88,62 @@
   letter-spacing: 0;
   color: var(--primary-blue);
   margin: 0;
-
 }
-
 @media (max-width: 991px) {
   .academics-section {
     padding-top: 1.875rem;
     padding-bottom: 1.875rem;
   }
-  .academics-card{
-    padding: 0 0.625rem;}
+  .academics-card {
+    padding: 0 0.625rem;
+  }
   .academics-section .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
-
   .academics-top {
     margin-bottom: 1.875rem;
   }
-
   .academics-heading-col {
     padding-right: 0;
     margin-bottom: 1.25rem;
   }
-
   .academics-content-col {
     padding-left: 0;
   }
-
   .academics-text {
     width: 100%;
     margin-bottom: 1.25rem;
   }
-
   .academics-buttons {
     gap: 0.9375rem;
   }
-
   .academics-card {
     margin-bottom: 1.875rem;
   }
-
   .academics-card:last-child {
     margin-bottom: 0;
   }
-
   .academics-card-image {
     height: 21.875rem;
   }
-    .academics-card-title {
+  .academics-card-title {
     font-size: 1.725rem;
   }
-    .academics-heading {
+  .academics-heading {
     font-size: 3.5rem;
   }
 }
-
 @media (max-width: 767px) {
   .academics-heading {
     font-size: 2.5rem;
   }
-
   .academics-text {
     font-size: 1.125rem;
   }
-
   .academics-card-image {
     height: 18.75rem;
   }
-
   .academics-card-title {
     font-size: 1.5625rem;
   }

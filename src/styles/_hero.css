@@ -6,10 +6,10 @@
 }
 .hero .hero-content-wrap {
   height: 75vh;
-  min-height: 675px;
   display: flex;
+  min-height: 525px;
   align-items: flex-end;
-  padding-bottom: 2rem;
+  padding-bottom: 0;
 }
 .hero .container-fluid {
   position: relative;
@@ -133,6 +133,11 @@
   opacity: 0.5;
   z-index: 1;
   pointer-events: none;
+}
+@media (max-width: 1400px) {
+  .hero .hero-title {
+    font-size: 10rem;
+  }
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .hero .hero-content-wrap {

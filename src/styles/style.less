@@ -50,6 +50,31 @@ select {
   padding-right: 1.875rem;
 }
 
+.section {
+  position: relative;
+  overflow: hidden;
+
+  .gradient-circle {
+    width: 62.6875rem;
+    height: 62.6875rem;
+    aspect-ratio: 1/1;
+    border-radius: 62.6875rem;
+    background: var(--primary-yellow-bright, #FFF02A);
+    filter: blur(9.375rem);
+    position: absolute;
+
+    &.right {
+      right: -50%;
+      bottom: -60%
+    }
+
+    &.left {
+      left: -50%;
+      bottom: -75% 
+    }
+  }
+}
+
 
 @import '_fonts';
 @import '_variables';
