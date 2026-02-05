@@ -343,7 +343,9 @@ document.addEventListener('DOMContentLoaded', function () {
             scrollTrigger: {
                 trigger: '.about-section',
                 start: 'top 80%',
-                toggleActions: 'play none none none'
+                end: 'top 40%',
+                scrub: 1,
+                once: true
             }
         });
 
@@ -353,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 y: 0,
                 duration: 0.7,
                 ease: 'power3.out',
-                stagger: 0.06
+                stagger: 0.08
             }, 0)
             .to('.about-text .sentence', {
                 opacity: 1,
