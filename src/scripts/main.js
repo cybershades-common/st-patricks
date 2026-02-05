@@ -278,6 +278,15 @@ document.addEventListener('DOMContentLoaded', function () {
         //         ease: 'power1.inOut'
         //     }, 0.3);
         // }
+
+        // Hero video - clip reveal left to right
+        heroTimeline.to('.hero-media-wrapper', {
+            clipPath: 'inset(0 0% 0 0)',
+            webkitClipPath: 'inset(0 0% 0 0)',
+            duration: 0.9,
+            ease: 'power2.inOut',
+            force3D: true
+        }, 2.5);
     }
 
     initHeroAnimations();
