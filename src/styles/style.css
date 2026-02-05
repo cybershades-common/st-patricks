@@ -995,7 +995,7 @@ body {
     padding-top: 6.25rem;
     min-height: auto;
   }
-  .hero-title {
+  .hero .hero-title {
     font-size: 5rem;
     letter-spacing: -0.125rem;
   }
@@ -1904,8 +1904,8 @@ body {
 }
 .testimonials-gradient {
   position: absolute;
-  left: 70%;
-  top: 70%;
+  left: 80%;
+  top: 80%;
   width: 62.6875rem;
   height: 62.6875rem;
   border-radius: 50%;
@@ -2982,6 +2982,10 @@ body {
   }
 }
 @media (max-width: 767px) {
+  .footer .footer-mission,
+  .footer .footer-logo {
+    max-width: 100%;
+  }
   .footer-logos {
     gap: 0;
     justify-content: space-between;
