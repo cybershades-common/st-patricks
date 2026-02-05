@@ -7,7 +7,7 @@
   overflow: hidden;
 
   .hero-content-wrap {
-    height: 75vh;  
+    height: 75vh;
     display: flex;
     min-height: 525px;
     align-items: flex-end;
@@ -32,17 +32,17 @@
 @hero-gradient-left: -16.25rem;
 
 .hero-gradient {
-      position: absolute;
-    bottom: -33.5rem;
-    left: -13.25rem;
-    width: 43.75rem;
-    height: 43.75rem;
-    border-radius: 128.1875rem;
-    background: var(--primary-yellow-bright, #FFF02A);
-    filter: blur(11.625rem);
-    pointer-events: none;
-    z-index: 0;
-    visibility: visible;
+  position: absolute;
+  bottom: -33.5rem;
+  left: -13.25rem;
+  width: 43.75rem;
+  height: 43.75rem;
+  border-radius: 128.1875rem;
+  background: var(--primary-yellow-bright, #FFF02A);
+  filter: blur(11.625rem);
+  pointer-events: none;
+  z-index: 0;
+  visibility: visible;
 }
 
 .hero-content {
@@ -169,11 +169,12 @@
 }
 
 
-@media (max-width:1400px){
-  .hero{
-  .hero-title{
-    font-size: 10rem;
-  }}
+@media (max-width:1400px) {
+  .hero {
+    .hero-title {
+      font-size: 10rem;
+    }
+  }
 }
 
 @media (min-width:992px) and (max-width:1200px) {
@@ -265,11 +266,14 @@
   .hero {
     padding-top: 6.25rem;
     min-height: auto;
+
+    .hero-title {
+      font-size: 5rem;
+      letter-spacing: -0.125rem;
+    }
   }
-.hero-title {
-    font-size: 5rem;
-    letter-spacing: -0.125rem;
-}
+
+
 
   .hero-text p {
     font-size: var(--font-size-b2);

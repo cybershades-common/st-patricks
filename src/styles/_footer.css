@@ -471,6 +471,10 @@
   }
 }
 @media (max-width: 767px) {
+  .footer .footer-mission,
+  .footer .footer-logo {
+    max-width: 100%;
+  }
   .footer-logos {
     gap: 0;
     justify-content: space-between;
