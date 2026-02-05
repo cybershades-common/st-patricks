@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gsap.set(heroTitleSpans, { display: 'inline-block', opacity: 0, y: 150 });
         gsap.set('.header-logo', { y: -50, opacity: 0 });
         gsap.set('.header-nav', { y: -50, opacity: 0 });
-        gsap.set('.hero-text p', { x: 50, opacity: 0 });
+        gsap.set('.hero-text p', { y: 50, opacity: 0 });
 
         // Build timeline sequence
         heroTimeline
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 0.5)
             // Hero description text
             .to('.hero-text p',
-                { x: 0, opacity: 1, duration: 1.2, ease: 'Power1.easeOut' },
+                { y: 0, opacity: 1, duration: 1.2, ease: 'Power1.easeOut' },
                 1.5
             );
 
