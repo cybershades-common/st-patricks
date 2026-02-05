@@ -350,6 +350,7 @@ body {
 }
 .header-logo {
   opacity: 0;
+  gap: 1rem;
 }
 .header-logo img {
   width: 4.375rem;
@@ -655,7 +656,7 @@ body {
   }
   .header-logo {
     width: auto;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   .logo-text {
     font-size: 1.25rem;
@@ -732,21 +733,18 @@ body {
 }
 @media (max-width: 767px) {
   .logo-text {
-    font-size: 0.8125rem;
+    font-size: 1.125rem;
     letter-spacing: -0.01875rem;
   }
   .header-nav {
     gap: 0.5rem;
+    justify-content: flex-end;
   }
   .header-logo-text {
     padding-top: 0.625rem;
   }
   .header-icons-wrapper {
-    gap: 0.5rem;
-  }
-  .header-icons-wrapper .header-icon-btn img {
-    width: 1.5rem;
-    height: 1.5rem;
+    gap: 1rem;
   }
   .hamburger {
     width: 2rem;
@@ -754,7 +752,7 @@ body {
 }
 @media (max-width: 575px) {
   .header-logo img {
-    width: 2.1875rem;
+    width: 3.5rem;
   }
   .header-logo-text {
     padding-top: 0.3125rem;
@@ -1222,9 +1220,15 @@ body {
     min-height: auto;
   }
   .strategic-content {
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem 0;
+  }
+  .strategic-content .full {
+    width: initial;
   }
   .strategic-top {
     width: 100%;
@@ -1238,7 +1242,7 @@ body {
     position: relative;
     bottom: auto;
     left: auto;
-    width: 100%;
+    max-width: 100%;
     margin-top: 1.875rem;
   }
   .strategic-text-col {
@@ -1440,6 +1444,11 @@ body {
   min-height: 50.625rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+.cocurricular-section .container-fluid > .row {
+  height: 100vh;
+  justify-content: space-between;
 }
 .cocurricular-content {
   flex: 1;
@@ -1741,6 +1750,16 @@ body {
   .statistics-card-number {
     font-size: 4.5rem;
   }
+  .statistics-cards .row .statistics-card {
+    max-width: 48%;
+    padding: 1.875rem 0.75rem;
+  }
+  .statistics-cards .row .statistics-card:last-child {
+    padding: 1.875rem 0.75rem;
+    margin-bottom: var(--spacing-base);
+    padding-bottom: var(--spacing-base);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
 }
 .parents-community-section {
   position: relative;
@@ -1829,6 +1848,7 @@ body {
 @media (max-width: 991px) {
   .parents-community-section {
     min-height: auto;
+    padding: 3rem 0;
   }
   .parents-community-section .container-fluid {
     padding-left: 1.25rem;
@@ -2022,17 +2042,21 @@ body {
     gap: var(--spacing-small);
   }
   .testimonials-image-col {
-    padding-right: 0;
-    margin-bottom: 0;
+    padding: 0.625rem;
+    margin-bottom: 1.5rem;
   }
   .testimonials-image-wrapper {
     width: 100%;
-    height: 25rem;
+    height: auto;
+    aspect-ratio: 446/551;
+  }
+  .testimonials-image-wrapper .testimonials-bg-img {
+    width: 100%;
   }
   .testimonials-text-col {
-    padding-left: 0;
+    padding: 0 0.625rem;
     margin-bottom: var(--spacing-small);
-    height: 100%;
+    height: auto;
   }
   .testimonials-quote-wrapper {
     width: 100%;
@@ -2050,11 +2074,6 @@ body {
   }
   .testimonials-quote-wrapper .testimonials-quote {
     font-size: 2rem;
-  }
-}
-@media (max-width: 767px) {
-  .testimonials-image-wrapper {
-    height: 20rem;
   }
 }
 .latest-news-section {
@@ -2286,6 +2305,7 @@ body {
   }
   .latest-news-buttons {
     gap: var(--spacing-xs);
+    flex-wrap: inherit;
   }
   .latest-news-filters-row {
     margin-bottom: var(--spacing-small);
@@ -2320,10 +2340,10 @@ body {
     height: 18.75rem;
   }
   .latest-news-card-content {
-    padding: 0 0.875rem 0.875rem 0.875rem;
+    padding: 1.25rem 0;
   }
   .latest-news-slide.active .latest-news-card-content {
-    padding: 0 1.25rem 1.25rem 1.25rem;
+    padding: 1.25rem 0;
   }
 }
 .cta-block-wrap {
