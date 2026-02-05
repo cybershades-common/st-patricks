@@ -43,7 +43,10 @@ class GSAPAnimations {
           case 'masked-title':    this.maskedTitle(el, cfg);    break;
           case 'writing-text':    this.writingText(el, cfg);   break;
           case 'btn-clip-reveal': this.btnClipReveal(el, cfg); break;
-          case 'image-clip-top':  this.imageClipTop(el, cfg);  break;
+          case 'image-clip-top':    this.imageClipTop(el, cfg);    break;
+          case 'image-clip-bottom': this.imageClipBottom(el, cfg); break;
+          case 'image-clip-left':   this.imageClipLeft(el, cfg);   break;
+          case 'image-clip-right':  this.imageClipRight(el, cfg);  break;
           case 'parallax-bg':     this.parallaxBg(el, cfg);    break;
           default: console.warn(`Unknown data-gsap: "${type}"`);
         }
@@ -429,6 +432,87 @@ class GSAPAnimations {
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
     const hidden  = 'inset(0 0 100% 0)';
     const shown   = 'inset(0 0 0%   0)';
+
+    gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
+    gsap.to(target, {
+      clipPath: shown, webkitClipPath: shown,
+      duration: cfg.duration || 0.6,
+      ease:     cfg.ease || 'power2.inOut',
+      delay:    cfg.delay,
+      stagger,
+      force3D:  true,
+      scrollTrigger: this.triggerCfg(el, cfg),
+      onComplete: () => {
+        (Array.isArray(target) ? target : [target]).forEach(e =>
+          gsap.set(e, { clearProps: 'will-change' })
+        );
+      }
+    });
+  }
+
+  // Image curtain-rise: clip opens from bottom to top
+  imageClipBottom(el, cfg) {
+    if (!el) return;
+
+    const kids    = this.animChildren(el);
+    const target  = kids && cfg.stagger ? kids : el;
+    const stagger = kids && cfg.stagger ? cfg.stagger : 0;
+    const hidden  = 'inset(100% 0 0 0)';
+    const shown   = 'inset(0%   0 0 0)';
+
+    gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
+    gsap.to(target, {
+      clipPath: shown, webkitClipPath: shown,
+      duration: cfg.duration || 0.6,
+      ease:     cfg.ease || 'power2.inOut',
+      delay:    cfg.delay,
+      stagger,
+      force3D:  true,
+      scrollTrigger: this.triggerCfg(el, cfg),
+      onComplete: () => {
+        (Array.isArray(target) ? target : [target]).forEach(e =>
+          gsap.set(e, { clearProps: 'will-change' })
+        );
+      }
+    });
+  }
+
+  // Image curtain-right: clip opens from left to right
+  imageClipLeft(el, cfg) {
+    if (!el) return;
+
+    const kids    = this.animChildren(el);
+    const target  = kids && cfg.stagger ? kids : el;
+    const stagger = kids && cfg.stagger ? cfg.stagger : 0;
+    const hidden  = 'inset(0 100% 0 0)';
+    const shown   = 'inset(0 0%   0 0)';
+
+    gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
+    gsap.to(target, {
+      clipPath: shown, webkitClipPath: shown,
+      duration: cfg.duration || 0.6,
+      ease:     cfg.ease || 'power2.inOut',
+      delay:    cfg.delay,
+      stagger,
+      force3D:  true,
+      scrollTrigger: this.triggerCfg(el, cfg),
+      onComplete: () => {
+        (Array.isArray(target) ? target : [target]).forEach(e =>
+          gsap.set(e, { clearProps: 'will-change' })
+        );
+      }
+    });
+  }
+
+  // Image curtain-left: clip opens from right to left
+  imageClipRight(el, cfg) {
+    if (!el) return;
+
+    const kids    = this.animChildren(el);
+    const target  = kids && cfg.stagger ? kids : el;
+    const stagger = kids && cfg.stagger ? cfg.stagger : 0;
+    const hidden  = 'inset(0 0 0 100%)';
+    const shown   = 'inset(0 0 0 0%)';
 
     gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
     gsap.to(target, {
