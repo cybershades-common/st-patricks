@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const menuFooter = document.querySelector('.mega-menu-footer');
 
         // Clear any existing properties
-        gsap.set([menuMainItems, menuSubItems], { clearProps: 'all' });
+        gsap.set([menuMainItems, menuSubItems, menuImage], { clearProps: 'all' });
 
         menuTimeline
             // Mega menu fade in
@@ -74,10 +74,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 { opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: 'power1.out', force3D: true },
                 '-=0.2'
             )
-            // Menu image - curtain drop reveal (after sub menu)
+            // Menu image - fade in with zoom out (after sub menu)
             .fromTo(menuImage,
-                { clipPath: 'inset(0 0 100% 0)' },
-                { clipPath: 'inset(0 0 0% 0)', duration: 0.6, ease: 'power2.inOut' },
+                { opacity: 0, scale: 1.15, force3D: true },
+                { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out', force3D: true },
                 '-=0.2'
             )
             // Menu footer (after image)
@@ -92,6 +92,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function closeMenu() {
         isMenuOpen = false;
 
+        // Reset menu items FIRST (before removing active class)
+        const menuMainItems = document.querySelectorAll('.menu-main-item');
+        const menuSubItems = document.querySelectorAll('.menu-sub-item');
+        const menuImage = document.querySelector('.menu-image');
+        const menuFooter = document.querySelector('.mega-menu-footer');
+
+        // Hide image immediately to prevent peeking
+        gsap.set(menuImage, { opacity: 0, scale: 1.15 });
+        gsap.set(menuMainItems, { opacity: 0, x: -60 });
+        gsap.set(menuSubItems, { opacity: 0, x: -20 });
+        gsap.set(menuFooter, { opacity: 0, y: 20 });
+
         // Remove padding from body AND header
         document.body.style.paddingRight = '';
         header.style.paddingRight = '';
@@ -103,17 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
         megaMenu.classList.remove('active');
         menuOverlay.classList.remove('active');
         document.body.style.overflow = '';
-
-        // Reset menu items for next open
-        const menuMainItems = document.querySelectorAll('.menu-main-item');
-        const menuSubItems = document.querySelectorAll('.menu-sub-item');
-        const menuImage = document.querySelector('.menu-image');
-        const menuFooter = document.querySelector('.mega-menu-footer');
-
-        gsap.set(menuMainItems, { opacity: 0, x: -60 });
-        gsap.set(menuSubItems, { opacity: 0, x: -20 });
-        gsap.set(menuImage, { clipPath: 'inset(0 0 100% 0)' });
-        gsap.set(menuFooter, { opacity: 0, y: 20 });
 
         btnEnquire.style.display = 'none';
         dropdownWrappers.forEach(wrapper => {

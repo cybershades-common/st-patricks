@@ -597,7 +597,8 @@ body {
   object-fit: cover;
   border-radius: 0;
   display: block;
-  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  transform: scale(1.15);
 }
 .mega-menu-footer {
   background-color: var(--basic-white);
