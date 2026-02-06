@@ -583,9 +583,11 @@
 
   .footer {
     padding-bottom: 0;
-.footer-gradient{
-  top: 100%;
-}
+
+    .footer-gradient {
+      top: 100%;
+    }
+
     .footer-mission,
     .footer-logo {
       max-width: 100%;
@@ -603,6 +605,7 @@
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 2.5rem;
+
     .row {
       >div {
         padding: 0;
@@ -619,7 +622,43 @@
   .footer .footer-right {
     padding: 0 .75rem;
   }
-    .footer-follow-wrapper {
-    margin:2rem 0;
+
+  .footer-follow-wrapper {
+    margin: 2rem 0;
+  }
 }
+
+
+
+@media only screen and (min-device-width : 390px) and (max-device-width : 992px) and (orientation : landscape) {
+  html {
+    body {
+      .footer {
+        padding-bottom: 0;
+
+        .footer-left {
+          justify-content: space-between;
+        }
+
+        .footer-logo {
+          max-width: 20rem;
+        }
+
+        .footer-bottom {
+          padding-bottom: 2rem;
+        }
+
+        .footer-bottom-links {
+          flex-direction: row;
+
+          .footer-bottom-links-left {
+            width: auto;
+          }
+        }
+        .footer-gradient{
+          top: 100%;
+        }
+      }
+    }
+  }
 }

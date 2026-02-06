@@ -40,6 +40,11 @@
   position: relative;
   z-index: 4;
 }
+@media (min-width: 992px) {
+  .cta-section .container-fluid {
+    max-width: 90rem;
+  }
+}
 .cta-heading {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-h1);
@@ -108,7 +113,6 @@
   }
   .cta-content {
     min-height: auto;
-    padding-left: 0;
   }
   .cta-heading-wrapper {
     position: relative;

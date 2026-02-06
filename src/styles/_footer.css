@@ -509,3 +509,26 @@
     margin: 2rem 0;
   }
 }
+@media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
+  html body .footer {
+    padding-bottom: 0;
+  }
+  html body .footer .footer-left {
+    justify-content: space-between;
+  }
+  html body .footer .footer-logo {
+    max-width: 20rem;
+  }
+  html body .footer .footer-bottom {
+    padding-bottom: 2rem;
+  }
+  html body .footer .footer-bottom-links {
+    flex-direction: row;
+  }
+  html body .footer .footer-bottom-links .footer-bottom-links-left {
+    width: auto;
+  }
+  html body .footer .footer-gradient {
+    top: 100%;
+  }
+}

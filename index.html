@@ -17,8 +17,8 @@
         <!-- Header Section -->
         <header class="header position-fixed top-0 start-0 end-0" id="header">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4 col-7">
+                <div class="header-row row">
+                    <div class=" left-block">
                         <div class="header-logo d-flex align-items-center">
                             <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College" class="flex-shrink-0">
                             <div class="header-logo-text d-flex flex-column justify-content-center">
@@ -27,14 +27,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 col-5">
-                        <div class="col-lg-auto header-nav d-flex justify-content-md-end align-items-center">
-                            <button
-                                class="btn-rounded-large-outline btn-header btn-book-tour me-3 d-none d-lg-inline-block">Book
+                    <div class="right-block">
+                        <div class="col-lg-auto header-nav d-flex  align-items-center">
+                            <button class="btn-rounded-large-outline btn-header btn-book-tour ">Book
                                 a Tour</button>
-                            <button class="btn-rounded-large-outline btn-header btn-enquire d-none">Enquire
+                            <button class="btn-rounded-large-outline btn-header btn-enquire  hide-header-items">Enquire
                                 Today</button>
-                            <div class="dropdown-wrapper d-none">
+                            <div class="dropdown-wrapper hide-header-items">
                                 <button class="menu-dropdown-btn">
                                     Work with Us
                                     <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
@@ -44,8 +43,11 @@
                                     </svg>
                                 </button>
                             </div>
-                            <div class="dropdown-wrapper d-none">
-                                <button class="menu-dropdown-btn">
+                            <div class="dropdown-wrapper hide-header-items dropdown">
+
+
+                                <button class=" menu-dropdown-btn dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     Quick Links
                                     <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -53,22 +55,35 @@
                                             stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Enrolment Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Pay Fees Online</a></li>
+                                    <li><a class="dropdown-item" href="#">Canvas</a></li>
+                                    <li><a class="dropdown-item" href="#">Sport Fixtures</a></li>
+                                    <li><a class="dropdown-item" href="#">Old Boys’ Website</a></li>
+                                    <li><a class="dropdown-item" href="#">Edval</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Staff Kiosk</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Student Café</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Parent Lounge</a></li>
+                                </ul>
                             </div>
-                            <div class="header-icons-wrapper d-flex align-items-center d-none d-lg-inline-flex">
-                                <button class="header-icon-btn">
-                                    <img src="assets/icons/header-search-icon.svg" alt="Search">
-                                </button>
-                                <button class="header-icon-btn">
-                                    <img src="assets/icons/profile-icon.svg" alt="Profile">
-                                </button>
-                            </div>
-                            <button class="menu-toggle d-flex align-items-center" id="menuToggle">
-                                <span class="menu-text">MENU</span>
-                                <div class="hamburger" id="hamburger">
-                                    <span class="hamburger-line"></span>
-                                    <span class="hamburger-line"></span>
+                            <div class="icon-menu-wrap">
+                                <div class="header-icons-wrapper d-flex align-items-center d-none d-lg-inline-flex">
+                                    <button class="header-icon-btn">
+                                        <img src="assets/icons/header-search-icon.svg" alt="Search">
+                                    </button>
+                                    <button class="header-icon-btn">
+                                        <img src="assets/icons/profile-icon.svg" alt="Profile">
+                                    </button>
                                 </div>
-                            </button>
+                                <button class="menu-toggle d-flex align-items-center" id="menuToggle">
+                                    <span class="menu-text">MENU</span>
+                                    <div class="hamburger" id="hamburger">
+                                        <span class="hamburger-line"></span>
+                                        <span class="hamburger-line"></span>
+                                    </div>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -130,13 +145,13 @@
             <div class="hero-content-wrap">
                 <div class="container-fluid position-relative">
                     <div class="row ">
-                        <div class="col-xl-7 col-lg-8">
+                        <div class="col-xl-7 col-lg-8 col-md-8">
                             <div class="col-lg-auto hero-content">
                                 <div class="hero-gradient position-absolute"></div>
                                 <h1 class="hero-title"><span>Let your </span><span>light shine.</span></h1>
                             </div>
                         </div>
-                        <div class="col-xl-3 offset-xl-1 col-lg-4 ">
+                        <div class="col-xl-3 offset-xl-1 col-lg-4 col-md-8">
                             <div
                                 class="col-lg-auto hero-text d-flex flex-column justify-content-between align-items-start">
                                 <p class="mb-0">An independent Catholic day school for boys from Years 5 to 12 in the
@@ -202,7 +217,8 @@
                                             graduates will be men of integrity and wisdom who are called to share their
                                             light with others.</p>
                                     </div>
-                                    <div data-gsap="zoom-in"     data-gsap-stagger="0.5" class="about-buttons d-flex align-items-center">
+                                    <div data-gsap="zoom-in" data-gsap-stagger="0.5"
+                                        class="about-buttons d-flex align-items-center">
                                         <button class="btn-rounded-large-outline">Hear from
                                             our Principal</button>
                                         <button class="btn-rounded-large-no-border">Our Ideal
@@ -215,9 +231,8 @@
                                 </div>
 
                                 <div class="col-12 col-md-5 offset-md-1 col-lg-6 offset-lg-2 about-image">
-                                    <img data-gsap="image-fade-in"
-                                    data-gsap-start="top 50%"                  data-gsap-start-mobile="top 75%"
-                                    src="assets/images/about-image.jpg"
+                                    <img data-gsap="image-fade-in" data-gsap-start="top 50%"
+                                        data-gsap-start-mobile="top 75%" src="assets/images/about-image.jpg"
                                         alt="St Patrick's College" class="w-100 h-100" loading="lazy">
                                 </div>
                             </div>
@@ -231,45 +246,46 @@
             </div>
         </div>
         <!-- Strategic Section -->
-        <section class="strategic-section position-relative section" style="background-image: url(assets/images/strategic-bg-1.jpg);">
-                <div class="strategic-overlay w-100 h-100">
-                    <div class="container-fluid position-relative">
-                        <div class="row  full">
-                            <div class="col-12 strategic-content">
-                                <div class="row ">
-                                    <div class="col-12 col-lg-8 strategic-top">
-                                        <h2 data-gsap="fade-up" data-gsap-start="top 90%" class="strategic-heading">Our
-                                            Strategic <br>Future and Growth
-                                        </h2>
-                                        <button data-gsap="zoom-in"  
-                                            class="btn-rounded-large-outline strategic-button">View our Mission and Strategic Plan</button>
-                                    </div>
+        <section class="strategic-section position-relative section"
+            style="background-image: url(assets/images/strategic-bg-1.jpg);">
+            <div class="strategic-overlay w-100 h-100">
+                <div class="container-fluid position-relative">
+                    <div class="row  full">
+                        <div class="col-12 strategic-content">
+                            <div class="row ">
+                                <div class="col-12 col-lg-8 strategic-top">
+                                    <h2 data-gsap="fade-up" data-gsap-start="top 90%" class="strategic-heading">Our
+                                        Strategic <br>Future and Growth
+                                    </h2>
+                                    <button data-gsap="zoom-in" class="btn-rounded-large-outline strategic-button">View
+                                        our Mission and Strategic Plan</button>
                                 </div>
-                                <div class="row  full">
-                                    <div class="col-12 strategic-text-wrapper">
-                                        <div class="row ">
-                                            <div data-gsap="fade-up" data-gsap-start="top 105%"
-                                                class="col-12 col-md-6 strategic-text-col">
-                                                <p>As part of our commitment to
-                                                    excellence and growth, we are investing in the Scientia Building, a
-                                                    state-of-the-art centre for science, hospitality and learning.</p>
-                                            </div>
-                                            <div data-gsap="fade-up" data-gsap-start="top 105%"
-                                                class="col-12 col-md-6 strategic-text-col">
-                                                <p>It will support
-                                                    cross-curricular education and foster a culture of innovation. We
-                                                    continue
-                                                    to shape a future where learning and community flourish.</p>
-                                            </div>
+                            </div>
+                            <div class="row  full">
+                                <div class="col-12 strategic-text-wrapper">
+                                    <div class="row ">
+                                        <div data-gsap="fade-up" data-gsap-start="top 105%"
+                                            class="col-12 col-md-6 strategic-text-col">
+                                            <p>As part of our commitment to
+                                                excellence and growth, we are investing in the Scientia Building, a
+                                                state-of-the-art centre for science, hospitality and learning.</p>
+                                        </div>
+                                        <div data-gsap="fade-up" data-gsap-start="top 105%"
+                                            class="col-12 col-md-6 strategic-text-col">
+                                            <p>It will support
+                                                cross-curricular education and foster a culture of innovation. We
+                                                continue
+                                                to shape a future where learning and community flourish.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
-           
+            </div>
+
 
         </section>
 
@@ -291,12 +307,12 @@
                                     learning pathways tailored to each student's strengths. From Years 5 through 12, we
                                     challenge our students to pursue academic excellence while developing character and
                                     leadership.</p>
-                                <div data-gsap="zoom-in" data-gsap-stagger="0.5" class="academics-buttons d-flex align-items-center">
-                                    <button 
-                                        class="btn-rounded-large-outline">Learning at St Patrick’s</button>
-                                    <button 
-                                        class="btn-rounded-large-no-border">Student Wellbeing <svg width="12" height="12"
-                                            viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <div data-gsap="zoom-in" data-gsap-stagger="0.5"
+                                    class="academics-buttons d-flex align-items-center">
+                                    <button class="btn-rounded-large-outline">Learning at St Patrick’s</button>
+                                    <button class="btn-rounded-large-no-border">Student Wellbeing <svg width="12"
+                                            height="12" viewBox="0 0 12 12" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.5 2L8 5.5L4.5 9" stroke="currentColor" stroke-width="1.5"
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg></button>
@@ -309,34 +325,32 @@
                         <div class="row ">
                             <div class="col-12 col-md-6 academics-card">
                                 <div class="academics-card-image">
-                                    <img data-gsap="image-fade-in"
-                                    data-gsap-start="top 60%"
-                                    data-gsap-start-mobile="top 80%"
-                                    src="assets/images/Entry Point Card-1.jpg"
+                                    <img data-gsap="image-fade-in" data-gsap-start="top 60%"
+                                        data-gsap-start-mobile="top 80%" src="assets/images/Entry Point Card-1.jpg"
                                         alt="Middle School" class="w-100 h-100" loading="lazy">
                                 </div>
-                                <h4 data-gsap="fade-up" data-gsap-start="top 90%" data-gsap-start-mobile="top 95%" class="academics-card-title">Middle
+                                <h4 data-gsap="fade-up" data-gsap-start="top 90%" data-gsap-start-mobile="top 95%"
+                                    class="academics-card-title">Middle
                                     School (Years 5 to 8)</h4>
                             </div>
                             <div class="col-12 col-md-6 academics-card">
                                 <div class="academics-card-image">
-                                    <img data-gsap="image-fade-in"
-                                    data-gsap-start="top 60%"
-                                    data-gsap-start-mobile="top 80%"
-                                    data-gsap-delay="0.2"
-                                        src="assets/images/Entry Point Card.jpg" alt="Senior School"
-                                        class="w-100 h-100" loading="lazy">
+                                    <img data-gsap="image-fade-in" data-gsap-start="top 60%"
+                                        data-gsap-start-mobile="top 80%" data-gsap-delay="0.2"
+                                        src="assets/images/Entry Point Card.jpg" alt="Senior School" class="w-100 h-100"
+                                        loading="lazy">
                                 </div>
-                                <h4 data-gsap="fade-up" data-gsap-start="top 90%" data-gsap-start-mobile="top 95%" class="academics-card-title">Senior
+                                <h4 data-gsap="fade-up" data-gsap-start="top 90%" data-gsap-start-mobile="top 95%"
+                                    class="academics-card-title">Senior
                                     School (Years 9 to 12)</h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-              <div class="gradient-circle left">
+            <div class="gradient-circle left">
 
-                    </div>
+            </div>
         </section>
 
         <!-- Co-Curricular Section -->
@@ -350,20 +364,22 @@
                 <div class="row ">
                     <div class="col-12 cocurricular-content">
                         <div class="row ">
-                            <div data-gsap="fade-up"  class="col-12 col-lg-6 cocurricular-left">
+                            <div data-gsap="fade-up" class="col-12 col-lg-6 cocurricular-left">
                                 <div class="cocurricular-label">CO-CURRICULAR</div>
-                                <h2 data-gsap="fade-up" class="cocurricular-heading">Music, drama and creative expression across the College
+                                <h2 data-gsap="fade-up" class="cocurricular-heading">Music, drama and creative
+                                    expression across the College
                                 </h2>
-                                <p data-gsap="fade-up" class="cocurricular-text">Students take part in ensembles, bands, drama groups and
+                                <p data-gsap="fade-up" class="cocurricular-text">Students take part in ensembles, bands,
+                                    drama groups and
                                     productions that develop skill, discipline and joy in performance.</p>
-                                <button data-gsap="zoom-in"   data-gsap-delay="0.1"
+                                <button data-gsap="zoom-in" data-gsap-delay="0.1"
                                     class="btn-rounded-large-outline cocurricular-button">See performing arts
                                     opportunities</button>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="col-12 cocurricular-nav">
-                                <div data-gsap="fade-in" data-gsap-start="top 100%" data-gsap-stagger="0.2" 
+                                <div data-gsap="fade-in" data-gsap-start="top 100%" data-gsap-stagger="0.2"
                                     class="cocurricular-nav-buttons d-flex align-items-center">
                                     <button class="btn-rounded-large-outline cocurricular-nav-btn">Sports</button>
                                     <button class="btn-rounded-large-outline cocurricular-nav-btn active">Performing
@@ -399,8 +415,8 @@
                                     generations
                                     of leaders grounded in faith and integrity. Our students thrive academically and
                                     grow as people of conscience.</p>
-                                <button data-gsap="zoom-in"
-                                    class="btn-rounded-large-outline statistics-button">Discover our Impact</button>
+                                <button data-gsap="zoom-in" class="btn-rounded-large-outline statistics-button">Discover
+                                    our Impact</button>
                             </div>
                         </div>
                     </div>
@@ -460,23 +476,19 @@
                                             <div class="swiper-wrapper">
                                                 <!-- Slide 1 -->
                                                 <div class="swiper-slide">
-                                                    <img data-gsap="image-clip-top"
-                                                         data-gsap-start="top 60%"
-                                                         src="assets/images/testimonial-1.jpg"
-                                                         alt="Liam Dossi"
-                                                         class="testimonials-img" loading="lazy">
+                                                    <img data-gsap="image-clip-top" data-gsap-start="top 60%"
+                                                        src="assets/images/testimonial-1.jpg" alt="Liam Dossi"
+                                                        class="testimonials-img" loading="lazy">
                                                 </div>
                                                 <!-- Slide 2 -->
                                                 <div class="swiper-slide">
-                                                    <img src="assets/images/about-image.jpg"
-                                                         alt="Michael Chen"
-                                                         class="testimonials-img" loading="lazy">
+                                                    <img src="assets/images/about-image.jpg" alt="Michael Chen"
+                                                        class="testimonials-img" loading="lazy">
                                                 </div>
                                                 <!-- Slide 3 -->
                                                 <div class="swiper-slide">
                                                     <img src="assets/images/parents-community-bg.jpg"
-                                                         alt="Catherine Walsh"
-                                                         class="testimonials-img" loading="lazy">
+                                                        alt="Catherine Walsh" class="testimonials-img" loading="lazy">
                                                 </div>
                                             </div>
                                         </div>
@@ -489,21 +501,29 @@
                                         <!-- Slide 1 -->
                                         <div class="swiper-slide">
                                             <div class="testimonials-quote-wrapper">
-                                                <p data-gsap="lines" class="testimonials-quote">"St Patrick's has given me confidence I never knew I had. My teachers push me, my mates back me and every day I feel like I am becoming a better version of myself."</p>
-                                                <p data-gsap="fade-up" data-gsap-start="top 120%" class="testimonials-attribution">Liam Dossi, Year 10 Student</p>
+                                                <p data-gsap="lines" class="testimonials-quote">"St Patrick's has given
+                                                    me confidence I never knew I had. My teachers push me, my mates back
+                                                    me and every day I feel like I am becoming a better version of
+                                                    myself."</p>
+                                                <p data-gsap="fade-up" data-gsap-start="top 120%"
+                                                    class="testimonials-attribution">Liam Dossi, Year 10 Student</p>
                                             </div>
                                         </div>
                                         <!-- Slide 2 -->
                                         <div class="swiper-slide">
                                             <div class="testimonials-quote-wrapper">
-                                                <p class="testimonials-quote">"The support I've received at SPC has shaped me in ways I didn't expect. The teachers here don't just teach — they genuinely care about who you become."</p>
+                                                <p class="testimonials-quote">"The support I've received at SPC has
+                                                    shaped me in ways I didn't expect. The teachers here don't just
+                                                    teach — they genuinely care about who you become."</p>
                                                 <p class="testimonials-attribution">Michael Chen, Year 11 Student</p>
                                             </div>
                                         </div>
                                         <!-- Slide 3 -->
                                         <div class="swiper-slide">
                                             <div class="testimonials-quote-wrapper">
-                                                <p class="testimonials-quote">"Watching our son thrive at St Patrick's has been remarkable. The school strikes the perfect balance between academic excellence and character development."</p>
+                                                <p class="testimonials-quote">"Watching our son thrive at St Patrick's
+                                                    has been remarkable. The school strikes the perfect balance between
+                                                    academic excellence and character development."</p>
                                                 <p class="testimonials-attribution">Catherine Walsh, Parent</p>
                                             </div>
                                         </div>
@@ -511,22 +531,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div   class="row  align-items-center testimonials-bottom-row">
+                        <div class="row  align-items-center testimonials-bottom-row">
                             <div class="col-lg-6 testimonials-button-col">
-                                <button data-gsap="zoom-in"  
-                                    class="btn-rounded-large-outline testimonials-button">Read more Community
+                                <button data-gsap="zoom-in" class="btn-rounded-large-outline testimonials-button">Read
+                                    more Community
                                     Stories</button>
                             </div>
                             <div class="col-lg-6 testimonials-arrows-col">
-                                <div data-gsap="fade-in"  class="testimonials-arrows d-flex align-items-center">
-                                    <button class="testimonials-arrow-btn" id="testimonialPrev" aria-label="Previous testimonial">
+                                <div data-gsap="fade-in" class="testimonials-arrows d-flex align-items-center">
+                                    <button class="testimonials-arrow-btn" id="testimonialPrev"
+                                        aria-label="Previous testimonial">
                                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M20 10L10 20L20 30M10 20H30" stroke="currentColor" stroke-width="2"
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </button>
-                                    <button class="testimonials-arrow-btn" id="testimonialNext" aria-label="Next testimonial">
+                                    <button class="testimonials-arrow-btn" id="testimonialNext"
+                                        aria-label="Next testimonial">
                                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M20 10L30 20L20 30M30 20H10" stroke="currentColor" stroke-width="2"
@@ -539,7 +561,7 @@
                     </div>
                 </div>
             </div>
-              
+
         </section>
 
         <!-- Parents and Friends Community Section -->
@@ -557,14 +579,14 @@
                         <p class="parents-community-text">Faith is at the heart of our life. Grounded in Gospel
                             spirituality, we foster meaningful relationships and service. Through retreats, prayer, and
                             community projects, our young men learn compassion, justice, and solidarity in action.</p>
-                        <button data-gsap="zoom-in" 
-                            class="btn-rounded-large-outline parents-community-button">Explore Community</button>
+                        <button data-gsap="zoom-in" class="btn-rounded-large-outline parents-community-button">Explore
+                            Community</button>
                     </div>
                 </div>
             </div>
         </section>
 
-       
+
 
         <!-- Latest News Section -->
         <section class="latest-news-section section">
@@ -576,10 +598,12 @@
                                 <h2 data-gsap="fade-up" class="latest-news-heading">Latest News and Happenings</h2>
                             </div>
                             <div class="col-12 col-lg-7 latest-news-content-col">
-                                <p data-gsap="fade-up" class="latest-news-description">Stay up to date with what's happening at SPC, from
+                                <p data-gsap="fade-up" class="latest-news-description">Stay up to date with what's
+                                    happening at SPC, from
                                     Open Days and community events, to student achievements and campus news, this is
                                     your window into our life as a college.</p>
-                                <div data-gsap="fade-in" data-gsap-stagger="0.4" class="latest-news-buttons d-flex align-items-center">
+                                <div data-gsap="fade-in" data-gsap-stagger="0.4"
+                                    class="latest-news-buttons d-flex align-items-center">
                                     <button class="btn-rounded-large-outline">View Latest News</button>
                                     <button class="btn-rounded-large-no-border">Events and Bookings <svg width="12"
                                             height="12" viewBox="0 0 12 12" fill="none"
@@ -594,7 +618,8 @@
                     <div class="col-12 latest-news-bottom">
                         <div class="row  align-items-center latest-news-filters-row">
                             <div data class="col-12 col-lg-auto latest-news-filters-col">
-                                <div data-gsap="fade-in" data-gsap-stagger="0.4" class="latest-news-filters d-flex align-items-center">
+                                <div data-gsap="fade-in" data-gsap-stagger="0.4"
+                                    class="latest-news-filters d-flex align-items-center">
                                     <button
                                         class="btn-rounded-large-outline latest-news-filter-btn latest-news-filter-btn-active"
                                         data-filter="all">All News</button>
@@ -607,7 +632,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-auto latest-news-arrows-col">
-                                <div data-gsap="fade-in"  class="latest-news-arrows d-flex align-items-center">
+                                <div data-gsap="fade-in" class="latest-news-arrows d-flex align-items-center">
                                     <button class="latest-news-arrow-btn latest-news-prev" id="latestNewsPrev"
                                         aria-label="Previous news">
                                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -627,8 +652,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div   class="latest-news-slider">
-                            <div data-gsap="fade-in" data-gsap-stagger="0.5" class="latest-news-track" id="latestNewsTrack">
+                        <div class="latest-news-slider">
+                            <div data-gsap="fade-in" data-gsap-stagger="0.5" class="latest-news-track"
+                                id="latestNewsTrack">
                                 <div class="latest-news-slide active">
                                     <div class="latest-news-card">
                                         <a href="#">
@@ -644,8 +670,8 @@
                                 <div class="latest-news-slide">
                                     <div class="latest-news-card">
                                         <a href="#">
-                                            <img loading="lazy" src="assets/images/news-2.jpg" alt="Farewell to the Class of 2025!"
-                                                class="latest-news-image">
+                                            <img loading="lazy" src="assets/images/news-2.jpg"
+                                                alt="Farewell to the Class of 2025!" class="latest-news-image">
                                             <div class="latest-news-card-content">
                                                 <h3 class="latest-news-card-title">Farewell to the Class of 2025!</h3>
                                                 <p class="latest-news-card-date">18.09.25</p>
@@ -656,8 +682,8 @@
                                 <div class="latest-news-slide">
                                     <div class="latest-news-card">
                                         <a href="#">
-                                            <img loading="lazy" src="assets/images/news-3.jpg" alt="Celebrating Father's Day"
-                                                class="latest-news-image">
+                                            <img loading="lazy" src="assets/images/news-3.jpg"
+                                                alt="Celebrating Father's Day" class="latest-news-image">
                                             <div class="latest-news-card-content">
                                                 <h3 class="latest-news-card-title">Celebrating Father's Day</h3>
                                                 <p class="latest-news-card-date">10.09.25</p>
@@ -711,9 +737,9 @@
         <!-- CTA Section -->
         <section class="cta-section position-relative section">
             <div class="cta-background position-absolute w-100 h-100">
-                <img src="assets/images/CTA.jpg" alt="CTA Background 1" class="cta-bg-img"
-                    loading="lazy" onerror="this.style.display='none'">
-               
+                <img src="assets/images/CTA.jpg" alt="CTA Background 1" class="cta-bg-img" loading="lazy"
+                    onerror="this.style.display='none'">
+
                 <div class="cta-overlay position-absolute w-100 h-100"></div>
             </div>
             <div class="container-fluid position-relative">
@@ -721,7 +747,8 @@
                     <div class="row ">
                         <div class="col-xl-5 col-lg-6 col-md-6 cta-content">
                             <div class="cta-heading-wrapper">
-                                <h1 data-gsap="fade-up" class="cta-heading">Begin your journey and let your light shine</h1>
+                                <h1 data-gsap="fade-up" class="cta-heading">Begin your journey and let your light shine
+                                </h1>
                             </div>
 
                         </div>
@@ -729,12 +756,14 @@
                     <div class="row">
                         <div class="col-xl-4 offset-xl-6 col-lg-6 col-md-6 offset-md-6 offset-lg-6">
                             <div class="cta-text-wrapper">
-                                <p data-gsap="fade-up" class="cta-text">Every boy who walks through our gates begins a journey shaped by
+                                <p data-gsap="fade-up" class="cta-text">Every boy who walks through our gates begins a
+                                    journey shaped by
                                     faith,
                                     friendship and challenge. <br>This is where confidence grows, talents emerge and
                                     young
                                     men learn to live with purpose and heart.</p>
-                                <div data-gsap="zoom-in" data-gsap-stagger="0.5" class="cta-buttons d-flex align-items-center">
+                                <div data-gsap="zoom-in" data-gsap-stagger="0.5"
+                                    class="cta-buttons d-flex align-items-center">
                                     <button class="btn-rounded-large-solid cta-button-solid">Book a Tour</button>
                                     <button class="btn-rounded-large-outline cta-button-outline">Enquire Today</button>
                                 </div>
@@ -866,8 +895,7 @@
                         <div class="col-12 col-lg-6 footer-copyright">
                             <p>© 2025 St Patrick's College Strathfield</p>
                         </div>
-                        <div
-                            class="col-12 col-lg-6 footer-bottom-links d-flex justify-content-between">
+                        <div class="col-12 col-lg-6 footer-bottom-links d-flex justify-content-between">
                             <div class="footer-bottom-links-left d-flex align-items-center">
                                 <span>ABN 70 273 700 830</span>
                                 <a href="#">Policies</a>
@@ -879,20 +907,20 @@
                     </div>
                 </div>
                 <div class="footer-decoration position-absolute w-100">
-                    <img src="assets/images/Tie.png" alt="Footer Decoration" class="w-100 h-100"
-                        loading="lazy" onerror="this.style.display='none'">
+                    <img src="assets/images/Tie.png" alt="Footer Decoration" class="w-100 h-100" loading="lazy"
+                        onerror="this.style.display='none'">
                 </div>
             </div>
 
-    </footer>
+        </footer>
     </div>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script> 
-     <script src="src/scripts/main.js"></script>
-    <script src="src/scripts/animations.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/animations.js"></script>
 
 </body>
 
