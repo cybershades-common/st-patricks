@@ -180,23 +180,23 @@ document.addEventListener('DOMContentLoaded', function () {
         // Set initial states before timeline runs — prevents flash of visible content
         const heroTitleSpans = document.querySelectorAll('.hero-title span');
         gsap.set(heroTitleSpans, { display: 'inline-block', opacity: 0, y: 150 });
-        gsap.set('.header-logo', { y: -50, opacity: 0 });
-        gsap.set('.header-nav', { y: -50, opacity: 0 });
+        // gsap.set('.header-logo', { y: -50, opacity: 0 });
+        // gsap.set('.header-nav', { y: -50, opacity: 0 });
         gsap.set('.hero-text p', { y: 50, opacity: 0 });
         gsap.set('.hero-media-wrapper', { opacity: 0 });
 
         // Build timeline sequence
         heroTimeline
             // Header logo
-            .to('.header-logo',
-                { y: 0, opacity: 1, duration: 0.7, ease: 'Power1.easeOut' },
-                0.2
-            )
+            // .to('.header-logo',
+            //     { y: 0, opacity: 1, duration: 0.7, ease: 'Power1.easeOut' },
+            //     0.2
+            // )
             // Header navigation
-            .to('.header-nav',
-                { y: 0, opacity: 1, duration: 0.7, ease: 'Power1.easeOut' },
-                0.2
-            )
+            // .to('.header-nav',
+            //     { y: 0, opacity: 1, duration: 0.7, ease: 'Power1.easeOut' },
+            //     0.2
+            // )
             // Hero title words (staggered)
             .to(heroTitleSpans, {
                 y: 0,
