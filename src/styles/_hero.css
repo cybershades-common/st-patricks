@@ -67,7 +67,7 @@
   margin: 0;
 }
 .hero-text button {
-  clip-path: inset(0 100% 0 0);
+  clip-path: none;
 }
 .sticky-wrapper {
   position: relative;

@@ -364,8 +364,8 @@ body {
   z-index: 1000;
   padding: 1.25rem 0;
   background-color: transparent;
-  /* transition: all 0.35s ease; */
-  /* will-change: transform; */
+  transition: all 0.35s ease;
+  will-change: transform;
   border-bottom: 0.0625rem solid transparent;
 }
 .header.header-hidden {
@@ -866,8 +866,7 @@ body {
   filter: blur(11.625rem);
   pointer-events: none;
   z-index: 0;
-  opacity: 1;
-  visibility: visible;
+  visibility: hidden;
 }
 .hero-content {
   padding-left: 0;
@@ -890,9 +889,6 @@ body {
   z-index: 1;
   top: -1.25rem;
 }
-.hero-title span {
-  opacity: 1;
-}
 .hero-text {
   height: 100%;
   padding-bottom: 2.5rem;
@@ -906,10 +902,9 @@ body {
   letter-spacing: 0;
   color: var(--basic-black);
   margin: 0;
-  opacity: 1;
 }
 .hero-text button {
-  clip-path: inset(0 0 0 0);
+  clip-path: none;
 }
 .sticky-wrapper {
   position: relative;

@@ -27,7 +27,7 @@
   padding-right: var(--spacing-base);
 }
 .header-logo {
-  opacity: 0;
+  opacity: 1;
   gap: 1rem;
 }
 .header-logo img {
@@ -62,7 +62,7 @@
 }
 .header-nav {
   gap: var(--spacing-xs);
-  opacity: 0;
+  opacity: 1;
 }
 .header-icons-wrapper {
   gap: 1.5625rem;
