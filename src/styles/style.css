@@ -368,14 +368,14 @@ body {
   will-change: transform;
   border-bottom: 0.0625rem solid transparent;
 }
-.header.header-hidden {
+/* .header.header-hidden {
   transform: translateY(-110%);
-}
-.header.header-scrolled {
+} */
+/* .header.header-scrolled {
   background-color: var(--basic-white);
   border-bottom-color: transparent;
   padding: 0.5rem 0;
-}
+} */
 .header.menu-open {
   background-color: var(--basic-white);
   border-bottom-color: transparent;
@@ -930,11 +930,11 @@ body {
   z-index: 0;
   transform: translateZ(0);
 }
-.sticky-wrapper .hero-media {
+/* .sticky-wrapper .hero-media {
   position: sticky !important;
   top: 0;
   z-index: 1;
-}
+} */
 .hero-media-wrapper {
   position: relative;
   width: 100%;

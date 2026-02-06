@@ -814,78 +814,78 @@ document.addEventListener('DOMContentLoaded', function () {
     // TESTIMONIALS SLIDER
     // ==========================================================================
 
-    // function initTestimonialsSlider() {
-    //     const prevBtn = document.getElementById('testimonialPrev');
-    //     const nextBtn = document.getElementById('testimonialNext');
-    //     const picWrapper = document.querySelector('.testimonials-pic-slider .swiper-wrapper');
-    //     const textWrapper = document.querySelector('.testimonials-text-slider .swiper-wrapper');
+    function initTestimonialsSlider() {
+        const prevBtn = document.getElementById('testimonialPrev');
+        const nextBtn = document.getElementById('testimonialNext');
+        const picWrapper = document.querySelector('.testimonials-pic-slider .swiper-wrapper');
+        const textWrapper = document.querySelector('.testimonials-text-slider .swiper-wrapper');
 
-    //     if (!prevBtn || !nextBtn || !picWrapper || !textWrapper) return;
+        if (!prevBtn || !nextBtn || !picWrapper || !textWrapper) return;
 
-    //     const totalSlides = picWrapper.querySelectorAll('.swiper-slide').length;
-    //     const isMobile = window.matchMedia('(max-width: 991px)').matches;
+        const totalSlides = picWrapper.querySelectorAll('.swiper-slide').length;
+        const isMobile = window.matchMedia('(max-width: 991px)').matches;
 
-    //     // Picture slider - vertical slides
-    //     const picSlider = new Swiper('.testimonials-pic-slider', {
-    //         direction: 'vertical',
-    //         slidesPerView: 1,
-    //         speed: 1000,
-    //         allowTouchMove: isMobile, // Enable touch on mobile
-    //         effect: 'slide'
-    //     });
+        // Picture slider - vertical slides
+        const picSlider = new Swiper('.testimonials-pic-slider', {
+            direction: 'vertical',
+            slidesPerView: 1,
+            speed: 1000,
+            allowTouchMove: isMobile, // Enable touch on mobile
+            effect: 'slide'
+        });
 
-    //     // Text slider - fade effect
-    //     const textSlider = new Swiper('.testimonials-text-slider', {
-    //         slidesPerView: 1,
-    //         speed: 1000,
-    //         effect: 'fade',
-    //         fadeEffect: {
-    //             crossFade: true
-    //         },
-    //         allowTouchMove: isMobile,
-    //         touchStartPreventDefault: false,
-    //         touchMoveStopPropagation: false,
-    //         on: {
-    //             slideChange: function() {
-    //                 picSlider.slideTo(this.activeIndex);
-    //                 updateButtons(this.activeIndex);
-    //             }
-    //         }
-    //     });
+        // Text slider - fade effect
+        const textSlider = new Swiper('.testimonials-text-slider', {
+            slidesPerView: 1,
+            speed: 1000,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            allowTouchMove: isMobile,
+            touchStartPreventDefault: false,
+            touchMoveStopPropagation: false,
+            on: {
+                slideChange: function() {
+                    picSlider.slideTo(this.activeIndex);
+                    updateButtons(this.activeIndex);
+                }
+            }
+        });
 
-    //     // Sync picture slider to text slider
-    //     picSlider.on('slideChange', function() {
-    //         if (this.activeIndex !== textSlider.activeIndex) {
-    //             textSlider.slideTo(this.activeIndex);
-    //         }
-    //     });
+        // Sync picture slider to text slider
+        picSlider.on('slideChange', function() {
+            if (this.activeIndex !== textSlider.activeIndex) {
+                textSlider.slideTo(this.activeIndex);
+            }
+        });
 
-    //     function updateButtons(index) {
-    //         const prevDisabled = index === 0;
-    //         const nextDisabled = index === totalSlides - 1;
-    //         prevBtn.disabled = prevDisabled;
-    //         nextBtn.disabled = nextDisabled;
-    //         prevBtn.classList.toggle('is-disabled', prevDisabled);
-    //         nextBtn.classList.toggle('is-disabled', nextDisabled);
-    //     }
+        function updateButtons(index) {
+            const prevDisabled = index === 0;
+            const nextDisabled = index === totalSlides - 1;
+            prevBtn.disabled = prevDisabled;
+            nextBtn.disabled = nextDisabled;
+            prevBtn.classList.toggle('is-disabled', prevDisabled);
+            nextBtn.classList.toggle('is-disabled', nextDisabled);
+        }
 
-    //     // Initialize button states
-    //     updateButtons(0);
+        // Initialize button states
+        updateButtons(0);
 
-    //     // Button click handlers
-    //     prevBtn.addEventListener('click', () => textSlider.slidePrev());
-    //     nextBtn.addEventListener('click', () => textSlider.slideNext());
+        // Button click handlers
+        prevBtn.addEventListener('click', () => textSlider.slidePrev());
+        nextBtn.addEventListener('click', () => textSlider.slideNext());
 
-    //     // Initialize GSAP animations
-    //     if (window.gsapInitFor) {
-    //         window.gsapInitFor(textWrapper);
-    //         window.gsapInitFor(picWrapper);
-    //     }
+        // Initialize GSAP animations
+        if (window.gsapInitFor) {
+            window.gsapInitFor(textWrapper);
+            window.gsapInitFor(picWrapper);
+        }
 
-    //     if (typeof ScrollTrigger !== 'undefined') {
-    //         ScrollTrigger.refresh();
-    //     }
-    // }
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
+    }
 
     initTestimonialsSlider();
 
