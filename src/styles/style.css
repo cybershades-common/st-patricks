@@ -16,6 +16,10 @@ video {
   max-width: 100%;
   object-fit: cover;
 }
+[data-gsap="image-fade-in"] {
+  opacity: 0;
+  visibility: hidden;
+}
 .full {
   width: 100%;
 }

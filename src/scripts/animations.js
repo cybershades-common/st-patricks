@@ -31,9 +31,14 @@ class GSAPAnimations {
   }
 
   setupAnimationsFor(root) {
-    root.querySelectorAll('[data-gsap]:not([data-gsap-initialized])').forEach(el => {
+    const isMobile = window.innerWidth <= 991;
+    root.querySelectorAll('[data-gsap],[data-gsap-mobile]').forEach(el => {
+      if (el.hasAttribute('data-gsap-initialized')) return;
+      const mobileType = el.getAttribute('data-gsap-mobile');
+      const desktopType = el.getAttribute('data-gsap');
+      const type = (isMobile && mobileType) ? mobileType : desktopType;
+      if (!type) return;
       el.setAttribute('data-gsap-initialized', 'true');
-      const type = el.getAttribute('data-gsap');
       const cfg  = this.readConfig(el);
 
       try {
@@ -41,7 +46,7 @@ class GSAPAnimations {
           case 'fade-up':         this.fadeUp(el, cfg);        break;
           case 'fade-in':         this.fadeIn(el, cfg);        break;
           case 'slide-left':      this.slideLeft(el, cfg);     break;
-          case 'slide-right':     this.slideRight(el, cfg);    break;
+          case 'slide-right':     this.slideRight(el, cfg);      break;
           case 'zoom-in':         this.zoomIn(el, cfg);        break;
           case 'lines':           this.linesAnimation(el, cfg);  break;
           case 'lines-scrub':     this.linesScrub(el, cfg);     break;
@@ -554,7 +559,7 @@ class GSAPAnimations {
     });
   }
 
-  // Smooth fade-in with zoom out (scale 1.15 → 1)
+  // Smooth fade-in with gentle zoom out (scale > 1 → 1)
   imageFadeIn(el, cfg) {
     if (!el) return;
 
@@ -567,14 +572,31 @@ class GSAPAnimations {
       || el.getAttribute('data-gsap-start')
       || 'top 50%';
 
-    // Reduce scale on mobile for better performance
-    const scaleFrom = isMobile ? 1.08 : 1.6;
+    // Subtle scale for smoother, contained reveal
+    const scaleFrom = isMobile ? 1.05 : 1.12;
 
-    gsap.set(target, { scale: scaleFrom, opacity: 0, force3D: true, willChange: 'transform, opacity' });
+    const targets = Array.isArray(target) ? target : [target];
+    targets.forEach(node => {
+      const img = node.tagName === 'IMG' ? node : node.querySelector?.('img');
+      const wrapper = img ? img.parentElement : node.parentElement;
+      if (wrapper && wrapper.style.overflow !== 'hidden') {
+        wrapper.style.overflow = 'hidden';
+      }
+    });
+
+    gsap.set(target, {
+      scale: scaleFrom,
+      autoAlpha: 0,
+      transformOrigin: '50% 50%',
+      force3D: true,
+      backfaceVisibility: 'hidden',
+      willChange: 'transform, opacity'
+    });
     gsap.to(target, {
-      scale: 1, opacity: 1,
-      duration: cfg.duration || 1.4,
-      ease:     cfg.ease || 'power3.out',
+      scale: 1,
+      autoAlpha: 1,
+      duration: cfg.duration || 1.6,
+      ease:     cfg.ease || 'power2.out',
       delay:    cfg.delay,
       stagger,
       force3D:  true,
