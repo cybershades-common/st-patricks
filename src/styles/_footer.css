@@ -501,6 +501,9 @@
   .footer-follow-wrapper {
     margin: 2rem 0;
   }
+  .footer-bottom-links {
+    flex-direction: column;
+  }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
   html body .footer {
