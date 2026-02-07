@@ -255,20 +255,6 @@ class GSAPAnimations {
 
   // Reveals text one rendered line at a time
   linesAnimation(el, cfg) {
-    // Skip line splitting on mobile for better performance
-    const isMobile = window.innerWidth <= 991;
-    if (isMobile) {
-      gsap.set(el, { autoAlpha: 0, y: 20 });
-      gsap.to(el, {
-        autoAlpha: 1, y: 0,
-        duration: cfg.duration || 0.8,
-        ease: cfg.ease || this.defaults.ease.fade,
-        delay: cfg.delay,
-        scrollTrigger: this.triggerCfg(el, cfg)
-      });
-      return;
-    }
-
     const lines = this.splitLines(el);
     if (!lines.length) return;
 
@@ -277,7 +263,7 @@ class GSAPAnimations {
       y: 0, autoAlpha: 1, force3D: true,
       duration: cfg.duration,
       ease:     cfg.ease || this.defaults.ease.fade,
-      stagger:  cfg.stagger || 0.15,
+      stagger:  cfg.stagger || 0.1,
       delay:    cfg.delay,
       scrollTrigger: this.triggerCfg(el, cfg)
     });
@@ -306,7 +292,7 @@ class GSAPAnimations {
       y: 0, autoAlpha: 1, force3D: true,
       duration: 1,
       ease:     cfg.ease || this.defaults.ease.fade,
-      stagger:  cfg.stagger || 0.1
+      stagger:  0.5
     });
   }
 
@@ -464,7 +450,7 @@ class GSAPAnimations {
     gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
     gsap.to(target, {
       clipPath: shown, webkitClipPath: shown,
-      duration: cfg.duration || 0.6,
+      duration: cfg.duration || 0.1,
       ease:     cfg.ease || 'power2.inOut',
       delay:    cfg.delay,
       stagger,
@@ -573,7 +559,7 @@ class GSAPAnimations {
       || 'top 50%';
 
     // Subtle scale for smoother, contained reveal
-    const scaleFrom = isMobile ? 1.05 : 1.12;
+    const scaleFrom = isMobile ? 1.3 : 1.3;
 
     const targets = Array.isArray(target) ? target : [target];
     targets.forEach(node => {
@@ -595,7 +581,7 @@ class GSAPAnimations {
     gsap.to(target, {
       scale: 1,
       autoAlpha: 1,
-      duration: cfg.duration || 1.6,
+      duration:  1,
       ease:     cfg.ease || 'power2.out',
       delay:    cfg.delay,
       stagger,
