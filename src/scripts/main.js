@@ -732,7 +732,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: statsContainer,
-                start: 'top 75%',
+                start: 'top 85%',
                 toggleActions: 'play none none none'
             }
         });

@@ -168,10 +168,12 @@ class GSAPAnimations {
     const kids    = this.animChildren(el);
     const target  = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
+    const targets = Array.isArray(target) ? target : [target];
 
     // Reduce movement distance on mobile for smoother animation
     const yDist = window.innerWidth <= 991 ? 30 : 50;
 
+    gsap.set(targets, { transition: 'none' });
     gsap.set(target, { y: yDist, autoAlpha: 0, force3D: true });
     gsap.to(target, {
       y: 0, autoAlpha: 1, force3D: true,
@@ -179,7 +181,10 @@ class GSAPAnimations {
       ease:     cfg.ease || this.defaults.ease.fade,
       delay:    cfg.delay,
       stagger,
-      scrollTrigger: this.triggerCfg(el, cfg)
+      scrollTrigger: this.triggerCfg(el, cfg),
+      onComplete: () => {
+        targets.forEach(t => gsap.set(t, { clearProps: 'transition' }));
+      }
     });
   }
 
@@ -187,7 +192,9 @@ class GSAPAnimations {
     const kids    = this.animChildren(el);
     const target  = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
+    const targets = Array.isArray(target) ? target : [target];
 
+    gsap.set(targets, { transition: 'none' });
     gsap.set(target, { autoAlpha: 0 });
     gsap.to(target, {
       autoAlpha: 1,
@@ -195,7 +202,10 @@ class GSAPAnimations {
       ease:     cfg.ease || this.defaults.ease.fade,
       delay:    cfg.delay,
       stagger,
-      scrollTrigger: this.triggerCfg(el, cfg)
+      scrollTrigger: this.triggerCfg(el, cfg),
+      onComplete: () => {
+        targets.forEach(t => gsap.set(t, { clearProps: 'transition' }));
+      }
     });
   }
 
@@ -594,7 +604,8 @@ class GSAPAnimations {
       transformOrigin: '50% 50%',
       force3D: true,
       backfaceVisibility: 'hidden',
-      willChange: 'transform, opacity'
+      willChange: 'transform, opacity',
+      transition: 'none'
     });
     gsap.to(target, {
       scale: 1,
@@ -612,7 +623,7 @@ class GSAPAnimations {
       onComplete: () => {
         // Clean up willChange after animation completes
         (Array.isArray(target) ? target : [target]).forEach(e =>
-          gsap.set(e, { clearProps: 'will-change' })
+          gsap.set(e, { clearProps: 'will-change,transition' })
         );
       }
     });
