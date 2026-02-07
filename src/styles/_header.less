@@ -197,18 +197,18 @@
   -ms-overflow-style: none;
   /* IE/Edge */
   box-shadow: none;
+  opacity: 0;
+  visibility: hidden;
 
   &::-webkit-scrollbar {
     display: none;
     /* Chrome, Safari, Edge */
   }
-
-  transform: translateY(calc(-100% - 1px));
-  transition: transform 0.6s cubic-bezier(0.215, 0.610, 0.355, 1.000);
 }
 
 .mega-menu.active {
-  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
   box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.1);
 }
 

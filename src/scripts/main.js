@@ -56,35 +56,40 @@ document.addEventListener('DOMContentLoaded', function () {
         gsap.set([menuMainItems, menuSubItems, menuImage], { clearProps: 'all' });
 
         menuTimeline
-            // Mega menu fade in
-            .to(megaMenu, {
-                opacity: 1,
-                duration: 0.3,
-                ease: 'power2.out'
-            }, '0')
+            // Mega menu + overlay quick fade in
+            .fromTo(megaMenu,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.2, ease: 'power1.out' },
+                0
+            )
+            .fromTo(menuOverlay,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.2, ease: 'power1.out' },
+                0
+            )
             // Main menu items (starts immediately with mega menu)
             .fromTo(menuMainItems,
                 { opacity: 0, x: -60, force3D: true },
                 { opacity: 1, x: 0, duration: 0.3, stagger: 0.1, ease: 'power1.out', force3D: true },
-                '+=0.3'
+                0.2
             )
             // Sub menu items (after main menu)
             .fromTo(menuSubItems,
                 { opacity: 0, x: -20, force3D: true },
                 { opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: 'power1.out', force3D: true },
-                '-=0.2'
+                0.6
             )
             // Menu image - fade in with zoom out (after sub menu)
             .fromTo(menuImage,
                 { opacity: 0, scale: 1.15, force3D: true },
                 { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out', force3D: true },
-                '-=0.2'
+                1.1
             )
             // Menu footer (after image)
             .fromTo(menuFooter,
                 { opacity: 0, y: 20 },
                 { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
-                '-=0.2'
+                1.6
             );
 
     }
@@ -92,29 +97,36 @@ document.addEventListener('DOMContentLoaded', function () {
     function closeMenu() {
         isMenuOpen = false;
 
-        // Reset menu items FIRST (before removing active class)
+        // Reset menu items AFTER fade to avoid flicker
         const menuMainItems = document.querySelectorAll('.menu-main-item');
         const menuSubItems = document.querySelectorAll('.menu-sub-item');
         const menuImage = document.querySelector('.menu-image');
         const menuFooter = document.querySelector('.mega-menu-footer');
+        gsap.killTweensOf([menuMainItems, menuSubItems, menuImage, menuFooter, megaMenu, menuOverlay]);
 
-        // Hide image immediately to prevent peeking
-        gsap.set(menuImage, { opacity: 0, scale: 1.15 });
-        gsap.set(menuMainItems, { opacity: 0, x: -60 });
-        gsap.set(menuSubItems, { opacity: 0, x: -20 });
-        gsap.set(menuFooter, { opacity: 0, y: 20 });
+        // Fade everything away, then reset state
+        gsap.to([megaMenu, menuOverlay], {
+            opacity: 0,
+            duration: 0.2,
+            ease: 'power1.inOut',
+            onComplete: () => {
+                gsap.set(menuImage, { opacity: 0, scale: 1.15 });
+                gsap.set(menuMainItems, { opacity: 0, x: -60 });
+                gsap.set(menuSubItems, { opacity: 0, x: -20 });
+                gsap.set(menuFooter, { opacity: 0, y: 20 });
+                // Remove padding from body AND header
+                document.body.style.paddingRight = '';
+                header.style.paddingRight = '';
 
-        // Remove padding from body AND header
-        document.body.style.paddingRight = '';
-        header.style.paddingRight = '';
+                header.classList.remove('menu-open');
+                hamburger.classList.remove('active');
+                menuText.textContent = 'MENU';
 
-        header.classList.remove('menu-open');
-        hamburger.classList.remove('active');
-        menuText.textContent = 'MENU';
-
-        megaMenu.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+                megaMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
 
         // Reset mobile menu overlay
         if (isMobile()) {
