@@ -998,7 +998,72 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Footer marquee - Using CSS animation (defined in _footer.css)
-    // No JavaScript needed - CSS handles the infinite scroll
+    // Footer marquee - JS driven, same direction (no scroll-based reversal)
+    function initFooterMarquee() {
+        const marquee = document.querySelector('.footer-large-text');
+        if (!marquee) return;
+
+        const original = marquee.querySelector('h1');
+        if (!original) return;
+
+        const isMobile = window.innerWidth <= 991;
+        const durationAttr = (isMobile && marquee.getAttribute('data-marquee-duration-mobile'))
+            || marquee.getAttribute('data-marquee-duration');
+        let duration = parseFloat(durationAttr) || 10;
+
+        const track = document.createElement('div');
+        track.className = 'footer-marquee-track';
+
+        const item = original;
+        item.classList.add('footer-marquee-item');
+
+        track.appendChild(item);
+        marquee.innerHTML = '';
+        marquee.appendChild(track);
+
+        // Duplicate content to allow seamless looping
+        const ensureCopies = () => {
+            const containerWidth = marquee.offsetWidth;
+            const itemWidth = item.offsetWidth || 1;
+            const minCopies = Math.ceil((containerWidth * 2) / itemWidth);
+            while (track.children.length < minCopies) {
+                const clone = item.cloneNode(true);
+                track.appendChild(clone);
+            }
+            return itemWidth;
+        };
+
+        let itemWidth = ensureCopies();
+        let offset = 0;
+
+        const speed = () => (itemWidth / duration) || 50; // px/sec
+        let lastTime = performance.now();
+
+        const tick = (now) => {
+            const delta = (now - lastTime) / 1000;
+            lastTime = now;
+            offset -= speed() * delta;
+            if (-offset >= itemWidth) {
+                offset += itemWidth;
+            }
+            track.style.transform = `translate3d(${offset}px, 0, 0)`;
+            requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(tick);
+        window.addEventListener('resize', () => {
+            itemWidth = ensureCopies();
+            const isMobileNow = window.innerWidth <= 991;
+            const durationAttrNow = (isMobileNow && marquee.getAttribute('data-marquee-duration-mobile'))
+                || marquee.getAttribute('data-marquee-duration');
+            const parsed = parseFloat(durationAttrNow);
+            if (!Number.isNaN(parsed) && parsed > 0) {
+                // update duration used in speed()
+                duration = parsed;
+            }
+        });
+    }
+
+    initFooterMarquee();
 
 });
