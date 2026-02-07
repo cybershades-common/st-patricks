@@ -2013,6 +2013,12 @@ body {
   .parents-community-text {
     font-size: 1.125rem;
   }
+  .parents-community-content {
+    min-height: 44rem;
+  }
+  .parents-community-content .parents-community-button {
+    margin-top: auto;
+  }
 }
 .testimonials-section {
   background-color: var(--primary-gold-4);
@@ -2650,6 +2656,13 @@ body {
   }
   .cta-text {
     font-size: 1.125rem;
+  }
+  .cta-section .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .cta-section .cta-block-wrap {
+    min-height: 44rem;
   }
 }
 .footer {

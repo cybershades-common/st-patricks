@@ -110,4 +110,10 @@
   .parents-community-text {
     font-size: 1.125rem;
   }
+  .parents-community-content {
+    min-height: 44rem;
+  }
+  .parents-community-content .parents-community-button {
+    margin-top: auto;
+  }
 }

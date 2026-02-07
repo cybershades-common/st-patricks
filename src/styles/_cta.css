@@ -40,11 +40,6 @@
   position: relative;
   z-index: 4;
 }
-@media (min-width: 992px) {
-  .cta-section .container-fluid {
-    max-width: 90rem;
-  }
-}
 .cta-heading {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-h1);
@@ -145,5 +140,12 @@
   }
   .cta-text {
     font-size: 1.125rem;
+  }
+  .cta-section .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .cta-section .cta-block-wrap {
+    min-height: 44rem;
   }
 }
