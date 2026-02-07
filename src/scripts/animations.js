@@ -586,7 +586,6 @@ class GSAPAnimations {
       || el.getAttribute('data-gsap-start')
       || 'top 50%';
 
-    // Subtle scale for smoother, contained reveal
     const scaleFrom = isMobile ? 1.3 : 1.3;
 
     const targets = Array.isArray(target) ? target : [target];

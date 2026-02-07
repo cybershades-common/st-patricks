@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
             duration: 1.1,
             ease: 'power2.out',
             force3D: true
-        }, 1.3);
+        }, 1);
 
         if (heroGradient) {
             heroTimeline.to(heroGradient, {
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: 0.8,
                 ease: 'back.out(1.2)',
                 force3D: true
-            }, 1.6);
+            }, 1.1);
         }
         
         // Animate hero media with clip-reveal from left to right (after button)
