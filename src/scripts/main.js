@@ -457,62 +457,40 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Disable text wrapping on mobile for better performance
-        const isMobileDevice = window.innerWidth <= 991;
+        // Use text wrapping animations for all breakpoints
+        wrapWords(aboutHeading);
 
-        if (isMobileDevice) {
-            // Simple fade-in animation on mobile (no text wrapping)
-            gsap.set([aboutHeading, '.about-text p'], { opacity: 0, y: 20 });
-            gsap.to([aboutHeading, '.about-text p'], {
+        const aboutParagraphs = document.querySelectorAll('.about-text p');
+        aboutParagraphs.forEach(p => wrapSentences(p));
+
+        gsap.set('.about-heading .word, .about-heading .underline', { opacity: 0 });
+        gsap.set('.about-text .sentence', { opacity: 0 });
+
+        const headingPieces = gsap.utils.toArray('.about-heading .word, .about-heading .underline');
+
+        const aboutTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '.about-section',
+                start: 'top 90%',
+                end: 'top 40%',
+                scrub: 1,
+                once: true
+            }
+        });
+
+        aboutTl
+            .to(headingPieces, {
                 opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power2.out',
-                stagger: 0.2,
-                scrollTrigger: {
-                    trigger: '.about-section',
-                    start: 'top 80%',
-                    once: true
-                }
-            });
-        } else {
-            // Desktop: Use text wrapping animations
-            wrapWords(aboutHeading);
-
-            const aboutParagraphs = document.querySelectorAll('.about-text p');
-            aboutParagraphs.forEach(p => wrapSentences(p));
-
-            gsap.set('.about-heading .word, .about-heading .underline', { opacity: 0, y: 32 });
-            gsap.set('.about-text .sentence', { opacity: 0, y: 22 });
-
-            const headingPieces = gsap.utils.toArray('.about-heading .word, .about-heading .underline');
-
-            const aboutTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: '.about-section',
-                    start: 'top 90%',
-                    end: 'top 40%',
-                    scrub: 1,
-                    once: true
-                }
-            });
-
-            aboutTl
-                .to(headingPieces, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.7,
-                    ease: 'power3.out',
-                    stagger: 0.08
-                }, 0)
-                .to('.about-text .sentence', {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.8,
-                    ease: 'power3.out',
-                    stagger: 0.42
-                }, 0.3);
-        }
+                duration: 0.9,
+                ease: 'power3.out',
+                stagger: 0.12
+            }, 0)
+            .to('.about-text .sentence', {
+                opacity: 1,
+                duration: 2,
+                ease: 'power3.out',
+                stagger: 0.5
+            }, 0.2);
     }
 
     initAboutReveal();
