@@ -904,11 +904,6 @@ body {
     justify-content: flex-start;
     margin: 1rem 0;
   }
-  body .header.menu-open .hide-header-items.btn-header.btn-enquire {
-    display: none;
-    opacity: 0;
-    pointer-events: none;
-  }
   body .header.menu-open .header-row .right-block {
     max-width: 40%;
   }

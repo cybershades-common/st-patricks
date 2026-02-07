@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
             header.style.paddingRight = scrollbarWidth + 'px';
         }
 
+        const headerMenuItems = document.querySelectorAll(
+            '.header-nav .btn-book-tour, .header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
+        );
+
+        gsap.set(headerMenuItems, { opacity: 0, force3D: true });
+
         header.classList.add('menu-open');
         header.classList.remove('header-hidden');
         isHeaderHidden = false;
@@ -67,29 +73,37 @@ document.addEventListener('DOMContentLoaded', function () {
                 { opacity: 1, duration: 0.2, ease: 'power1.out' },
                 0
             )
-            // Main menu items (starts immediately with mega menu)
+            // Header menu items (fade only)
+            .to(headerMenuItems, {
+                opacity: 1,
+                duration: 0.3,
+                ease: 'power1.out',
+                stagger: 0.08,
+                force3D: true
+            }, 0.2)
+            // Main menu items (after header items)
             .fromTo(menuMainItems,
                 { opacity: 0, x: -60, force3D: true },
                 { opacity: 1, x: 0, duration: 0.3, stagger: 0.1, ease: 'power1.out', force3D: true },
-                0.2
+                0.55
             )
             // Sub menu items (after main menu)
             .fromTo(menuSubItems,
                 { opacity: 0, x: -20, force3D: true },
                 { opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: 'power1.out', force3D: true },
-                0.6
+                0.95
             )
             // Menu image - fade in with zoom out (after sub menu)
             .fromTo(menuImage,
                 { opacity: 0, scale: 1.15, force3D: true },
                 { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out', force3D: true },
-                1.1
+                1.45
             )
             // Menu footer (after image)
             .fromTo(menuFooter,
                 { opacity: 0, y: 20 },
                 { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
-                1.6
+                2.1
             );
 
     }
@@ -102,6 +116,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const menuSubItems = document.querySelectorAll('.menu-sub-item');
         const menuImage = document.querySelector('.menu-image');
         const menuFooter = document.querySelector('.mega-menu-footer');
+        const headerMenuItems = document.querySelectorAll(
+            '.header-nav .btn-book-tour, .header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
+        );
         gsap.killTweensOf([menuMainItems, menuSubItems, menuImage, menuFooter, megaMenu, menuOverlay]);
 
         // Fade everything away, then reset state
@@ -114,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 gsap.set(menuMainItems, { opacity: 0, x: -60 });
                 gsap.set(menuSubItems, { opacity: 0, x: -20 });
                 gsap.set(menuFooter, { opacity: 0, y: 20 });
+                gsap.set(headerMenuItems, { clearProps: 'opacity' });
                 // Remove padding from body AND header
                 document.body.style.paddingRight = '';
                 header.style.paddingRight = '';
