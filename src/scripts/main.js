@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const aboutTl = gsap.timeline({
             scrollTrigger: {
                 trigger: '.about-section',
-                start: isMobile ? 'top 105%' : 'top 85%',
+                start: isMobile ? 'top 90%' : 'top 85%',
                 end: isMobile ? 'top 60%' : 'top 20%',
                 scrub: 1,
                 once: true
