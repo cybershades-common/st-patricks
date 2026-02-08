@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const headerMenuItems = document.querySelectorAll(
-            '.header-nav .btn-book-tour, .header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
+            '.header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
         );
 
         gsap.set(headerMenuItems, { opacity: 0, force3D: true });
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const menuImage = document.querySelector('.menu-image');
         const menuFooter = document.querySelector('.mega-menu-footer');
         const headerMenuItems = document.querySelectorAll(
-            '.header-nav .btn-book-tour, .header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
+            '.header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
         );
         gsap.killTweensOf([menuMainItems, menuSubItems, menuImage, menuFooter, megaMenu, menuOverlay]);
 

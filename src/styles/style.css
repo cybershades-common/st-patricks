@@ -411,6 +411,10 @@ body {
   opacity: 0;
   visibility: hidden;
 }
+.header-nav .btn-book-tour {
+  opacity: 1;
+  visibility: visible;
+}
 .header-icons-wrapper {
   gap: 1.5625rem;
 }
@@ -669,7 +673,7 @@ body {
 .header .header-row .right-block {
   max-width: 33.33333333%;
   padding: 0;
-  transition: all ease 0.25s;
+  transition: none;
 }
 .header .header-row .right-block .header-icons-wrapper {
   margin-left: auto;
@@ -696,7 +700,7 @@ body {
 .header .hide-header-items {
   display: none;
   opacity: 0;
-  transition: all ease 0.25s;
+  transition: opacity ease 0.25s;
 }
 .header.menu-open .header-row .right-block {
   max-width: 65.875%;
@@ -704,6 +708,7 @@ body {
 .header.menu-open .hide-header-items {
   display: flex;
   opacity: 1;
+  visibility: visible;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .header.menu-open .dropdown-wrapper.hide-header-items {

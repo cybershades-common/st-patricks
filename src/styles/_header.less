@@ -87,6 +87,10 @@
   opacity: 0;
   visibility: hidden;
 }
+.header-nav .btn-book-tour {
+  opacity: 1;
+  visibility: visible;
+}
 
 .header-icons-wrapper {
   gap: 1.5625rem;
@@ -398,7 +402,7 @@
     .right-block {
       max-width: 33.33333333%;
       padding: 0;
-      transition: all ease .25s;
+      transition: none;
 
       .header-icons-wrapper {
         margin-left: auto;
@@ -436,7 +440,7 @@
   .hide-header-items {
     display: none;
     opacity: 0;
-    transition: all ease .25s;
+    transition: opacity ease .25s;
 
   }
 
@@ -450,6 +454,7 @@
     .hide-header-items {
       display: flex;
       opacity: 1;
+      visibility: visible;
     }
   }
 
