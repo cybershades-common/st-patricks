@@ -50,10 +50,17 @@ document.addEventListener('DOMContentLoaded', function () {
         menuText.textContent = 'CLOSE';
         document.body.style.overflow = 'hidden';
 
-        btnEnquire.style.display = 'inline-flex';
-        dropdownWrappers.forEach(wrapper => {
-            wrapper.style.display = 'flex';
-        });
+        if (!isMobile()) {
+            btnEnquire.style.display = 'inline-flex';
+            dropdownWrappers.forEach(wrapper => {
+                wrapper.style.display = 'flex';
+            });
+        } else {
+            btnEnquire.style.display = 'none';
+            dropdownWrappers.forEach(wrapper => {
+                wrapper.style.display = 'none';
+            });
+        }
 
         // Create menu animation timeline
         const menuTimeline = gsap.timeline();
