@@ -5,6 +5,7 @@
 }
 html {
   font-size: 16px;
+  scrollbar-gutter: stable;
 }
 .wrapper {
   max-width: 100vw;
@@ -405,6 +406,8 @@ body {
 }
 .header-nav {
   gap: var(--spacing-xs);
+  width: 100%;
+  justify-content: flex-end;
 }
 .header-nav .btn-header,
 .header-nav .menu-dropdown-btn {
@@ -779,7 +782,7 @@ body {
   .header-logo-text {
     padding-top: 0.9375rem;
   }
-  body .header.menu-open .header-row .right-block {
+  .header.menu-open .header-row .right-block {
     max-width: 57.875%;
   }
 }
@@ -866,6 +869,9 @@ body {
 @media (max-width: 991px) {
   .header-logo {
     width: auto;
+  }
+  .header .header-row .right-block {
+    max-width: 57.875%;
   }
   .header-logo-text {
     padding-top: 0.9375rem;

@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let isHeaderHidden = false;
     let lastScrollY = window.scrollY;
     let scrollTicking = false;
+    const supportsStableScrollbarGutter =
+        typeof window.CSS !== 'undefined' &&
+        typeof window.CSS.supports === 'function' &&
+        window.CSS.supports('scrollbar-gutter: stable');
+    const usePaddingCompensation = !supportsStableScrollbarGutter;
 
     function openMenu() {
         isMenuOpen = true;
@@ -25,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
         // Apply padding to body AND header
-        if (scrollbarWidth > 0) {
+        if (usePaddingCompensation && scrollbarWidth > 0) {
             document.body.style.paddingRight = scrollbarWidth + 'px';
             header.style.paddingRight = scrollbarWidth + 'px';
         }
@@ -133,8 +138,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 gsap.set(menuFooter, { opacity: 0, y: 20 });
                 gsap.set(headerMenuItems, { clearProps: 'opacity' });
                 // Remove padding from body AND header
-                document.body.style.paddingRight = '';
-                header.style.paddingRight = '';
+                if (usePaddingCompensation) {
+                    document.body.style.paddingRight = '';
+                    header.style.paddingRight = '';
+                }
 
                 header.classList.remove('menu-open');
                 hamburger.classList.remove('active');

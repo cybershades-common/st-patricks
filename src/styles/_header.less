@@ -80,6 +80,8 @@
 .header-nav {
   gap: var(--spacing-xs);
   // Don't hide the container, just the items inside
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .header-nav .btn-header,
@@ -547,7 +549,7 @@
     padding-top: 0.9375rem;
   }
 
-  body .header.menu-open .header-row .right-block {
+  .header.menu-open .header-row .right-block {
     max-width: 57.875%;
   }
 }
@@ -656,6 +658,9 @@
     width: auto;
   }
 
+  .header .header-row .right-block {
+    max-width: 57.875%;
+  }
 
 
   .header-logo-text {
@@ -715,8 +720,8 @@
     }
 
     .header.menu-open .header-row .right-block {
-    max-width:40%;
-}
+      max-width: 40%;
+    }
   }
 }
 
