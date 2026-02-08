@@ -700,6 +700,12 @@ body {
 .header .dropdown-menu li a {
   color: var(--basic-black);
 }
+.header .dropdown-menu .dropdown-item:active,
+.header .dropdown-menu .dropdown-item:focus,
+.header .dropdown-menu .dropdown-item.active {
+  color: var(--basic-black);
+  background-color: transparent;
+}
 .header .hide-header-items {
   display: none;
   opacity: 0;
