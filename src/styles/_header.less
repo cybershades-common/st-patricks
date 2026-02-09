@@ -20,7 +20,6 @@
 .header.header-scrolled {
   background-color: var(--basic-white);
   border-bottom-color: transparent;
-
 }
 
 .header.menu-open {
@@ -32,8 +31,6 @@
   padding-left: var(--spacing-base);
   padding-right: var(--spacing-base);
 }
-
-
 
 .header-logo {
   // Hidden initially - will be shown by GSAP animation
@@ -65,7 +62,6 @@
   color: var(--basic-black);
   display: block;
   margin: 0;
-
 }
 
 .logo-text-main {
@@ -135,6 +131,8 @@
   visibility: hidden;
   cursor: pointer;
   padding: 0.3125rem;
+  display: flex;
+  align-items: center; // Align hamburger with menu text
 }
 
 .menu-text {
@@ -150,7 +148,7 @@
 .hamburger {
   position: relative;
   width: 2.25rem;
-  height: 2.5rem;
+  height: auto; // Auto height for better alignment with menu text
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -161,9 +159,9 @@
 .hamburger-line {
   display: block;
   width: 100%;
-  height: 0.125rem;
+  height: 0.15rem; // Increased from 0.125rem to make lines more consistent
   background-color: var(--basic-black);
-  transition: all 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   transform-origin: center;
   border-radius: 0.0625rem;
 }
@@ -228,7 +226,9 @@
   z-index: 997;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
 }
 
 .mega-menu-overlay.active {
@@ -295,8 +295,6 @@
 .menu-sub-item:hover {
   color: var(--primary-blue) !important;
 }
-
-
 
 .menu-image {
   width: 100%;
@@ -371,7 +369,7 @@
   transition: opacity 0.3s ease;
 
   svg {
-    transition: all ease .25s;
+    transition: all ease 0.25s;
   }
 
   &[aria-expanded="true"] {
@@ -385,20 +383,17 @@
   opacity: 1;
 }
 
-
-
 .header {
   .header-row {
     justify-content: space-between;
     margin: 0 -0.75rem;
 
-    >div {
+    > div {
       padding: 0 0.75rem;
     }
 
     .left-block {
       max-width: 33.33333333%;
-
     }
 
     .right-block {
@@ -423,7 +418,6 @@
           display: none;
         }
       }
-
     }
   }
 
@@ -446,12 +440,10 @@
     background-color: transparent;
   }
 
-
   .hide-header-items {
     display: none;
     opacity: 0;
-    transition: opacity ease .25s;
-
+    transition: opacity ease 0.25s;
   }
 
   &.menu-open {
@@ -467,10 +459,9 @@
       visibility: visible;
     }
   }
-
 }
 
-@media (min-width:992px) and (max-width:1200px) {
+@media (min-width: 992px) and (max-width: 1200px) {
   .header.menu-open .dropdown-wrapper.hide-header-items {
     display: none !important;
   }
@@ -502,7 +493,7 @@
     padding-left: var(--spacing-xs);
     padding-right: var(--spacing-xs);
 
-    >.row {
+    > .row {
       align-items: center;
     }
 
@@ -550,7 +541,6 @@
     letter-spacing: -0.025rem;
     width: auto;
     line-height: 100%;
-
   }
 
   .header-logo-text {
@@ -577,7 +567,6 @@
 
   .mega-menu {
     padding-top: 6.25rem;
-
   }
 
   .mega-menu-inner {
@@ -590,7 +579,7 @@
     }
   }
 
-  .mega-menu-inner .row>div {
+  .mega-menu-inner .row > div {
     height: auto;
   }
 
@@ -618,7 +607,7 @@
     background: #fff;
     padding: 7.5rem var(--spacing-xs) 1.5rem;
     transform: translateX(-100%);
-    transition: transform 0.35s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transition: transform 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
     z-index: 1000;
     overflow-y: auto;
     opacity: 1;
@@ -644,7 +633,7 @@
     padding: 0.5rem 0;
 
     &:before {
-      content: '\2190';
+      content: "\2190";
       margin-right: 0.5rem;
       font-size: 1.25rem;
     }
@@ -686,7 +675,6 @@
     max-width: 57.875%;
   }
 
-
   .header-logo-text {
     padding-top: 0.9375rem;
   }
@@ -698,12 +686,12 @@
       padding: 0.75rem 0;
 
       .header-row {
-        .left-block{
+        .left-block {
           max-width: 60%;
         }
-         .right-block {
+        .right-block {
           max-width: 35%;
-         }
+        }
       }
     }
 
@@ -731,6 +719,7 @@
 
     .hamburger {
       width: 2rem;
+      transform: translateY(-3px); // Move up slightly on mobile to align with menu text
     }
 
     .menu-sub-item {
@@ -745,13 +734,11 @@
 
     .menu-main-items {
       padding: 1rem 0;
-     
     }
 
     .mega-menu-footer {
       padding: 0.5rem 0;
     }
-
 
     .header.menu-open .header-row .right-block {
       max-width: 40%;
@@ -773,7 +760,7 @@
   }
 
   .menu-main-item {
-    font-size: 2.2875rem; 
+    font-size: 2.2875rem;
   }
 
   .menu-sub-item {
