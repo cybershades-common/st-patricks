@@ -1,123 +1,891 @@
-<div class="app">
-  <section>
-    <div class="container">
-      <p class="reveal">In the vastness of space, celestial bodies dance in harmony. Stars twinkle, planets orbit, and nebulas paint vibrant hues. Black holes exert their gravitational might, while comets streak by, leaving stardust in their wake.</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonial Slider</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0a0f;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    .testimonial-section {
+      width: 100%;
+      max-width: 1200px;
+      padding: 40px;
+      position: relative;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 11px;
+      color: #c9a96e;
+      font-weight: 600;
+      margin-bottom: 50px;
+      position: relative;
+      padding-left: 50px;
+    }
+
+    .section-label::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 35px;
+      height: 1px;
+      background: #c9a96e;
+    }
+
+    .slider-container {
+      display: flex;
+      align-items: stretch;
+      gap: 80px;
+      min-height: 500px;
+    }
+
+    /* Left - Image */
+    .slider-left {
+      flex: 0 0 420px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .image-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .slide-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      will-change: transform, clip-path;
+    }
+
+    .slide-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      will-change: transform;
+    }
+
+    .slide-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+      pointer-events: none;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .image-frame {
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      right: 15px;
+      bottom: 15px;
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      border-radius: 12px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .slide-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      z-index: 10;
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+
+    .slide-counter .current {
+      font-size: 28px;
+      font-weight: 700;
+      color: #c9a96e;
+    }
+
+    /* Right - Content */
+    .slider-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      padding: 20px 0;
+      min-height: 500px;
+    }
+
+    .content-wrapper {
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .testimonial-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      will-change: transform, opacity;
+      visibility: hidden;
+    }
+
+    .testimonial-content.active {
+      visibility: visible;
+    }
+
+    .quote-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 30px;
+    }
+
+    .quote-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: #c9a96e;
+    }
+
+    .stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 25px;
+    }
+
+    .stars svg {
+      width: 18px;
+      height: 18px;
+      fill: #c9a96e;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      line-height: 1.6;
+      color: #e8e8e8;
+      font-weight: 400;
+      margin-bottom: 40px;
+      max-width: 550px;
+    }
+
+    .quote-text .highlight {
+      color: #c9a96e;
+      font-style: italic;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #c9a96e;
+      flex-shrink: 0;
+    }
+
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .author-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .author-role {
+      font-size: 13px;
+      color: #888;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    /* Bottom Bar */
+    .bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 36px;
+      background: transparent;
+      border: 1px solid #c9a96e;
+      color: #c9a96e;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #c9a96e;
+      transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 0;
+      border-radius: 50px;
+    }
+
+    .cta-button:hover::before {
+      left: 0;
+    }
+
+    .cta-button:hover {
+      color: #0a0a0f;
+    }
+
+    .cta-button span,
+    .cta-button svg {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-button svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-button:hover svg {
+      transform: translateX(4px);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-bar {
+      width: 120px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 16px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #c9a96e;
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .nav-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: #e8e8e8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: #c9a96e;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-btn:hover::before {
+      width: 110%;
+      height: 110%;
+    }
+
+    .nav-btn:hover {
+      border-color: #c9a96e;
+      color: #0a0a0f;
+    }
+
+    .nav-btn svg {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-btn:hover svg {
+      transform: scale(1.1);
+    }
+
+    .nav-btn:active {
+      transform: scale(0.92);
+    }
+
+    .bg-decoration {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .bg-decoration.one {
+      width: 500px;
+      height: 500px;
+      top: -200px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(201, 169, 110, 0.03) 0%, transparent 70%);
+    }
+
+    .bg-decoration.two {
+      width: 400px;
+      height: 400px;
+      bottom: -150px;
+      left: -100px;
+      background: radial-gradient(circle, rgba(201, 169, 110, 0.02) 0%, transparent 70%);
+    }
+
+    .line-decoration {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(201, 169, 110, 0.15), transparent);
+    }
+
+    @media (max-width: 1024px) {
+      .slider-container {
+        flex-direction: column;
+        gap: 40px;
+        min-height: auto;
+      }
+
+      .slider-left {
+        flex: none;
+        height: 350px;
+        width: 100%;
+      }
+
+      .slider-right {
+        min-height: 350px;
+      }
+
+      .quote-text {
+        font-size: 22px;
+      }
+
+      .image-frame {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .testimonial-section {
+        padding: 20px;
+      }
+
+      .slider-left {
+        height: 280px;
+      }
+
+      .slider-right {
+        min-height: 300px;
+      }
+
+      .quote-text {
+        font-size: 18px;
+      }
+
+      .bottom-bar {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .progress-bar {
+        width: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-decoration one"></div>
+  <div class="bg-decoration two"></div>
+
+  <section class="testimonial-section">
+    <div class="section-label">What Our Clients Say</div>
+
+    <div class="slider-container">
+      <div class="slider-left">
+        <div class="image-frame"></div>
+        <div class="image-wrapper" id="imageWrapper"></div>
+        <div class="slide-counter">
+          <span class="current" id="counterCurrent">01</span> / <span id="counterTotal">04</span>
+        </div>
+      </div>
+
+      <div class="slider-right">
+        <div class="content-wrapper" id="contentWrapper"></div>
+        <div class="line-decoration"></div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <button class="cta-button">
+        <span>View All Reviews</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+
+      <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <button class="nav-btn" id="nextBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
     </div>
   </section>
-</div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+  <script>
+    const testimonials = [
+      {
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+        quote: `Working with this team was a <span class="highlight">transformative experience</span>. They didn't just deliver a product — they crafted a vision that exceeded every expectation.`,
+        name: "Alexander Mitchell",
+        role: "CEO, Nexus Ventures",
+        stars: 5
+      },
+      {
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop&crop=face",
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+        quote: `The attention to detail is <span class="highlight">absolutely remarkable</span>. Every pixel, every interaction — it all feels intentional and beautifully executed.`,
+        name: "Sarah Chen",
+        role: "Design Director, Artform Studio",
+        stars: 5
+      },
+      {
+        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop&crop=face",
+        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+        quote: `They turned our complex requirements into an <span class="highlight">elegant, intuitive solution</span>. Our conversion rates increased by 340% within the first quarter.`,
+        name: "James Rodriguez",
+        role: "CTO, Quantum Digital",
+        stars: 5
+      },
+      {
+        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=800&fit=crop&crop=face",
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+        quote: `From strategy to execution, the <span class="highlight">level of craftsmanship</span> was unparalleled. They truly understand the art of digital storytelling.`,
+        name: "Emily Nakamura",
+        role: "Founder, Lumina Brands",
+        stars: 5
+      }
+    ];
 
-// Base
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    let currentIndex = 0;
+    let isAnimating = false;
+    let activeContentTL = null;
+    let activeExitTL = null;
+    const totalSlides = testimonials.length;
 
-html {
-  display: block;
-  height: auto;
-  min-height: 100%;
-  width: 100%;
-  font-size: clamp(16px, 2vw, 24px);
-  line-height: 1.4;
-  overflow-x: hidden;
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  background-image: linear-gradient(to right, #2F586A, #1E121C);
-}
+    const imageWrapper = document.getElementById('imageWrapper');
+    const contentWrapper = document.getElementById('contentWrapper');
+    const counterCurrent = document.getElementById('counterCurrent');
+    const counterTotal = document.getElementById('counterTotal');
+    const progressFill = document.getElementById('progressFill');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
-body {
-  display: block;
-  min-height: 100vh;
-  overflow: hidden;
-} 
+    function init() {
+      counterTotal.textContent = String(totalSlides).padStart(2, '0');
+      createImageSlide(0, true);
+      createContentSlide(0, true);
+      updateProgress();
 
-// Smooth scroll
-.lenis {
-  &.lenis-smooth {
-    scroll-behavior: auto;
-
-    [data-lenis-prevent] {
-      overscroll-behavior: contain;
+      gsap.fromTo('.section-label',
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out', delay: 0.2 }
+      );
+      gsap.fromTo('.slider-left',
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 1, ease: 'power3.out', delay: 0.4 }
+      );
+      gsap.fromTo('.bottom-bar',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.8 }
+      );
     }
-  }
 
-  &.lenis-stopped {
-    overflow: hidden;
-  }
+    function createImageSlide(index, isInitial = false) {
+      const data = testimonials[index];
+      const slideDiv = document.createElement('div');
+      slideDiv.className = 'slide-image';
+      slideDiv.setAttribute('data-index', index);
 
-  &.lenis-scrolling iframe {
-    pointer-events: none;
-  }
-}
+      const img = document.createElement('img');
+      img.src = data.image;
+      img.alt = data.name;
+      slideDiv.appendChild(img);
+      imageWrapper.appendChild(slideDiv);
 
-// Layout
-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
+      if (isInitial) {
+        gsap.set(slideDiv, { clipPath: 'inset(0% 0% 0% 0%)' });
+        gsap.set(img, { scale: 1, x: 0 });
+      }
 
-.container {
-  position: relative;
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-// Reveal
-.reveal {
-  font-kerning: none;
-  text-transform: uppercase;
-  font-weight: 300;
-  font-size: 1.4rem;
-  line-height: 1.4;
-}
-
-
-gsap.registerPlugin(ScrollTrigger);
-let revealAnimations = [];
-
-// Scroll
-const lenis = new Lenis({
-  lerp: 0.07
-});
-
-lenis.on('scroll', ScrollTrigger.update)
-gsap.ticker.add((time)=>{
-  lenis.raf(time * 1000)
-})
-
-// Reveal
-document.querySelectorAll('.reveal').forEach(text => {
-  // Split text
-  let splitText = new SplitType(text, {
-    type: 'words'
-  })
-
-  // Animation
-  const section = text.closest('section');
-  gsap.from(splitText.words, {
-    opacity: 0,
-    ease: 'none',
-    stagger: 1,
-    duration: 5,
-    scrollTrigger: {
-      trigger: section,
-      start: 'top top', 
-      end: () => `+=${window.innerHeight * 5}px`,
-      scrub: true,
-      // markers: true,
-      pin: true,
+      return { slideDiv, img };
     }
-  })
-})
 
+    function createContentSlide(index, isInitial = false) {
+      const data = testimonials[index];
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'testimonial-content';
+      contentDiv.setAttribute('data-index', index);
 
+      const quoteIcon = document.createElement('div');
+      quoteIcon.className = 'quote-icon';
+      quoteIcon.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>`;
 
+      const starsDiv = document.createElement('div');
+      starsDiv.className = 'stars';
+      for (let i = 0; i < data.stars; i++) {
+        starsDiv.innerHTML += `<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+      }
 
+      const quoteP = document.createElement('p');
+      quoteP.className = 'quote-text';
+      quoteP.innerHTML = `"${data.quote}"`;
 
+      const authorDiv = document.createElement('div');
+      authorDiv.className = 'author-info';
+      authorDiv.innerHTML = `
+                <div class="author-avatar"><img src="${data.avatar}" alt="${data.name}"></div>
+                <div class="author-details">
+                    <span class="author-name">${data.name}</span>
+                    <span class="author-role">${data.role}</span>
+                </div>
+            `;
 
+      contentDiv.appendChild(quoteIcon);
+      contentDiv.appendChild(starsDiv);
+      contentDiv.appendChild(quoteP);
+      contentDiv.appendChild(authorDiv);
+      contentWrapper.appendChild(contentDiv);
+
+      if (isInitial) {
+        contentDiv.classList.add('active');
+        const tl = gsap.timeline({ delay: 0.5 });
+        tl.fromTo(quoteIcon, { opacity: 0, scale: 0.5, rotation: -20 }, { opacity: 0.15, scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(1.7)' })
+          .fromTo(starsDiv.children, { opacity: 0, y: 10, scale: 0 }, { opacity: 1, y: 0, scale: 1, duration: 0.3, stagger: 0.06, ease: 'back.out(2)' }, '-=0.3')
+          .fromTo(quoteP, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.2')
+          .fromTo(authorDiv, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4');
+      }
+
+      return contentDiv;
+    }
+
+    function updateProgress() {
+      const pct = ((currentIndex + 1) / totalSlides) * 100;
+      gsap.to(progressFill, { width: pct + '%', duration: 0.5, ease: 'power2.out' });
+    }
+
+    function goToSlide(newIndex, direction) {
+      if (isAnimating || newIndex === currentIndex) return;
+      isAnimating = true;
+
+      // Kill any running content timelines to prevent conflicts
+      if (activeContentTL) { activeContentTL.kill(); activeContentTL = null; }
+      if (activeExitTL) { activeExitTL.kill(); activeExitTL = null; }
+
+      const oldIndex = currentIndex;
+      currentIndex = newIndex;
+
+      // Counter
+      gsap.to(counterCurrent, {
+        opacity: 0, y: direction === 1 ? -10 : 10, duration: 0.2, ease: 'power2.in',
+        onComplete: () => {
+          counterCurrent.textContent = String(currentIndex + 1).padStart(2, '0');
+          gsap.fromTo(counterCurrent,
+            { opacity: 0, y: direction === 1 ? 10 : -10 },
+            { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
+          );
+        }
+      });
+
+      updateProgress();
+
+      // ═══════════════════════════
+      // IMAGE TRANSITION (PARALLAX)
+      // ═══════════════════════════
+      const { slideDiv: newImageSlide, img: newImg } = createImageSlide(currentIndex);
+
+      const clipFrom = direction === 1 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)';
+      const clipTo = 'inset(0% 0% 0% 0%)';
+      const oldClipTo = direction === 1 ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 0% 100%)';
+      const parallaxFrom = direction === 1 ? -100 : 100;
+      const oldParallaxTo = direction === 1 ? 100 : -100;
+
+      gsap.set(newImageSlide, { clipPath: clipFrom, zIndex: 2 });
+      gsap.set(newImg, { scale: 1.3, x: parallaxFrom });
+
+      // Old image parallax out
+      const oldImages = imageWrapper.querySelectorAll(`.slide-image[data-index="${oldIndex}"]`);
+      oldImages.forEach(el => {
+        gsap.set(el, { zIndex: 1 });
+        gsap.to(el.querySelector('img'), {
+          x: oldParallaxTo, scale: 1.1, duration: 1.2, ease: 'power3.inOut'
+        });
+        gsap.to(el, {
+          clipPath: oldClipTo, duration: 1.2, ease: 'power3.inOut', delay: 0.05
+        });
+      });
+
+      // New image reveal
+      gsap.to(newImageSlide, {
+        clipPath: clipTo, duration: 1.2, ease: 'power3.inOut'
+      });
+      gsap.to(newImg, {
+        scale: 1, x: 0, duration: 1.4, ease: 'power3.out'
+      });
+
+      // Cleanup old images
+      setTimeout(() => {
+        const stale = imageWrapper.querySelectorAll(`.slide-image[data-index="${oldIndex}"]`);
+        stale.forEach(el => el.remove());
+      }, 1500);
+
+      // ═══════════════════════════
+      // CONTENT TRANSITION (FIXED)
+      // ═══════════════════════════
+      const oldContent = contentWrapper.querySelector(`.testimonial-content[data-index="${oldIndex}"]`);
+
+      // Exit values based on direction
+      const exitY = direction === 1 ? -50 : 50;
+      const enterFromY = direction === 1 ? 60 : -60;
+
+      // ── EXIT old content ──
+      if (oldContent) {
+        const oldQuoteIcon = oldContent.querySelector('.quote-icon');
+        const oldStars = oldContent.querySelectorAll('.stars svg');
+        const oldQuote = oldContent.querySelector('.quote-text');
+        const oldAuthor = oldContent.querySelector('.author-info');
+
+        activeExitTL = gsap.timeline({
+          onComplete: () => {
+            oldContent.remove();
+            activeExitTL = null;
+          }
+        });
+
+        activeExitTL
+          .to(oldAuthor, {
+            opacity: 0,
+            y: exitY * 0.5,
+            x: direction === 1 ? -20 : 20,
+            duration: 0.35,
+            ease: 'power3.in'
+          }, 0)
+          .to(oldQuote, {
+            opacity: 0,
+            y: exitY,
+            duration: 0.4,
+            ease: 'power3.in'
+          }, 0.05)
+          .to(oldStars, {
+            opacity: 0,
+            scale: 0,
+            duration: 0.25,
+            stagger: direction === 1 ? 0.02 : -0.02,
+            ease: 'power2.in'
+          }, 0.05)
+          .to(oldQuoteIcon, {
+            opacity: 0,
+            scale: 0.3,
+            rotation: direction === 1 ? 15 : -15,
+            duration: 0.3,
+            ease: 'power2.in'
+          }, 0.05);
+      }
+
+      // ── ENTER new content ──
+      const newContent = createContentSlide(currentIndex);
+      newContent.classList.add('active');
+
+      const newQuoteIcon = newContent.querySelector('.quote-icon');
+      const newStars = newContent.querySelectorAll('.stars svg');
+      const newQuote = newContent.querySelector('.quote-text');
+      const newAuthor = newContent.querySelector('.author-info');
+
+      // Set initial hidden states
+      gsap.set(newQuoteIcon, { opacity: 0, scale: 0.3, rotation: direction === 1 ? -15 : 15 });
+      gsap.set(newStars, { opacity: 0, scale: 0, y: direction === 1 ? 15 : -15 });
+      gsap.set(newQuote, { opacity: 0, y: enterFromY });
+      gsap.set(newAuthor, { opacity: 0, y: enterFromY * 0.5, x: direction === 1 ? 20 : -20 });
+
+      activeContentTL = gsap.timeline({
+        delay: 0.5,
+        onComplete: () => {
+          isAnimating = false;
+          activeContentTL = null;
+        }
+      });
+
+      activeContentTL
+        .to(newQuoteIcon, {
+          opacity: 0.15,
+          scale: 1,
+          rotation: 0,
+          duration: 0.6,
+          ease: 'back.out(1.4)'
+        }, 0)
+        .to(newStars, {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.35,
+          stagger: direction === 1 ? 0.05 : -0.05,
+          ease: 'back.out(2)'
+        }, 0.1)
+        .to(newQuote, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        }, 0.15)
+        .to(newAuthor, {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          duration: 0.65,
+          ease: 'power3.out'
+        }, 0.3);
+    }
+
+    function nextSlide() {
+      goToSlide((currentIndex + 1) % totalSlides, 1);
+    }
+
+    function prevSlide() {
+      goToSlide((currentIndex - 1 + totalSlides) % totalSlides, -1);
+    }
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide(); else prevSlide();
+      }
+    });
+
+    let autoPlay = setInterval(nextSlide, 6000);
+    document.querySelector('.testimonial-section').addEventListener('mouseenter', () => clearInterval(autoPlay));
+    document.querySelector('.testimonial-section').addEventListener('mouseleave', () => { autoPlay = setInterval(nextSlide, 6000); });
+
+    init();
+  </script>
+
+</body>
+
+</html>

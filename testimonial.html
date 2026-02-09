@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Helvetica Neue LT Pro';
+            src: url('assets/fonts/HelveticaNeueLTProLt.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Helvetica Neue LT Pro';
+            src: url('assets/fonts/HelveticaNeueLTProRoman.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --primary-yellow-bright: #fff02a;
+            --primary-blue: #10069f;
+            --primary-gold-4: #f6f3ec;
+            --basic-white: #ffffff;
+            --basic-black: #27251f;
+            --font-family-helvetica-neue: 'Helvetica Neue LT Pro', sans-serif;
+            --font-size-quote-large: 2.8125rem;
+            --font-size-b3: 0.75rem;
+            --font-weight-light: 300;
+            --font-weight-regular: 400;
+            --line-height-quote-large: 1.05;
+            --line-height-b3: 1;
+            --letter-spacing-label-3: 0.3125rem;
+            --spacing-small-2: 2.5rem;
+            --spacing-small: 1.875rem;
+            --spacing-xs: 1.25rem;
+        }
+
+        body {
+            font-family: var(--font-family-helvetica-neue);
+            background-color: var(--primary-gold-4);
+            margin: 0;
+            padding: 0;
+        }
+
+        .testimonials-section {
+            background-color: var(--primary-gold-4);
+            padding-top: var(--spacing-small-2);
+            padding-bottom: var(--spacing-small-2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-gradient {
+            position: absolute;
+            left: 80%;
+            top: 80%;
+            width: 62.6875rem;
+            height: 62.6875rem;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            background: var(--primary-yellow-bright);
+            filter: blur(15.625rem);
+            opacity: 0.3;
+        }
+
+        .testimonials-section .container-fluid {
+            position: relative;
+            z-index: 2;
+            padding-left: 1.875rem;
+            padding-right: 1.875rem;
+        }
+
+        .testimonials-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem 0;
+        }
+
+        .testimonials-image-wrapper {
+            position: relative;
+            width: 27.875rem;
+            height: 34.4375rem;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .testimonials-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            will-change: transform, clip-path;
+        }
+
+        .testimonials-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            will-change: transform;
+        }
+
+        .testimonials-text-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 34.4375rem;
+        }
+
+        .testimonials-quote-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            width: 34.25rem;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .testimonials-slide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            visibility: hidden;
+            will-change: transform, opacity;
+        }
+
+        .testimonials-slide-content.active {
+            visibility: visible;
+        }
+
+        .testimonials-quote {
+            font-family: var(--font-family-helvetica-neue);
+            font-size: var(--font-size-quote-large);
+            font-weight: var(--font-weight-light);
+            line-height: var(--line-height-quote-large);
+            letter-spacing: 0;
+            color: var(--primary-blue);
+            margin: 0;
+        }
+
+        .testimonials-attribution {
+            font-family: var(--font-family-helvetica-neue);
+            font-size: var(--font-size-b3);
+            font-weight: var(--font-weight-regular);
+            line-height: var(--line-height-b3);
+            letter-spacing: var(--letter-spacing-label-3);
+            color: var(--basic-black);
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .testimonials-button {
+            margin-top: 0;
+        }
+
+        .testimonials-bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .btn-rounded-large-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.625rem;
+            padding: 0.9375rem 1.5625rem;
+            border-radius: 18.75rem;
+            font-family: var(--font-family-helvetica-neue);
+            font-size: 0.9375rem;
+            font-weight: var(--font-weight-regular);
+            line-height: 0.9;
+            text-align: center;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--primary-blue);
+            background: transparent;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .btn-rounded-large-outline:hover {
+            background-color: var(--primary-blue);
+            color: var(--basic-white);
+        }
+
+        .testimonials-arrows {
+            gap: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonials-arrow-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: var(--basic-black);
+            transition: all 0.3s ease;
+        }
+
+        .testimonials-arrow-btn:hover {
+            color: var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        .testimonials-arrow-btn svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 991px) {
+            .testimonials-section {
+                padding-top: var(--spacing-small);
+                padding-bottom: var(--spacing-small);
+            }
+
+            .testimonials-section .container-fluid {
+                padding-left: var(--spacing-xs);
+                padding-right: var(--spacing-xs);
+            }
+
+            .testimonials-content {
+                gap: var(--spacing-small);
+            }
+
+            .testimonials-image-wrapper {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 446/353;
+            }
+
+            .testimonials-text-col {
+                padding: 0 0.625rem;
+                margin-bottom: var(--spacing-small);
+                height: auto;
+            }
+
+            .testimonials-quote-wrapper {
+                width: 100%;
+                min-height: 12rem;
+            }
+
+            .testimonials-button-col {
+                padding-right: 0;
+                margin-bottom: 0;
+                flex: 1 1 auto;
+            }
+
+            .testimonials-arrows-col {
+                margin-left: 0;
+                flex: 0 0 auto;
+            }
+
+            .testimonials-bottom-row {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: var(--spacing-xs);
+                flex-wrap: nowrap;
+                align-items: center;
+            }
+
+            .testimonials-button-col,
+            .testimonials-arrows-col {
+                width: auto;
+            }
+
+            .testimonials-button {
+                width: 100%;
+                white-space: nowrap;
+            }
+
+            .testimonials-arrows {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .testimonials-quote {
+                font-size: 1.5rem;
+            }
+
+            .testimonials-attribution {
+                font-size: 0.625rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="testimonials-section">
+        <div class="testimonials-gradient"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 testimonials-content">
+                    <div class="row align-items-start">
+                        <div class="col-12 col-xl-4 col-md-5 testimonials-image-col">
+                            <div class="testimonials-image-wrapper" id="imageWrapper">
+                                <!-- Images injected by JS -->
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-5 col-md-6 offset-xl-2 offset-md-1 testimonials-text-col">
+                            <div class="testimonials-quote-wrapper" id="contentWrapper">
+                                <!-- Content injected by JS -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center testimonials-bottom-row">
+                        <div class="col-6 col-lg-6 testimonials-button-col">
+                            <button class="btn-rounded-large-outline testimonials-button">Read more Community Stories</button>
+                        </div>
+                        <div class="col-6 col-lg-6 testimonials-arrows-col">
+                            <div class="testimonials-arrows d-flex align-items-center">
+                                <button class="testimonials-arrow-btn" id="prevBtn" aria-label="Previous testimonial">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20 10L10 20L20 30M10 20H30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <button class="testimonials-arrow-btn" id="nextBtn" aria-label="Next testimonial">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20 10L30 20L20 30M30 20H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+        // =====================
+        // TESTIMONIAL DATA
+        // =====================
+        const testimonials = [
+            {
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face",
+                quote: `"St Patrick's has given me confidence I never knew I had. My teachers push me, my mates back me and every day I feel like I am becoming a better version of myself."`,
+                name: "Liam Dossi, Year 10 Student"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop&crop=face",
+                quote: `"The community here is unlike anything I've experienced. From day one, I felt welcomed, supported and inspired to reach my full potential in everything I do."`,
+                name: "Sophie Nguyen, Year 11 Student"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop&crop=face",
+                quote: `"Watching my son grow into a confident young man has been incredible. The school nurtures not just academics but character, resilience and genuine kindness."`,
+                name: "Mark Henderson, Parent"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=800&fit=crop&crop=face",
+                quote: `"Every student here has a story and what I love most is that we get to help write the next chapter. Teaching here is a privilege I'm grateful for every single day."`,
+                name: "Ms. Claire O'Brien, English Teacher"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop&crop=face",
+                quote: `"The opportunities at St Patrick's go far beyond the classroom. Sport, music, leadership — I've been able to discover passions I never even knew I had before."`,
+                name: "James Callahan, Year 12 Student"
+            }
+        ];
+
+        // =====================
+        // STATE
+        // =====================
+        let currentIndex = 0;
+        let isAnimating = false;
+        let activeContentTL = null;
+        let activeExitTL = null;
+        const totalSlides = testimonials.length;
+
+        const imageWrapper = document.getElementById('imageWrapper');
+        const contentWrapper = document.getElementById('contentWrapper');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // =====================
+        // CREATE IMAGE SLIDE
+        // =====================
+        function createImageSlide(index, isInitial) {
+            const data = testimonials[index];
+            const slideDiv = document.createElement('div');
+            slideDiv.className = 'testimonials-image';
+            slideDiv.setAttribute('data-index', index);
+
+            const img = document.createElement('img');
+            img.className = 'testimonials-img';
+            img.src = data.image;
+            img.alt = data.name;
+            slideDiv.appendChild(img);
+            imageWrapper.appendChild(slideDiv);
+
+            if (isInitial) {
+                gsap.set(slideDiv, { clipPath: 'inset(0% 0% 0% 0%)' });
+                gsap.set(img, { scale: 1, x: 0 });
+            }
+
+            return { slideDiv, img };
+        }
+
+        // =====================
+        // CREATE CONTENT SLIDE
+        // =====================
+        function createContentSlide(index, isInitial) {
+            const data = testimonials[index];
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'testimonials-slide-content';
+            contentDiv.setAttribute('data-index', index);
+
+            const quoteP = document.createElement('p');
+            quoteP.className = 'testimonials-quote';
+            quoteP.textContent = data.quote;
+
+            const attrP = document.createElement('p');
+            attrP.className = 'testimonials-attribution';
+            attrP.textContent = data.name;
+
+            contentDiv.appendChild(quoteP);
+            contentDiv.appendChild(attrP);
+            contentWrapper.appendChild(contentDiv);
+
+            if (isInitial) {
+                contentDiv.classList.add('active');
+                const tl = gsap.timeline({ delay: 0.3 });
+                tl.fromTo(quoteP,
+                    { opacity: 0, y: 40 },
+                    { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+                )
+                .fromTo(attrP,
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+                    '-=0.4'
+                );
+            }
+
+            return contentDiv;
+        }
+
+        // =====================
+        // GO TO SLIDE
+        // =====================
+        function goToSlide(newIndex, direction) {
+            if (isAnimating || newIndex === currentIndex) return;
+            isAnimating = true;
+
+            if (activeContentTL) { activeContentTL.kill(); activeContentTL = null; }
+            if (activeExitTL) { activeExitTL.kill(); activeExitTL = null; }
+
+            const oldIndex = currentIndex;
+            currentIndex = newIndex;
+
+            // ── IMAGE PARALLAX TRANSITION ──
+            const { slideDiv: newImageSlide, img: newImg } = createImageSlide(currentIndex, false);
+
+            const clipFrom = direction === 1 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)';
+            const oldClipTo = direction === 1 ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 0% 100%)';
+            const parallaxFrom = direction === 1 ? -100 : 100;
+            const oldParallaxTo = direction === 1 ? 100 : -100;
+
+            gsap.set(newImageSlide, { clipPath: clipFrom, zIndex: 2 });
+            gsap.set(newImg, { scale: 1.3, x: parallaxFrom });
+
+            const oldImages = imageWrapper.querySelectorAll(`.testimonials-image[data-index="${oldIndex}"]`);
+            oldImages.forEach(el => {
+                gsap.set(el, { zIndex: 1 });
+                gsap.to(el.querySelector('.testimonials-img'), {
+                    x: oldParallaxTo, scale: 1.1, duration: 1.2, ease: 'power3.inOut'
+                });
+                gsap.to(el, {
+                    clipPath: oldClipTo, duration: 1.2, ease: 'power3.inOut', delay: 0.05
+                });
+            });
+
+            gsap.to(newImageSlide, {
+                clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'power3.inOut'
+            });
+            gsap.to(newImg, {
+                scale: 1, x: 0, duration: 1.4, ease: 'power3.out'
+            });
+
+            setTimeout(() => {
+                const stale = imageWrapper.querySelectorAll(`.testimonials-image[data-index="${oldIndex}"]`);
+                stale.forEach(el => el.remove());
+            }, 1500);
+
+            // ── CONTENT TRANSITION ──
+            const oldContent = contentWrapper.querySelector(`.testimonials-slide-content[data-index="${oldIndex}"]`);
+            const exitY = direction === 1 ? -50 : 50;
+            const enterFromY = direction === 1 ? 60 : -60;
+
+            if (oldContent) {
+                const oldQuote = oldContent.querySelector('.testimonials-quote');
+                const oldAttr = oldContent.querySelector('.testimonials-attribution');
+
+                activeExitTL = gsap.timeline({
+                    onComplete: () => {
+                        oldContent.remove();
+                        activeExitTL = null;
+                    }
+                });
+
+                activeExitTL
+                    .to(oldAttr, {
+                        opacity: 0,
+                        y: exitY * 0.5,
+                        duration: 0.35,
+                        ease: 'power3.in'
+                    }, 0)
+                    .to(oldQuote, {
+                        opacity: 0,
+                        y: exitY,
+                        duration: 0.4,
+                        ease: 'power3.in'
+                    }, 0.05);
+            }
+
+            const newContent = createContentSlide(currentIndex, false);
+            newContent.classList.add('active');
+
+            const newQuote = newContent.querySelector('.testimonials-quote');
+            const newAttr = newContent.querySelector('.testimonials-attribution');
+
+            gsap.set(newQuote, { opacity: 0, y: enterFromY });
+            gsap.set(newAttr, { opacity: 0, y: enterFromY * 0.5 });
+
+            activeContentTL = gsap.timeline({
+                delay: 0.5,
+                onComplete: () => {
+                    isAnimating = false;
+                    activeContentTL = null;
+                }
+            });
+
+            activeContentTL
+                .to(newQuote, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                }, 0)
+                .to(newAttr, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.65,
+                    ease: 'power3.out'
+                }, 0.15);
+        }
+
+        // =====================
+        // NAVIGATION
+        // =====================
+        function nextSlide() {
+            goToSlide((currentIndex + 1) % totalSlides, 1);
+        }
+
+        function prevSlide() {
+            goToSlide((currentIndex - 1 + totalSlides) % totalSlides, -1);
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        let touchStartX = 0;
+        document.querySelector('.testimonials-section').addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        document.querySelector('.testimonials-section').addEventListener('touchend', (e) => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide(); else prevSlide();
+            }
+        });
+
+        let autoPlay = setInterval(nextSlide, 6000);
+        document.querySelector('.testimonials-section').addEventListener('mouseenter', () => clearInterval(autoPlay));
+        document.querySelector('.testimonials-section').addEventListener('mouseleave', () => { autoPlay = setInterval(nextSlide, 6000); });
+
+        // =====================
+        // INIT
+        // =====================
+        createImageSlide(0, true);
+        createContentSlide(0, true);
+    </script>
+</body>
+</html>

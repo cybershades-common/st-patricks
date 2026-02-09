@@ -2087,30 +2087,20 @@ body {
   max-width: 100%;
   overflow: hidden;
 }
-.testimonials-pic-slider,
-.testimonials-pic-slider .swiper-wrapper,
-.testimonials-pic-slider .swiper-slide {
+.testimonials-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  will-change: transform, clip-path;
 }
-.testimonials-pic-slider .swiper-slide {
-  overflow: hidden;
-}
-.testimonials-pic-slider .swiper-slide:not(:first-child) {
-  display: none;
-}
-.testimonials-pic-slider .testimonials-img {
+.testimonials-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.2);
-  transition: transform 1.2s ease;
-}
-.testimonials-pic-slider .testimonials-img[data-gsap="image-fade-in"] {
-  transition: none;
-}
-.testimonials-pic-slider .swiper-slide-active .testimonials-img {
-  transform: scale(1);
+  display: block;
+  will-change: transform;
 }
 .testimonials-image-background {
   top: 0;
@@ -2144,35 +2134,30 @@ body {
   justify-content: space-between;
   height: 34.4375rem;
 }
-.testimonials-text-slider,
-.testimonials-text-slider .swiper-wrapper,
-.testimonials-text-slider .swiper-slide {
-  width: 100%;
-  height: 100%;
-}
-.testimonials-text-slider .swiper-slide {
-  opacity: 1 !important;
-  display: flex;
-  align-items: stretch;
-}
-.testimonials-text-slider .swiper-slide:not(:first-child) {
-  display: none;
-}
-.testimonials-text-slider .swiper-slide-active {
-  opacity: 1 !important;
-}
-.testimonials-text-slider .testimonials-quote,
-.testimonials-text-slider .testimonials-attribution {
-  opacity: 1;
-  visibility: visible;
-}
 .testimonials-quote-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   width: 34.25rem;
   max-width: 100%;
+  overflow: hidden;
+}
+.testimonials-slide-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+.testimonials-slide-content.active {
+  visibility: visible;
 }
 .testimonials-quote {
   font-family: var(--font-family-helvetica-neue);
@@ -2256,6 +2241,7 @@ body {
   }
   .testimonials-quote-wrapper {
     width: 100%;
+    min-height: 12rem;
   }
   .testimonials-button-col {
     padding-right: 0;
