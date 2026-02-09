@@ -39,7 +39,7 @@
   height: 43.75rem;
   border-radius: 128.1875rem;
   background: var(--primary-yellow-bright, #FFF02A);
-  filter: blur(11.625rem);
+  filter: blur(11.625rem); // 186px blur - hidden on mobile to prevent iOS Safari freeze
   pointer-events: none;
   z-index: 0;
   opacity: 1;
@@ -233,6 +233,11 @@
 }
 
 @media (max-width: 991px) {
+  // Hide gradient on mobile - massive blur filter causes iOS Safari freeze
+  .hero-gradient {
+    display: none !important;
+  }
+
   .hero {
     padding-top: 7.5rem;
 
@@ -245,15 +250,6 @@
       padding: 5rem 0 0;
       height: auto;
       min-height: auto;
-
-      .hero-gradient {
-
-        bottom: -38.5rem;
-        left: -6.25rem;
-        width: 20.75rem;
-        height: 26.75rem;
-
-      }
 
     }
   }
@@ -303,14 +299,7 @@
     mix-blend-mode: normal;
   }
 
-  .hero-content {
-    .hero-gradient {
-      width: 20rem;
-      height: 20rem;
-      left: -10rem;
-      bottom: -28rem;
-    }
-  }
+  // Gradient already hidden at 991px - no need to resize
 }
 
 @media (max-width: 575px) {

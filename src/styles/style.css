@@ -1136,6 +1136,9 @@ body {
   }
 }
 @media (max-width: 991px) {
+  .hero-gradient {
+    display: none !important;
+  }
   .hero {
     padding-top: 7.5rem;
   }
@@ -1147,12 +1150,6 @@ body {
     padding: 5rem 0 0;
     height: auto;
     min-height: auto;
-  }
-  .hero .hero-content-wrap .hero-gradient {
-    bottom: -38.5rem;
-    left: -6.25rem;
-    width: 20.75rem;
-    height: 26.75rem;
   }
   .hero .container-fluid {
     padding-left: var(--spacing-xs);
@@ -1183,12 +1180,6 @@ body {
   }
   .hero-media-overlay {
     mix-blend-mode: normal;
-  }
-  .hero-content .hero-gradient {
-    width: 20rem;
-    height: 20rem;
-    left: -10rem;
-    bottom: -28rem;
   }
 }
 @media (max-width: 575px) {

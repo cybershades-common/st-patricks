@@ -379,10 +379,11 @@ document.addEventListener('DOMContentLoaded', function () {
             force3D: true
         });
 
-        if (heroGradient) {
+        // Skip gradient animation on mobile (gradient is hidden via CSS)
+        const isMobile = window.innerWidth <= 991;
+        if (heroGradient && !isMobile) {
             gsap.set(heroGradient, {
                 autoAlpha: 0,
-
                 force3D: true
             });
         }
@@ -438,10 +439,10 @@ document.addEventListener('DOMContentLoaded', function () {
             force3D: true
         }, 1);
 
-        if (heroGradient) {
+        // Skip gradient animation on mobile (gradient is hidden via CSS)
+        if (heroGradient && !isMobile) {
             heroTimeline.to(heroGradient, {
                 autoAlpha: 1,
-
                 duration: 3,
                 ease: 'power2.out',
                 force3D: true
