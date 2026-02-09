@@ -42,8 +42,8 @@
   filter: blur(11.625rem);
   pointer-events: none;
   z-index: 0;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
 }
 
 .hero-content {
@@ -69,10 +69,10 @@
   position: relative;
   z-index: 1;
   top: -1.25rem;
-  
-  // Hide initially to prevent flash
-  opacity: 0;
-  visibility: hidden;
+
+  // Show immediately
+  opacity: 1;
+  visibility: visible;
 
   span {
     display: inline-block;
@@ -94,16 +94,16 @@
     letter-spacing: 0;
     color: var(--basic-black);
     margin: 0;
-    // Hide initially to prevent flash
-    opacity: 0;
-    visibility: hidden;
+    // Show immediately
+    opacity: 1;
+    visibility: visible;
   }
 
   button {
     clip-path: none;
-    // Hide initially to prevent flash
-    opacity: 0;
-    visibility: hidden;
+    // Show immediately
+    opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -141,9 +141,9 @@
   height: 100%;
   transform: translateZ(0);
   overflow: hidden;
-  // Hide initially - will be revealed with clip animation from left
-  clip-path: inset(0 100% 0 0);
-  -webkit-clip-path: inset(0 100% 0 0);
+  // Show immediately - no clip animation
+  clip-path: none;
+  -webkit-clip-path: none;
 }
 
 .hero-image,
