@@ -1337,7 +1337,7 @@ body {
   z-index: 1;
 }
 .strategic-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.25);
   position: absolute;
   top: 0;
   left: 0;
@@ -1609,7 +1609,7 @@ body {
   object-fit: cover;
 }
 .cocurricular-overlay {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.25);
   top: 0;
   left: 0;
   z-index: 2;
@@ -1951,7 +1951,7 @@ body {
   z-index: 2;
 }
 .parents-community-overlay {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%);
   top: 0;
   left: 0;
   z-index: 3;
@@ -2581,7 +2581,7 @@ body {
   z-index: 2;
 }
 .cta-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.25);
   top: 0;
   left: 0;
   z-index: 3;
