@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yellow Corner Gradients</title>
+  <title>Marquee</title>
   <style>
     * {
       margin: 0;
@@ -13,163 +13,53 @@
     }
 
     body {
-      background: #ffffff;
-      font-family: 'Helvetica Neue', sans-serif;
-      color: #222;
-      overflow-x: hidden;
-    }
-
-    .section {
-      position: relative;
-      width: 100%;
-      height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
+      min-height: 100vh;
+      background: #ffffff;
       overflow: hidden;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      font-family: sans-serif;
     }
 
-    .section h2 {
-      font-size: 1.3rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.35;
-      z-index: 1;
+    .marquee {
+      width: 100%;
+      overflow: hidden;
     }
 
-    .corner-glow {
-      position: absolute;
-      width: 55%;
-      height: 55%;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(60px);
-      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 12s linear infinite;
     }
 
-    /* Section 1 */
-    .section:nth-child(1) .corner-glow:nth-child(1) {
-      top: -20%;
-      left: -20%;
-      background: radial-gradient(circle, rgba(218, 165, 0, 0.85) 0%, rgba(200, 150, 0, 0.4) 45%, transparent 72%);
+    .marquee-half {
+      white-space: nowrap;
+      font-size: 2.5rem;
+      color: #1a56db;
     }
 
-    .section:nth-child(1) .corner-glow:nth-child(2) {
-      top: -20%;
-      right: -20%;
-      background: radial-gradient(circle, rgba(200, 150, 0, 0.7) 0%, rgba(190, 140, 0, 0.3) 45%, transparent 72%);
-    }
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
 
-    .section:nth-child(1) .corner-glow:nth-child(3) {
-      bottom: -20%;
-      left: -20%;
-      background: radial-gradient(circle, rgba(195, 145, 0, 0.6) 0%, rgba(185, 135, 0, 0.25) 45%, transparent 72%);
-    }
-
-    .section:nth-child(1) .corner-glow:nth-child(4) {
-      bottom: -20%;
-      right: -20%;
-      background: radial-gradient(circle, rgba(210, 160, 0, 0.75) 0%, rgba(195, 145, 0, 0.35) 45%, transparent 72%);
-    }
-
-    /* Section 2 */
-    .section:nth-child(2) .corner-glow:nth-child(1) {
-      top: -20%;
-      left: -20%;
-      background: radial-gradient(circle, rgba(205, 155, 0, 0.72) 0%, rgba(190, 140, 0, 0.3) 45%, transparent 72%);
-    }
-
-    .section:nth-child(2) .corner-glow:nth-child(2) {
-      top: -20%;
-      right: -20%;
-      background: radial-gradient(circle, rgba(215, 165, 0, 0.8) 0%, rgba(200, 150, 0, 0.38) 45%, transparent 72%);
-    }
-
-    .section:nth-child(2) .corner-glow:nth-child(3) {
-      bottom: -20%;
-      left: -20%;
-      background: radial-gradient(circle, rgba(220, 170, 0, 0.78) 0%, rgba(200, 155, 0, 0.35) 45%, transparent 72%);
-    }
-
-    .section:nth-child(2) .corner-glow:nth-child(4) {
-      bottom: -20%;
-      right: -20%;
-      background: radial-gradient(circle, rgba(195, 145, 0, 0.65) 0%, rgba(180, 130, 0, 0.28) 45%, transparent 72%);
+      100% {
+        transform: translateX(-50%);
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <section class="section">
-    <div class="corner-glow"></div>
-    <div class="corner-glow"></div>
-    <div class="corner-glow"></div>
-    <div class="corner-glow"></div>
-    <h2>Section One</h2>
-  </section>
-
-  <section class="section">
-    <div class="corner-glow"></div>
-    <div class="corner-glow"></div>
-    <div class="corner-glow"></div>
-    <div class="corner-glow"></div>
-    <h2>Section Two</h2>
-  </section>
-
-  <script>
-    const maxShift = 60;
-
-    let mouseX = 0.5;
-    let mouseY = 0.5;
-    let currentX = 0.5;
-    let currentY = 0.5;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX / window.innerWidth;
-      mouseY = e.clientY / window.innerHeight;
-    });
-
-    function animate() {
-      currentX += (mouseX - currentX) * 0.08;
-      currentY += (mouseY - currentY) * 0.08;
-
-      const shiftX = (currentX - 0.5) * 2;
-      const shiftY = (currentY - 0.5) * 2;
-
-      document.querySelectorAll('.section').forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        const visible = rect.bottom > 0 && rect.top < window.innerHeight;
-        if (!visible) return;
-
-        const localY = (window.innerHeight / 2 - rect.top) / rect.height;
-        const proximity = 1 - Math.min(Math.abs(localY - 0.5) * 1.2, 1);
-        const strength = 0.4 + proximity * 0.6;
-
-        const glows = section.querySelectorAll('.corner-glow');
-
-        glows.forEach((glow, i) => {
-          const isLeft = (i === 0 || i === 2);
-          const isTop = (i === 0 || i === 1);
-
-          const pullX = isLeft ? Math.max(shiftX, shiftX * 0.5) : Math.min(shiftX, shiftX * 0.5);
-          const pullY = isTop ? Math.max(shiftY, shiftY * 0.5) : Math.min(shiftY, shiftY * 0.5);
-
-          const tx = pullX * maxShift * strength;
-          const ty = pullY * maxShift * strength;
-
-          glow.style.transform = `translate(${tx}px, ${ty}px)`;
-        });
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-  </script>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-half">Let your light shine.&nbsp; Let your light shine.&nbsp; Let your light shine.&nbsp; Let
+        your light shine.&nbsp; </span>
+      <span class="marquee-half">Let your light shine.&nbsp; Let your light shine.&nbsp; Let your light shine.&nbsp; Let
+        your light shine.&nbsp; </span>
+    </div>
+  </div>
 
 </body>
 

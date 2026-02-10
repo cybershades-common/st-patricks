@@ -1413,7 +1413,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Footer marquee - JS driven, same direction (no scroll-based reversal)
+    // Footer marquee - JS driven, seamless infinite loop
     function initFooterMarquee() {
         const marquee = document.querySelector('.footer-large-text');
         if (!marquee) return;
@@ -1428,49 +1428,64 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const track = document.createElement('div');
         track.className = 'footer-marquee-track';
+        track.style.display = 'inline-flex';
+        track.style.willChange = 'transform';
+        track.style.whiteSpace = 'nowrap';
 
         const item = original;
         item.classList.add('footer-marquee-item');
+        item.style.display = 'inline-block';
+        item.style.whiteSpace = 'nowrap';
 
         track.appendChild(item);
         const clone = item.cloneNode(true);
+        clone.style.display = 'inline-block';
+        clone.style.whiteSpace = 'nowrap';
         track.appendChild(clone);
 
         marquee.innerHTML = '';
         marquee.appendChild(track);
 
         let itemWidth = 1;
-        let offset = 0;
+        let position = 0;
 
         const measure = () => {
-            itemWidth = item.offsetWidth || 1;
-            track.style.transform = 'translate3d(0,0,0)';
-            offset = 0;
+            itemWidth = item.getBoundingClientRect().width;
+            if (itemWidth === 0) itemWidth = 1;
         };
 
         measure();
+
+        let resizeTimer;
         window.addEventListener('resize', () => {
-            const isMobileNow = window.innerWidth <= 991;
-            const durationAttrNow = (isMobileNow && marquee.getAttribute('data-marquee-duration-mobile'))
-                || marquee.getAttribute('data-marquee-duration');
-            const parsed = parseFloat(durationAttrNow);
-            if (!Number.isNaN(parsed) && parsed > 0) {
-                duration = parsed;
-            }
-            measure();
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const isMobileNow = window.innerWidth <= 991;
+                const durationAttrNow = (isMobileNow && marquee.getAttribute('data-marquee-duration-mobile'))
+                    || marquee.getAttribute('data-marquee-duration');
+                const parsed = parseFloat(durationAttrNow);
+                if (!Number.isNaN(parsed) && parsed > 0) {
+                    duration = parsed;
+                }
+                measure();
+                position = position % itemWidth;
+            }, 100);
         });
 
-        const speed = () => (itemWidth / duration) || 50; // px/sec
+        const speed = () => itemWidth / duration;
         let lastTime = performance.now();
 
         const tick = (now) => {
             const delta = (now - lastTime) / 1000;
             lastTime = now;
-            offset -= speed() * delta;
-            if (-offset >= itemWidth) {
-                offset += itemWidth;
+
+            position -= speed() * delta;
+
+            while (position <= -itemWidth) {
+                position += itemWidth;
             }
-            track.style.transform = `translate3d(${offset}px, 0, 0)`;
+
+            track.style.transform = `translate3d(${position}px, 0, 0)`;
             requestAnimationFrame(tick);
         };
 
