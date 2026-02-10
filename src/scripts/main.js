@@ -1147,36 +1147,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initStatsAnimation();
 
-    // ==========================================================================
-    // STATISTICS SECTION ANIMATION - END
-    // ==========================================================================
 
-    // ==========================================================================
-    // TESTIMONIALS SLIDER
-    // ==========================================================================
-
-    // Sophisticated Custom Testimonials Slider with GSAP Animations
+    //  Custom Testimonials Slider with GSAP Animations
     (function initTestimonialsSlider() {
         // =====================
-        // TESTIMONIAL DATA
+        // LOAD TESTIMONIAL DATA FROM HTML
         // =====================
-        const testimonials = [
-            {
-                image: "assets/images/testimonial-1.jpg",
-                quote: `"St Patrick's has given me confidence I never knew I had. My teachers push me, my mates back me and every day I feel like I am becoming a better version of myself."`,
-                name: "Liam Dossi, Year 10 Student"
-            },
-            {
-                image: "assets/images/about-image.jpg",
-                quote: `"The support I've received at SPC has shaped me in ways I didn't expect. The teachers here don't just teach — they genuinely care about who you become."`,
-                name: "Michael Chen, Year 11 Student"
-            },
-            {
-                image: "assets/images/parents-community-bg.jpg",
-                quote: `"Watching our son thrive at St Patrick's has been remarkable. The school strikes the perfect balance between academic excellence and character development."`,
-                name: "Catherine Walsh, Parent"
-            }
-        ];
+        const testimonialsDataContainer = document.querySelector('.testimonials-data');
+        if (!testimonialsDataContainer) {
+            console.warn('Testimonials data container not found');
+            return;
+        }
+
+        const testimonialItems = testimonialsDataContainer.querySelectorAll('.testimonial-item');
+        if (!testimonialItems.length) {
+            console.warn('No testimonial items found');
+            return;
+        }
+
+        // Build testimonials array from HTML
+        const testimonials = Array.from(testimonialItems).map(item => {
+            const image = item.getAttribute('data-image');
+            const quoteEl = item.querySelector('.testimonial-quote');
+            const nameEl = item.querySelector('.testimonial-name');
+
+            return {
+                image: image || '',
+                quote: quoteEl ? quoteEl.textContent.trim() : '',
+                name: nameEl ? nameEl.textContent.trim() : ''
+            };
+        });
 
         // =====================
         // STATE
@@ -1186,6 +1186,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let activeContentTL = null;
         let activeExitTL = null;
         const totalSlides = testimonials.length;
+        const preloadedImages = new Map(); // Store preloaded images
 
         const imageWrapper = document.getElementById('testimonialsImageWrapper');
         const contentWrapper = document.getElementById('testimonialsContentWrapper');
@@ -1199,6 +1200,31 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // =====================
+        // PRELOAD IMAGES
+        // =====================
+        function preloadImage(src) {
+            return new Promise((resolve, reject) => {
+                if (preloadedImages.has(src)) {
+                    resolve(preloadedImages.get(src));
+                    return;
+                }
+                const img = new Image();
+                img.onload = () => {
+                    preloadedImages.set(src, img);
+                    resolve(img);
+                };
+                img.onerror = reject;
+                img.src = src;
+            });
+        }
+
+        // Preload all images on init
+        function preloadAllImages() {
+            const promises = testimonials.map(t => preloadImage(t.image));
+            Promise.all(promises).catch(err => console.error('Image preload error:', err));
+        }
+
+        // =====================
         // CREATE IMAGE SLIDE
         // =====================
         function createImageSlide(index, isInitial) {
@@ -1209,8 +1235,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const img = document.createElement('img');
             img.className = 'testimonials-img';
-            img.src = data.image;
+
+            // Use preloaded image if available
+            if (preloadedImages.has(data.image)) {
+                img.src = preloadedImages.get(data.image).src;
+            } else {
+                img.src = data.image;
+                preloadImage(data.image).catch(err => console.error('Image load error:', err));
+            }
+
             img.alt = data.name;
+            img.style.opacity = '1';
+            img.style.display = 'block';
+
             slideDiv.appendChild(img);
             imageWrapper.appendChild(slideDiv);
 
@@ -1251,11 +1288,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     { opacity: 0, y: 40 },
                     { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
                 )
-                .fromTo(attrP,
-                    { opacity: 0, y: 20 },
-                    { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-                    '-=0.4'
-                );
+                    .fromTo(attrP,
+                        { opacity: 0, y: 20 },
+                        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+                        '-=0.4'
+                    );
             }
 
             return contentDiv;
@@ -1286,13 +1323,30 @@ document.addEventListener('DOMContentLoaded', function () {
             gsap.set(newImg, { scale: 1.3, x: parallaxFrom });
 
             const oldImages = imageWrapper.querySelectorAll(`.testimonials-image[data-index="${oldIndex}"]`);
+            let animationCompleted = 0;
+            const totalOldImages = oldImages.length;
+
             oldImages.forEach(el => {
                 gsap.set(el, { zIndex: 1 });
                 gsap.to(el.querySelector('.testimonials-img'), {
                     x: oldParallaxTo, scale: 1.1, duration: 1.2, ease: 'power3.inOut'
                 });
                 gsap.to(el, {
-                    clipPath: oldClipTo, duration: 1.2, ease: 'power3.inOut', delay: 0.05
+                    clipPath: oldClipTo,
+                    duration: 1.2,
+                    ease: 'power3.inOut',
+                    delay: 0.05,
+                    onComplete: () => {
+                        animationCompleted++;
+                        // Only remove after all animations complete and new image exists
+                        if (animationCompleted === totalOldImages) {
+                            const newImageExists = imageWrapper.querySelector(`.testimonials-image[data-index="${currentIndex}"]`);
+                            if (newImageExists) {
+                                const stale = imageWrapper.querySelectorAll(`.testimonials-image[data-index="${oldIndex}"]`);
+                                stale.forEach(el => el.remove());
+                            }
+                        }
+                    }
                 });
             });
 
@@ -1302,11 +1356,6 @@ document.addEventListener('DOMContentLoaded', function () {
             gsap.to(newImg, {
                 scale: 1, x: 0, duration: 1.4, ease: 'power3.out'
             });
-
-            setTimeout(() => {
-                const stale = imageWrapper.querySelectorAll(`.testimonials-image[data-index="${oldIndex}"]`);
-                stale.forEach(el => el.remove());
-            }, 1500);
 
             // ── CONTENT TRANSITION ──
             const oldContent = contentWrapper.querySelector(`.testimonials-slide-content[data-index="${oldIndex}"]`);
@@ -1351,8 +1400,11 @@ document.addEventListener('DOMContentLoaded', function () {
             activeContentTL = gsap.timeline({
                 delay: 0.5,
                 onComplete: () => {
-                    isAnimating = false;
-                    activeContentTL = null;
+                    // Add small buffer to ensure all animations complete
+                    setTimeout(() => {
+                        isAnimating = false;
+                        activeContentTL = null;
+                    }, 100);
                 }
             });
 
@@ -1407,6 +1459,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // =====================
         // INIT
         // =====================
+        // Preload all images first
+        preloadAllImages();
+
+        // Create initial slides
         createImageSlide(0, true);
         createContentSlide(0, true);
     })();
