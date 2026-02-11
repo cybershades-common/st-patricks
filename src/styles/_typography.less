@@ -1,91 +1,11 @@
-// Typography
+// ==========================================================================
+// GLOBAL TYPOGRAPHY
+// ==========================================================================
 // Base typography for core HTML tags - these styles apply globally
-// Sections can override specific properties (like color) as needed
+// Sections can override specific properties (like color, size) as needed
+// This ensures Wagtail CMS content looks good without requiring classes
 
-// Headings
-h1 {
-  font-family: var(--font-family-helvetica-neue);
-  font-size: var(--font-size-h1);
-  font-weight: var(--font-weight-light);
-  line-height: var(--line-height-h1);
-  letter-spacing: var(--letter-spacing-h1);
-  color: var(--basic-black);
-  margin: 0;
-}
-
-h2 {
-  font-family: var(--font-family-helvetica-neue);
-  font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-light);
-  line-height: var(--line-height-h2);
-  letter-spacing: var(--letter-spacing-h2);
-  color: var(--basic-black);
-  margin: 0;
-}
-
-h3 {
-  font-family: var(--font-family-helvetica-neue);
-  font-size: var(--font-size-lead); // 1.875rem (30px)
-  font-weight: var(--font-weight-light);
-  line-height: 1.2;
-  letter-spacing: -0.03rem;
-  color: var(--basic-black);
-  margin: 0;
-}
-
-h4 {
-  font-family: var(--font-family-helvetica-neue);
-  font-size: var(--font-size-h4);
-  font-weight: var(--font-weight-light);
-  line-height: var(--line-height-h4);
-  letter-spacing: 0;
-  color: var(--basic-black);
-  margin: 0;
-}
-
-h5 {
-  font-family: var(--font-family-helvetica-neue);
-  font-size: var(--font-size-b1); // 1.25rem (20px)
-  font-weight: var(--font-weight-regular);
-  line-height: 1.3;
-  letter-spacing: 0;
-  color: var(--basic-black);
-  margin: 0;
-}
-
-h6 {
-  font-family: var(--font-family-helvetica-neue);
-  font-size: var(--font-size-b2); // 0.9375rem (15px)
-  font-weight: var(--font-weight-regular);
-  line-height: 1.3;
-  letter-spacing: 0;
-  color: var(--basic-black);
-  margin: 0;
-}
-
-// Paragraph
-p {
-  font-family: var(--font-family-helvetica-neue);
-  font-size: var(--font-size-b1);
-  font-weight: var(--font-weight-light);
-  line-height: var(--line-height-b1);
-  letter-spacing: 0;
-  color: var(--basic-black);
-  margin: 0;
-}
-
-// Small text (labels, captions, secondary text)
-small {
-  font-family: var(--font-family-helvetica-neue);
-  font-size: var(--font-size-b2);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-b2);
-  letter-spacing: 0.046875rem;
-  color: var(--basic-black);
-  display: inline;
-}
-
-// Body
+// Body - Foundation for all text
 body {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-b2);
@@ -101,7 +21,88 @@ body {
   overflow-x: hidden;
 }
 
-// Additional common elements
+// ==========================================================================
+// HEADINGS
+// ==========================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-helvetica-neue);
+  font-weight: var(--font-weight-light);
+  color: var(--basic-black);
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  letter-spacing: var(--letter-spacing-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  letter-spacing: var(--letter-spacing-h2);
+}
+
+h3 {
+  font-size: var(--font-size-lead); // 1.875rem (30px)
+  line-height: 1.2;
+  letter-spacing: -0.03rem;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  letter-spacing: 0;
+}
+
+h5 {
+  font-size: var(--font-size-b1); // 1.25rem (20px)
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+h6 {
+  font-size: var(--font-size-b2); // 0.9375rem (15px)
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+// ==========================================================================
+// PARAGRAPH & TEXT
+// ==========================================================================
+
+p {
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b1);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-b1);
+  letter-spacing: 0;
+  color: var(--basic-black);
+  margin: 0;
+
+  // Paragraphs after paragraphs get spacing
+  & + p {
+    margin-top: 1rem;
+  }
+}
+
+// Small text (labels, captions, dates, secondary text)
+small {
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b2);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-b2);
+  letter-spacing: 0.046875rem;
+  color: var(--basic-black);
+  display: inline;
+}
+
+// Emphasis and strong
 strong, b {
   font-weight: var(--font-weight-regular);
 }
@@ -110,7 +111,137 @@ em, i {
   font-style: italic;
 }
 
+// ==========================================================================
+// LISTS
+// ==========================================================================
+
+ul, ol {
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-b1);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-b1);
+  color: var(--basic-black);
+  margin: 0;
+  padding-left: 1.5rem;
+
+  li {
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+// Nested lists
+ul ul, ol ul {
+  margin-top: 0.5rem;
+  list-style-type: circle;
+}
+
+ol ol, ul ol {
+  margin-top: 0.5rem;
+  list-style-type: lower-alpha;
+}
+
+// ==========================================================================
+// BLOCKQUOTE
+// ==========================================================================
+
+blockquote {
+  font-family: var(--font-family-helvetica-neue);
+  font-size: var(--font-size-lead);
+  font-weight: var(--font-weight-light);
+  line-height: 1.4;
+  color: var(--basic-black);
+  margin: 2rem 0;
+  padding-left: 2rem;
+  border-left: 3px solid var(--primary-blue);
+  font-style: italic;
+
+  p {
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
+
+// ==========================================================================
+// LINKS
+// ==========================================================================
+
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--primary-blue);
+  }
+}
+
+// ==========================================================================
+// HORIZONTAL RULE
+// ==========================================================================
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+// ==========================================================================
+// RESPONSIVE TYPOGRAPHY
+// ==========================================================================
+
+// Tablet (991px and below)
+@media (max-width: 991px) {
+  h1 {
+    font-size: calc(var(--font-size-h1) * 0.7); // Scale down h1
+  }
+
+  h2 {
+    font-size: calc(var(--font-size-h2) * 0.8); // Scale down h2
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+}
+
+// Mobile (767px and below)
+@media (max-width: 767px) {
+  h1 {
+    font-size: calc(var(--font-size-h1) * 0.5); // Further scale down
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+
+  p, ul, ol {
+    font-size: var(--font-size-b2); // Slightly smaller on mobile
+  }
+
+  blockquote {
+    font-size: 1.25rem;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+  }
 }
