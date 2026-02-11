@@ -161,19 +161,52 @@ class GSAPAnimations {
       if (section.hasAttribute('data-gsap-children-initialized')) return;
       section.setAttribute('data-gsap-children-initialized', 'true');
 
-      // Get config based on screen size
-      const mobileConfigAttr = section.getAttribute('data-gsap-children-mobile');
+      // Get configs
       const desktopConfigAttr = section.getAttribute('data-gsap-children');
-      const configAttr = (isMobile && mobileConfigAttr) ? mobileConfigAttr : desktopConfigAttr;
+      const mobileConfigAttr = section.getAttribute('data-gsap-children-mobile');
 
-      if (!configAttr) return;
+      if (!desktopConfigAttr) return;
 
-      let config;
+      let desktopConfig, mobileConfig;
       try {
-        config = JSON.parse(configAttr);
+        desktopConfig = JSON.parse(desktopConfigAttr);
+        if (mobileConfigAttr) {
+          mobileConfig = JSON.parse(mobileConfigAttr);
+        }
       } catch (err) {
         console.error('[GSAPAnimations] Invalid JSON in data-gsap-children:', err);
         return;
+      }
+
+      // Merge mobile config over desktop config
+      let config = desktopConfig;
+      if (isMobile && mobileConfig) {
+        config = {...desktopConfig};
+        Object.entries(mobileConfig).forEach(([selector, mobileAnim]) => {
+          const desktopAnim = config[selector];
+
+          if (desktopAnim) {
+            // If both are strings, use mobile
+            if (typeof desktopAnim === 'string' && typeof mobileAnim === 'string') {
+              config[selector] = mobileAnim;
+            }
+            // If desktop is string but mobile is object, convert desktop to object and merge
+            else if (typeof desktopAnim === 'string' && typeof mobileAnim === 'object') {
+              config[selector] = { type: desktopAnim, ...mobileAnim };
+            }
+            // If both are objects, merge mobile over desktop
+            else if (typeof desktopAnim === 'object' && typeof mobileAnim === 'object') {
+              config[selector] = { ...desktopAnim, ...mobileAnim };
+            }
+            // If desktop is object but mobile is string, use mobile string
+            else {
+              config[selector] = mobileAnim;
+            }
+          } else {
+            // Mobile has a selector that desktop doesn't have
+            config[selector] = mobileAnim;
+          }
+        });
       }
 
       // Get trigger start (check mobile-specific first)
