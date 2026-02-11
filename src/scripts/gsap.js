@@ -771,7 +771,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function initAboutReveal() {
-        const aboutHeading = document.querySelector('.about-heading');
+        const aboutHeading = document.querySelector('.about-section h2');
         if (!aboutHeading) {
             return;
         }
@@ -782,10 +782,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const aboutParagraphs = document.querySelectorAll('.about-text p');
         aboutParagraphs.forEach(p => wrapSentences(p));
 
-        gsap.set('.about-heading .word, .about-heading .underline', { opacity: 0 });
+        gsap.set('.about-section h2 .word, .about-section h2 .underline', { opacity: 0 });
         gsap.set('.about-text .sentence', { opacity: 0 });
 
-        const headingPieces = gsap.utils.toArray('.about-heading .word, .about-heading .underline');
+        const headingPieces = gsap.utils.toArray('.about-section h2 .word, .about-section h2 .underline');
 
         const isMobile = window.innerWidth <= 991;
         const aboutTl = gsap.timeline({

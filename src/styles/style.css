@@ -1348,43 +1348,32 @@ hr {
 .about-section {
   padding-top: 2.1875rem;
   padding-bottom: 2rem;
+  background-color: var(--primary-gold-4);
   position: relative;
   z-index: 0;
   overflow: hidden;
-  background-color: var(--primary-gold-4);
 }
 .about-section .container-fluid {
   position: relative;
 }
-.about-heading {
-  font-family: var(--font-family-helvetica-neue);
+.about-section h2 {
   font-size: 3.75rem;
-  font-weight: var(--font-weight-light);
   line-height: 1.05;
   letter-spacing: -0.0375rem;
   color: var(--primary-blue);
-  margin: 0;
-  padding: 0;
 }
-.about-heading .word {
+.about-section h2 .word {
   display: inline;
   text-decoration: inherit;
 }
-.about-heading .underline {
-  text-decoration: underline;
-  text-decoration-style: solid;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.08em;
-  text-decoration-skip-ink: none;
-  display: inline;
-}
-.about-heading .underline {
+.about-section h2 .underline {
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-skip-ink: auto;
   text-decoration-thickness: 3px;
   text-underline-offset: auto;
   text-underline-position: from-font;
+  display: inline;
 }
 .about-content-row {
   margin-top: 12.5rem;
@@ -1398,13 +1387,9 @@ hr {
   margin-bottom: 1.1875rem;
 }
 .about-text p {
-  font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-b2);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-b2);
-  letter-spacing: 0;
-  color: var(--basic-black);
-  margin: 0;
 }
 .about-text .sentence {
   display: inline;
@@ -1422,7 +1407,7 @@ hr {
   object-fit: cover;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
-  .about-heading {
+  .about-section h2 {
     font-size: 3rem;
   }
 }
@@ -1430,13 +1415,12 @@ hr {
   .about-section {
     padding-top: 1.25rem;
     padding-bottom: 1.875rem;
-    overflow: hidden;
   }
   .about-section .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
-  .about-heading {
+  .about-section h2 {
     font-size: 1.875rem;
     letter-spacing: -0.01875rem;
     margin-bottom: 1.875rem;
@@ -1455,12 +1439,11 @@ hr {
     gap: 0.625rem;
   }
   .about-image {
-    padding-top: 0;
     height: 25rem;
   }
 }
 @media (max-width: 767px) {
-  .about-heading {
+  .about-section h2 {
     font-size: 1.5625rem;
   }
   .about-image {
