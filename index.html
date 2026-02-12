@@ -308,22 +308,25 @@
             <div class="academics-gradient position-absolute"></div>
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-12 academics-top">
+                    <div class="col-12 academics-top" data-gsap-children='{
+                        "h2":{"type":"fade-up"},
+                        "p":{"type":"fade-up"},
+                        "button":{"type":"zoom-in", "stagger":"0.5"}
+                    }'>
                         <div class="row  align-items-start">
                             <div class="col-12 col-xl-4 col-lg-5 col-md-5 academics-heading-col">
-                                <h2 data-gsap="fade-up" class="academics-heading">Academics <br>and Learning</h2>
+                                <h2>Academics <br>and Learning</h2>
                             </div>
 
                             <div
                                 class="col-12 col-xl-5 col-lg-6 col-md-6 offset-md-1 offset-xl-2 academics-content-col">
-                                <p data-gsap="fade-up" class="academics-text">At SPC, learning is more than grades: it's
+                                <p>At SPC, learning is more than grades: it's
                                     about growth. We invest in quality teaching, a supportive wellbeing framework and
                                     learning pathways tailored to each student's strengths. From Years 5 through 12, we
                                     challenge our students to pursue academic excellence while developing character and
                                     leadership.</p>
-                                <div data-gsap="zoom-in" data-gsap-stagger="0.5"
-                                    class="academics-buttons d-flex align-items-center">
-                                    <button class="btn-rounded-large-outline">Learning at St Patrick’s</button>
+                                <div class="academics-buttons d-flex align-items-center">
+                                    <button class="btn-rounded-large-outline">Learning at St Patrick's</button>
                                     <button class="btn-rounded-large-no-border">Student Wellbeing <svg width="12"
                                             height="12" viewBox="0 0 12 12" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -336,26 +339,28 @@
                         </div>
                     </div>
                     <div class="col-12 academics-cards">
-                        <div class="row ">
+                        <div class="row " data-gsap-children='{
+                            "img":{"type":"image-fade-in", "start":"top 60%"},
+                            "h4":{"type":"fade-up", "start":"top 90%"}
+                        }' data-gsap-children-mobile='{
+                            "img":{"start":"top 80%"},
+                            "h4":{"start":"top 95%"}
+                        }'>
                             <div class="col-12 col-md-6 academics-card">
                                 <div class="academics-card-image">
-                                    <img data-gsap="image-fade-in" data-gsap-start="top 60%"
-                                        data-gsap-start-mobile="top 80%" src="assets/images/Entry Point Card-1.jpg"
+                                    <img src="assets/images/Entry Point Card-1.jpg"
                                         alt="Middle School" class="w-100 h-100" loading="eager" decoding="async">
                                 </div>
-                                <h4 data-gsap="fade-up" data-gsap-start="top 90%" data-gsap-start-mobile="top 95%"
-                                    class="academics-card-title">Middle
+                                <h4>Middle
                                     School (Years 5 to 8)</h4>
                             </div>
                             <div class="col-12 col-md-6 academics-card">
                                 <div class="academics-card-image">
-                                    <img data-gsap="image-fade-in" data-gsap-start="top 60%"
-                                        data-gsap-start-mobile="top 70%" data-gsap-delay="0.2"
+                                    <img data-gsap-delay="0.2"
                                         src="assets/images/Entry Point Card.jpg" alt="Senior School" class="w-100 h-100"
                                         loading="eager" decoding="async">
                                 </div>
-                                <h4 data-gsap="fade-up" data-gsap-start="top 90%" data-gsap-start-mobile="top 95%"
-                                    class="academics-card-title">Senior
+                                <h4>Senior
                                     School (Years 9 to 12)</h4>
                             </div>
                         </div>
