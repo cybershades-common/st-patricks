@@ -1102,11 +1102,11 @@ hr {
   }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
-  html body .header .mega-menu {
-    max-height: 100vh;
-  }
   html body .header .header-row .right-block .dropdown-wrapper.hide-header-items.dropdown {
     display: none !important;
+  }
+  html body .mega-menu {
+    max-height: 100vh;
   }
 }
 .hero {
