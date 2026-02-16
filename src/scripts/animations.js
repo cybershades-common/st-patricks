@@ -691,16 +691,24 @@ class GSAPAnimations {
     console.log('[Lines Animation] skipScrollTrigger:', skipScrollTrigger, 'immediate:', cfg.immediate);
 
     // Make parent element visible (in case CSS hides it)
-    gsap.set(el, { autoAlpha: 1 });
+    gsap.set(el, { autoAlpha: 1, transition: 'none' });
 
-    gsap.set(lines, { y: 30, autoAlpha: 0, force3D: true });
+    gsap.set(lines, { y: 30, autoAlpha: 0, force3D: true, transition: 'none' });
 
     const animConfig = {
-      y: 0, autoAlpha: 1, force3D: true,
+      y: 0,
+      autoAlpha: 1,
       duration: cfg.duration,
       ease:     cfg.ease || this.defaults.ease.fade,
       stagger:  cfg.stagger || 0.1,
-      delay:    cfg.delay
+      delay:    cfg.delay,
+      force3D:  true,
+      onComplete: () => {
+        // Clear GSAP properties to prevent jerkiness
+        lines.forEach(line => {
+          gsap.set(line, { clearProps: 'transform,transition' });
+        });
+      }
     };
 
     // Immediate or hero elements: animate on page load. Others: use ScrollTrigger
