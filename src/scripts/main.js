@@ -991,7 +991,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create master timeline
         const headerTimeline = gsap.timeline({
-            delay: 0.1 // Start slightly before hero animation
+            delay: 1.8 // Start after all hero animations complete
         });
 
         // Set initial states - slide from top for all items at once
