@@ -25,63 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
         window.CSS.supports('scrollbar-gutter: stable');
     const usePaddingCompensation = !supportsStableScrollbarGutter;
 
-    const menuConfig = {
-        home: {
-            image: 'assets/images/hero-image.jpg',
-            subItems: []
-        },
-        about: {
-            image: 'assets/icons/menu-image.jpg',
-            subItems: [
-                "Principal's Welcome",
-                "Captain's Welcome",
-                "History",
-                "Building Our Future",
-                "Mission and Strategic Plan",
-                "Annual Reports",
-                "Ideal Graduate",
-                "Leadership Team",
-                "Governance",
-                "Policies and Forms"
-            ]
-        },
-        identity: {
-            image: 'assets/images/about-image.jpg',
-            subItems: [
-                'Mission and Values',
-                'Catholic Tradition',
-                'Edmund Rice Heritage',
-                'Student Wellbeing',
-                'Diversity and Inclusion'
-            ]
-        },
-        learning: {
-            image: 'assets/images/news-1.jpg',
-            subItems: [
-                'Curriculum Overview',
-                'Learning Support',
-                'Technology in Learning',
-                'Assessment and Reporting',
-                'Library and Resources'
-            ]
-        },
-        cocurricular: {
-            image: 'assets/images/cocurricular-bg.jpg',
-            subItems: []
-        },
-        community: {
-            image: 'assets/images/parents-community-bg.jpg',
-            subItems: []
-        },
-        enrolment: {
-            image: 'assets/images/strategic-bg-1.jpg',
-            subItems: []
-        }
-    };
+    const menuSubGroups = menuSubItemsContainer
+        ? Array.from(menuSubItemsContainer.querySelectorAll('.menu-sub-items-group'))
+        : [];
+    const menuSubGroupMap = new Map(menuSubGroups.map(group => [group.dataset.menu, group]));
 
     const menuOrder = Array.from(menuMainItems).map(item => item.dataset.menu || '');
     let currentMenuKey = null;
     let isMenuImageAnimating = false;
+    let pendingMenuImageSrc = null;
+    let isSubMenuAnimating = false;
+    let pendingMenuKey = null;
 
     function getMenuDirection(nextKey) {
         const currentIndex = menuOrder.indexOf(currentMenuKey);
@@ -138,13 +92,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (isMenuImageAnimating) {
-            const slides = menuImageWrapper.querySelectorAll('.menu-image-slide');
-            gsap.killTweensOf(slides);
-            gsap.killTweensOf(menuImageWrapper.querySelectorAll('.menu-image'));
-            // Keep the active slide in place to avoid blank gaps
-            slides.forEach((slide) => {
-                if (!slide.classList.contains('is-active')) slide.remove();
-            });
+            pendingMenuImageSrc = src;
+            return;
         }
         isMenuImageAnimating = true;
 
@@ -197,40 +146,45 @@ document.addEventListener('DOMContentLoaded', function () {
                 activeSlide.remove();
                 newSlide.classList.add('is-active');
                 isMenuImageAnimating = false;
+                if (pendingMenuImageSrc && pendingMenuImageSrc !== src) {
+                    const nextSrc = pendingMenuImageSrc;
+                    pendingMenuImageSrc = null;
+                    setMenuImage(nextSrc, false, directionOverride);
+                } else {
+                    pendingMenuImageSrc = null;
+                }
             }
         });
     }
 
-    function renderSubMenu(items) {
+    function setActiveSubGroup(nextKey, direction, instant) {
         if (!menuSubItemsContainer) return;
-
-        const backBtn = menuSubItemsContainer.querySelector('.menu-sub-back');
-        menuSubItemsContainer.innerHTML = '';
-        if (backBtn) {
-            menuSubItemsContainer.appendChild(backBtn);
+        const nextGroup = menuSubGroupMap.get(nextKey);
+        if (!nextGroup) {
+            menuSubGroups.forEach(group => group.classList.remove('is-active'));
+            return;
         }
 
-        items.forEach((label, index) => {
-            const link = document.createElement('a');
-            link.href = '#';
-            link.className = 'menu-sub-item' + (index === 0 ? ' active' : '');
-            link.textContent = label;
-            menuSubItemsContainer.appendChild(link);
-        });
-    }
+        const currentGroup = menuSubItemsContainer.querySelector('.menu-sub-items-group.is-active');
+        if (currentGroup === nextGroup && !instant) return;
 
-    function animateSubMenuChange(items, direction) {
-        if (!menuSubItemsContainer) return;
-
-        const currentItems = Array.from(menuSubItemsContainer.querySelectorAll('.menu-sub-item'));
         const exitX = direction === 1 ? -20 : 20;
         const enterX = direction === 1 ? 20 : -20;
 
-        if (!currentItems.length) {
-            renderSubMenu(items);
-            const newItems = Array.from(menuSubItemsContainer.querySelectorAll('.menu-sub-item'));
-            gsap.set(newItems, { opacity: 0, x: enterX, force3D: true });
-            gsap.to(newItems, {
+        if (instant) {
+            menuSubGroups.forEach(group => group.classList.remove('is-active'));
+            nextGroup.classList.add('is-active');
+            const items = Array.from(nextGroup.querySelectorAll('.menu-sub-item'));
+            gsap.set(items, { opacity: 1, x: 0, clearProps: 'transform' });
+            return;
+        }
+
+        if (!currentGroup) {
+            menuSubGroups.forEach(group => group.classList.remove('is-active'));
+            nextGroup.classList.add('is-active');
+            const items = Array.from(nextGroup.querySelectorAll('.menu-sub-item'));
+            gsap.set(items, { opacity: 0, x: enterX, force3D: true });
+            gsap.to(items, {
                 opacity: 1,
                 x: 0,
                 duration: 0.35,
@@ -241,19 +195,38 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        const currentItems = Array.from(currentGroup.querySelectorAll('.menu-sub-item'));
         gsap.killTweensOf(currentItems);
+
+        if (isSubMenuAnimating) {
+            pendingMenuKey = nextKey;
+            return;
+        }
+        isSubMenuAnimating = true;
+
         gsap.timeline({
             onComplete: () => {
-                renderSubMenu(items);
-                const newItems = Array.from(menuSubItemsContainer.querySelectorAll('.menu-sub-item'));
-                gsap.set(newItems, { opacity: 0, x: enterX, force3D: true });
-                gsap.to(newItems, {
+                currentGroup.classList.remove('is-active');
+                nextGroup.classList.add('is-active');
+                const nextItems = Array.from(nextGroup.querySelectorAll('.menu-sub-item'));
+                gsap.set(nextItems, { opacity: 0, x: enterX, force3D: true });
+                gsap.to(nextItems, {
                     opacity: 1,
                     x: 0,
                     duration: 0.35,
                     ease: 'power2.out',
                     stagger: 0.05,
-                    force3D: true
+                    force3D: true,
+                    onComplete: () => {
+                        isSubMenuAnimating = false;
+                        if (pendingMenuKey && pendingMenuKey !== nextKey) {
+                            const nextPending = pendingMenuKey;
+                            pendingMenuKey = null;
+                            updateMenuForKey(nextPending, false);
+                        } else {
+                            pendingMenuKey = null;
+                        }
+                    }
                 });
             }
         }).to(currentItems, {
@@ -267,21 +240,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateMenuForKey(nextKey, instant) {
-        if (!nextKey || !menuConfig[nextKey]) return;
+        if (!nextKey) return;
         if (nextKey === currentMenuKey && !instant) return;
 
+        const activeItem = Array.from(menuMainItems).find(item => item.dataset.menu === nextKey);
+        const imageSrc = activeItem ? activeItem.dataset.image : null;
         const direction = currentMenuKey ? getMenuDirection(nextKey) : 1;
+
+        if (!instant && isSubMenuAnimating) {
+            pendingMenuKey = nextKey;
+            if (imageSrc) {
+                pendingMenuImageSrc = imageSrc;
+            }
+            return;
+        }
         currentMenuKey = nextKey;
 
-        const config = menuConfig[nextKey];
         if (instant) {
-            renderSubMenu(config.subItems);
-            setMenuImage(config.image, true, direction);
+            setActiveSubGroup(nextKey, direction, true);
+            if (imageSrc) {
+                setMenuImage(imageSrc, true, direction);
+            }
             return;
         }
 
-        animateSubMenuChange(config.subItems, direction);
-        setMenuImage(config.image, false, direction);
+        setActiveSubGroup(nextKey, direction, false);
+        if (imageSrc) {
+            setMenuImage(imageSrc, false, direction);
+        }
     }
 
     const initialActiveItem = document.querySelector('.menu-main-item.active');
@@ -317,8 +303,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.style.overflow = 'hidden';
 
         const activeItem = document.querySelector('.menu-main-item.active');
-        const activeKey = activeItem ? activeItem.dataset.menu : 'about';
-        updateMenuForKey(activeKey, true);
+        const activeKey = activeItem ? activeItem.dataset.menu : null;
+        if (activeKey) {
+            updateMenuForKey(activeKey, true);
+        }
 
         if (!isMobile()) {
             btnEnquire.style.display = 'inline-flex';
@@ -552,7 +540,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     backBtn.className = 'menu-sub-back';
                     backBtn.textContent = 'Back';
                     backBtn.addEventListener('click', function () {
-                        const items = menuSubItemsContainer.querySelectorAll('.menu-sub-item');
+                        const activeGroup = menuSubItemsContainer.querySelector('.menu-sub-items-group.is-active');
+                        const items = activeGroup ? activeGroup.querySelectorAll('.menu-sub-item') : [];
                         menuSubItemsContainer.classList.remove('active');
                         gsap.set(items, { opacity: 0, x: -20 });
                     });
@@ -563,7 +552,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 menuSubItemsContainer.classList.add('active');
 
                 // Animate submenu items (stagger like desktop)
-                const items = menuSubItemsContainer.querySelectorAll('.menu-sub-item');
+                const activeGroup = menuSubItemsContainer.querySelector('.menu-sub-items-group.is-active');
+                const items = activeGroup ? activeGroup.querySelectorAll('.menu-sub-item') : [];
                 gsap.killTweensOf(items);
                 gsap.set(items, { opacity: 0, x: -20, force3D: true });
                 gsap.to(items, {
@@ -593,7 +583,7 @@ document.addEventListener('DOMContentLoaded', function () {
         item.addEventListener('mouseenter', function () {
             if (isMobile()) return;
             const nextKey = item.dataset.menu;
-            if (!menuConfig[nextKey]) return;
+            if (!nextKey) return;
             setActiveMenuItem(item);
             updateMenuForKey(nextKey, false);
         });
@@ -601,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function () {
         item.addEventListener('click', function (e) {
             if (isMobile()) return;
             const nextKey = item.dataset.menu;
-            if (!menuConfig[nextKey]) return;
+            if (!nextKey) return;
             e.preventDefault();
             setActiveMenuItem(item);
             updateMenuForKey(nextKey, false);

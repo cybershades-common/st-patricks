@@ -226,6 +226,14 @@
   gap: 0.3125rem;
   padding-top: 1.25rem;
 }
+.menu-sub-items-group {
+  display: none;
+  flex-direction: column;
+  gap: 0.3125rem;
+}
+.menu-sub-items-group.is-active {
+  display: flex;
+}
 .menu-sub-item {
   font-family: var(--font-family-helvetica-neue);
   font-size: 1.25rem;
