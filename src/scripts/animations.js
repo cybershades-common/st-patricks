@@ -678,18 +678,38 @@ class GSAPAnimations {
 
   // Reveals text one rendered line at a time
   linesAnimation(el, cfg) {
+    console.log('[Lines Animation] Element:', el, 'Config:', cfg);
     const lines = this.splitLines(el);
-    if (!lines.length) return;
+    console.log('[Lines Animation] Split into', lines.length, 'lines:', lines);
+
+    if (!lines.length) {
+      console.warn('[Lines Animation] No lines found, animation skipped');
+      return;
+    }
+
+    const skipScrollTrigger = cfg.immediate || this.isHeroElement(el);
+    console.log('[Lines Animation] skipScrollTrigger:', skipScrollTrigger, 'immediate:', cfg.immediate);
+
+    // Make parent element visible (in case CSS hides it)
+    gsap.set(el, { autoAlpha: 1 });
 
     gsap.set(lines, { y: 30, autoAlpha: 0, force3D: true });
-    gsap.to(lines, {
+
+    const animConfig = {
       y: 0, autoAlpha: 1, force3D: true,
       duration: cfg.duration,
       ease:     cfg.ease || this.defaults.ease.fade,
       stagger:  cfg.stagger || 0.1,
-      delay:    cfg.delay,
-      scrollTrigger: this.triggerCfg(el, cfg)
-    });
+      delay:    cfg.delay
+    };
+
+    // Immediate or hero elements: animate on page load. Others: use ScrollTrigger
+    if (!skipScrollTrigger) {
+      animConfig.scrollTrigger = this.triggerCfg(el, cfg);
+    }
+
+    console.log('[Lines Animation] Animating with config:', animConfig);
+    gsap.to(lines, animConfig);
   }
 
   // Line-by-line fade up, scrub-driven, plays once then stays
