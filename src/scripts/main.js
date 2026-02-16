@@ -744,7 +744,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 autoAlpha: 1,
                 y: 0, // Rise up like sunrise
                 scale: 1, // Grow to full size
-                duration: 2.5,
+                duration: 1.2, // Faster for more noticeable entrance
                 ease: 'power2.out',
                 force3D: true
             }, 0.4);
@@ -1013,7 +1013,7 @@ document.addEventListener('DOMContentLoaded', function () {
             autoAlpha: 1,
             y: 0, // Rise to final position
             scale: 1, // Grow to full size
-            duration: 3,
+            duration: 1.5, // Faster for more noticeable entrance
             ease: 'power2.out',
             scrollTrigger: {
                 trigger: footer,
