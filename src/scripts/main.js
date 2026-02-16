@@ -534,9 +534,16 @@ document.addEventListener('DOMContentLoaded', function () {
         menuMainItems.forEach((item) => {
             item.addEventListener('click', function (e) {
                 if (!isMobile()) return;
-                e.preventDefault();
 
                 const nextKey = item.dataset.menu;
+
+                // If Home is clicked, redirect to home page instead of showing submenu
+                if (nextKey === 'home') {
+                    window.location.href = '/';
+                    return;
+                }
+
+                e.preventDefault();
 
                 // Hide ALL submenu items instantly first (clean slate)
                 const allSubItems = menuSubItemsContainer.querySelectorAll('.menu-sub-item');
@@ -559,9 +566,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     gsap.to(items, {
                         opacity: 1,
                         x: 0,
-                        duration: 0.35,
+                        duration: 0.5,        // Slower: 0.35 → 0.5
                         ease: 'power2.out',
-                        stagger: 0.05,
+                        stagger: 0.08,        // Slower stagger: 0.05 → 0.08
+                        delay: 0.4,           // Delay to let overlay slide in first
                         force3D: true
                     });
                 }, 50);
@@ -600,6 +608,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isMobile()) return;
             const nextKey = item.dataset.menu;
             if (!nextKey) return;
+
+            // If Home is clicked, redirect to home page instead of changing menu
+            if (nextKey === 'home') {
+                window.location.href = '/';
+                return;
+            }
+
             e.preventDefault();
             setActiveMenuItem(item);
             updateMenuForKey(nextKey, false);
