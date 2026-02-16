@@ -302,7 +302,13 @@ document.addEventListener('DOMContentLoaded', function () {
         menuText.textContent = 'CLOSE';
         document.body.style.overflow = 'hidden';
 
-        const activeItem = document.querySelector('.menu-main-item.active');
+        let activeItem = document.querySelector('.menu-main-item.active');
+        if (!activeItem || activeItem.dataset.menu === 'home') {
+            activeItem = Array.from(menuMainItems).find(item => item.dataset.menu === 'about') || activeItem;
+            if (activeItem) {
+                setActiveMenuItem(activeItem);
+            }
+        }
         const activeKey = activeItem ? activeItem.dataset.menu : null;
         if (activeKey) {
             updateMenuForKey(activeKey, true);
@@ -802,6 +808,28 @@ document.addEventListener('DOMContentLoaded', function () {
             const toggle = dropdown.querySelector('.dropdown-toggle');
             const menu = dropdown.querySelector('.dropdown-menu');
             if (!toggle || !menu) return;
+
+            const dropdownInstance =
+                window.bootstrap && window.bootstrap.Dropdown
+                    ? window.bootstrap.Dropdown.getOrCreateInstance(toggle, { autoClose: false })
+                    : null;
+
+            // Desktop hover opens dropdown (keeps GSAP animation)
+            dropdown.addEventListener('mouseenter', () => {
+                if (isMobile() || !dropdownInstance) return;
+                dropdownInstance.show();
+            });
+            dropdown.addEventListener('mouseleave', () => {
+                if (isMobile() || !dropdownInstance) return;
+                dropdownInstance.hide();
+            });
+
+            // Prevent click toggle on desktop
+            toggle.addEventListener('click', (e) => {
+                if (!isMobile()) {
+                    e.preventDefault();
+                }
+            });
 
             dropdown.addEventListener('show.bs.dropdown', () => {
                 gsap.killTweensOf(menu);
