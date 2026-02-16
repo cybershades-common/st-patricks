@@ -158,21 +158,34 @@
   right: 0;
   z-index: 998;
   background-color: var(--basic-white);
-  padding-top: 7.5rem;
+  --menu-scroll-offset: 7.5rem;
+  padding-top: 0;
   padding-bottom: var(--spacing-base);
   max-height: 90vh;
-  overflow-y: auto;
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* IE/Edge */
+  overflow: hidden;
   box-shadow: none;
   opacity: 0;
   visibility: hidden;
 }
-.mega-menu::-webkit-scrollbar {
-  display: none;
-  /* Chrome, Safari, Edge */
+.mega-menu .container-fluid {
+  margin-top: var(--menu-scroll-offset);
+  height: calc(90vh - var(--menu-scroll-offset));
+  max-height: calc(90vh - var(--menu-scroll-offset));
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-gold-1) transparent;
+}
+.mega-menu .container-fluid::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.mega-menu .container-fluid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mega-menu .container-fluid::-webkit-scrollbar-thumb {
+  background-color: var(--primary-gold-1);
+  border-radius: 999px;
+  border: 0.125rem solid transparent;
+  background-clip: content-box;
 }
 .mega-menu.active {
   opacity: 1;
@@ -185,7 +198,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.58);
   z-index: 997;
   opacity: 0;
   visibility: hidden;
@@ -194,6 +207,12 @@
 .mega-menu-overlay.active {
   opacity: 1;
   visibility: visible;
+}
+@media (max-width: 991px) {
+  .mega-menu-overlay {
+    height: 100vh;
+    bottom: auto;
+  }
 }
 .mega-menu-inner {
   align-items: start;
@@ -387,6 +406,12 @@
   color: var(--basic-black);
   background-color: transparent;
 }
+.header .dropdown:hover > .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 0;
+}
 .header .hide-header-items {
   display: none;
   opacity: 0;
@@ -484,7 +509,7 @@
     display: none;
   }
   .mega-menu {
-    padding-top: 6.25rem;
+    --menu-scroll-offset: 6.25rem;
   }
   .mega-menu-inner {
     overflow-y: auto;
@@ -513,8 +538,8 @@
     left: 0;
     right: 0;
     bottom: auto;
-    height: 85vh;
-    max-height: 85vh;
+    height: 80vh;
+    max-height: 80vh;
     background: #fff;
     padding: 7.5rem var(--spacing-xs) 1.5rem;
     transform: translateX(-100%);

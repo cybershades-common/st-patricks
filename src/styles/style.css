@@ -426,7 +426,7 @@ hr {
   z-index: 1;
   border-color: var(--primary-blue);
   color: var(--primary-blue);
-  transition: color 0.4s ease;
+  transition: color 0.24s ease;
 }
 .btn-rounded-large-outline::before {
   content: '';
@@ -436,7 +436,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: var(--primary-blue);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }
@@ -529,7 +529,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: var(--primary-blue-tint);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }
@@ -736,7 +736,7 @@ hr {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.58);
   z-index: 997;
   opacity: 0;
   visibility: hidden;
@@ -745,6 +745,12 @@ hr {
 .mega-menu-overlay.active {
   opacity: 1;
   visibility: visible;
+}
+@media (max-width: 991px) {
+  .mega-menu-overlay {
+    height: 100vh;
+    bottom: auto;
+  }
 }
 .mega-menu-inner {
   align-items: start;
@@ -1070,8 +1076,8 @@ hr {
     left: 0;
     right: 0;
     bottom: auto;
-    height: 85vh;
-    max-height: 85vh;
+    height: 80vh;
+    max-height: 80vh;
     background: #fff;
     padding: 7.5rem var(--spacing-xs) 1.5rem;
     transform: translateX(-100%);
@@ -1608,7 +1614,7 @@ hr {
   border-color: var(--basic-white);
   color: var(--basic-white);
   margin-top: 0.625rem;
-  transition: color 0.4s ease;
+  transition: color 0.24s ease;
 }
 .strategic-button::before {
   content: '';
@@ -1618,7 +1624,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: var(--basic-white);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }
@@ -1906,7 +1912,7 @@ hr {
 .cocurricular-left button {
   border-color: var(--basic-white);
   color: var(--basic-white);
-  transition: color 0.4s ease;
+  transition: color 0.24s ease;
 }
 .cocurricular-left button::before {
   content: '';
@@ -1916,7 +1922,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: var(--basic-white);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }
@@ -1938,7 +1944,7 @@ hr {
   border-color: var(--basic-white);
   color: var(--basic-white);
   white-space: nowrap;
-  transition: color 0.4s ease;
+  transition: color 0.24s ease;
 }
 .cocurricular-nav-buttons button::before {
   content: '';
@@ -1948,7 +1954,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: var(--basic-white);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }
@@ -2260,7 +2266,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: var(--basic-white);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }
@@ -2639,7 +2645,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: var(--basic-black);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }
@@ -2936,7 +2942,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.9);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }
@@ -2948,7 +2954,7 @@ hr {
   color: var(--basic-white);
   background-color: transparent;
   margin: 0;
-  transition: color 0.4s ease;
+  transition: color 0.24s ease;
 }
 .cta-button-outline::before {
   content: '';
@@ -2958,7 +2964,7 @@ hr {
   width: 0;
   height: 100%;
   background-color: var(--basic-white);
-  transition: width 0.4s ease;
+  transition: width 0.24s ease;
   z-index: -1;
   border-radius: var(--radius-huge);
 }

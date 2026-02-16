@@ -537,7 +537,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
 
                 const nextKey = item.dataset.menu;
-                updateMenuForKey(nextKey, false);
+
+                // Hide ALL submenu items instantly first (clean slate)
+                const allSubItems = menuSubItemsContainer.querySelectorAll('.menu-sub-item');
+                gsap.killTweensOf(allSubItems);
+                gsap.set(allSubItems, { opacity: 0, force3D: true });
+
+                // Update to new submenu group (instant mode for mobile - no desktop animation)
+                updateMenuForKey(nextKey, true);
+
+                // Show overlay
+                menuSubItemsContainer.classList.add('active');
+
+                // Small delay to ensure DOM is updated
+                setTimeout(() => {
+                    // Animate ONLY the new submenu items in (stagger)
+                    const activeGroup = menuSubItemsContainer.querySelector('.menu-sub-items-group.is-active');
+                    const items = activeGroup ? activeGroup.querySelectorAll('.menu-sub-item') : [];
+                    gsap.killTweensOf(items);
+                    gsap.set(items, { opacity: 0, x: -20, force3D: true });
+                    gsap.to(items, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.35,
+                        ease: 'power2.out',
+                        stagger: 0.05,
+                        force3D: true
+                    });
+                }, 50);
 
                 // Add back button if it doesn't exist
                 let backBtn = menuSubItemsContainer.querySelector('.menu-sub-back');
@@ -553,23 +580,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                     menuSubItemsContainer.insertBefore(backBtn, menuSubItemsContainer.firstChild);
                 }
-
-                // Show overlay
-                menuSubItemsContainer.classList.add('active');
-
-                // Animate submenu items (stagger like desktop)
-                const activeGroup = menuSubItemsContainer.querySelector('.menu-sub-items-group.is-active');
-                const items = activeGroup ? activeGroup.querySelectorAll('.menu-sub-item') : [];
-                gsap.killTweensOf(items);
-                gsap.set(items, { opacity: 0, x: -20, force3D: true });
-                gsap.to(items, {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.35,
-                    ease: 'power2.out',
-                    stagger: 0.05,
-                    force3D: true
-                });
             });
         });
     }
