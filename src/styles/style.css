@@ -459,7 +459,8 @@ hr {
   transition: transform 0.4s ease-in-out;
 }
 .btn-rounded-large-no-border:hover {
-  color: var(--primary-blue-tint);
+  background-color: var(--primary-blue);
+  color: var(--basic-white);
 }
 .btn-rounded-large-no-border:hover svg {
   transform: translateX(4px);
