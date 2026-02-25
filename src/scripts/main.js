@@ -1275,16 +1275,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentTranslate = offset;
             };
 
+            let startY = 0;
+            let dragDirection = null; // 'h' | 'v' | null
             const handleDragStart = (e) => {
                 isDragging = true;
+                dragDirection = null;
                 startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                startY = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
                 localTrack.classList.add('dragging');
                 localTrack.style.transition = 'none';
             };
             const handleDragMove = (e) => {
                 if (!isDragging) return;
-                e.preventDefault();
                 const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                const y = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
+                if (!dragDirection) {
+                    const dx = Math.abs(x - startX);
+                    const dy = Math.abs(y - startY);
+                    if (dx < 5 && dy < 5) return;
+                    dragDirection = dx >= dy ? 'h' : 'v';
+                }
+                if (dragDirection === 'v') {
+                    isDragging = false;
+                    localTrack.classList.remove('dragging');
+                    localTrack.style.transition = '';
+                    return;
+                }
+                e.preventDefault();
                 currentTranslate = prevTranslate + (x - startX);
                 localTrack.style.transform = `translateX(${currentTranslate}px)`;
             };
