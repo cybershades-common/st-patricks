@@ -2032,7 +2032,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!heroGradient || !heroContentWrap || !heroContent) return;
 
         const CONFIG = {
-            followEase: 0.03,
+            followEase: 0.02,
             returnEase: 0.01,
         };
 
