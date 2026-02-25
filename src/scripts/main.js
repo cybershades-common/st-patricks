@@ -2283,12 +2283,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const navBtns = Array.from(section.querySelectorAll('.cocurricular-nav-btn'));
         if (!slides.length) return;
 
-        let currentIndex = 0;
+        let currentIndex = 1;
         let isAnimating = false;
 
-        // Initial state — first slide visible, rest hidden
-        slides.forEach((slide, i) => gsap.set(slide, { autoAlpha: i === 0 ? 1 : 0, zIndex: i === 0 ? 1 : 0 }));
-        bgSlides.forEach((bg, i) => gsap.set(bg, { autoAlpha: i === 0 ? 1 : 0 }));
+        // Initial state — active slide visible, rest hidden
+        slides.forEach((slide, i) => gsap.set(slide, { autoAlpha: i === currentIndex ? 1 : 0, zIndex: i === currentIndex ? 1 : 0 }));
+        bgSlides.forEach((bg, i) => gsap.set(bg, { autoAlpha: i === currentIndex ? 1 : 0 }));
 
         function goToSlide(newIndex) {
             if (isAnimating || newIndex === currentIndex) return;
