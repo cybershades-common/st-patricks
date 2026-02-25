@@ -2228,12 +2228,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const CONFIG = {
-            maxLeft: 700, // Increased for more left-side movement
-            maxUp: 500, // Increased to match diagonal movement better
-            activeRadius: 600, // Larger active area
-            followEase: 0.08,
-            returnEase: 0.03,
+            followEase: 0.02,
+            returnEase: 0.01,
         };
+
+        const computed = window.getComputedStyle(testimonialsGradient);
+        const baseLeft = Number.parseFloat(computed.left) || 0;
+        const baseTop = Number.parseFloat(computed.top) || 0;
+        let halfW = testimonialsGradient.offsetWidth / 2;
+        let halfH = testimonialsGradient.offsetHeight / 2;
 
         let mouseX = null;
         let mouseY = null;
@@ -2241,6 +2244,13 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentY = 0;
         let hasMouseMoved = false;
         let isInActiveArea = false;
+
+        function updateGradientSize() {
+            halfW = testimonialsGradient.offsetWidth / 2;
+            halfH = testimonialsGradient.offsetHeight / 2;
+        }
+
+        window.addEventListener('resize', updateGradientSize);
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
@@ -2257,44 +2267,33 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const testimonialsRect = testimonialsSection.getBoundingClientRect();
-            const contentRect = testimonialsContent.getBoundingClientRect();
 
-            const contentCenterX = contentRect.left + (contentRect.width / 2);
-            const contentCenterY = contentRect.top + (contentRect.height / 2);
-
-            const distanceFromContent = Math.sqrt(
-                Math.pow(mouseX - contentCenterX, 2) +
-                Math.pow(mouseY - contentCenterY, 2)
+            isInActiveArea = (
+                mouseX >= testimonialsRect.left &&
+                mouseX <= testimonialsRect.right &&
+                mouseY >= testimonialsRect.top &&
+                mouseY <= testimonialsRect.bottom
             );
-
-            isInActiveArea = distanceFromContent <= CONFIG.activeRadius;
 
             let targetX = 0;
             let targetY = 0;
 
             if (isInActiveArea) {
-                const deltaX = mouseX - contentCenterX;
-                const deltaY = contentCenterY - mouseY;
+                const targetCenterX = mouseX;
+                const targetTopY = mouseY; // top edge follows cursor
 
-                const moveLeft = Math.max(0, -deltaX);
-                const moveUp = Math.max(0, deltaY);
+                const baseCenterX = testimonialsRect.left + baseLeft + halfW;
+                const baseTopY = testimonialsRect.top + baseTop;
 
-                // Calculate percentages independently for stronger diagonal movement
-                const leftPercent = Math.min(1, moveLeft / CONFIG.activeRadius);
-                const upPercent = Math.min(1, moveUp / CONFIG.activeRadius);
-
-                const offsetX = leftPercent * CONFIG.maxLeft;
-                const offsetY = upPercent * CONFIG.maxUp;
-
-                targetX = -offsetX;
-                targetY = offsetY;
+                targetX = targetCenterX - baseCenterX;
+                targetY = targetTopY - baseTopY;
             }
 
             const currentEase = isInActiveArea ? CONFIG.followEase : CONFIG.returnEase;
             currentX += (targetX - currentX) * currentEase;
             currentY += (targetY - currentY) * currentEase;
 
-            testimonialsGradient.style.transform = `translate(${currentX}px, ${-currentY}px)`;
+            testimonialsGradient.style.transform = `translate(${currentX}px, ${currentY}px)`;
 
             requestAnimationFrame(animate);
         }
