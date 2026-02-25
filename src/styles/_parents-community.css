@@ -21,7 +21,7 @@
   z-index: 2;
 }
 .parents-community-overlay {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%);
   top: 0;
   left: 0;
   z-index: 3;
@@ -40,10 +40,7 @@
   align-items: flex-start;
   max-width: 100%;
 }
-.parents-community-heading {
-  width: 100%;
-}
-.parents-community-heading {
+.parents-community-content h2 {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-h2);
   font-weight: var(--font-weight-light);
@@ -51,8 +48,9 @@
   letter-spacing: -0.0375rem;
   color: var(--basic-white);
   margin: 0;
+  width: 100%;
 }
-.parents-community-text {
+.parents-community-content p {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-b1);
   font-weight: var(--font-weight-regular);
@@ -63,17 +61,17 @@
   width: 33.4375rem;
   max-width: 100%;
 }
-.parents-community-button {
+.parents-community-content button {
   border-color: var(--basic-white);
   color: var(--basic-white);
   margin-top: 0;
 }
-.parents-community-button:hover {
+.parents-community-content button:hover {
   background-color: var(--basic-white);
   color: var(--basic-black);
 }
 @media (min-width: 992px) and (max-width: 1200px) {
-  .parents-community-heading {
+  .parents-community-content h2 {
     font-size: 3rem;
   }
 }
@@ -94,26 +92,26 @@
     min-height: auto;
     width: 100%;
   }
-  .parents-community-heading {
+  .parents-community-content h2 {
     font-size: 2.5rem;
     margin-bottom: var(--spacing-xs);
   }
-  .parents-community-text {
+  .parents-community-content p {
     width: 100%;
     margin-bottom: var(--spacing-xs);
   }
 }
 @media (max-width: 767px) {
-  .parents-community-heading {
-    font-size: 1.875rem;
-  }
-  .parents-community-text {
-    font-size: 1.125rem;
-  }
   .parents-community-content {
     min-height: 44rem;
   }
-  .parents-community-content .parents-community-button {
+  .parents-community-content h2 {
+    font-size: 1.875rem;
+  }
+  .parents-community-content p {
+    font-size: 1.125rem;
+  }
+  .parents-community-content button {
     margin-top: auto;
   }
 }

@@ -1,16 +1,13 @@
-/* Co-Curricular Section */
 .cocurricular-section {
   position: relative;
   min-height: 50.625rem;
   overflow: hidden;
 }
-
 .cocurricular-background {
   top: 0;
   left: 0;
   z-index: 1;
 }
-
 .cocurricular-background img {
   position: absolute;
   top: 0;
@@ -19,15 +16,13 @@
   height: 100%;
   object-fit: cover;
 }
-
 .cocurricular-overlay {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.25);
   top: 0;
   left: 0;
   z-index: 2;
   pointer-events: none;
 }
-
 .cocurricular-section .container-fluid {
   padding-top: 3.125rem;
   padding-bottom: 3.125rem;
@@ -38,12 +33,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
 .cocurricular-section .container-fluid > .row {
   height: 100vh;
   justify-content: space-between;
 }
-
 .cocurricular-content {
   flex: 1;
   display: flex;
@@ -51,70 +44,54 @@
   justify-content: space-between;
   min-height: 100%;
 }
-
 .cocurricular-left {
   padding-top: 1.25rem;
 }
-
-/* Typography - context-specific overrides only */
 .cocurricular-left small {
   color: var(--basic-white);
   text-transform: uppercase;
   margin-bottom: 1.875rem;
   display: block;
 }
-
 .cocurricular-left h2 {
   color: var(--basic-white);
   margin-bottom: 1.875rem;
   max-width: 35rem;
 }
-
 .cocurricular-left p {
   color: rgba(255, 255, 255, 0.85);
   max-width: 34.9375rem;
   margin-bottom: 2.5rem;
 }
-
-/* Buttons */
 .cocurricular-left button {
   border-color: var(--basic-white);
   color: var(--basic-white);
 }
-
 .cocurricular-left button:hover {
   background-color: var(--basic-white);
   color: var(--basic-black);
 }
-
-/* Navigation */
 .cocurricular-nav {
   margin-top: auto;
   padding-top: 3.125rem;
 }
-
 .cocurricular-nav-buttons {
   gap: 1.25rem;
   flex-wrap: wrap;
 }
-
 .cocurricular-nav-buttons button {
   border-color: var(--basic-white);
   color: var(--basic-white);
   white-space: nowrap;
 }
-
 .cocurricular-nav-buttons button:hover {
   background-color: var(--basic-white);
   color: var(--basic-black);
 }
-
 .cocurricular-nav-buttons button.active {
   background-color: var(--basic-white);
   color: var(--basic-black);
 }
-
-/* Responsive Styles */
 @media (max-width: 991px) {
   .cocurricular-section {
     min-height: auto;
@@ -134,7 +111,7 @@
     font-size: 2.5rem;
   }
   .cocurricular-left p {
-    width: 100%;
+    max-width: 100%;
   }
   .cocurricular-nav {
     margin-top: auto;
@@ -144,7 +121,6 @@
     gap: 0.9375rem;
   }
 }
-
 @media (max-width: 767px) {
   .cocurricular-left h2 {
     font-size: 1.875rem;
@@ -159,7 +135,6 @@
     min-height: 50.625rem;
   }
 }
-
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
   html body .cocurricular-section .container-fluid > .row {
     min-height: 100vh;

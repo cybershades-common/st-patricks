@@ -19,49 +19,26 @@
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
 }
 
 .btn-rounded-large-outline {
   .btn-rounded-large();
   border-color: var(--primary-blue);
   color: var(--primary-blue);
-  transition: color 0.24s ease;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: var(--primary-blue);
-    transition: width 0.24s ease;
-    z-index: -1;
-    border-radius: var(--radius-huge);
-  }
 }
 
 .btn-rounded-large-outline:hover {
+  background-color: var(--primary-blue);
   color: var(--basic-white);
-
-  &::before {
-    width: 100%;
-  }
 }
 
 .btn-rounded-large-outline.btn-header {
   border-color: var(--basic-black);
   color: var(--basic-black);
-
-  &::before {
-    background-color: var(--basic-black);
-  }
 }
 
 .btn-rounded-large-outline.btn-header:hover {
+  background-color: var(--basic-black);
   color: var(--basic-white);
 }
 
@@ -69,25 +46,10 @@
   .btn-rounded-large();
   border-color: transparent;
   color: var(--primary-blue);
-  overflow: visible;
-
-  svg,
-  i,
-  .icon,
-  img {
-    transition: transform 0.3s ease;
-  }
 }
 
 .btn-rounded-large-no-border:hover {
   color: var(--primary-blue-tint);
-
-  svg,
-  i,
-  .icon,
-  img {
-    transform: translateX(5px);
-  }
 }
 
 .btn-rounded-large-solid {
@@ -95,23 +57,8 @@
   background-color: var(--primary-blue);
   color: var(--basic-white);
   border-color: var(--primary-blue);
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: var(--primary-blue-tint);
-    transition: width 0.24s ease;
-    z-index: -1;
-    border-radius: var(--radius-huge);
-  }
 }
 
 .btn-rounded-large-solid:hover {
-  &::before {
-    width: 100%;
-  }
+  background-color: var(--primary-blue-tint);
 }

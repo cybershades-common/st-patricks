@@ -26,10 +26,8 @@
   padding-top: 2.0625rem;
   position: relative;
 }
-.strategic-heading {
-  font-family: var(--font-family-helvetica-neue);
+.strategic-section h2 {
   font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-light);
   line-height: 1.05;
   letter-spacing: -0.0375rem;
   color: var(--basic-white);
@@ -89,7 +87,7 @@
     width: 100%;
     margin-bottom: 1.875rem;
   }
-  .strategic-heading {
+  .strategic-section h2 {
     font-size: 2.5rem;
     margin-bottom: 1.25rem;
   }
@@ -112,7 +110,7 @@
   }
 }
 @media (max-width: 767px) {
-  .strategic-heading {
+  .strategic-section h2 {
     font-size: 1.875rem;
   }
 }

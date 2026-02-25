@@ -38,10 +38,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  >.row{
+  > .row {
     height: 100vh;
     justify-content: space-between;
-
   }
 }
 
@@ -80,27 +79,10 @@
   button {
     border-color: var(--basic-white);
     color: var(--basic-white);
-    transition: color 0.24s ease;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background-color: var(--basic-white);
-      transition: width 0.24s ease;
-      z-index: -1;
-      border-radius: var(--radius-huge);
-    }
 
     &:hover {
+      background-color: var(--basic-white);
       color: var(--basic-black);
-
-      &::before {
-        width: 100%;
-      }
     }
   }
 }
@@ -118,36 +100,15 @@
     border-color: var(--basic-white);
     color: var(--basic-white);
     white-space: nowrap;
-    transition: color 0.24s ease;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background-color: var(--basic-white);
-      transition: width 0.24s ease;
-      z-index: -1;
-      border-radius: var(--radius-huge);
-    }
 
     &:hover {
+      background-color: var(--basic-white);
       color: var(--basic-black);
-
-      &::before {
-        width: 100%;
-      }
     }
 
     &.active {
       background-color: var(--basic-white);
       color: var(--basic-black);
-
-      &::before {
-        width: 100%;
-      }
     }
   }
 }
@@ -208,10 +169,10 @@
   }
 }
 
-@media only screen and (min-device-width : 390px) and (max-device-width : 992px) and (orientation : landscape) {
+@media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
   html {
     body {
-      .cocurricular-section .container-fluid>.row {
+      .cocurricular-section .container-fluid > .row {
         min-height: 100vh;
         justify-content: space-between;
         height: auto;

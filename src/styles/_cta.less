@@ -48,14 +48,10 @@
   position: relative;
   z-index: 4;
 
-
   // @media (min-width: 992px) {
   //   max-width: 90rem;
   // }
 }
-
-
-
 
 .cta-heading-wrapper h1 {
   font-family: var(--font-family-helvetica-neue);
@@ -93,25 +89,11 @@
   color: var(--basic-black);
   border-color: var(--basic-white);
   margin: 0;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
-    transition: width 0.24s ease;
-    z-index: -1;
-    border-radius: var(--radius-huge);
-  }
 }
 
 .cta-button-solid:hover {
-  &::before {
-    width: 100%;
-  }
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--basic-black);
 }
 
 .cta-button-outline {
@@ -119,31 +101,14 @@
   color: var(--basic-white);
   background-color: transparent;
   margin: 0;
-  transition: color 0.24s ease;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: var(--basic-white);
-    transition: width 0.24s ease;
-    z-index: -1;
-    border-radius: var(--radius-huge);
-  }
 }
 
 .cta-button-outline:hover {
+  background-color: var(--basic-white);
   color: var(--basic-black);
-
-  &::before {
-    width: 100%;
-  }
 }
 
-@media (min-width:992px) and (max-width:1200px) {
+@media (min-width: 992px) and (max-width: 1200px) {
   .cta-block-wrap {
     .cta-heading-wrapper h1 {
       font-size: 4.5rem;
@@ -153,8 +118,6 @@
 }
 
 @media (max-width: 991px) {
-
-
   .cta-section {
     min-height: auto;
 
@@ -172,7 +135,6 @@
 
   .cta-content {
     min-height: auto;
-
   }
 
   .cta-heading-wrapper {
@@ -212,12 +174,11 @@
   .cta-text-wrapper p {
     font-size: 1.125rem;
   }
-   .cta-section .container-fluid {
+  .cta-section .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-   
   }
-  .cta-section .cta-block-wrap{
-     min-height: 44rem;
+  .cta-section .cta-block-wrap {
+    min-height: 44rem;
   }
 }

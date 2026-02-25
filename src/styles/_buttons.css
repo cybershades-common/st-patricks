@@ -1,0 +1,101 @@
+.btn-rounded-large {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-super-small);
+  padding: var(--spacing-2xs) var(--spacing-half-base);
+  border-radius: var(--radius-huge);
+  font-family: var(--font-family-helvetica-neue);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+}
+.btn-rounded-large-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-super-small);
+  padding: var(--spacing-2xs) var(--spacing-half-base);
+  border-radius: var(--radius-huge);
+  font-family: var(--font-family-helvetica-neue);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+.btn-rounded-large-outline:hover {
+  background-color: var(--primary-blue);
+  color: var(--basic-white);
+}
+.btn-rounded-large-outline.btn-header {
+  border-color: var(--basic-black);
+  color: var(--basic-black);
+}
+.btn-rounded-large-outline.btn-header:hover {
+  background-color: var(--basic-black);
+  color: var(--basic-white);
+}
+.btn-rounded-large-no-border {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-super-small);
+  padding: var(--spacing-2xs) var(--spacing-half-base);
+  border-radius: var(--radius-huge);
+  font-family: var(--font-family-helvetica-neue);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  border-color: transparent;
+  color: var(--primary-blue);
+}
+.btn-rounded-large-no-border:hover {
+  color: var(--primary-blue-tint);
+}
+.btn-rounded-large-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-super-small);
+  padding: var(--spacing-2xs) var(--spacing-half-base);
+  border-radius: var(--radius-huge);
+  font-family: var(--font-family-helvetica-neue);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  background-color: var(--primary-blue);
+  color: var(--basic-white);
+  border-color: var(--primary-blue);
+}
+.btn-rounded-large-solid:hover {
+  background-color: var(--primary-blue-tint);
+}

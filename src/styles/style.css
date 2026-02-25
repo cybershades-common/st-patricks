@@ -399,9 +399,6 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
 }
 .btn-rounded-large-outline {
   display: inline-flex;
@@ -421,39 +418,19 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
   border-color: var(--primary-blue);
   color: var(--primary-blue);
-  transition: color 0.24s ease;
-}
-.btn-rounded-large-outline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: var(--primary-blue);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
 }
 .btn-rounded-large-outline:hover {
+  background-color: var(--primary-blue);
   color: var(--basic-white);
-}
-.btn-rounded-large-outline:hover::before {
-  width: 100%;
 }
 .btn-rounded-large-outline.btn-header {
   border-color: var(--basic-black);
   color: var(--basic-black);
 }
-.btn-rounded-large-outline.btn-header::before {
-  background-color: var(--basic-black);
-}
 .btn-rounded-large-outline.btn-header:hover {
+  background-color: var(--basic-black);
   color: var(--basic-white);
 }
 .btn-rounded-large-no-border {
@@ -474,27 +451,11 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
   border-color: transparent;
   color: var(--primary-blue);
-  overflow: visible;
-}
-.btn-rounded-large-no-border svg,
-.btn-rounded-large-no-border i,
-.btn-rounded-large-no-border .icon,
-.btn-rounded-large-no-border img {
-  transition: transform 0.3s ease;
 }
 .btn-rounded-large-no-border:hover {
   color: var(--primary-blue-tint);
-}
-.btn-rounded-large-no-border:hover svg,
-.btn-rounded-large-no-border:hover i,
-.btn-rounded-large-no-border:hover .icon,
-.btn-rounded-large-no-border:hover img {
-  transform: translateX(5px);
 }
 .btn-rounded-large-solid {
   display: inline-flex;
@@ -514,27 +475,12 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
   background-color: var(--primary-blue);
   color: var(--basic-white);
   border-color: var(--primary-blue);
 }
-.btn-rounded-large-solid::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
+.btn-rounded-large-solid:hover {
   background-color: var(--primary-blue-tint);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
-}
-.btn-rounded-large-solid:hover::before {
-  width: 100%;
 }
 .header {
   position: fixed;
@@ -1614,25 +1560,10 @@ hr {
   border-color: var(--basic-white);
   color: var(--basic-white);
   margin-top: 0.625rem;
-  transition: color 0.24s ease;
-}
-.strategic-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: var(--basic-white);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
 }
 .strategic-button:hover {
+  background-color: var(--basic-white);
   color: var(--basic-black);
-}
-.strategic-button:hover::before {
-  width: 100%;
 }
 .strategic-text-wrapper {
   position: absolute;
@@ -1912,25 +1843,10 @@ hr {
 .cocurricular-left button {
   border-color: var(--basic-white);
   color: var(--basic-white);
-  transition: color 0.24s ease;
-}
-.cocurricular-left button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: var(--basic-white);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
 }
 .cocurricular-left button:hover {
+  background-color: var(--basic-white);
   color: var(--basic-black);
-}
-.cocurricular-left button:hover::before {
-  width: 100%;
 }
 .cocurricular-nav {
   margin-top: auto;
@@ -1944,32 +1860,14 @@ hr {
   border-color: var(--basic-white);
   color: var(--basic-white);
   white-space: nowrap;
-  transition: color 0.24s ease;
-}
-.cocurricular-nav-buttons button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: var(--basic-white);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
 }
 .cocurricular-nav-buttons button:hover {
+  background-color: var(--basic-white);
   color: var(--basic-black);
-}
-.cocurricular-nav-buttons button:hover::before {
-  width: 100%;
 }
 .cocurricular-nav-buttons button.active {
   background-color: var(--basic-white);
   color: var(--basic-black);
-}
-.cocurricular-nav-buttons button.active::before {
-  width: 100%;
 }
 @media (max-width: 991px) {
   .cocurricular-section {
@@ -2256,25 +2154,10 @@ hr {
   border-color: var(--basic-white);
   color: var(--basic-white);
   margin-top: 0;
-  transition: color 0.4s ease;
-}
-.parents-community-content button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: var(--basic-white);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
 }
 .parents-community-content button:hover {
+  background-color: var(--basic-white);
   color: var(--basic-black);
-}
-.parents-community-content button:hover::before {
-  width: 100%;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .parents-community-content h2 {
@@ -2635,19 +2518,6 @@ hr {
   margin: 0;
   border-color: var(--basic-black);
   color: var(--basic-black);
-  transition: color 0.4s ease;
-}
-.latest-news-filter-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: var(--basic-black);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
 }
 .latest-news-filter-btn.latest-news-filter-btn-active {
   background-color: var(--basic-white);
@@ -2656,19 +2526,12 @@ hr {
   border-color: var(--primary-gold);
   color: var(--primary-gold);
 }
-.latest-news-filter-btn.latest-news-filter-btn-gold::before {
-  background-color: var(--primary-gold);
-}
-.latest-news-filter-btn:hover {
-  color: var(--basic-white);
-}
-.latest-news-filter-btn:hover::before {
-  width: 100%;
-}
 .latest-news-filter-btn:hover.latest-news-filter-btn-active {
+  background-color: var(--basic-black);
   color: var(--basic-white);
 }
 .latest-news-filter-btn:hover.latest-news-filter-btn-gold {
+  background-color: var(--primary-gold);
   color: var(--basic-white);
 }
 @media (min-width: 992px) {
@@ -2758,7 +2621,7 @@ hr {
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .latest-news-card-content h3 {
-  color: var(--primary-blue, #10069F);
+  color: var(--primary-blue, #10069f);
   leading-trim: both;
   text-edge: cap;
   font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
@@ -2769,7 +2632,7 @@ hr {
   /* 1.75rem */
 }
 .latest-news-slide.active .latest-news-card-content h3 {
-  color: var(--primary-blue, #10069F);
+  color: var(--primary-blue, #10069f);
   leading-trim: both;
   text-edge: cap;
   font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
@@ -2934,45 +2797,19 @@ hr {
   border-color: var(--basic-white);
   margin: 0;
 }
-.cta-button-solid::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
+.cta-button-solid:hover {
   background-color: rgba(255, 255, 255, 0.9);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
-}
-.cta-button-solid:hover::before {
-  width: 100%;
+  color: var(--basic-black);
 }
 .cta-button-outline {
   border-color: var(--basic-white);
   color: var(--basic-white);
   background-color: transparent;
   margin: 0;
-  transition: color 0.24s ease;
-}
-.cta-button-outline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: var(--basic-white);
-  transition: width 0.24s ease;
-  z-index: -1;
-  border-radius: var(--radius-huge);
 }
 .cta-button-outline:hover {
+  background-color: var(--basic-white);
   color: var(--basic-black);
-}
-.cta-button-outline:hover::before {
-  width: 100%;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .cta-block-wrap .cta-heading-wrapper h1 {
