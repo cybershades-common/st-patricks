@@ -43,7 +43,7 @@
 
 .statistics-card {
   position: relative;
-  height: 17.625rem; // 282px
+  height: @section-card-height;
   display: flex;
   gap: var(--spacing-xs); // 20px
   align-items: flex-start;
@@ -64,7 +64,7 @@
     padding: 1.875rem;
     margin-bottom: var(--spacing-base);
     padding-bottom: var(--spacing-base);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid @card-divider-color;
 
   }
 
@@ -84,7 +84,7 @@
 .statistics-card-divider {
   width: 0.0625rem; // 1px
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: @card-divider-color;
   flex-shrink: 0;
 
   @media (max-width: 991px) {
@@ -127,7 +127,7 @@
   }
 
   .statistics-card {
-    height: 13rem;
+    height: 13rem; // scaled from @section-card-height
   }
 
   .statistics-card-content p:last-child {
@@ -163,7 +163,7 @@
           padding: 1.875rem;
           margin-bottom: var(--spacing-base);
           padding-bottom: var(--spacing-base);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          border-bottom: 1px solid @card-divider-color;
         }
       }
     }
@@ -207,7 +207,7 @@
           padding: 1.875rem 0.75rem;
           margin-bottom: var(--spacing-base);
           padding-bottom: var(--spacing-base);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          border-bottom: 1px solid @card-divider-color;
         }
       }
     }
