@@ -1267,12 +1267,31 @@ document.addEventListener('DOMContentLoaded', function () {
             const moveToSlide = (index, animate = true) => {
                 if (index < 0) index = 0;
                 if (index >= slides.length) index = slides.length - 1;
+                const isChanging = animate && index !== currentIndex;
                 currentIndex = index;
                 const offset = -(currentIndex * (getSlideWidth() + getGap()));
-                localTrack.style.transition = animate ? '' : 'none';
-                localTrack.style.transform = `translateX(${offset}px)`;
                 prevTranslate = offset;
                 currentTranslate = offset;
+
+                if (!animate) {
+                    localTrack.style.transition = 'none';
+                    localTrack.style.transform = `translateX(${offset}px)`;
+                    return;
+                }
+
+                if (isChanging) {
+                    gsap.killTweensOf(slides);
+                    gsap.timeline()
+                        .to(slides, { scale: 0.88, duration: 0.18, ease: 'power2.in' })
+                        .call(() => {
+                            localTrack.style.transition = 'none';
+                            localTrack.style.transform = `translateX(${offset}px)`;
+                        })
+                        .to(slides, { scale: 1, duration: 0.38, ease: 'power3.out' });
+                } else {
+                    localTrack.style.transition = '';
+                    localTrack.style.transform = `translateX(${offset}px)`;
+                }
             };
 
             let startY = 0;
