@@ -3679,6 +3679,7 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
 }
 .latest-news-filter-btn {
   margin: 0;
+  line-height: 1;
   border-color: var(--primary-gold, #84754E);
   color: var(--primary-gold, #84754E);
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
