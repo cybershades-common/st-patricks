@@ -1234,13 +1234,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function initLatestNewsSlider() {
-        const track = document.getElementById('latestNewsTrack');
-        const slides = document.querySelectorAll('.latest-news-slide');
+        const trackAll = document.getElementById('latestNewsTrackAll');
+        const trackJunior = document.getElementById('latestNewsTrackJunior');
+        const trackSenior = document.getElementById('latestNewsTrackSenior');
         const prevBtn = document.getElementById('latestNewsPrev');
         const nextBtn = document.getElementById('latestNewsNext');
 
-        if (!track || !slides.length || !prevBtn || !nextBtn) return;
+        if (!trackAll || !prevBtn || !nextBtn) return;
 
+        const trackMap = { all: trackAll, junior: trackJunior, senior: trackSenior };
+        let activeTrack = trackAll;
         let currentIndex = 0;
         let isDragging = false;
         let startX = 0;
@@ -1248,27 +1251,26 @@ document.addEventListener('DOMContentLoaded', function () {
         let prevTranslate = 0;
         let cleanupFn = null;
 
+        // Hide non-active tracks on init
+        gsap.set([trackJunior, trackSenior], { display: 'none' });
+
         const isMobile = () => window.innerWidth <= 768;
 
-        // Simple mobile swiper - equal sized slides
         function initMobileSlider() {
-            // Get actual dimensions
+            const localTrack = activeTrack;
+            const slides = Array.from(localTrack.querySelectorAll('.latest-news-slide'));
+            if (!slides.length) return () => {};
+
             const getSlideWidth = () => slides[0].offsetWidth;
-            const getGap = () => parseFloat(getComputedStyle(track).gap) || 20;
+            const getGap = () => parseFloat(getComputedStyle(localTrack).gap) || 20;
 
             const moveToSlide = (index, animate = true) => {
-                // Keep within bounds
                 if (index < 0) index = 0;
                 if (index >= slides.length) index = slides.length - 1;
-
                 currentIndex = index;
-                const slideWidth = getSlideWidth();
-                const gap = getGap();
-                const offset = -(currentIndex * (slideWidth + gap));
-
-                // Enable/disable transition
-                track.style.transition = animate ? '' : 'none';
-                track.style.transform = `translateX(${offset}px)`;
+                const offset = -(currentIndex * (getSlideWidth() + getGap()));
+                localTrack.style.transition = animate ? '' : 'none';
+                localTrack.style.transform = `translateX(${offset}px)`;
                 prevTranslate = offset;
                 currentTranslate = offset;
             };
@@ -1276,183 +1278,177 @@ document.addEventListener('DOMContentLoaded', function () {
             const handleDragStart = (e) => {
                 isDragging = true;
                 startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-                track.classList.add('dragging');
-                track.style.transition = 'none'; // Disable transition during drag
+                localTrack.classList.add('dragging');
+                localTrack.style.transition = 'none';
             };
-
             const handleDragMove = (e) => {
                 if (!isDragging) return;
                 e.preventDefault();
-                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-                currentTranslate = prevTranslate + (currentX - startX);
-                track.style.transform = `translateX(${currentTranslate}px)`;
+                const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                currentTranslate = prevTranslate + (x - startX);
+                localTrack.style.transform = `translateX(${currentTranslate}px)`;
             };
-
             const handleDragEnd = () => {
                 if (!isDragging) return;
                 isDragging = false;
-                track.classList.remove('dragging');
-                track.style.transition = ''; // Re-enable transition
-
+                localTrack.classList.remove('dragging');
+                localTrack.style.transition = '';
                 const movedBy = currentTranslate - prevTranslate;
-                const threshold = getSlideWidth() * 0.2; // 20% of slide width
-
-                if (movedBy < -threshold && currentIndex < slides.length - 1) {
-                    moveToSlide(currentIndex + 1);
-                } else if (movedBy > threshold && currentIndex > 0) {
-                    moveToSlide(currentIndex - 1);
-                } else {
-                    moveToSlide(currentIndex); // Snap back
-                }
+                const threshold = getSlideWidth() * 0.2;
+                if (movedBy < -threshold && currentIndex < slides.length - 1) moveToSlide(currentIndex + 1);
+                else if (movedBy > threshold && currentIndex > 0) moveToSlide(currentIndex - 1);
+                else moveToSlide(currentIndex);
             };
+            const handlePrev = () => { if (currentIndex > 0) moveToSlide(currentIndex - 1); };
+            const handleNext = () => { if (currentIndex < slides.length - 1) moveToSlide(currentIndex + 1); };
 
-            // Button handlers
-            const handlePrev = () => {
-                if (currentIndex > 0) moveToSlide(currentIndex - 1);
-            };
-            const handleNext = () => {
-                if (currentIndex < slides.length - 1) moveToSlide(currentIndex + 1);
-            };
-
-            // Add button listeners
             prevBtn.addEventListener('click', handlePrev);
             nextBtn.addEventListener('click', handleNext);
+            localTrack.addEventListener('mousedown', handleDragStart);
+            localTrack.addEventListener('mousemove', handleDragMove);
+            localTrack.addEventListener('mouseup', handleDragEnd);
+            localTrack.addEventListener('mouseleave', handleDragEnd);
+            localTrack.addEventListener('touchstart', handleDragStart, { passive: false });
+            localTrack.addEventListener('touchmove', handleDragMove, { passive: false });
+            localTrack.addEventListener('touchend', handleDragEnd);
 
-            // Add drag/swipe listeners
-            track.addEventListener('mousedown', handleDragStart);
-            track.addEventListener('mousemove', handleDragMove);
-            track.addEventListener('mouseup', handleDragEnd);
-            track.addEventListener('mouseleave', handleDragEnd);
-            track.addEventListener('touchstart', handleDragStart, { passive: false });
-            track.addEventListener('touchmove', handleDragMove, { passive: false });
-            track.addEventListener('touchend', handleDragEnd);
-
-            // Initialize
             moveToSlide(0, false);
 
-            // Return cleanup function
             return () => {
                 prevBtn.removeEventListener('click', handlePrev);
                 nextBtn.removeEventListener('click', handleNext);
-                track.removeEventListener('mousedown', handleDragStart);
-                track.removeEventListener('mousemove', handleDragMove);
-                track.removeEventListener('mouseup', handleDragEnd);
-                track.removeEventListener('mouseleave', handleDragEnd);
-                track.removeEventListener('touchstart', handleDragStart);
-                track.removeEventListener('touchmove', handleDragMove);
-                track.removeEventListener('touchend', handleDragEnd);
+                localTrack.removeEventListener('mousedown', handleDragStart);
+                localTrack.removeEventListener('mousemove', handleDragMove);
+                localTrack.removeEventListener('mouseup', handleDragEnd);
+                localTrack.removeEventListener('mouseleave', handleDragEnd);
+                localTrack.removeEventListener('touchstart', handleDragStart);
+                localTrack.removeEventListener('touchmove', handleDragMove);
+                localTrack.removeEventListener('touchend', handleDragEnd);
             };
         }
 
-        // Desktop slider - active/inactive states
         function initDesktopSlider() {
-            const activeWidth = 680; // 42.5rem
-            const inactiveWidth = 333; // 20.8125rem
-            const gap = 20; // 1.25rem
+            const localTrack = activeTrack;
+            const slides = Array.from(localTrack.querySelectorAll('.latest-news-slide'));
+            if (!slides.length) return () => {};
+
+            const activeWidth = 680;
+            const inactiveWidth = 333;
+            const gap = 20;
 
             const updateSlides = () => {
                 slides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
             };
-
             const getPosition = (index) => {
                 let pos = 0;
-                for (let i = 0; i < index; i++) {
-                    pos += inactiveWidth + gap;
-                }
+                for (let i = 0; i < index; i++) pos += inactiveWidth + gap;
                 return -pos;
             };
-
             const moveToSlide = (index) => {
                 if (index < 0) index = slides.length - 1;
                 if (index >= slides.length) index = 0;
                 currentIndex = index;
                 updateSlides();
                 const pos = getPosition(currentIndex);
-                track.style.transform = `translateX(${pos}px)`;
+                localTrack.style.transform = `translateX(${pos}px)`;
                 prevTranslate = pos;
             };
 
             const handleDragStart = (e) => {
                 isDragging = true;
                 startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-                track.classList.add('dragging');
+                localTrack.classList.add('dragging');
             };
-
             const handleDragMove = (e) => {
                 if (!isDragging) return;
-                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-                currentTranslate = prevTranslate + (currentX - startX);
-                track.style.transform = `translateX(${currentTranslate}px)`;
+                const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                currentTranslate = prevTranslate + (x - startX);
+                localTrack.style.transform = `translateX(${currentTranslate}px)`;
             };
-
             const handleDragEnd = () => {
                 if (!isDragging) return;
                 isDragging = false;
-                track.classList.remove('dragging');
-
+                localTrack.classList.remove('dragging');
                 const movedBy = currentTranslate - prevTranslate;
-                if (movedBy < -100) {
-                    moveToSlide(currentIndex + 1);
-                } else if (movedBy > 100) {
-                    moveToSlide(currentIndex - 1);
-                } else {
-                    moveToSlide(currentIndex);
-                }
+                if (movedBy < -100) moveToSlide(currentIndex + 1);
+                else if (movedBy > 100) moveToSlide(currentIndex - 1);
+                else moveToSlide(currentIndex);
             };
-
-            // Button handlers
             const handlePrev = () => moveToSlide(currentIndex - 1);
             const handleNext = () => moveToSlide(currentIndex + 1);
 
-            // Add button listeners
             prevBtn.addEventListener('click', handlePrev);
             nextBtn.addEventListener('click', handleNext);
+            localTrack.addEventListener('mousedown', handleDragStart);
+            localTrack.addEventListener('mousemove', handleDragMove);
+            localTrack.addEventListener('mouseup', handleDragEnd);
+            localTrack.addEventListener('mouseleave', handleDragEnd);
+            localTrack.addEventListener('touchstart', handleDragStart, { passive: true });
+            localTrack.addEventListener('touchmove', handleDragMove, { passive: true });
+            localTrack.addEventListener('touchend', handleDragEnd);
 
-            // Add drag listeners
-            track.addEventListener('mousedown', handleDragStart);
-            track.addEventListener('mousemove', handleDragMove);
-            track.addEventListener('mouseup', handleDragEnd);
-            track.addEventListener('mouseleave', handleDragEnd);
-            track.addEventListener('touchstart', handleDragStart, { passive: true });
-            track.addEventListener('touchmove', handleDragMove, { passive: true });
-            track.addEventListener('touchend', handleDragEnd);
-
-            // Initialize
             moveToSlide(0);
 
-            // Return cleanup function
             return () => {
                 prevBtn.removeEventListener('click', handlePrev);
                 nextBtn.removeEventListener('click', handleNext);
-                track.removeEventListener('mousedown', handleDragStart);
-                track.removeEventListener('mousemove', handleDragMove);
-                track.removeEventListener('mouseup', handleDragEnd);
-                track.removeEventListener('mouseleave', handleDragEnd);
-                track.removeEventListener('touchstart', handleDragStart);
-                track.removeEventListener('touchmove', handleDragMove);
-                track.removeEventListener('touchend', handleDragEnd);
+                localTrack.removeEventListener('mousedown', handleDragStart);
+                localTrack.removeEventListener('mousemove', handleDragMove);
+                localTrack.removeEventListener('mouseup', handleDragEnd);
+                localTrack.removeEventListener('mouseleave', handleDragEnd);
+                localTrack.removeEventListener('touchstart', handleDragStart);
+                localTrack.removeEventListener('touchmove', handleDragMove);
+                localTrack.removeEventListener('touchend', handleDragEnd);
             };
         }
 
-        // Initialize appropriate slider
         const init = () => {
-            // Cleanup previous listeners
             if (cleanupFn) cleanupFn();
-
-            // Initialize new slider
-            if (isMobile()) {
-                cleanupFn = initMobileSlider();
-            } else {
-                cleanupFn = initDesktopSlider();
-            }
+            currentIndex = 0;
+            cleanupFn = isMobile() ? initMobileSlider() : initDesktopSlider();
         };
 
         // Filter tabs
         const filterTabs = document.querySelectorAll('.latest-news-filter-btn');
         filterTabs.forEach(tab => {
             tab.addEventListener('click', function () {
+                if (this.classList.contains('latest-news-filter-btn-active')) return;
                 filterTabs.forEach(t => t.classList.remove('latest-news-filter-btn-active'));
                 this.classList.add('latest-news-filter-btn-active');
+
+                const filter = this.dataset.filter;
+                const newTrack = trackMap[filter];
+                if (!newTrack || newTrack === activeTrack) return;
+
+                const oldTrack = activeTrack;
+                if (cleanupFn) { cleanupFn(); cleanupFn = null; }
+
+                gsap.to(oldTrack, {
+                    opacity: 0,
+                    duration: 0.22,
+                    ease: 'power2.in',
+                    onComplete: () => {
+                        // Reset and hide old track
+                        gsap.set(oldTrack, { display: 'none', opacity: 1 });
+                        oldTrack.style.transform = 'translateX(0)';
+
+                        // Swap active track and reinit slider
+                        activeTrack = newTrack;
+                        currentIndex = 0;
+                        prevTranslate = 0;
+                        currentTranslate = 0;
+                        newTrack.style.transition = 'none';
+                        newTrack.style.transform = 'translateX(0)';
+
+                        cleanupFn = isMobile() ? initMobileSlider() : initDesktopSlider();
+
+                        // Fade in new track
+                        gsap.fromTo(newTrack,
+                            { display: 'flex', opacity: 0 },
+                            { opacity: 1, duration: 0.35, ease: 'power2.out' }
+                        );
+                    }
+                });
             });
         });
 
