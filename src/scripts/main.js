@@ -1388,6 +1388,8 @@ document.addEventListener('DOMContentLoaded', function () {
             localTrack.addEventListener('touchend', handleDragEnd);
 
             moveToSlide(0);
+            // Clear any inline transition override so CSS transition takes over for subsequent moves
+            requestAnimationFrame(() => { localTrack.style.transition = ''; });
 
             return () => {
                 prevBtn.removeEventListener('click', handlePrev);
