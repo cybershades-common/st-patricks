@@ -2273,4 +2273,98 @@ document.addEventListener('DOMContentLoaded', function () {
         initTestimonialsGradientCursorEffect();
     }, 2000);
 
+    // Co-Curricular Slider
+    function initCocurricularSlider() {
+        const section = document.querySelector('.cocurricular-section');
+        if (!section) return;
+
+        const slides = Array.from(section.querySelectorAll('.cocurricular-slide'));
+        const bgSlides = Array.from(section.querySelectorAll('.cocurricular-bg-slide'));
+        const navBtns = Array.from(section.querySelectorAll('.cocurricular-nav-btn'));
+        if (!slides.length) return;
+
+        let currentIndex = 0;
+        let isAnimating = false;
+
+        // Initial state — first slide visible, rest hidden
+        slides.forEach((slide, i) => gsap.set(slide, { autoAlpha: i === 0 ? 1 : 0, zIndex: i === 0 ? 1 : 0 }));
+        bgSlides.forEach((bg, i) => gsap.set(bg, { autoAlpha: i === 0 ? 1 : 0 }));
+
+        function goToSlide(newIndex) {
+            if (isAnimating || newIndex === currentIndex) return;
+            isAnimating = true;
+
+            const dir = newIndex > currentIndex ? 1 : -1;
+            const oldIndex = currentIndex;
+            currentIndex = newIndex;
+
+            navBtns.forEach((btn, i) => btn.classList.toggle('active', i === newIndex));
+
+            const fromSlide = slides[oldIndex];
+            const toSlide = slides[newIndex];
+            const fromBg = bgSlides[oldIndex];
+            const toBg = bgSlides[newIndex];
+            const fromItems = Array.from(fromSlide.querySelectorAll('small, h2, p, button'));
+            const toItems = Array.from(toSlide.querySelectorAll('small, h2, p, button'));
+
+            // Stack: fromSlide on top during out, toSlide below
+            gsap.set(fromSlide, { zIndex: 3 });
+            gsap.set(toSlide, { autoAlpha: 1, zIndex: 2 });
+            gsap.set(toItems, { y: dir * 50, autoAlpha: 0 });
+            gsap.set(toBg, { autoAlpha: 0, scale: 1.08 });
+
+            const tl = gsap.timeline({
+                onComplete: () => { isAnimating = false; }
+            });
+
+            // Content out — directional stagger
+            tl.to(fromItems, {
+                y: dir * -35,
+                autoAlpha: 0,
+                duration: 0.4,
+                stagger: 0.055,
+                ease: 'power2.in'
+            }, 0);
+
+            // Background crossfade with Ken Burns
+            tl.to(fromBg, { autoAlpha: 0, scale: 1.06, duration: 0.65, ease: 'power2.inOut' }, 0);
+            tl.to(toBg, { autoAlpha: 1, scale: 1, duration: 0.85, ease: 'power2.out' }, 0.1);
+
+            // Hide old slide once its content is gone
+            tl.set(fromSlide, { autoAlpha: 0, zIndex: 0 }, 0.6);
+
+            // Content in
+            tl.to(toItems, {
+                y: 0,
+                autoAlpha: 1,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power3.out'
+            }, 0.5);
+        }
+
+        // Nav button clicks
+        navBtns.forEach((btn, i) => {
+            btn.addEventListener('click', () => goToSlide(i));
+        });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchStartY = 0;
+        section.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        section.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
+                if (dx < 0 && currentIndex < slides.length - 1) goToSlide(currentIndex + 1);
+                else if (dx > 0 && currentIndex > 0) goToSlide(currentIndex - 1);
+            }
+        }, { passive: true });
+    }
+
+    initCocurricularSlider();
+
 });
