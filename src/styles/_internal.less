@@ -165,7 +165,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   padding-left: 3.75rem; // 60px
+
+  &.internal-content-text-col-reversed {
+    padding-left: 0;
+    padding-right: 3.75rem; // 60px
+  }
 }
 
 .internal-content-text {
@@ -186,9 +192,10 @@
 
 .internal-content-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--spacing-xs);
-  align-items: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
 
   button {
     border-color: var(--primary-blue);
@@ -244,6 +251,10 @@
 
   .internal-content-text-col {
     padding-left: 0;
+
+    &.internal-content-text-col-reversed {
+      padding-right: 0;
+    }
   }
 
   .internal-content-text {
@@ -253,6 +264,8 @@
 
   .internal-content-buttons {
     gap: var(--spacing-small);
+    flex-direction: row;
+    align-items: center;
   }
 }
 
@@ -267,6 +280,8 @@
 
   .internal-content-buttons {
     width: 100%;
+    flex-direction: column;
+    align-items: stretch;
 
     button,
     a {
@@ -310,6 +325,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  color: rgba(0, 0, 0, 0.2); // Light grey as per Figma design
 
   svg {
     width: 100%;
