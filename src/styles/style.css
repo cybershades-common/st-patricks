@@ -1222,7 +1222,6 @@ hr {
   z-index: 2;
 }
 .hero-title {
-  position: relative;
   z-index: 2;
   font-family: var(--font-family-helvetica-neue);
   font-size: 11.25rem;
@@ -2094,6 +2093,10 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   .about-image {
     height: 18.75rem;
   }
+}
+.contact-page-hero .hero-content-wrap {
+  height: 29.875rem;
+  min-height: unset;
 }
 .contact-intro-section {
   padding-top: var(--spacing-small-2);
