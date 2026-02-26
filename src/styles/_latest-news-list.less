@@ -80,10 +80,19 @@
 .hero-media-swiper {
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.hero-media-slider .swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .hero-media-slide {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: flex;
@@ -228,6 +237,26 @@
   line-height: var(--line-height-b1);
   color: var(--basic-white);
   white-space: nowrap;
+}
+
+.hero-media-slide-navigation-shell {
+  position: absolute;
+  right: var(--spacing-small);
+  bottom: var(--spacing-small);
+  z-index: 4;
+  width: calc(100% - (var(--spacing-small) * 2));
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.hero-media-slide-navigation-shell .hero-media-slide-navigation {
+  pointer-events: auto;
+}
+
+.hero-media-slide-arrow.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .hero-media-slide-pagination-current,

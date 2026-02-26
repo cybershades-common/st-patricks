@@ -2511,6 +2511,177 @@ document.addEventListener('DOMContentLoaded', function () {
         initTestimonialsGradientCursorEffect();
     }, 2000);
 
+    // Latest News Hero Slider (Cocurricular-style animation)
+    function initLatestNewsHeroSlider() {
+        const slider = document.querySelector('.hero-media-slider');
+        if (!slider) return;
+
+        const slides = Array.from(slider.querySelectorAll('.hero-media-slide'));
+        if (!slides.length) return;
+
+        const navInstances = Array.from(slider.querySelectorAll('.hero-media-slide-navigation'));
+        let navRoot = navInstances[0] || null;
+        if (navRoot) {
+            navInstances.slice(1).forEach(nav => nav.remove());
+            const navShell = document.createElement('div');
+            navShell.className = 'hero-media-slide-navigation-shell';
+            navShell.appendChild(navRoot);
+            slider.appendChild(navShell);
+        }
+
+        const prevBtns = Array.from(slider.querySelectorAll('.hero-media-slide-arrow-prev'));
+        const nextBtns = Array.from(slider.querySelectorAll('.hero-media-slide-arrow-next'));
+        const currentEls = Array.from(slider.querySelectorAll('.hero-media-slide-pagination-current'));
+        const totalEls = Array.from(slider.querySelectorAll('.hero-media-slide-pagination-total'));
+
+        const total = String(slides.length).padStart(2, '0');
+        totalEls.forEach(el => { el.textContent = total; });
+
+        const bgSlides = slides.map(slide => slide.querySelector('.hero-media-slide-bg'));
+
+        let currentIndex = 0;
+        let isAnimating = false;
+
+        slides.forEach((slide, i) => {
+            gsap.set(slide, { autoAlpha: i === currentIndex ? 1 : 0, zIndex: i === currentIndex ? 1 : 0 });
+        });
+        bgSlides.forEach((bg, i) => {
+            if (!bg) return;
+            gsap.set(bg, { autoAlpha: i === currentIndex ? 1 : 0 });
+            const img = bg.querySelector('img');
+            if (img) gsap.set(img, { scale: 1.06 });
+        });
+
+        function updatePagination() {
+            const current = String(currentIndex + 1).padStart(2, '0');
+            currentEls.forEach(el => { el.textContent = current; });
+        }
+
+        function updateNavState() {
+            const isAtStart = currentIndex === 0;
+            const isAtEnd = currentIndex === slides.length - 1;
+            prevBtns.forEach(btn => {
+                btn.disabled = isAtStart;
+                btn.classList.toggle('is-disabled', isAtStart);
+            });
+            nextBtns.forEach(btn => {
+                btn.disabled = isAtEnd;
+                btn.classList.toggle('is-disabled', isAtEnd);
+            });
+        }
+
+        function getSlideItems(slide) {
+            return Array.from(slide.querySelectorAll('.hero-media-slide-caption-inner > *, .hero-media-slide-link'));
+        }
+
+        function goToSlide(newIndex) {
+            if (isAnimating || newIndex === currentIndex) return;
+            if (newIndex < 0 || newIndex >= slides.length) return;
+            isAnimating = true;
+
+            const dir = newIndex > currentIndex ? 1 : -1;
+            const oldIndex = currentIndex;
+            currentIndex = newIndex;
+
+            updatePagination();
+            updateNavState();
+
+            const fromSlide = slides[oldIndex];
+            const toSlide = slides[newIndex];
+            const fromBg = bgSlides[oldIndex];
+            const toBg = bgSlides[newIndex];
+            const fromItems = getSlideItems(fromSlide);
+            const toItems = getSlideItems(toSlide);
+
+            gsap.set(fromSlide, { zIndex: 3 });
+            gsap.set(toSlide, { autoAlpha: 1, zIndex: 2 });
+            gsap.set(toItems, { y: dir * 50, autoAlpha: 0 });
+            if (toBg) gsap.set(toBg, { autoAlpha: 0, scale: 1.08 });
+
+            const tl = gsap.timeline({
+                onComplete: () => { isAnimating = false; }
+            });
+
+            tl.to(fromItems, {
+                y: dir * -35,
+                autoAlpha: 0,
+                duration: 0.4,
+                stagger: 0.055,
+                ease: 'power2.in'
+            }, 0);
+
+            if (fromBg) tl.to(fromBg, { autoAlpha: 0, scale: 1.06, duration: 0.65, ease: 'power2.inOut' }, 0);
+            if (toBg) tl.to(toBg, { autoAlpha: 1, scale: 1, duration: 0.85, ease: 'power2.out' }, 0.1);
+
+            tl.set(fromSlide, { autoAlpha: 0, zIndex: 0 }, 0.6);
+
+            tl.to(toItems, {
+                y: 0,
+                autoAlpha: 1,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power3.out'
+            }, 0.5);
+        }
+
+        updatePagination();
+        updateNavState();
+
+        prevBtns.forEach(btn => btn.addEventListener('click', () => goToSlide(currentIndex - 1)));
+        nextBtns.forEach(btn => btn.addEventListener('click', () => goToSlide(currentIndex + 1)));
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchStartY = 0;
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        slider.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
+                if (dx < 0) goToSlide(currentIndex + 1);
+                else goToSlide(currentIndex - 1);
+            }
+        }, { passive: true });
+
+        // Mouse parallax for active background
+        const PARALLAX_INTENSITY = 15; // px
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        slider.addEventListener('mousemove', (e) => {
+            const rect = slider.getBoundingClientRect();
+            mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+            mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            mouseX = 0;
+            mouseY = 0;
+        });
+
+        function updateParallax() {
+            currentX += (mouseX - currentX) * 0.06;
+            currentY += (mouseY - currentY) * 0.06;
+
+            const activeBg = bgSlides[currentIndex];
+            const activeImg = activeBg ? activeBg.querySelector('img') : null;
+            if (activeImg) {
+                const moveX = currentX * PARALLAX_INTENSITY;
+                const moveY = currentY * PARALLAX_INTENSITY;
+                gsap.set(activeImg, { x: moveX, y: moveY });
+            }
+
+            requestAnimationFrame(updateParallax);
+        }
+
+        requestAnimationFrame(updateParallax);
+    }
+
     // Co-Curricular Slider
     function initCocurricularSlider() {
         const section = document.querySelector('.cocurricular-section');
@@ -2644,6 +2815,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initCocurricularSlider();
+    initLatestNewsHeroSlider();
 
 });
         function updateGradientSize() {
