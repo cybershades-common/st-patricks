@@ -1208,7 +1208,7 @@ class GSAPAnimations {
 
     // If called on a card, find the container (row)
     // If called on container, use it directly
-    const isCard = el.classList.contains('internal-explore-card') || el.classList.contains('latest-news-list-card');
+    const isCard = el.classList.contains('internal-explore-card') || el.classList.contains('latest-news-list-card') || el.classList.contains('about-nav-card');
     const container = isCard
       ? (el.closest('.news-detail-keep-reading-cards')
         || el.closest('.latest-news-list-grid')
@@ -1226,8 +1226,8 @@ class GSAPAnimations {
     const start = cfg.start || 'top 70%';
     const stagger = cfg.stagger ? parseFloat(cfg.stagger) : (isMobile ? 0.2 : 0.15);
 
-    // Find all cards within the container (support both card types)
-    const cards = Array.from(container.querySelectorAll('.internal-explore-card, .latest-news-list-card'));
+    // Find all cards within the container (support all card types)
+    const cards = Array.from(container.querySelectorAll('.internal-explore-card, .latest-news-list-card, .about-nav-card'));
     if (!cards.length) return;
 
     // Group cards by their visual row based on offsetTop
@@ -1261,7 +1261,7 @@ class GSAPAnimations {
         const img = card.querySelector('img');
         const h5 = card.querySelector('h5');
         // Support both image wrapper classes
-        const imageWrapper = card.querySelector('.internal-explore-card-image') || card.querySelector('.latest-news-list-card-image');
+        const imageWrapper = card.querySelector('.internal-explore-card-image') || card.querySelector('.latest-news-list-card-image') || card.querySelector('.about-nav-card-image');
         // Get category content for news cards
         const category = card.querySelector('.latest-news-list-card-category');
         const contentWrapper = card.querySelector('.latest-news-list-card-content');
