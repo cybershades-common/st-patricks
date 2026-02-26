@@ -126,6 +126,22 @@ body:has(.hero-internal) .header:not(.menu-open),
 }
 
 // ==========================================================================
+// CENTER ALIGNMENT FOR SINGLE COLUMN LAYOUT
+// ==========================================================================
+
+// Center hero title when single-column section exists on page
+body:has(.internal-content-single) {
+  .hero-internal-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-internal-title {
+    text-align: center;
+  }
+}
+
+// ==========================================================================
 // RESPONSIVE
 // ==========================================================================
 

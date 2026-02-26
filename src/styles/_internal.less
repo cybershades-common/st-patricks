@@ -605,6 +605,36 @@
 // INTERNAL CONTENT SINGLE COLUMN SECTION
 // ==========================================================================
 
+// Center alignment for local nav and intro text in single-column layout
+body:has(.internal-content-single) {
+  .internal-local-nav {
+    .container-fluid {
+      display: flex;
+      justify-content: center;
+    }
+
+    .internal-local-nav-tabs {
+      justify-content: center;
+    }
+  }
+
+  .internal-intro-text {
+    .container-fluid {
+      display: flex;
+      justify-content: center;
+    }
+
+    .internal-intro-text-content {
+      justify-content: center;
+      text-align: center;
+
+      h3 {
+        text-align: center;
+      }
+    }
+  }
+}
+
 .internal-content-single {
   padding-top: var(--spacing-small-2);
   padding-bottom: var(--spacing-small-2);
