@@ -64,8 +64,8 @@
   }
 
   .internal-local-nav-tab {
-    width: 100%;
-    justify-content: center;
+    width: auto;
+    flex-shrink: 0;
   }
 }
 
@@ -177,6 +177,10 @@
   &.internal-content-text-col-reversed {
     padding-left: 0;
     padding-right: 3.75rem; // 60px
+
+    .internal-content-buttons {
+      margin-right: var(--spacing-base);
+    }
   }
 }
 
@@ -309,14 +313,15 @@
   }
 
   .internal-content-buttons {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 
     button,
     a {
-      width: 100%;
-      justify-content: center;
+      width: auto;
+      flex-shrink: 0;
     }
   }
 }
@@ -593,5 +598,190 @@
   .internal-quote-decoration {
     width: 8rem;
     height: 0.375rem;
+  }
+}
+
+// ==========================================================================
+// INTERNAL CONTENT SINGLE COLUMN SECTION
+// ==========================================================================
+
+.internal-content-single {
+  padding-top: var(--spacing-small-2);
+  padding-bottom: var(--spacing-small-2);
+  background-color: var(--primary-gold-4);
+  position: relative;
+
+  .container-fluid {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.internal-content-single-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-base); // 75px
+  align-items: center;
+  width: 100%;
+  max-width: 57.125rem; // 914px
+}
+
+.internal-content-single-image {
+  width: 100%;
+  height: 38.125rem; // 610px
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.internal-content-single-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs); // 20px
+  width: 100%;
+  max-width: 42.5rem; // 680px
+
+  p {
+    font-family: var(--font-family-helvetica-neue);
+    font-size: var(--font-size-b1);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-b1);
+    color: var(--basic-black-secondary);
+    margin: 0;
+
+    strong {
+      font-weight: var(--font-weight-bold);
+    }
+  }
+}
+
+.internal-content-single-quote {
+  display: flex;
+  flex-direction: column;
+  gap: 2.125rem; // 34px
+  align-items: center;
+  width: 100%;
+  max-width: 42.5rem; // 680px
+
+  .internal-quote-icon {
+    width: 3.375rem; // 54px
+    height: 2.5rem; // 40px
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: rgba(0, 0, 0, 0.2);
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
+  p {
+    font-family: var(--font-family-helvetica-neue);
+    font-size: var(--font-size-h4); // 1.875rem
+    font-weight: var(--font-weight-light);
+    line-height: 1.3; // 130%
+    color: var(--primary-blue);
+    text-align: center;
+    margin: 0;
+  }
+
+  .internal-quote-decoration {
+    flex-shrink: 0;
+
+    img {
+      display: block;
+      width: 12.5rem;
+      height: 0.625rem;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+// ==========================================================================
+// INTERNAL CONTENT SINGLE COLUMN - RESPONSIVE
+// ==========================================================================
+
+@media (max-width: 991px) {
+  .internal-content-single {
+    padding-top: var(--spacing-small);
+    padding-bottom: var(--spacing-small);
+
+    .container-fluid {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+
+  .internal-content-single-wrapper {
+    gap: var(--spacing-base);
+    max-width: 100%;
+  }
+
+  .internal-content-single-image {
+    height: 25rem;
+  }
+
+  .internal-content-single-text {
+    max-width: 100%;
+  }
+
+  .internal-content-single-quote {
+    max-width: 100%;
+    gap: var(--spacing-base);
+
+    .internal-quote-icon {
+      width: 2.5rem;
+      height: 1.875rem;
+    }
+
+    p {
+      font-size: 1.875rem;
+      line-height: 1.35;
+    }
+
+    .internal-quote-decoration {
+      img {
+        width: 10rem;
+        height: 0.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .internal-content-single-image {
+    height: 20rem;
+  }
+
+  .internal-content-single-quote {
+    gap: var(--spacing-small);
+
+    .internal-quote-icon {
+      width: 2rem;
+      height: 1.5rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+      line-height: 1.4;
+    }
+
+    .internal-quote-decoration {
+      img {
+        width: 8rem;
+        height: 0.375rem;
+      }
+    }
   }
 }
