@@ -2635,7 +2635,7 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   flex-shrink: 0;
 }
 .contact-visit-buttons a:hover {
-  color: var(--primary-blue-tint);
+  color: var(--basic-white);
   text-decoration: none;
 }
 .contact-visit-map {
