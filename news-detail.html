@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St Patrick's College</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icons/fevicon-logo.svg">
+
+    <!-- Preload critical fonts for faster loading -->
+    <link rel="preload" href="assets/fonts/HelveticaNeueLTProLt.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/HelveticaNeueLTProRoman.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/style.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- Header Section -->
+        <header class="header position-fixed top-0 start-0 end-0" id="header">
+            <div class="container-fluid">
+                <div class="header-row row">
+                    <div class=" left-block">
+                        <div class="header-logo d-flex align-items-center">
+                            <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College" class="flex-shrink-0">
+                            <div class="header-logo-text d-flex flex-column justify-content-center">
+                                <span class="logo-text logo-text-main">ST PATRICK'S</span>
+                                <span class="logo-text logo-text-sub">COLLEGE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-block">
+                        <div class="col-lg-auto header-nav d-flex  align-items-center">
+                            <button class="btn-rounded-large-outline   btn-header btn-book-tour ">Book
+                                a Tour</button>
+                            <button class="btn-rounded-large-outline btn-header btn-enquire hide-header-items">Enquire
+                                Today</button>
+                            <div class="dropdown-wrapper hide-header-items dropdown">
+                                <button class="menu-dropdown-btn dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Work with Us
+                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Label-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Label-2</a></li>
+                                    <li><a class="dropdown-item" href="#">Label-3</a></li>
+                                    <li><a class="dropdown-item" href="#">Label-4</a></li>
+                                    <li><a class="dropdown-item" href="#">Label-5</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-wrapper hide-header-items dropdown">
+
+
+                                <button class=" menu-dropdown-btn dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Quick Links
+                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Enrolment Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Pay Fees Online</a></li>
+                                    <li><a class="dropdown-item" href="#">Canvas</a></li>
+                                    <li><a class="dropdown-item" href="#">Sport Fixtures</a></li>
+                                    <li><a class="dropdown-item" href="#">Old Boys' Website</a></li>
+                                    <li><a class="dropdown-item" href="#">Edval</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Staff Kiosk</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Student Café</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Parent Lounge</a></li>
+                                </ul>
+                            </div>
+                            <div class="icon-menu-wrap">
+                                <div class="header-icons-wrapper d-flex align-items-center d-none d-md-inline-flex">
+                                    <button class="header-icon-btn">
+                                        <img src="assets/icons/header-search-icon.svg" alt="Search">
+                                    </button>
+                                    <button class="header-icon-btn">
+                                        <img src="assets/icons/profile-icon.svg" alt="Profile">
+                                    </button>
+                                </div>
+                                <button class="menu-toggle d-flex align-items-center" id="menuToggle">
+                                    <span class="menu-text">MENU</span>
+                                    <div class="hamburger" id="hamburger">
+                                        <span class="hamburger-line"></span>
+                                        <span class="hamburger-line"></span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- Mega Menu Overlay -->
+        <div class="mega-menu-overlay" id="menuOverlay"></div>
+
+        <!-- Mega Menu -->
+        <div class="mega-menu position-fixed top-0 start-0 end-0" id="megaMenu">
+            <div class="container-fluid d-flex flex-column h-100">
+                <div class="mega-menu-inner row g-4 flex-grow-1">
+                    <div class="col-lg-4 col-md-5 menu-main-items d-flex flex-column">
+                        <a href="#" class="menu-main-item" data-menu="home"
+                            data-image="assets/images/hero-image.jpg">Home</a>
+                        <a href="#" class="menu-main-item active" data-menu="about"
+                            data-image="assets/icons/menu-image.jpg">About</a>
+                        <a href="#" class="menu-main-item" data-menu="identity"
+                            data-image="assets/images/about-image.jpg">Identity</a>
+                        <a href="#" class="menu-main-item" data-menu="learning"
+                            data-image="assets/images/news-1.jpg">Learning</a>
+                        <a href="#" class="menu-main-item" data-menu="cocurricular"
+                            data-image="assets/images/cocurricular-bg.jpg">Co-Curricular</a>
+                        <a href="#" class="menu-main-item" data-menu="community"
+                            data-image="assets/images/parents-community-bg.jpg">Community</a>
+                        <a href="#" class="menu-main-item" data-menu="enrolment"
+                            data-image="assets/images/strategic-bg-1.jpg">Enrolment</a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 menu-sub-items d-flex flex-column" id="menuSubItems">
+                        <div class="menu-sub-items-group is-active" data-menu="about">
+                            <a href="#" class="menu-sub-item active">Principal's Welcome</a>
+                            <a href="#" class="menu-sub-item">Captain's Welcome</a>
+                            <a href="#" class="menu-sub-item">History</a>
+                            <a href="#" class="menu-sub-item">Building Our Future</a>
+                            <a href="#" class="menu-sub-item">Mission and Strategic Plan</a>
+                            <a href="#" class="menu-sub-item">Annual Reports</a>
+                            <a href="#" class="menu-sub-item">Ideal Graduate</a>
+                            <a href="#" class="menu-sub-item">Leadership Team</a>
+                            <a href="#" class="menu-sub-item">Governance</a>
+                            <a href="#" class="menu-sub-item">Policies and Forms</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="identity">
+                            <a href="#" class="menu-sub-item active">Mission and Values</a>
+                            <a href="#" class="menu-sub-item">Catholic Tradition</a>
+                            <a href="#" class="menu-sub-item">Edmund Rice Heritage</a>
+                            <a href="#" class="menu-sub-item">Student Wellbeing</a>
+                            <a href="#" class="menu-sub-item">Diversity and Inclusion</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="learning">
+                            <a href="#" class="menu-sub-item active">Curriculum Overview</a>
+                            <a href="#" class="menu-sub-item">Learning Support</a>
+                            <a href="#" class="menu-sub-item">Technology in Learning</a>
+                            <a href="#" class="menu-sub-item">Assessment and Reporting</a>
+                            <a href="#" class="menu-sub-item">Library and Resources</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="cocurricular">
+                            <a href="#" class="menu-sub-item active">Sport</a>
+                            <a href="#" class="menu-sub-item">Music and Performance</a>
+                            <a href="#" class="menu-sub-item">Clubs and Societies</a>
+                            <a href="#" class="menu-sub-item">Outdoor Education</a>
+                            <a href="#" class="menu-sub-item">Leadership Programs</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="community">
+                            <a href="#" class="menu-sub-item active">Parents and Carers</a>
+                            <a href="#" class="menu-sub-item">Old Boys Network</a>
+                            <a href="#" class="menu-sub-item">Community Partnerships</a>
+                            <a href="#" class="menu-sub-item">Events and Calendar</a>
+                            <a href="#" class="menu-sub-item">Support and Giving</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="enrolment">
+                            <a href="#" class="menu-sub-item active">How to Apply</a>
+                            <a href="#" class="menu-sub-item">Fees and Scholarships</a>
+                            <a href="#" class="menu-sub-item">Tours and Open Days</a>
+                            <a href="#" class="menu-sub-item">International Students</a>
+                            <a href="#" class="menu-sub-item">Enrolment FAQs</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-3 menu-image-wrapper d-flex align-items-stretch justify-content-center">
+                        <img src="assets/icons/menu-image.jpg" alt="St Patrick's College" class="menu-image w-100">
+                    </div>
+                </div>
+                <div class="mega-menu-footer flex-shrink-0">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 menu-footer-left ">
+                            <span>Francis Street, Strathfield 2135 NSW</span>
+                            <span>+612 9763 1000</span>
+                        </div>
+                        <div class="col-md-6 menu-footer-right">
+                            <span class="follow-label me-2">Follow Us</span>
+                            <a href="#">Facebook</a>
+                            <a href="#">Instagram</a>
+                            <a href="#">Linkedin</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero position-relative news-detail-hero">
+            <div class="hero-content-wrap">
+                <div class="container-fluid position-relative">
+                    <!-- Navigation Row -->
+                    <div class="news-detail-hero-navigation">
+                        <a href="latest-news.html" class="news-detail-hero-back-link" data-gsap-children='{"a":{"type":"fade-in"}}'>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Back</span>
+                        </a>
+                        <!-- Category Label - Centered -->
+                        <div class="news-detail-hero-category" data-gsap-children='{"div":{"type":"fade-in"}}'>
+                            <span class="news-detail-hero-category-bold">News</span>
+                            <span>Sport</span>
+                        </div>
+                        <div></div> <!-- Spacer for flexbox -->
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hero-content">
+                                <div class="hero-gradient position-absolute"></div>
+                                <h1 class="hero-title"><span>Honouring 2025 Academic Achievement at High Achievers' Assembly</span></h1>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="hero-text d-flex flex-column align-items-start">
+                                <p class="mb-0">On Thursday 18 September, our Year 11 students officially transitioned into our leading year group of 2026.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="src/scripts/animations.js"></script>
+    <script src="src/scripts/main.js"></script>
+
+</body>
+
+</html>
