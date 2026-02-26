@@ -375,7 +375,11 @@
                     </div>
                 </div>
                 <div class="internal-explore-cards">
-                    <div class="row">
+                    <div class="row" data-gsap-children='{
+                        ".internal-explore-card":{"type":"card-row-stagger", "start":"top 70%", "stagger":"0.15"}
+                    }' data-gsap-children-mobile='{
+                        ".internal-explore-card":{"type":"card-row-stagger", "start":"top 80%", "stagger":"0.2"}
+                    }'>
                         <div class="col-12 col-md-6 col-lg-3 internal-explore-card">
                             <div class="internal-explore-card-image">
                                 <img src="assets/images/Entry Point Card-1.jpg" alt="Principal's Welcome"

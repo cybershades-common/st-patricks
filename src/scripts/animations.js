@@ -267,6 +267,7 @@ class GSAPAnimations {
         case 'image-clip-left':   this.imageClipLeft(el, cfg);   break;
         case 'image-clip-right':  this.imageClipRight(el, cfg);  break;
         case 'image-fade-in':     this.imageFadeIn(el, cfg);    break;
+        case 'card-row-stagger':  this.cardRowStagger(el, cfg);  break;
         case 'parallax-bg':     this.parallaxBg(el, cfg);    break;
       }
     } catch (err) {
@@ -1192,6 +1193,134 @@ class GSAPAnimations {
         }
       });
     }
+  }
+
+  // -----------------------------------------------------------------------
+  // Card Row Stagger
+  // -----------------------------------------------------------------------
+
+  // Animates cards in rows with stagger within each row
+  // Each card triggers individually when it comes into view
+  // Animates both image and h5 together for each card
+  // Detects rows based on card positions (desktop: 4 per row, mobile: 2 per row)
+  cardRowStagger(el, cfg) {
+    if (!el) return;
+
+    // If called on a card, find the container (row)
+    // If called on container, use it directly
+    const container = el.classList.contains('internal-explore-card') 
+      ? el.closest('.row') 
+      : el;
+    
+    if (!container) return;
+
+    // Check if already initialized
+    if (container.hasAttribute('data-card-row-stagger-initialized')) return;
+    container.setAttribute('data-card-row-stagger-initialized', 'true');
+
+    const isMobile = window.innerWidth <= 991;
+    const start = cfg.start || 'top 70%';
+    const stagger = cfg.stagger ? parseFloat(cfg.stagger) : (isMobile ? 0.2 : 0.15);
+
+    // Find all cards within the container
+    const cards = Array.from(container.querySelectorAll('.internal-explore-card'));
+    if (!cards.length) return;
+
+    // Group cards by their visual row based on offsetTop
+    // This is more reliable than getBoundingClientRect as it doesn't depend on scroll position
+    const rows = [];
+    const rowMap = new Map();
+
+    cards.forEach((card) => {
+      // Use offsetTop relative to the container for row detection
+      const containerTop = container.offsetTop;
+      const cardTop = card.offsetTop;
+      const relativeTop = cardTop - containerTop;
+      
+      // Round to nearest 10px to group cards in same row (handles small variations)
+      const rowKey = Math.round(relativeTop / 10) * 10;
+
+      if (!rowMap.has(rowKey)) {
+        rowMap.set(rowKey, []);
+      }
+      rowMap.get(rowKey).push(card);
+    });
+
+    // Convert map to sorted array of rows
+    const sortedRows = Array.from(rowMap.entries())
+      .sort((a, b) => a[0] - b[0])
+      .map(entry => entry[1]);
+
+    // Animate each card individually with stagger based on row position
+    sortedRows.forEach((row, rowIndex) => {
+      row.forEach((card, cardIndexInRow) => {
+        const img = card.querySelector('img');
+        const h5 = card.querySelector('h5');
+        const imageWrapper = card.querySelector('.internal-explore-card-image');
+
+        if (!img || !h5) return;
+
+        // Calculate stagger delay based on position in row
+        const staggerDelay = cardIndexInRow * stagger;
+
+        // Set overflow hidden for image wrapper
+        if (imageWrapper && imageWrapper.style.overflow !== 'hidden') {
+          imageWrapper.style.overflow = 'hidden';
+        }
+
+        // Initial state for image
+        gsap.set(img, {
+          scale: 1.3,
+          autoAlpha: 0,
+          transformOrigin: '50% 50%',
+          force3D: true,
+          backfaceVisibility: 'hidden',
+          willChange: 'transform, opacity'
+        });
+
+        // Initial state for h5 (fade-in, no y transform)
+        gsap.set(h5, {
+          autoAlpha: 0,
+          force3D: true,
+          willChange: 'opacity'
+        });
+
+        // Animate image
+        gsap.to(img, {
+          scale: 1,
+          autoAlpha: 1,
+          duration: 1,
+          ease: cfg.ease || 'power2.out',
+          delay: staggerDelay,
+          force3D: true,
+          scrollTrigger: {
+            trigger: card,
+            start: start,
+            toggleActions: 'play none none none'
+          },
+          onComplete: () => {
+            gsap.set(img, { clearProps: 'will-change' });
+          }
+        });
+
+        // Animate h5 together with image (same delay) - fade-in only
+        gsap.to(h5, {
+          autoAlpha: 1,
+          duration: cfg.duration || 1.25,
+          ease: cfg.ease || 'power2.out',
+          delay: staggerDelay,
+          force3D: true,
+          scrollTrigger: {
+            trigger: card,
+            start: start,
+            toggleActions: 'play none none none'
+          },
+          onComplete: () => {
+            gsap.set(h5, { clearProps: 'will-change' });
+          }
+        });
+      });
+    });
   }
 
   // -----------------------------------------------------------------------
