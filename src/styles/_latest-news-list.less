@@ -26,7 +26,6 @@
 
   .row {
     margin-top: 0; // Reset margin
-    align-items: flex-end; // Align row items to bottom
     margin-bottom: 0;
   }
 
@@ -415,6 +414,19 @@
       height: 20.9375rem;
       min-height: 20.9375rem;
     }
+
+    .row {
+      align-items: flex-start; // Stack items on mobile/tablet
+    }
+
+    .hero-title {
+      font-size: 4.5rem; // Smaller on tablet
+      margin-bottom: var(--spacing-small);
+    }
+
+    .hero-text {
+      margin-top: 0;
+    }
   }
 
   .hero-media-slider {
@@ -470,6 +482,23 @@
     .hero-content-wrap {
       height: 20.9375rem;
       min-height: 20.9375rem;
+    }
+
+    .row {
+      align-items: flex-start; // Stack items on mobile
+    }
+
+    .hero-title {
+      font-size: 3rem; // Smaller on mobile
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .hero-text {
+      margin-top: 0;
+      
+      p {
+        font-size: 1.125rem; // Slightly smaller on mobile
+      }
     }
   }
 
