@@ -1564,6 +1564,14 @@ body:has(.internal-content-single) .hero-internal-title {
     font-size: 3rem;
     letter-spacing: -0.125rem;
   }
+  .hero-internal-content {
+    padding-top: var(--spacing-small) !important;
+  }
+  .hero-internal-title span {
+    display: inline-block;
+    padding-top: 0.15em;
+    margin-top: -0.15em;
+  }
 }
 .internal-local-nav {
   padding-top: var(--spacing-small);
