@@ -4136,29 +4136,52 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
     font-size: 0.6875rem;
   }
 }
-.hero-latest-news-breadcrumbs {
+.hero:has(+ .hero-media-slider) .hero-content-wrap {
+  height: 20.9375rem;
+  min-height: 20.9375rem;
+  align-items: flex-end;
+}
+.hero:has(+ .hero-media-slider) .container-fluid {
   display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  margin-bottom: 1.25rem;
-  font-size: var(--font-size-b2);
-  font-weight: var(--font-weight-regular);
-  color: var(--basic-black-secondary);
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  padding-bottom: 0;
 }
-.hero-latest-news-breadcrumbs a {
-  color: var(--basic-black-secondary);
-  text-decoration: none;
+.hero:has(+ .hero-media-slider) .row {
+  margin-top: 0;
+  align-items: flex-end;
+  margin-bottom: 0;
 }
-.hero-latest-news-breadcrumbs a:hover {
-  text-decoration: underline;
+.hero:has(+ .hero-media-slider) .hero-title {
+  color: var(--primary-blue-tint, #1406C5);
+  leading-trim: both;
+  text-edge: cap;
+  font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
+  font-size: 5.625rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%;
+  /* 5.625rem */
+  letter-spacing: -0.16875rem;
+  top: 0;
+  opacity: 1;
+  visibility: visible;
+  margin: 0;
+  padding: 0;
 }
-.hero-latest-news-breadcrumbs span {
-  color: var(--basic-black-secondary);
+.hero:has(+ .hero-media-slider) .hero-content {
+  margin-bottom: 0;
 }
-.hero-latest-news-breadcrumbs svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--basic-black-secondary);
+.hero:has(+ .hero-media-slider) .hero-text p {
+  font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
+  font-size: var(--font-size-b1, 1.25rem);
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--primary-black-c, #27251F);
+  margin: 0;
 }
 .hero-media-slider {
   position: relative;
@@ -4441,6 +4464,10 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   color: var(--basic-white);
 }
 @media (max-width: 991px) {
+  .hero:has(+ .hero-media-slider) .hero-content-wrap {
+    height: 20.9375rem;
+    min-height: 20.9375rem;
+  }
   .hero-media-slider {
     min-height: 25rem;
   }
@@ -4480,6 +4507,10 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   }
 }
 @media (max-width: 767px) {
+  .hero:has(+ .hero-media-slider) .hero-content-wrap {
+    height: 20.9375rem;
+    min-height: 20.9375rem;
+  }
   .hero-media-slider {
     min-height: 20rem;
   }
