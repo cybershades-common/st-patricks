@@ -1208,7 +1208,8 @@ class GSAPAnimations {
 
     // If called on a card, find the container (row)
     // If called on container, use it directly
-    const container = el.classList.contains('internal-explore-card') 
+    const isCard = el.classList.contains('internal-explore-card') || el.classList.contains('latest-news-list-card');
+    const container = isCard 
       ? el.closest('.row') 
       : el;
     
@@ -1222,8 +1223,8 @@ class GSAPAnimations {
     const start = cfg.start || 'top 70%';
     const stagger = cfg.stagger ? parseFloat(cfg.stagger) : (isMobile ? 0.2 : 0.15);
 
-    // Find all cards within the container
-    const cards = Array.from(container.querySelectorAll('.internal-explore-card'));
+    // Find all cards within the container (support both card types)
+    const cards = Array.from(container.querySelectorAll('.internal-explore-card, .latest-news-list-card'));
     if (!cards.length) return;
 
     // Group cards by their visual row based on offsetTop
@@ -1256,7 +1257,13 @@ class GSAPAnimations {
       row.forEach((card, cardIndexInRow) => {
         const img = card.querySelector('img');
         const h5 = card.querySelector('h5');
-        const imageWrapper = card.querySelector('.internal-explore-card-image');
+        // Support both image wrapper classes
+        const imageWrapper = card.querySelector('.internal-explore-card-image') || card.querySelector('.latest-news-list-card-image');
+        // Get category content for news cards
+        const category = card.querySelector('.latest-news-list-card-category');
+        const contentWrapper = card.querySelector('.latest-news-list-card-content');
+        // Get divider for news cards
+        const divider = card.querySelector('.latest-news-list-card-divider');
 
         if (!img || !h5) return;
 
@@ -1266,6 +1273,16 @@ class GSAPAnimations {
         // Set overflow hidden for image wrapper
         if (imageWrapper && imageWrapper.style.overflow !== 'hidden') {
           imageWrapper.style.overflow = 'hidden';
+        }
+
+        // Initial state for divider (news cards) - clip from top
+        if (divider) {
+          gsap.set(divider, {
+            clipPath: 'inset(100% 0 0% 0)',
+            webkitClipPath: 'inset(100% 0 0% 0)',
+            force3D: true,
+            willChange: 'clip-path'
+          });
         }
 
         // Initial state for image
@@ -1278,12 +1295,42 @@ class GSAPAnimations {
           willChange: 'transform, opacity'
         });
 
-        // Initial state for h5 (fade-in, no y transform)
+        // Initial state for h5 (fade-up)
         gsap.set(h5, {
+          y: 20,
           autoAlpha: 0,
           force3D: true,
-          willChange: 'opacity'
+          willChange: 'transform, opacity'
         });
+
+        // Initial state for category content (news cards)
+        if (category) {
+          gsap.set(category, {
+            autoAlpha: 0,
+            force3D: true,
+            willChange: 'opacity'
+          });
+        }
+
+        // Animate divider first (news cards) - grows from top to bottom (slowly)
+        if (divider) {
+          gsap.to(divider, {
+            clipPath: 'inset(0% 0 0% 0)',
+            webkitClipPath: 'inset(0% 0 0% 0)',
+            duration: 1.2,
+            ease: cfg.ease || 'power2.out',
+            delay: staggerDelay,
+            force3D: true,
+            scrollTrigger: {
+              trigger: card,
+              start: start,
+              toggleActions: 'play none none none'
+            },
+            onComplete: () => {
+              gsap.set(divider, { clearProps: 'will-change' });
+            }
+          });
+        }
 
         // Animate image
         gsap.to(img, {
@@ -1303,12 +1350,32 @@ class GSAPAnimations {
           }
         });
 
-        // Animate h5 together with image (same delay) - fade-in only
+        // Animate category first (news cards) - slightly before h5
+        if (category) {
+          gsap.to(category, {
+            autoAlpha: 1,
+            duration: cfg.duration || 1.25,
+            ease: cfg.ease || 'power2.out',
+            delay: staggerDelay + 0.1,
+            force3D: true,
+            scrollTrigger: {
+              trigger: card,
+              start: start,
+              toggleActions: 'play none none none'
+            },
+            onComplete: () => {
+              gsap.set(category, { clearProps: 'will-change' });
+            }
+          });
+        }
+
+        // Animate h5 with fade-up
         gsap.to(h5, {
+          y: 0,
           autoAlpha: 1,
           duration: cfg.duration || 1.25,
           ease: cfg.ease || 'power2.out',
-          delay: staggerDelay,
+          delay: staggerDelay + 0.2,
           force3D: true,
           scrollTrigger: {
             trigger: card,

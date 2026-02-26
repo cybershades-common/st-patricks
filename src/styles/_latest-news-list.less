@@ -583,6 +583,7 @@
   }
 
   .hero-media-slider {
+    height: 80vh;
     min-height: 20rem;
   }
 
@@ -596,9 +597,14 @@
     font-size: 0.9375rem;
   }
 
+  .hero-media-slide-bottom {
+    padding-bottom: calc(var(--spacing-xs) + 4rem); // Extra padding to prevent pagination overlap
+  }
+
   .hero-media-slide-navigation {
     flex-direction: column;
     gap: var(--spacing-super-small);
+    margin-top: var(--spacing-small); // Add margin to separate from content
   }
 
   .hero-media-slide-pagination {

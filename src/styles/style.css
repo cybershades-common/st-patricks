@@ -4600,6 +4600,7 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
     font-size: 1.125rem;
   }
   .hero-media-slider {
+    height: 80vh;
     min-height: 20rem;
   }
   .hero-media-slide-caption h2 {
@@ -4610,9 +4611,13 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   .hero-media-slide-caption p {
     font-size: 0.9375rem;
   }
+  .hero-media-slide-bottom {
+    padding-bottom: calc(var(--spacing-xs) + 4rem);
+  }
   .hero-media-slide-navigation {
     flex-direction: column;
     gap: var(--spacing-super-small);
+    margin-top: var(--spacing-small);
   }
   .hero-media-slide-pagination {
     padding: 0 var(--spacing-2xs);

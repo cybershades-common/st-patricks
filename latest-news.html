@@ -358,9 +358,12 @@
         <!-- Local Navigation Section -->
         <section class="latest-news-local-nav position-relative section">
             <div class="container-fluid">
-                <div class="latest-news-local-nav-content">
+                <div class="latest-news-local-nav-content" data-gsap-children='{
+                    ".latest-news-local-nav-title":{"type":"fade-in"}
+                }'>
                     <h4 class="latest-news-local-nav-title">Explore News Articles</h4>
-                    <div class="latest-news-local-nav-tabs">
+                    <div data-gsap-children='{"a":{"type":"fade-in","stagger":"0.08"}}'
+                        class="latest-news-local-nav-tabs">
                         <a href="#" class="btn-rounded-large-outline latest-news-local-nav-tab">All News</a>
                         <a href="#" class="btn-rounded-large-outline latest-news-local-nav-tab">News Event</a>
                         <a href="#" class="btn-rounded-large-outline latest-news-local-nav-tab">News Sport</a>
@@ -379,7 +382,11 @@
         <section class="latest-news-list position-relative section">
             <div class="container-fluid">
                 <div class="latest-news-list-grid">
-                    <div class="row">
+                    <div class="row" data-gsap-children='{
+                        ".latest-news-list-card":{"type":"card-row-stagger", "start":"top 70%", "stagger":"0.15"}
+                    }' data-gsap-children-mobile='{
+                        ".latest-news-list-card":{"type":"card-row-stagger", "start":"top 80%", "stagger":"0.2"}
+                    }'>
                         <div class="col-12 col-md-6 col-lg-3 latest-news-list-card">
                             <div class="latest-news-list-card-image">
                                 <img src="assets/images/news-1.jpg" alt="News Article" class="w-100 h-100" loading="lazy" onerror="this.style.display='none'">
@@ -535,7 +542,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="latest-news-pagination">
+                <div class="latest-news-pagination" data-gsap-children='{
+                    ".latest-news-pagination-btn":{"type":"fade-in","stagger":"0.3"}
+                }'>
                     <button class="btn-rounded-large-outline latest-news-pagination-btn">1</button>
                     <button class="btn-rounded-large-outline latest-news-pagination-btn">2</button>
                     <button class="btn-rounded-large-outline latest-news-pagination-btn">3</button>
