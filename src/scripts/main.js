@@ -1763,6 +1763,124 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // ==========================================================================
+    // CONTACT FORM — CUSTOM ANIMATED DROPDOWNS
+    // Replaces native <select> elements with a fully styled custom dropdown.
+    // The native <select> stays hidden so form submission still works.
+    // ==========================================================================
+
+    function initContactFormDropdowns() {
+        const selects = document.querySelectorAll('.contact-form select');
+        if (!selects.length) return;
+
+        selects.forEach(select => {
+            const wrapper = select.closest('.contact-form-input-wrapper');
+            if (!wrapper) return;
+
+            const options = Array.from(select.options);
+            const isPlaceholder = (opt) => opt.value === '';
+
+            // ── Build custom dropdown ──────────────────────────────────────────
+            const dropdown = document.createElement('div');
+            dropdown.className = 'cf-dropdown';
+
+            // Trigger row (displayed value + arrow)
+            const trigger = document.createElement('div');
+            trigger.className = 'cf-dropdown-trigger';
+            trigger.setAttribute('role', 'button');
+            trigger.setAttribute('tabindex', '0');
+
+            const valueEl = document.createElement('span');
+            valueEl.className = 'cf-dropdown-value';
+            const initialOpt = options[select.selectedIndex] || options[0];
+            valueEl.textContent = initialOpt ? initialOpt.text : '';
+            if (!isPlaceholder(initialOpt)) valueEl.classList.add('has-value');
+
+            const arrow = document.createElement('img');
+            arrow.src = 'assets/icons/dropdown-icon.svg';
+            arrow.className = 'cf-dropdown-arrow';
+            arrow.alt = '';
+            arrow.setAttribute('aria-hidden', 'true');
+
+            trigger.appendChild(valueEl);
+            trigger.appendChild(arrow);
+
+            // Options list
+            const optsList = document.createElement('ul');
+            optsList.className = 'cf-dropdown-options';
+            optsList.setAttribute('role', 'listbox');
+
+            options.forEach(opt => {
+                const li = document.createElement('li');
+                li.className = 'cf-dropdown-option';
+                if (isPlaceholder(opt)) li.classList.add('is-placeholder');
+                if (opt.selected) li.classList.add('is-selected');
+                li.textContent = opt.text;
+                li.dataset.value = opt.value;
+                li.setAttribute('role', 'option');
+
+                li.addEventListener('click', () => {
+                    select.value = opt.value;
+                    valueEl.textContent = opt.text;
+                    valueEl.classList.toggle('has-value', !isPlaceholder(opt));
+                    optsList.querySelectorAll('.cf-dropdown-option')
+                        .forEach(o => o.classList.remove('is-selected'));
+                    li.classList.add('is-selected');
+                    closeDropdown(dropdown);
+                });
+
+                optsList.appendChild(li);
+            });
+
+            dropdown.appendChild(trigger);
+            dropdown.appendChild(optsList);
+
+            // Hide native select, insert custom dropdown before it
+            select.hidden = true;
+            wrapper.insertBefore(dropdown, select);
+
+            // ── Open / close ───────────────────────────────────────────────────
+            function openDropdown(dd) {
+                // Close any other open dropdown first
+                document.querySelectorAll('.cf-dropdown.is-open').forEach(d => {
+                    if (d !== dd) closeDropdown(d);
+                });
+                dd.classList.add('is-open');
+            }
+
+            function closeDropdown(dd) {
+                dd.classList.remove('is-open');
+            }
+
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.contains('is-open')
+                    ? closeDropdown(dropdown)
+                    : openDropdown(dropdown);
+            });
+
+            // Keyboard support
+            trigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dropdown.classList.contains('is-open')
+                        ? closeDropdown(dropdown)
+                        : openDropdown(dropdown);
+                }
+                if (e.key === 'Escape') closeDropdown(dropdown);
+            });
+        });
+
+        // Close on outside click
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.cf-dropdown.is-open')
+                .forEach(d => d.classList.remove('is-open'));
+        });
+    }
+
+    initContactFormDropdowns();
+
+
+    // ==========================================================================
     // TESTIMONIALS SLIDER
     // ==========================================================================
 
