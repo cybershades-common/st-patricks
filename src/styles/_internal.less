@@ -46,8 +46,11 @@
   .internal-local-nav {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+
+    .container-fluid {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
   }
 
   .internal-local-nav-tabs {
@@ -106,8 +109,11 @@
   .internal-intro-text {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+
+    .container-fluid {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
   }
 
   .internal-intro-text-content {
@@ -251,8 +257,21 @@
   .internal-content {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+
+    .container-fluid {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .row {
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+    }
+
+    .row > [class*="col-"] {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
   }
 
   .internal-content-image {
@@ -395,8 +414,11 @@
   .internal-explore {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+
+    .container-fluid {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
   }
 
   .internal-explore-header {
@@ -520,8 +542,11 @@
   .internal-quote {
     padding-top: var(--spacing-small-2);
     padding-bottom: var(--spacing-small-2);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+
+    .container-fluid {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
   }
 
   .internal-quote-content {

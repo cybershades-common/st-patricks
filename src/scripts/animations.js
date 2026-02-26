@@ -1124,7 +1124,7 @@ class GSAPAnimations {
     const kids    = this.animChildren(el);
     const isMobile = window.innerWidth <= 991;
     const start = cfg.start || 'top 50%';
-    const scaleFrom = isMobile ? 1.3 : 1.3;
+    const scaleFrom = isMobile ? 1.4 : 1.4;
 
     // On mobile with stagger:0, treat each element separately
     // On desktop or when stagger is set, use group animation

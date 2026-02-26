@@ -1589,8 +1589,10 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   .internal-local-nav {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+  }
+  .internal-local-nav .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
   .internal-local-nav-tabs {
     gap: var(--spacing-super-small);
@@ -1633,8 +1635,10 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   .internal-intro-text {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+  }
+  .internal-intro-text .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
   .internal-intro-text-content {
     min-height: auto;
@@ -1748,8 +1752,18 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   .internal-content {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+  }
+  .internal-content .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .internal-content .row {
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+  }
+  .internal-content .row > [class*="col-"] {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
   .internal-content-image {
     height: 25rem;
@@ -1858,8 +1872,10 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   .internal-explore {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+  }
+  .internal-explore .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
   .internal-explore-header {
     margin-bottom: var(--spacing-base);
@@ -1952,8 +1968,10 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   .internal-quote {
     padding-top: var(--spacing-small-2);
     padding-bottom: var(--spacing-small-2);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+  }
+  .internal-quote .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
   .internal-quote-content {
     gap: var(--spacing-base);
