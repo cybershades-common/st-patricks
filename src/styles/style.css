@@ -2396,15 +2396,12 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   flex-direction: column;
   gap: var(--spacing-base);
 }
-.contact-form-fields .row {
-  gap: var(--spacing-xs);
-}
-.contact-form-fields > div {
+.contact-form-fields > div:not(.row) {
   display: flex;
   flex-direction: column;
   gap: 0.3125rem;
 }
-.contact-form-fields > div label {
+.contact-form-fields label {
   font-size: var(--font-size-b2);
   font-weight: var(--font-weight-regular);
   line-height: 1;
@@ -2450,7 +2447,7 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   padding-right: 1.25rem;
   cursor: pointer;
   /* arrow colour deep navy per Figma design */
-  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7.5L10 12.5L15 7.5' stroke='%23183153' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("../../assets/icons/dropdown-icon.svg");
   background-repeat: no-repeat;
   background-position: right center;
   background-size: 1.25rem;
@@ -2462,12 +2459,9 @@ body:has(.hero-internal) .header:not(.menu-open) .header-icon-btn img,
   padding-bottom: var(--spacing-2xs);
 }
 .contact-form-input-border {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
   height: 0.0625rem;
-  background-color: #002e5d;
+  align-self: stretch;
+  background: var(--primary-gold-3, #EEEAE0);
   pointer-events: none;
 }
 .contact-form-content button[type="submit"] {
