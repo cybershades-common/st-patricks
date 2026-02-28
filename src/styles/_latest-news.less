@@ -125,8 +125,9 @@
 }
 
 .latest-news-track {
+  --latest-news-gap: 1.25rem;
   display: flex;
-  gap: 1.25rem;
+  gap: var(--latest-news-gap);
   cursor: grab;
   user-select: none;
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -280,8 +281,8 @@
 
   .latest-news-slide,
   .latest-news-slide.active {
-    width: 85vw;
-    max-width: 25rem;
+    width: calc((100% - var(--latest-news-gap)) / 1.25);
+    max-width: calc((100% - var(--latest-news-gap)) / 1.25);
   }
 
   .latest-news-image,
