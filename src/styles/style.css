@@ -94,6 +94,9 @@ a[href^="tel"] {
   color: var(--basic-black);
   text-decoration: none;
 }
+.ar-680-584 {
+  aspect-ratio: 680/584;
+}
 @font-face {
   font-family: 'Helvetica Neue LT Pro';
   src: url('../../assets/fonts/HelveticaNeueLTProLt.woff2') format('woff2'), url('../../assets/fonts/HelveticaNeueLTProLt.woff') format('woff');
@@ -1700,7 +1703,6 @@ body:has(.internal-content-single) .hero-internal-title {
 }
 .internal-content-image {
   width: 100%;
-  height: 36.5rem;
   position: relative;
   overflow: hidden;
 }
@@ -1714,7 +1716,10 @@ body:has(.internal-content-single) .hero-internal-title {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 3.75rem;
+  padding: 0 4.5rem;
+}
+.internal-content-text-col .internal-content-buttons {
+  margin-top: 1.25rem;
 }
 .internal-content-text-col.internal-content-text-col-reversed {
   padding-left: 0;
@@ -1962,8 +1967,9 @@ body:has(.internal-content-single) .hero-internal-title {
   justify-content: center;
   align-items: center;
   gap: 2.125rem;
-  max-width: 48rem;
   width: 100%;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 .internal-quote-icon {
   width: 3.375rem;
