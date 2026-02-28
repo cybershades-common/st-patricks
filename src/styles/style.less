@@ -38,7 +38,6 @@ button,
 input,
 textarea,
 select {
-
   &:focus,
   &:hover,
   &:active,
@@ -50,11 +49,11 @@ select {
   }
 }
 
-
-
 .container-fluid {
   padding-left: 1.875rem;
   padding-right: 1.875rem;
+  position: relative;
+  z-index: 1;
 }
 
 .section {
@@ -66,7 +65,7 @@ select {
     height: 62.6875rem;
     aspect-ratio: 1/1;
     border-radius: 62.6875rem;
-    background: var(--primary-yellow-bright, #FFF02A);
+    background: var(--primary-yellow-bright, #fff02a);
     filter: blur(9.375rem);
     position: absolute;
     opacity: 0;
@@ -74,35 +73,45 @@ select {
 
     &.right {
       right: -50%;
-      bottom: -60%
+      bottom: -60%;
     }
 
     &.left {
       left: -50%;
-      bottom: -75% 
+      bottom: -75%;
+    }
+    &.top-right {
+      top: -52rem;
+      right: -45%;
+    }
+    &.top-left {
+     
     }
   }
 }
-a[href^=tel]{ color:var(--basic-black); text-decoration:none;}
+a[href^="tel"] {
+  color: var(--basic-black);
+  text-decoration: none;
+}
 
-@import '_fonts';
-@import '_variables';
-@import '_typography';
-@import '_buttons';
-@import '_header';
-@import '_hero';
-@import '_hero-internal';
-@import '_internal';
-@import '_about';
-@import '_contact';
-@import '_strategic';
-@import '_academics';
-@import '_cocurricular';
-@import '_statistics';
-@import '_parents-community';
-@import '_testimonials';
-@import '_latest-news';
-@import '_latest-news-list';
-@import '_cta';
-@import '_footer';
-@import '_responsive';
+@import "_fonts";
+@import "_variables";
+@import "_typography";
+@import "_buttons";
+@import "_header";
+@import "_hero";
+@import "_hero-internal";
+@import "_internal";
+@import "_about";
+@import "_contact";
+@import "_strategic";
+@import "_academics";
+@import "_cocurricular";
+@import "_statistics";
+@import "_parents-community";
+@import "_testimonials";
+@import "_latest-news";
+@import "_latest-news-list";
+@import "_cta";
+@import "_footer";
+@import "_responsive";

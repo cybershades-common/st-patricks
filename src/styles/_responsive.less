@@ -1,8 +1,6 @@
 // Responsive Mixins
 // Mobile first approach
 
-
-
 .respond-to-sm(@rules) {
   @media (min-width: var(--breakpoint-sm)) {
     @rules();
@@ -33,27 +31,24 @@
   }
 }
 
-@media (min-width:992px) and (max-width:1200px){
-  html{
+@media (min-width: 992px) and (max-width: 1200px) {
+  html {
     font-size: 14px;
-    
   }
 }
 
-@media (min-width:768px) and (max-width:991px){
-  html{
+@media (min-width: 768px) and (max-width: 991px) {
+  html {
     font-size: 14px;
-    body{
-      h2{
+    body {
+      h2 {
         font-size: 2.75rem !important;
       }
     }
   }
 }
 
-
-
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .section {
     .gradient-circle {
       &.right {
@@ -72,10 +67,9 @@
       top: 95%;
     }
   }
-
 }
 
-@media only screen and (min-device-width : 390px) and (max-device-width : 992px) and (orientation : landscape) {
+@media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
   html {
     body {
       .section {
@@ -95,19 +89,20 @@
   }
 }
 
-@media (min-width:1900px) {
+
+@media (min-width: 1900px) {
   html {
     font-size: 21px;
   }
 }
 
-@media (min-width:2500px) {
+@media (min-width: 2500px) {
   html {
     font-size: 28px;
   }
 }
 
-@media (min-width:3200px) {
+@media (min-width: 3200px) {
   html {
     font-size: 40px;
   }
