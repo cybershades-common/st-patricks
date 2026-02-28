@@ -1721,10 +1721,6 @@ body:has(.internal-content-single) .hero-internal-title {
 .internal-content-text-col .internal-content-buttons {
   margin-top: 1.25rem;
 }
-.internal-content-text-col.internal-content-text-col-reversed {
-  padding-left: 0;
-  padding-right: 3.75rem;
-}
 .internal-content-text-col.internal-content-text-col-reversed .internal-content-buttons {
   margin-right: var(--spacing-base);
 }
