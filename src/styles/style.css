@@ -2036,6 +2036,8 @@ body:has(.internal-content-single) .hero-internal-title {
   }
   .internal-quote-content {
     gap: var(--spacing-small);
+    padding-left: 0;
+    padding-right: 0;
   }
   .internal-quote-icon {
     width: 2rem;
