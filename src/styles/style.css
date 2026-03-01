@@ -1791,11 +1791,14 @@ body:has(.internal-content-single) .hero-internal-title {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
-  .internal-content .row {
+  .internal-content .container-fluid > .row {
     margin-left: -1.25rem;
     margin-right: -1.25rem;
   }
-  .internal-content .row > [class*="col-"] {
+  .internal-content .container-fluid > .row.reversed {
+    flex-direction: column-reverse;
+  }
+  .internal-content .container-fluid > .row > [class*="col-"] {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
