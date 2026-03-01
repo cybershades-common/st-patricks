@@ -8,7 +8,10 @@
   z-index: 1000;
   padding: 1.25rem 0;
   background-color: transparent;
-  transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out, transform 0.35s ease;
+  transition:
+    background-color 0.4s ease-in-out,
+    border-color 0.4s ease-in-out,
+    transform 0.35s ease;
   will-change: transform;
   border-bottom: 0.0625rem solid transparent;
 }
@@ -79,6 +82,7 @@
   // Don't hide the container, just the items inside
   width: 100%;
   justify-content: flex-end;
+  min-height: 51px;
 }
 
 .header-nav .btn-header,
@@ -507,7 +511,11 @@
   .hide-header-items {
     display: none;
     opacity: 0;
-    transition: opacity ease 0.25s, background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+    transition:
+      opacity ease 0.25s,
+      background-color 0.4s ease-in-out,
+      color 0.4s ease-in-out,
+      border-color 0.4s ease-in-out;
   }
 
   &.menu-open {
@@ -521,6 +529,32 @@
       display: flex;
       opacity: 1;
       visibility: visible;
+    }
+  }
+}
+
+.internal-page {
+  .header {
+    &:not(.menu-open):not(.header-scrolled) {
+      .logo-text {
+        color: var(--basic-white);
+      }
+      .btn-rounded-large-outline.btn-header {
+        border-color: var(--basic-white);
+        color: var(--basic-white);
+      }
+      .menu-text {
+        color: var(--basic-white);
+      }
+      .header-icon-btn {
+        img {
+          transition: all ease 0.25s;
+          filter: brightness(0) invert(1);
+        }
+      }
+      .hamburger-line {
+        background-color: var(--basic-white);
+      }
     }
   }
 }
