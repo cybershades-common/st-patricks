@@ -4857,11 +4857,11 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   }
 }
 .news-detail-hero {
-  padding-bottom: 3.125rem;
+  padding-bottom: 2.875rem;
 }
 .news-detail-hero .hero-content-wrap {
-  height: 52.77vh;
-  min-height: 475px;
+  height: auto;
+  min-height: auto;
   padding-top: 10rem;
   align-items: flex-start;
 }
