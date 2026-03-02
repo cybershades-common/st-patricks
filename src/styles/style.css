@@ -2455,6 +2455,7 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   .about-buttons {
     align-items: flex-start;
     gap: 0.625rem;
+    flex-wrap: wrap;
   }
   .about-image {
     height: 25rem;
@@ -4006,7 +4007,8 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
     flex-direction: row;
     justify-content: space-between;
     gap: var(--spacing-xs);
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
     align-items: center;
   }
   .testimonials-button-col,
