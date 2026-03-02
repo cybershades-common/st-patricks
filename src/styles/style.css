@@ -505,8 +505,6 @@ hr {
   .btn-rounded-large-no-border,
   .btn-rounded-large-solid {
     line-height: 1;
-    padding-top: calc(var(--spacing-2xs) + 0.125rem);
-    padding-bottom: calc(var(--spacing-2xs) - 0.125rem);
   }
 }
 .header {
@@ -3463,7 +3461,10 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   max-width: 50%;
 }
 @media (max-width: 991px) {
-  .cocurricular-slide .cocurricular-left {
+  .cocurricular-slides {
+    overflow: visible;
+  }
+  .cocurricular-slides .cocurricular-slide .cocurricular-left {
     max-width: 100%;
   }
 }
@@ -4271,7 +4272,6 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   }
   .latest-news-buttons {
     gap: var(--spacing-xs);
-    flex-wrap: inherit;
   }
   .latest-news-filters-row {
     margin-bottom: var(--spacing-small);
