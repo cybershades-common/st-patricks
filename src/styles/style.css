@@ -4303,7 +4303,8 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   }
   .latest-news-image,
   .latest-news-slide.active .latest-news-image {
-    height: 18.75rem;
+    height: auto;
+    aspect-ratio: 1;
   }
   .latest-news-card-content,
   .latest-news-slide.active .latest-news-card-content {
