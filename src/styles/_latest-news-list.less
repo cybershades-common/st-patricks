@@ -392,8 +392,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-      margin-top: 4.6875rem;
+
+  
 }
 
 .latest-news-list-card-divider {
@@ -909,10 +909,7 @@ html{
   background-color: var(--basic-white);
   position: relative;
 
-  .container-fluid {
-    padding-left: 24.06rem; // 385px
-    padding-right: 24.06rem; // 385px
-  }
+ 
 }
 
 .news-detail-lead {
@@ -956,45 +953,36 @@ html{
 
 .news-detail-gallery {
   margin-bottom: var(--spacing-base); // 100px
-  margin-left: calc(-24.06rem + var(--spacing-base)); // Break out of content padding, add some margin
-  margin-right: calc(-24.06rem + var(--spacing-base)); // Break out of content padding, add some margin
-  width: calc(100% + (24.06rem * 2) - (var(--spacing-base) * 2)); // Extend beyond content width
+ 
 }
 
 .news-detail-gallery-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs); // 20px
+  gap: var(--spacing-xs) 0; // 20px
   justify-content: center;
-  width: 100%;
-  max-width: 56.875rem; // 910px - wider than content
-  margin: 0 auto;
+  margin: 0;
+  >div{
+    padding:0 0.625rem;
+  }
 }
 
 .news-detail-gallery-item {
   position: relative;
-  width: calc((100% - (var(--spacing-xs) * 2)) / 3); // 3 items per row on desktop
-  height: 0;
-  padding-bottom: calc((100% - (var(--spacing-xs) * 2)) / 3); // Maintain square aspect ratio
   overflow: hidden;
-  flex-shrink: 0;
+  flex-shrink: 0;  cursor: pointer;
 
   img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100%;   
     object-fit: cover;
+    aspect-ratio: 1 ;
   }
-
-  &.news-detail-gallery-item-expand {
-    cursor: pointer;
+ 
 
     .news-detail-gallery-overlay {
       position: absolute;
       top: 0;
       left: 0;
+      bottom:0;
+      right:0;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
@@ -1014,9 +1002,10 @@ html{
       opacity: 1;
     }
   }
-}
+
 
 .news-detail-quote {
+  margin-top:6.25rem;
   margin-bottom: var(--spacing-md); // 50px
   display: flex;
   flex-direction: column;
@@ -1081,7 +1070,7 @@ html{
 .news-detail-footer-back {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-4xs); // 10px
+  gap: 0.625rem; // 10px
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-b1); // 20px
   font-weight: var(--font-weight-light);
@@ -1140,9 +1129,7 @@ html{
   background-color: var(--basic-white);
   position: relative;
 
-  .container-fluid {
-    padding: 0;
-  }
+
 }
 
 .news-detail-keep-reading-inner {
@@ -1152,9 +1139,8 @@ html{
   gap: var(--spacing-xl, 6.25rem);
   align-self: stretch;
   width: 100%;
-  max-width: 85rem; // 1360px
   margin: 0 auto;
-  padding: 0 var(--spacing-small);
+
 }
 
 .news-detail-keep-reading-header {
@@ -1192,12 +1178,7 @@ html{
 }
 
 @media (max-width: 991px) {
-  .news-detail-content-section {
-    .container-fluid {
-      padding-left: var(--spacing-small);
-      padding-right: var(--spacing-small);
-    }
-  }
+
 
   .news-detail-lead p {
     font-size: 2rem; // Smaller on tablet
@@ -1214,8 +1195,7 @@ html{
   }
 
   .news-detail-gallery-item {
-    width: calc((100% - var(--spacing-xs)) / 2); // 2 items per row on tablet
-    padding-bottom: calc((100% - var(--spacing-xs)) / 2); // Maintain square aspect ratio
+
   }
 
   .news-detail-keep-reading {
@@ -1229,7 +1209,7 @@ html{
 
   .news-detail-keep-reading-inner {
     gap: var(--spacing-base);
-    padding: 0 var(--spacing-small);
+
   }
 
   .news-detail-keep-reading-cards {
@@ -1252,10 +1232,7 @@ html{
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
 
-    .container-fluid {
-      padding-left: var(--spacing-xs);
-      padding-right: var(--spacing-xs);
-    }
+ 
   }
 
   .news-detail-lead {
@@ -1280,15 +1257,10 @@ html{
 
   .news-detail-gallery {
     margin-bottom: var(--spacing-small);
-    margin-left: 0;
-    margin-right: 0;
     width: 100%;
   }
 
-  .news-detail-gallery-item {
-    width: calc((100% - var(--spacing-xs)) / 2); // 2 items per row on mobile
-    padding-bottom: calc((100% - var(--spacing-xs)) / 2); // Maintain square aspect ratio
-  }
+
 
   .news-detail-keep-reading {
     padding-top: var(--spacing-small);
@@ -1301,7 +1273,7 @@ html{
 
   .news-detail-keep-reading-inner {
     gap: var(--spacing-small);
-    padding: 0 var(--spacing-xs);
+    
   }
 
   .news-detail-keep-reading-cards {
