@@ -87,7 +87,7 @@ select:focus-within {
   bottom: -75%;
 }
 .section .gradient-circle.top-right {
-  top: -52rem;
+  top: -48rem;
   right: -45%;
 }
 a[href^="tel"] {
@@ -6098,7 +6098,7 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
     bottom: -75%;
   }
   .section .gradient-circle.top-right {
-    top: -51rem;
+    top: -47rem;
     right: -48rem;
   }
   .section .testimonials-gradient {
