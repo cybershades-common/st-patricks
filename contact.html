@@ -1,655 +1,697 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>St Patrick's College</title>
-    <link rel="icon" type="image/svg+xml" href="assets/icons/fevicon-logo.svg" />
 
-    <!-- Preload critical fonts for faster loading -->
-    <link rel="preload" href="assets/fonts/HelveticaNeueLTProLt.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="assets/fonts/HelveticaNeueLTProRoman.woff2" as="font" type="font/woff2" crossorigin />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St Patrick's College</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/fevicon-logo.svg" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="src/styles/style.css" />
-  </head>
+  <!-- Preload critical fonts for faster loading -->
+  <link rel="preload" href="assets/fonts/HelveticaNeueLTProLt.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/HelveticaNeueLTProRoman.woff2" as="font" type="font/woff2" crossorigin />
 
-  <body>
-    <div class="wrapper">
-      <!-- Header Section -->
-      <header class="header position-fixed top-0 start-0 end-0" id="header">
-        <div class="container-fluid">
-          <div class="header-row row">
-            <div class="left-block">
-              <div class="header-logo d-flex align-items-center">
-                <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College" class="flex-shrink-0" />
-                <div class="header-logo-text d-flex flex-column justify-content-center">
-                  <span class="logo-text logo-text-main">ST PATRICK'S</span>
-                  <span class="logo-text logo-text-sub">COLLEGE</span>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="src/styles/style.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Header Section -->
+    <header class="header position-fixed top-0 start-0 end-0" id="header">
+      <div class="container-fluid">
+        <div class="header-row row">
+          <div class="left-block">
+            <div class="header-logo d-flex align-items-center">
+              <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College" class="flex-shrink-0" />
+              <div class="header-logo-text d-flex flex-column justify-content-center">
+                <span class="logo-text logo-text-main">ST PATRICK'S</span>
+                <span class="logo-text logo-text-sub">COLLEGE</span>
+              </div>
+            </div>
+          </div>
+          <div class="right-block">
+            <div class="col-lg-auto header-nav d-flex align-items-center">
+    <a href="#" class="btn-rounded-large btn-rounded-large-outline-black   btn-book-tour ">Book
+                                a Tour</a>
+                            <a href="#"
+                                class="btn-rounded-large btn-rounded-large-outline-black  btn-enquire hide-header-items">Enquire
+                                Today</a>
+              <div class="dropdown-wrapper hide-header-items dropdown">
+                <button class="menu-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Work with Us
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Label-1</a></li>
+                  <li><a class="dropdown-item" href="#">Label-2</a></li>
+                  <li><a class="dropdown-item" href="#">Label-3</a></li>
+                  <li><a class="dropdown-item" href="#">Label-4</a></li>
+                  <li><a class="dropdown-item" href="#">Label-5</a></li>
+                </ul>
+              </div>
+              <div class="dropdown-wrapper hide-header-items dropdown">
+                <button class="menu-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Quick Links
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Enrolment Dashboard</a></li>
+                  <li><a class="dropdown-item" href="#">Pay Fees Online</a></li>
+                  <li><a class="dropdown-item" href="#">Canvas</a></li>
+                  <li><a class="dropdown-item" href="#">Sport Fixtures</a></li>
+                  <li><a class="dropdown-item" href="#">Old Boys’ Website</a></li>
+                  <li><a class="dropdown-item" href="#">Edval</a></li>
+                  <li><a class="dropdown-item" href="#">TASS Staff Kiosk</a></li>
+                  <li><a class="dropdown-item" href="#">TASS Student Café</a></li>
+                  <li><a class="dropdown-item" href="#">TASS Parent Lounge</a></li>
+                </ul>
+              </div>
+              <div class="icon-menu-wrap">
+                <div class="header-icons-wrapper d-flex align-items-center d-none d-md-inline-flex">
+                  <a href="#" class="header-icon-btn">
+                    <img src="assets/icons/header-search-icon.svg" alt="Search" />
+                  </a>
+                  <a href="#" class="header-icon-btn">
+                    <img src="assets/icons/profile-icon.svg" alt="Profile" />
+                  </a>
+                </div>
+                <a href="#" class="menu-toggle d-flex align-items-center" id="menuToggle">
+                  <span class="menu-text">MENU</span>
+                  <div class="hamburger" id="hamburger">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mega Menu Overlay -->
+    <div class="mega-menu-overlay" id="menuOverlay"></div>
+
+    <!-- Mega Menu -->
+    <div class="mega-menu position-fixed top-0 start-0 end-0" id="megaMenu">
+      <div class="container-fluid d-flex flex-column h-100">
+        <div class="mega-menu-inner row g-4 flex-grow-1">
+          <div class="col-lg-4 col-md-5 menu-main-items d-flex flex-column">
+            <a href="#" class="menu-main-item" data-menu="home" data-image="assets/images/hero-image.jpg">Home</a>
+            <a href="#" class="menu-main-item active" data-menu="about"
+              data-image="assets/icons/menu-image.jpg">About</a>
+            <a href="#" class="menu-main-item" data-menu="identity"
+              data-image="assets/images/about-image.jpg">Identity</a>
+            <a href="#" class="menu-main-item" data-menu="learning" data-image="assets/images/news-1.jpg">Learning</a>
+            <a href="#" class="menu-main-item" data-menu="cocurricular"
+              data-image="assets/images/cocurricular-bg.jpg">Co-Curricular</a>
+            <a href="#" class="menu-main-item" data-menu="community"
+              data-image="assets/images/parents-community-bg.jpg">Community</a>
+            <a href="#" class="menu-main-item" data-menu="enrolment"
+              data-image="assets/images/strategic-bg-1.jpg">Enrolment</a>
+          </div>
+          <div class="col-lg-4 col-md-4 menu-sub-items d-flex flex-column" id="menuSubItems">
+            <div class="menu-sub-items-group is-active" data-menu="about">
+              <a href="#" class="menu-sub-item active">Principal's Welcome</a>
+              <a href="#" class="menu-sub-item">Captain's Welcome</a>
+              <a href="#" class="menu-sub-item">History</a>
+              <a href="#" class="menu-sub-item">Building Our Future</a>
+              <a href="#" class="menu-sub-item">Mission and Strategic Plan</a>
+              <a href="#" class="menu-sub-item">Annual Reports</a>
+              <a href="#" class="menu-sub-item">Ideal Graduate</a>
+              <a href="#" class="menu-sub-item">Leadership Team</a>
+              <a href="#" class="menu-sub-item">Governance</a>
+              <a href="#" class="menu-sub-item">Policies and Forms</a>
+            </div>
+            <div class="menu-sub-items-group" data-menu="identity">
+              <a href="#" class="menu-sub-item active">Mission and Values</a>
+              <a href="#" class="menu-sub-item">Catholic Tradition</a>
+              <a href="#" class="menu-sub-item">Edmund Rice Heritage</a>
+              <a href="#" class="menu-sub-item">Student Wellbeing</a>
+              <a href="#" class="menu-sub-item">Diversity and Inclusion</a>
+            </div>
+            <div class="menu-sub-items-group" data-menu="learning">
+              <a href="#" class="menu-sub-item active">Curriculum Overview</a>
+              <a href="#" class="menu-sub-item">Learning Support</a>
+              <a href="#" class="menu-sub-item">Technology in Learning</a>
+              <a href="#" class="menu-sub-item">Assessment and Reporting</a>
+              <a href="#" class="menu-sub-item">Library and Resources</a>
+            </div>
+            <div class="menu-sub-items-group" data-menu="cocurricular">
+              <a href="#" class="menu-sub-item active">Sport</a>
+              <a href="#" class="menu-sub-item">Music and Performance</a>
+              <a href="#" class="menu-sub-item">Clubs and Societies</a>
+              <a href="#" class="menu-sub-item">Outdoor Education</a>
+              <a href="#" class="menu-sub-item">Leadership Programs</a>
+            </div>
+            <div class="menu-sub-items-group" data-menu="community">
+              <a href="#" class="menu-sub-item active">Parents and Carers</a>
+              <a href="#" class="menu-sub-item">Old Boys Network</a>
+              <a href="#" class="menu-sub-item">Community Partnerships</a>
+              <a href="#" class="menu-sub-item">Events and Calendar</a>
+              <a href="#" class="menu-sub-item">Support and Giving</a>
+            </div>
+            <div class="menu-sub-items-group" data-menu="enrolment">
+              <a href="#" class="menu-sub-item active">How to Apply</a>
+              <a href="#" class="menu-sub-item">Fees and Scholarships</a>
+              <a href="#" class="menu-sub-item">Tours and Open Days</a>
+              <a href="#" class="menu-sub-item">International Students</a>
+              <a href="#" class="menu-sub-item">Enrolment FAQs</a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-3 menu-image-wrapper d-flex align-items-stretch justify-content-center">
+            <img src="assets/icons/menu-image.jpg" alt="St Patrick's College" class="menu-image w-100" />
+          </div>
+        </div>
+        <div class="mega-menu-footer flex-shrink-0">
+          <div class="row align-items-center">
+            <div class="col-md-6 menu-footer-left">
+              <span>Francis Street, Strathfield 2135 NSW</span>
+              <span>+612 9763 1000</span>
+            </div>
+            <div class="col-md-6 menu-footer-right">
+              <span class="follow-label me-2">Follow Us</span>
+              <a href="#">Facebook</a>
+              <a href="#">Instagram</a>
+              <a href="#">Linkedin</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero contact-page-hero position-relative">
+      <div class="hero-content-wrap">
+        <div class="container-fluid position-relative">
+          <div class="row">
+            <div class="col-lg-8 col-md-7">
+              <div class="col-lg-auto hero-content">
+                <div class="hero-gradient position-absolute"></div>
+                <h1 class="hero-title">Contact</h1>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+              <div class="col-lg-auto hero-text d-flex flex-column justify-content-between align-items-start">
+                <p class="mb-0">We’re glad you’re here. Whether you have a question about life at the College, want to
+                  book a visit, or simply need to reach a member of our team, we are here to help you with a warm
+                  welcome and a clear response.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Wrapper: constrains sticky behavior -->
+    <div class="sticky-wrapper">
+      <div class="hero-media w-100">
+        <div class="hero-media-wrapper position-relative w-100">
+          <!-- Hero Video (uncomment to enable) -->
+          <!-- <video class="hero-video position-absolute top-0 start-0 w-100 " id="heroVideo" autoplay muted loop
+                        playsinline preload="none" poster="assets/images/hero-image.jpg">
+                        <source src="assets/videos/hero-vid.mp4" type="video/mp4">
+                    </video> -->
+
+          <!-- Hero Image (remove when video is enabled) -->
+          <img src="assets/images/hero-image.jpg" alt="St Patrick's College"
+            class="hero-video position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover" />
+
+          <div class="hero-media-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+        </div>
+      </div>
+
+      <!-- Contact Intro Section -->
+      <div class="sticky-content">
+        <section class="contact-intro-section position-relative section">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12 col-lg-9" data-gsap-children='{"h2":{"type":"word-reveal"}}'>
+                <h2> St Patrick's College is a place built on connection and community. Every voice matters here, and we
+                  look forward to hearing from you. </h2>
+              </div>
+              <div class="col-12 col-lg-3"></div>
+            </div>
+
+            <div class="contact-intro-cards-row">
+              <div class="row contact-intro-cards">
+                <div class="col-12 col-md-6 col-lg-3">
+                  <div class="contact-intro-card">
+                    <div class="contact-intro-card-divider"></div>
+                    <div class="contact-intro-card-content">
+                      <div class="card-header">
+                        <h3>Call Us</h3>
+                        <p>+61 2 9763 1000</p>
+                        <br />
+                        <p>
+                          <strong>Office Hours:</strong><br />
+                          8:00am to 4:30pm<br />
+                          Monday to Friday
+                        </p>
+                      </div>
+                      <div class="card-footer">
+                        <button class="btn-rounded-large btn-rounded-large-outline-blue"> Call +61 2 9763 1000 </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                  <div class="contact-intro-card">
+                    <div class="contact-intro-card-divider"></div>
+                    <div class="contact-intro-card-content">
+                      <div class="card-header">
+                        <h3>Email Us</h3>
+                        <p>spc@spc.nsw.edu.au</p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue"> Send a Message </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                  <div class="contact-intro-card">
+                    <div class="contact-intro-card-divider"></div>
+                    <div class="contact-intro-card-content">
+                      <div class="card-header">
+                        <h3>Campus Address</h3>
+                        <p>
+                          St Patrick's College, Strathfield<br />
+                          Francis Street<br />
+                          Strathfield NSW 2135<br />
+                          Australia
+                        </p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue"> View Map </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                  <div class="contact-intro-card">
+                    <div class="contact-intro-card-divider"></div>
+                    <div class="contact-intro-card-content">
+                      <div class="card-header">
+                        <h3>Postal Address</h3>
+                        <p>
+                          St Patrick's College, Strathfield<br />
+                          Private Mail Bag 1<br />
+                          Strathfield NSW 2135<br />
+                          Australia
+                        </p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue"> View Map </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="right-block">
-              <div class="col-lg-auto header-nav d-flex align-items-center">
-                <a href="#"  class="btn-rounded-large-outline btn-header btn-book-tour">Book a Tour</a>
-                 <a href="#"  class="btn-rounded-large-outline btn-header btn-enquire hide-header-items">Enquire Today</a>
-                <div class="dropdown-wrapper hide-header-items dropdown">
-                  <button class="menu-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Work with Us
-                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Label-1</a></li>
-                    <li><a class="dropdown-item" href="#">Label-2</a></li>
-                    <li><a class="dropdown-item" href="#">Label-3</a></li>
-                    <li><a class="dropdown-item" href="#">Label-4</a></li>
-                    <li><a class="dropdown-item" href="#">Label-5</a></li>
-                  </ul>
-                </div>
-                <div class="dropdown-wrapper hide-header-items dropdown">
-                  <button class="menu-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Quick Links
-                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Enrolment Dashboard</a></li>
-                    <li><a class="dropdown-item" href="#">Pay Fees Online</a></li>
-                    <li><a class="dropdown-item" href="#">Canvas</a></li>
-                    <li><a class="dropdown-item" href="#">Sport Fixtures</a></li>
-                    <li><a class="dropdown-item" href="#">Old Boys’ Website</a></li>
-                    <li><a class="dropdown-item" href="#">Edval</a></li>
-                    <li><a class="dropdown-item" href="#">TASS Staff Kiosk</a></li>
-                    <li><a class="dropdown-item" href="#">TASS Student Café</a></li>
-                    <li><a class="dropdown-item" href="#">TASS Parent Lounge</a></li>
-                  </ul>
-                </div>
-                <div class="icon-menu-wrap">
-                  <div class="header-icons-wrapper d-flex align-items-center d-none d-md-inline-flex">
-                   <a href="#"  class="header-icon-btn">
-                      <img src="assets/icons/header-search-icon.svg" alt="Search" />
-                   </a>
-                    <a href="#"  class="header-icon-btn">
-                      <img src="assets/icons/profile-icon.svg" alt="Profile" />
-                    </a>
-                  </div>
-                  <a href="#"  class="menu-toggle d-flex align-items-center" id="menuToggle">
-                    <span class="menu-text">MENU</span>
-                    <div class="hamburger" id="hamburger">
-                      <span class="hamburger-line"></span>
-                      <span class="hamburger-line"></span>
+          </div>
+        </section>
+
+        <!-- Social Media Section -->
+        <section class="contact-social-section position-relative section">
+          <div class="contact-social-background position-absolute w-100 h-100">
+            <img src="assets/images/social-media-image.jpg" alt="Social Media Background" class="contact-social-bg-img"
+              loading="lazy" onerror="this.style.display = 'none'" />
+            <div class="contact-social-overlay position-absolute w-100 h-100"></div>
+          </div>
+          <div class="container-fluid position-relative">
+            <div class="row">
+              <div class="col-12 col-lg-9">
+                <div data-gsap-children='{"h2":{"type":"fade-up"}}' class="contact-social-content">
+                  <div>
+                    <h2>Follow life at SPC<br />on Social Media</h2>
+                    <div data-gsap-children='{"button":{"type":"zoom-in","stagger":"0.3"}}'
+                      class="contact-social-buttons">
+                      <a href="#" class="btn-rounded-large btn-rounded-large-outline-white">Facebook</a>
+                      <a href="#" class="btn-rounded-large btn-rounded-large-outline-white">Instagram</a>
+                      <a href="#" class="btn-rounded-large btn-rounded-large-outline-white">LinkedIn</a>
                     </div>
+                  </div>
+                  <div class="contact-social-text">
+                    <div class="row" data-gsap-children='{"p":{"type":"fade-up","stagger":"0.3"}}'>
+                      <div class="col-12 col-md-4">
+                        <p>We post regular updates including student achievements, HSC highlights, sporting results,
+                          performance nights, service initiatives, upcoming events and key announcements.</p>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <p>It is a simple way to stay informed, celebrate milestones and keep close to the daily life of
+                          our community.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-form-section position-relative section">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12 col-lg-5 contact-form-image-col">
+                <div data-gsap-children='{"h2":{"type":"fade-up"}, "img":{"type":"image-fade-in"}}'
+                  class="contact-form-image-wrapper">
+                  <h2>Send a Message</h2>
+                  <div class="contact-form-image">
+                    <img src="assets/images/contact-form-image.jpg" alt="Students" class="w-100 h-100" loading="lazy"
+                      onerror="this.style.display = 'none'" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-7 contact-form-col">
+                <div data-gsap-children='{"p":{"type":"fade-up","delay":"0.3"}, "button":{"type":"zoom-in"}}'
+                  class="contact-form-content">
+                  <p> Please enter your details into the fields below, we will respond to your enquiry within 2 working
+                    days. An asterisk (*) indicates required fields. </p>
+                  <form class="contact-form">
+                    <div class="contact-form-fields" data-gsap-children='{"div":{"type":"fade-in","stagger":"0.05"}}'>
+                      <div class="row g-4">
+                        <div class="col-md-6">
+                          <label for="firstName">First Name *</label>
+                          <div class="contact-form-input-wrapper">
+                            <input type="text" id="firstName" name="firstName" required />
+                            <div class="contact-form-input-border"></div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="surname">Surname *</label>
+                          <div class="contact-form-input-wrapper">
+                            <input type="text" id="surname" name="surname" required />
+                            <div class="contact-form-input-border"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row g-4">
+                        <div class="col-md-6">
+                          <label for="email">Email *</label>
+                          <div class="contact-form-input-wrapper">
+                            <input type="email" id="email" name="email" required />
+                            <div class="contact-form-input-border"></div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="contactNumber">Preferred Contact Number</label>
+                          <div class="contact-form-input-wrapper">
+                            <input type="tel" id="contactNumber" name="contactNumber"
+                              placeholder="Mobile or landline number" />
+                            <div class="contact-form-input-border"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <label for="relationship">Relationship with the College</label>
+                        <div class="contact-form-input-wrapper">
+                          <select id="relationship" name="relationship">
+                            <option value="">Select Type</option>
+                            <option value="parent">Parent</option>
+                            <option value="student">Student</option>
+                            <option value="alumni">Alumni</option>
+                            <option value="other">Other</option>
+                          </select>
+                          <div class="contact-form-input-border"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <label for="contactType">Who would you like to contact *</label>
+                        <div class="contact-form-input-wrapper">
+                          <select id="contactType" name="contactType" required>
+                            <option value="">Select Type</option>
+                            <option value="admissions">Admissions</option>
+                            <option value="academic">Academic</option>
+                            <option value="general">General Enquiry</option>
+                          </select>
+                          <div class="contact-form-input-border"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <label for="enquiryType">Are you enquiring about?</label>
+                        <div class="contact-form-input-wrapper">
+                          <select id="enquiryType" name="enquiryType">
+                            <option value="enrolment">Enrolment</option>
+                            <option value="academic">Academic</option>
+                            <option value="sport">Sport</option>
+                            <option value="other">Other</option>
+                          </select>
+                          <div class="contact-form-input-border"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <label for="message">What is your question? *</label>
+                        <div class="contact-form-input-wrapper">
+                          <textarea id="message" name="message" rows="4"
+                            placeholder="Type your question, comment or feedback here..." required></textarea>
+                          <div class="contact-form-input-border"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn-rounded-large  btn-rounded-large-solid-blue"> Send Message </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Visit College Section -->
+        <section class="contact-visit-section position-relative section">
+          <div class="container-fluid">
+            <div class="row contact-visit-header">
+              <div class="col-12 col-lg-auto" data-gsap-children='{"h2":{"type":"fade-up"}}'>
+                <h2>Visit the College</h2>
+              </div>
+              <div class="col-12 col-lg-auto contact-visit-info"
+                data-gsap-children='{"p":{"type":"fade-up"}, "button":{"type":"zoom-in"}, "a":{"type":"zoom-in","delay":"0.3"}}'>
+                <p>
+                  St Patrick's College, Strathfield<br />
+                  Francis Street<br />
+                  Strathfield NSW 2135<br />
+                  Australia
+                </p>
+                <div class="contact-visit-buttons">
+                  <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue">Get Directions</a>
+                  <a href="#" class="btn-rounded-large btn-rounded-large-no-border">
+                    View Campus Map
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="contact-visit-map">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.5!2d151.0775!3d-33.8725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae3b3b3b3b3b%3A0x3b3b3b3b3b3b3b3b!2sSt%20Patrick%27s%20College%2C%20Francis%20Street%2C%20Strathfield%20NSW%202135!5e0!3m2!1sen!2sau!4v1234567890123!5m2!1sen!2sau"
+                    width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" title="St Patrick's College Location Map"> </iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section position-relative section">
+      <div class="cta-background position-absolute w-100 h-100">
+        <img src="assets/images/CTA.jpg" alt="CTA Background 1" class="cta-bg-img" loading="lazy"
+          onerror="this.style.display = 'none'" />
+
+        <div class="cta-overlay position-absolute w-100 h-100"></div>
+      </div>
+      <div class="container-fluid position-relative">
+        <div class="cta-block-wrap">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-6 cta-content">
+              <div class="cta-heading-wrapper" data-gsap-children='{"h1":{"type":"fade-up"}}'>
+                <h1>Begin your journey and let your light shine </h1>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-4 offset-xl-6 col-lg-6 col-md-6 offset-md-6 offset-lg-6">
+              <div class="cta-text-wrapper"
+                data-gsap-children='{"p":{"type":"fade-up"}, "button":{"type":"zoom-in", "stagger":"0.5"}}'>
+                <p>Every boy who walks through our gates begins a journey shaped by faith, friendship and challenge.
+                  <br />This is where confidence grows, talents emerge and young men learn to live with purpose and
+                  heart.
+                </p>
+                <div class="cta-buttons d-flex align-items-center">
+                  <a href="#" class="btn-rounded-large-solid cta-button-solid-white">Book a Tour</a>
+                  <a href="#" class="btn-rounded-large btn-rounded-large-outline-white">Enquire Today</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer position-relative">
+      <div class="footer-gradient position-absolute"></div>
+      <div class="container-fluid position-relative">
+        <div class="row">
+          <div class="col-12 col-lg-5 col-xl-4 footer-left position-relative">
+            <div class="footer-logo">
+              <div class="footer-crest">
+                <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College Crest" class="w-100 h-100" />
+              </div>
+              <div class="footer-college-name">
+                <h2>ST PATRICK'S COLLEGE</h2>
+              </div>
+            </div>
+            <div class="footer-mission">
+              <p>An independent Catholic day school for boys from Years 5 to 12 in the Edmund Rice tradition educating
+                spirited men of faith and purpose.</p>
+            </div>
+            <div class="footer-logos d-flex align-items-center">
+              <div class="footer-logo-centenary">
+                <img src="assets/icons/Logo Centenary.svg" alt="Centenary Logo" class="w-100 h-100" />
+              </div>
+              <div class="footer-divider-vertical"></div>
+              <div class="footer-logo-oldboys">
+                <img src="assets/icons/Logo Old Boys.svg" alt="Old Boys Logo" class="w-100 h-100" />
+              </div>
+              <div class="footer-divider-vertical"></div>
+              <div class="footer-logo-erea">
+                <img src="assets/icons/EREA Australia Logo Colour.svg" alt="EREA Logo" class="w-100 h-100" />
+              </div>
+            </div>
+          </div>
+          <div class="col-12 offset-xl-2 col-xl-6 col-lg-6 offset-lg-1 footer-right">
+            <div class="row">
+              <div class="col-6 col-md-4 footer-column">
+                <h3>Address</h3>
+                <div class="footer-address pt-2">
+                  <p>St Patrick's College</p>
+                  <p>Francis Street<br />Strathfield<br />2135 NSW</p>
+                </div>
+                <h3>Contact</h3>
+                <div class="footer-contact">
+                  <p>+612 9763 1000</p>
+                  <p>Contact Details</p>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 footer-column">
+                <h3>Explore</h3>
+                <div class="footer-links">
+                  <a href="#" class="footer-link">Home</a>
+                  <a href="#" class="footer-link">About</a>
+                  <a href="#" class="footer-link">Identity</a>
+                  <a href="#" class="footer-link">Learning</a>
+                  <a href="#" class="footer-link">Co-Curricular</a>
+                  <a href="#" class="footer-link">Community</a>
+                  <a href="#" class="footer-link">Enrolments</a>
+                  <a href="#" class="footer-link">Contact Us</a>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 footer-column">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                  <a href="#" class="footer-link">Enrolment Dashboard</a>
+                  <a href="#" class="footer-link">Pay Fees Online</a>
+                  <a href="#" class="footer-link">Canvas</a>
+                  <a href="#" class="footer-link">Sport Fixtures</a>
+                  <a href="#" class="footer-link">Old Boys' Website</a>
+                  <a href="#" class="footer-link">Edval</a>
+                  <a href="#" class="footer-link">TASS Staff Kiosk</a>
+                  <a href="#" class="footer-link">TASS Student Café</a>
+                  <a href="#" class="footer-link">TASS Parent Lounge</a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 footer-follow-wrapper">
+                <div class="footer-follow d-flex align-items-center">
+                  <span class="footer-follow-label">Follow Us</span>
+                  <div class="footer-social-links d-flex align-items-center">
+                    <a href="#" class="footer-social-link">Facebook</a>
+                    <a href="#" class="footer-social-link">Instagram</a>
+                    <a href="#" class="footer-social-link">Linkedin</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-10 col-lg-8 footer-acknowledgement-wrapper">
+                <div class="footer-acknowledgement">
+                  <p>We acknowledge the traditional owners of the land on which St Patrick's College stands, the Wangal
+                    clan of the Darug people.</p>
+                </div>
+              </div>
+              <div class="col-2 col-lg-4 footer-arrow-wrapper">
+                <div class="footer-arrow-up">
+                  <a href="#" class="footer-arrow-btn" id="footerArrowUp" aria-label="Back to top">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 10L20 30M20 10L10 20M20 10L30 20" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </header>
-
-      <!-- Mega Menu Overlay -->
-      <div class="mega-menu-overlay" id="menuOverlay"></div>
-
-      <!-- Mega Menu -->
-      <div class="mega-menu position-fixed top-0 start-0 end-0" id="megaMenu">
-        <div class="container-fluid d-flex flex-column h-100">
-          <div class="mega-menu-inner row g-4 flex-grow-1">
-            <div class="col-lg-4 col-md-5 menu-main-items d-flex flex-column">
-              <a href="#" class="menu-main-item" data-menu="home" data-image="assets/images/hero-image.jpg">Home</a>
-              <a href="#" class="menu-main-item active" data-menu="about" data-image="assets/icons/menu-image.jpg">About</a>
-              <a href="#" class="menu-main-item" data-menu="identity" data-image="assets/images/about-image.jpg">Identity</a>
-              <a href="#" class="menu-main-item" data-menu="learning" data-image="assets/images/news-1.jpg">Learning</a>
-              <a href="#" class="menu-main-item" data-menu="cocurricular" data-image="assets/images/cocurricular-bg.jpg">Co-Curricular</a>
-              <a href="#" class="menu-main-item" data-menu="community" data-image="assets/images/parents-community-bg.jpg">Community</a>
-              <a href="#" class="menu-main-item" data-menu="enrolment" data-image="assets/images/strategic-bg-1.jpg">Enrolment</a>
-            </div>
-            <div class="col-lg-4 col-md-4 menu-sub-items d-flex flex-column" id="menuSubItems">
-              <div class="menu-sub-items-group is-active" data-menu="about">
-                <a href="#" class="menu-sub-item active">Principal's Welcome</a>
-                <a href="#" class="menu-sub-item">Captain's Welcome</a>
-                <a href="#" class="menu-sub-item">History</a>
-                <a href="#" class="menu-sub-item">Building Our Future</a>
-                <a href="#" class="menu-sub-item">Mission and Strategic Plan</a>
-                <a href="#" class="menu-sub-item">Annual Reports</a>
-                <a href="#" class="menu-sub-item">Ideal Graduate</a>
-                <a href="#" class="menu-sub-item">Leadership Team</a>
-                <a href="#" class="menu-sub-item">Governance</a>
-                <a href="#" class="menu-sub-item">Policies and Forms</a>
-              </div>
-              <div class="menu-sub-items-group" data-menu="identity">
-                <a href="#" class="menu-sub-item active">Mission and Values</a>
-                <a href="#" class="menu-sub-item">Catholic Tradition</a>
-                <a href="#" class="menu-sub-item">Edmund Rice Heritage</a>
-                <a href="#" class="menu-sub-item">Student Wellbeing</a>
-                <a href="#" class="menu-sub-item">Diversity and Inclusion</a>
-              </div>
-              <div class="menu-sub-items-group" data-menu="learning">
-                <a href="#" class="menu-sub-item active">Curriculum Overview</a>
-                <a href="#" class="menu-sub-item">Learning Support</a>
-                <a href="#" class="menu-sub-item">Technology in Learning</a>
-                <a href="#" class="menu-sub-item">Assessment and Reporting</a>
-                <a href="#" class="menu-sub-item">Library and Resources</a>
-              </div>
-              <div class="menu-sub-items-group" data-menu="cocurricular">
-                <a href="#" class="menu-sub-item active">Sport</a>
-                <a href="#" class="menu-sub-item">Music and Performance</a>
-                <a href="#" class="menu-sub-item">Clubs and Societies</a>
-                <a href="#" class="menu-sub-item">Outdoor Education</a>
-                <a href="#" class="menu-sub-item">Leadership Programs</a>
-              </div>
-              <div class="menu-sub-items-group" data-menu="community">
-                <a href="#" class="menu-sub-item active">Parents and Carers</a>
-                <a href="#" class="menu-sub-item">Old Boys Network</a>
-                <a href="#" class="menu-sub-item">Community Partnerships</a>
-                <a href="#" class="menu-sub-item">Events and Calendar</a>
-                <a href="#" class="menu-sub-item">Support and Giving</a>
-              </div>
-              <div class="menu-sub-items-group" data-menu="enrolment">
-                <a href="#" class="menu-sub-item active">How to Apply</a>
-                <a href="#" class="menu-sub-item">Fees and Scholarships</a>
-                <a href="#" class="menu-sub-item">Tours and Open Days</a>
-                <a href="#" class="menu-sub-item">International Students</a>
-                <a href="#" class="menu-sub-item">Enrolment FAQs</a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-3 menu-image-wrapper d-flex align-items-stretch justify-content-center">
-              <img src="assets/icons/menu-image.jpg" alt="St Patrick's College" class="menu-image w-100" />
-            </div>
-          </div>
-          <div class="mega-menu-footer flex-shrink-0">
-            <div class="row align-items-center">
-              <div class="col-md-6 menu-footer-left">
-                <span>Francis Street, Strathfield 2135 NSW</span>
-                <span>+612 9763 1000</span>
-              </div>
-              <div class="col-md-6 menu-footer-right">
-                <span class="follow-label me-2">Follow Us</span>
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">Linkedin</a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <!-- Hero Section -->
-      <section class="hero contact-page-hero position-relative">
-        <div class="hero-content-wrap">
-          <div class="container-fluid position-relative">
-            <div class="row">
-              <div class="col-lg-8 col-md-7">
-                <div class="col-lg-auto hero-content">
-                  <div class="hero-gradient position-absolute"></div>
-                  <h1 class="hero-title">Contact</h1>
-                </div>
+      <div class="footer-large-text" data-marquee-duration="15" data-marquee-duration-mobile="10">
+        <h1>Let your light shine.&nbsp;</h1>
+      </div>
+      <div class="footer-bottom">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-12 col-lg-6 footer-copyright">
+              <p>© 2025 St Patrick's College Strathfield</p>
+            </div>
+            <div class="col-12 col-lg-6 footer-bottom-links d-flex justify-content-between">
+              <div class="footer-bottom-links-left d-flex align-items-center">
+                <span>ABN 70 273 700 830</span>
+                <a href="#">Policies</a>
+                <a href="#">Complaints</a>
+                <a href="#">Safeguarding</a>
               </div>
-              <div class="col-lg-4 col-md-5">
-                <div class="col-lg-auto hero-text d-flex flex-column justify-content-between align-items-start">
-                  <p class="mb-0">We’re glad you’re here. Whether you have a question about life at the College, want to book a visit, or simply need to reach a member of our team, we are here to help you with a warm welcome and a clear response.</p>
-                </div>
-              </div>
+              <a href="#" class="footer-design-link">Design</a>
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- Sticky Wrapper: constrains sticky behavior -->
-      <div class="sticky-wrapper">
-        <div class="hero-media w-100">
-          <div class="hero-media-wrapper position-relative w-100">
-            <!-- Hero Video (uncomment to enable) -->
-            <!-- <video class="hero-video position-absolute top-0 start-0 w-100 " id="heroVideo" autoplay muted loop
-                        playsinline preload="none" poster="assets/images/hero-image.jpg">
-                        <source src="assets/videos/hero-vid.mp4" type="video/mp4">
-                    </video> -->
-
-            <!-- Hero Image (remove when video is enabled) -->
-            <img src="assets/images/hero-image.jpg" alt="St Patrick's College" class="hero-video position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover" />
-
-            <div class="hero-media-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-          </div>
-        </div>
-
-        <!-- Contact Intro Section -->
-        <div class="sticky-content">
-          <section class="contact-intro-section position-relative section">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-12 col-lg-9" data-gsap-children='{"h2":{"type":"word-reveal"}}'>
-                  <h2> St Patrick's College is a place built on connection and community. Every voice matters here, and we look forward to hearing from you. </h2>
-                </div>
-                <div class="col-12 col-lg-3"></div>
-              </div>
-
-              <div class="contact-intro-cards-row">
-                <div class="row contact-intro-cards">
-                  <div class="col-12 col-md-6 col-lg-3">
-                    <div class="contact-intro-card">
-                      <div class="contact-intro-card-divider"></div>
-                      <div class="contact-intro-card-content">
-                        <div class="card-header">
-                          <h3>Call Us</h3>
-                          <p>+61 2 9763 1000</p>
-                          <br />
-                          <p>
-                            <strong>Office Hours:</strong><br />
-                            8:00am to 4:30pm<br />
-                            Monday to Friday
-                          </p></div
-                        >
-                        <div class="card-footer">
-                          <button class="btn-rounded-large-outline"> Call +61 2 9763 1000 </button>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="col-12 col-md-6 col-lg-3">
-                    <div class="contact-intro-card">
-                      <div class="contact-intro-card-divider"></div>
-                      <div class="contact-intro-card-content">
-                        <div class="card-header">
-                          <h3>Email Us</h3>
-                          <p>spc@spc.nsw.edu.au</p></div
-                        >
-                        <div class="card-footer">
-                          <button class="btn-rounded-large-outline"> Send a Message </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-6 col-lg-3">
-                    <div class="contact-intro-card">
-                      <div class="contact-intro-card-divider"></div>
-                      <div class="contact-intro-card-content">
-                        <div class="card-header">
-                          <h3>Campus Address</h3>
-                          <p>
-                            St Patrick's College, Strathfield<br />
-                            Francis Street<br />
-                            Strathfield NSW 2135<br />
-                            Australia
-                          </p></div
-                        >
-                        <div class="card-footer">
-                            <a href="#"  class="btn-rounded-large-outline"> View Map </a>
-                        </div></div
-                      >
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-6 col-lg-3">
-                    <div class="contact-intro-card">
-                      <div class="contact-intro-card-divider"></div>
-                      <div class="contact-intro-card-content">
-                        <div class="card-header">
-                          <h3>Postal Address</h3>
-                          <p>
-                            St Patrick's College, Strathfield<br />
-                            Private Mail Bag 1<br />
-                            Strathfield NSW 2135<br />
-                            Australia
-                          </p>
-                        </div>
-                        <div class="card-footer">
-                           <a href="#"  class="btn-rounded-large-outline"> View Map </a>
-                        </div></div
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Social Media Section -->
-          <section class="contact-social-section position-relative section">
-            <div class="contact-social-background position-absolute w-100 h-100">
-              <img src="assets/images/social-media-image.jpg" alt="Social Media Background" class="contact-social-bg-img" loading="lazy" onerror="this.style.display = 'none'" />
-              <div class="contact-social-overlay position-absolute w-100 h-100"></div>
-            </div>
-            <div class="container-fluid position-relative">
-              <div class="row">
-                <div class="col-12 col-lg-9">
-                  <div data-gsap-children='{"h2":{"type":"fade-up"}}' class="contact-social-content">
-                    <div>
-                      <h2>Follow life at SPC<br />on Social Media</h2>
-                      <div data-gsap-children='{"button":{"type":"zoom-in","stagger":"0.3"}}' class="contact-social-buttons">
-                       <a href="#"  class="btn-rounded-large-solid">Facebook</a>
-                          <a href="#"  class="btn-rounded-large-outline">Instagram</a>
-                         <a href="#"  class="btn-rounded-large-outline">LinkedIn</a>
-                      </div>
-                    </div>
-                    <div class="contact-social-text">
-                      <div class="row" data-gsap-children='{"p":{"type":"fade-up","stagger":"0.3"}}'>
-                        <div class="col-12 col-md-4">
-                          <p>We post regular updates including student achievements, HSC highlights, sporting results, performance nights, service initiatives, upcoming events and key announcements.</p>
-                        </div>
-                        <div class="col-12 col-md-4">
-                          <p>It is a simple way to stay informed, celebrate milestones and keep close to the daily life of our community.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Contact Form Section -->
-          <section class="contact-form-section position-relative section">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-12 col-lg-5 contact-form-image-col">
-                  <div data-gsap-children='{"h2":{"type":"fade-up"}, "img":{"type":"image-fade-in"}}' class="contact-form-image-wrapper">
-                    <h2>Send a Message</h2>
-                    <div class="contact-form-image">
-                      <img src="assets/images/contact-form-image.jpg" alt="Students" class="w-100 h-100" loading="lazy" onerror="this.style.display = 'none'" />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-lg-7 contact-form-col">
-                  <div data-gsap-children='{"p":{"type":"fade-up","delay":"0.3"}, "button":{"type":"zoom-in"}}' class="contact-form-content">
-                    <p> Please enter your details into the fields below, we will respond to your enquiry within 2 working days. An asterisk (*) indicates required fields. </p>
-                    <form class="contact-form">
-                      <div class="contact-form-fields" data-gsap-children='{"div":{"type":"fade-in","stagger":"0.05"}}'>
-                        <div class="row g-4">
-                          <div class="col-md-6">
-                            <label for="firstName">First Name *</label>
-                            <div class="contact-form-input-wrapper">
-                              <input type="text" id="firstName" name="firstName" required />
-                              <div class="contact-form-input-border"></div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <label for="surname">Surname *</label>
-                            <div class="contact-form-input-wrapper">
-                              <input type="text" id="surname" name="surname" required />
-                              <div class="contact-form-input-border"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row g-4">
-                          <div class="col-md-6">
-                            <label for="email">Email *</label>
-                            <div class="contact-form-input-wrapper">
-                              <input type="email" id="email" name="email" required />
-                              <div class="contact-form-input-border"></div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <label for="contactNumber">Preferred Contact Number</label>
-                            <div class="contact-form-input-wrapper">
-                              <input type="tel" id="contactNumber" name="contactNumber" placeholder="Mobile or landline number" />
-                              <div class="contact-form-input-border"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <label for="relationship">Relationship with the College</label>
-                          <div class="contact-form-input-wrapper">
-                            <select id="relationship" name="relationship">
-                              <option value="">Select Type</option>
-                              <option value="parent">Parent</option>
-                              <option value="student">Student</option>
-                              <option value="alumni">Alumni</option>
-                              <option value="other">Other</option>
-                            </select>
-                            <div class="contact-form-input-border"></div>
-                          </div>
-                        </div>
-                        <div>
-                          <label for="contactType">Who would you like to contact *</label>
-                          <div class="contact-form-input-wrapper">
-                            <select id="contactType" name="contactType" required>
-                              <option value="">Select Type</option>
-                              <option value="admissions">Admissions</option>
-                              <option value="academic">Academic</option>
-                              <option value="general">General Enquiry</option>
-                            </select>
-                            <div class="contact-form-input-border"></div>
-                          </div>
-                        </div>
-                        <div>
-                          <label for="enquiryType">Are you enquiring about?</label>
-                          <div class="contact-form-input-wrapper">
-                            <select id="enquiryType" name="enquiryType">
-                              <option value="enrolment">Enrolment</option>
-                              <option value="academic">Academic</option>
-                              <option value="sport">Sport</option>
-                              <option value="other">Other</option>
-                            </select>
-                            <div class="contact-form-input-border"></div>
-                          </div>
-                        </div>
-                        <div>
-                          <label for="message">What is your question? *</label>
-                          <div class="contact-form-input-wrapper">
-                            <textarea id="message" name="message" rows="4" placeholder="Type your question, comment or feedback here..." required></textarea>
-                            <div class="contact-form-input-border"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <button type="submit" class="btn-rounded-large-solid"> Send Message </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Visit College Section -->
-          <section class="contact-visit-section position-relative section">
-            <div class="container-fluid">
-              <div class="row contact-visit-header">
-                <div class="col-12 col-lg-auto" data-gsap-children='{"h2":{"type":"fade-up"}}'>
-                  <h2>Visit the College</h2>
-                </div>
-                <div class="col-12 col-lg-auto contact-visit-info" data-gsap-children='{"p":{"type":"fade-up"}, "button":{"type":"zoom-in"}, "a":{"type":"zoom-in","delay":"0.3"}}'>
-                  <p>
-                    St Patrick's College, Strathfield<br />
-                    Francis Street<br />
-                    Strathfield NSW 2135<br />
-                    Australia
-                  </p>
-                  <div class="contact-visit-buttons">
-                      <a href="#"  class="btn-rounded-large-outline">Get Directions</a>
-                    <a href="#" class="btn-rounded-large-no-border">
-                      View Campus Map
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="contact-visit-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.5!2d151.0775!3d-33.8725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae3b3b3b3b3b%3A0x3b3b3b3b3b3b3b3b!2sSt%20Patrick%27s%20College%2C%20Francis%20Street%2C%20Strathfield%20NSW%202135!5e0!3m2!1sen!2sau!4v1234567890123!5m2!1sen!2sau" width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="St Patrick's College Location Map"> </iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+        <div class="footer-decoration position-absolute w-100">
+          <img src="assets/images/Tie.png" alt="Footer Decoration" class="w-100 h-100" loading="lazy"
+            onerror="this.style.display = 'none'" />
         </div>
       </div>
+    </footer>
+  </div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-      <!-- CTA Section -->
-      <section class="cta-section position-relative section">
-        <div class="cta-background position-absolute w-100 h-100">
-          <img src="assets/images/CTA.jpg" alt="CTA Background 1" class="cta-bg-img" loading="lazy" onerror="this.style.display = 'none'" />
+  <script src="src/scripts/animations.js"></script>
+  <script src="src/scripts/main.js"></script>
+</body>
 
-          <div class="cta-overlay position-absolute w-100 h-100"></div>
-        </div>
-        <div class="container-fluid position-relative">
-          <div class="cta-block-wrap">
-            <div class="row">
-              <div class="col-xl-5 col-lg-6 col-md-6 cta-content">
-                <div class="cta-heading-wrapper" data-gsap-children='{"h1":{"type":"fade-up"}}'>
-                  <h1>Begin your journey and let your light shine </h1>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-4 offset-xl-6 col-lg-6 col-md-6 offset-md-6 offset-lg-6">
-                <div class="cta-text-wrapper" data-gsap-children='{"p":{"type":"fade-up"}, "button":{"type":"zoom-in", "stagger":"0.5"}}'>
-                  <p>Every boy who walks through our gates begins a journey shaped by faith, friendship and challenge. <br />This is where confidence grows, talents emerge and young men learn to live with purpose and heart.</p>
-                  <div class="cta-buttons d-flex align-items-center">
-                    <a href="#"  class="btn-rounded-large-solid cta-button-solid">Book a Tour</a>
-                    <a href="#"  class="btn-rounded-large-outline cta-button-outline">Enquire Today</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer Section -->
-      <footer class="footer position-relative">
-        <div class="footer-gradient position-absolute"></div>
-        <div class="container-fluid position-relative">
-          <div class="row">
-            <div class="col-12 col-lg-5 col-xl-4 footer-left position-relative">
-              <div class="footer-logo">
-                <div class="footer-crest">
-                  <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College Crest" class="w-100 h-100" />
-                </div>
-                <div class="footer-college-name">
-                  <h2>ST PATRICK'S COLLEGE</h2>
-                </div>
-              </div>
-              <div class="footer-mission">
-                <p>An independent Catholic day school for boys from Years 5 to 12 in the Edmund Rice tradition educating spirited men of faith and purpose.</p>
-              </div>
-              <div class="footer-logos d-flex align-items-center">
-                <div class="footer-logo-centenary">
-                  <img src="assets/icons/Logo Centenary.svg" alt="Centenary Logo" class="w-100 h-100" />
-                </div>
-                <div class="footer-divider-vertical"></div>
-                <div class="footer-logo-oldboys">
-                  <img src="assets/icons/Logo Old Boys.svg" alt="Old Boys Logo" class="w-100 h-100" />
-                </div>
-                <div class="footer-divider-vertical"></div>
-                <div class="footer-logo-erea">
-                  <img src="assets/icons/EREA Australia Logo Colour.svg" alt="EREA Logo" class="w-100 h-100" />
-                </div>
-              </div>
-            </div>
-            <div class="col-12 offset-xl-2 col-xl-6 col-lg-6 offset-lg-1 footer-right">
-              <div class="row">
-                <div class="col-6 col-md-4 footer-column">
-                  <h3>Address</h3>
-                  <div class="footer-address pt-2">
-                    <p>St Patrick's College</p>
-                    <p>Francis Street<br />Strathfield<br />2135 NSW</p>
-                  </div>
-                  <h3>Contact</h3>
-                  <div class="footer-contact">
-                    <p>+612 9763 1000</p>
-                    <p>Contact Details</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-4 footer-column">
-                  <h3>Explore</h3>
-                  <div class="footer-links">
-                    <a href="#" class="footer-link">Home</a>
-                    <a href="#" class="footer-link">About</a>
-                    <a href="#" class="footer-link">Identity</a>
-                    <a href="#" class="footer-link">Learning</a>
-                    <a href="#" class="footer-link">Co-Curricular</a>
-                    <a href="#" class="footer-link">Community</a>
-                    <a href="#" class="footer-link">Enrolments</a>
-                    <a href="#" class="footer-link">Contact Us</a>
-                  </div>
-                </div>
-                <div class="col-6 col-md-4 footer-column">
-                  <h3>Quick Links</h3>
-                  <div class="footer-links">
-                    <a href="#" class="footer-link">Enrolment Dashboard</a>
-                    <a href="#" class="footer-link">Pay Fees Online</a>
-                    <a href="#" class="footer-link">Canvas</a>
-                    <a href="#" class="footer-link">Sport Fixtures</a>
-                    <a href="#" class="footer-link">Old Boys' Website</a>
-                    <a href="#" class="footer-link">Edval</a>
-                    <a href="#" class="footer-link">TASS Staff Kiosk</a>
-                    <a href="#" class="footer-link">TASS Student Café</a>
-                    <a href="#" class="footer-link">TASS Parent Lounge</a>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 footer-follow-wrapper">
-                  <div class="footer-follow d-flex align-items-center">
-                    <span class="footer-follow-label">Follow Us</span>
-                    <div class="footer-social-links d-flex align-items-center">
-                      <a href="#" class="footer-social-link">Facebook</a>
-                      <a href="#" class="footer-social-link">Instagram</a>
-                      <a href="#" class="footer-social-link">Linkedin</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-10 col-lg-8 footer-acknowledgement-wrapper">
-                  <div class="footer-acknowledgement">
-                    <p>We acknowledge the traditional owners of the land on which St Patrick's College stands, the Wangal clan of the Darug people.</p>
-                  </div>
-                </div>
-                <div class="col-2 col-lg-4 footer-arrow-wrapper">
-                  <div class="footer-arrow-up">
-                    <a href="#"  class="footer-arrow-btn" id="footerArrowUp" aria-label="Back to top">
-                      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 10L20 30M20 10L10 20M20 10L30 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-large-text" data-marquee-duration="15" data-marquee-duration-mobile="10">
-          <h1>Let your light shine.&nbsp;</h1>
-        </div>
-        <div class="footer-bottom">
-          <div class="container-fluid">
-            <div class="row align-items-center">
-              <div class="col-12 col-lg-6 footer-copyright">
-                <p>© 2025 St Patrick's College Strathfield</p>
-              </div>
-              <div class="col-12 col-lg-6 footer-bottom-links d-flex justify-content-between">
-                <div class="footer-bottom-links-left d-flex align-items-center">
-                  <span>ABN 70 273 700 830</span>
-                  <a href="#">Policies</a>
-                  <a href="#">Complaints</a>
-                  <a href="#">Safeguarding</a>
-                </div>
-                <a href="#" class="footer-design-link">Design</a>
-              </div>
-            </div>
-          </div>
-          <div class="footer-decoration position-absolute w-100">
-            <img src="assets/images/Tie.png" alt="Footer Decoration" class="w-100 h-100" loading="lazy" onerror="this.style.display = 'none'" />
-          </div>
-        </div>
-      </footer>
-    </div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <script src="src/scripts/animations.js"></script>
-    <script src="src/scripts/main.js"></script>
-  </body>
 </html>
