@@ -153,12 +153,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .internal-content-image {
   width: 100%;
   position: relative;
   overflow: hidden;
+      display: flex;
+    height: 100%;
+
 
   img {
     width: 100%;
@@ -172,9 +176,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 0 4.5rem;
+ .internal-content-text{
+        padding: 0 4rem;
+    }
   .internal-content-buttons {
     margin-top: 1.25rem;
+ padding: 0 4rem;
+   
   }
   &.internal-content-text-col-reversed {
     .internal-content-buttons {
@@ -256,6 +264,19 @@
 // INTERNAL CONTENT - RESPONSIVE
 // ==========================================================================
 
+@media (min-width:992px) and (max-width:1200px){
+   .internal-content-text-col {
+     .internal-content-text,
+       .internal-content-buttons
+      {
+      padding:0 2rem;
+      flex-wrap:nowrap;
+     }
+   }
+
+}
+
+
 @media (max-width: 991px) {
   .internal-content {
     padding-top: var(--spacing-small);
@@ -288,21 +309,25 @@
   .internal-content-text-col {
     padding-left: 0;
 
+
     &.internal-content-text-col-reversed {
       padding-right: 0;
     }
-  }
-
-  .internal-content-text {
+      .internal-content-text {
     gap: var(--spacing-small);
+    padding:0 2rem;
     margin-bottom: var(--spacing-small);
   }
 
   .internal-content-buttons {
     gap: var(--spacing-small);
+    padding:0 2rem;
     flex-direction: row;
     align-items: center;
   }
+  }
+
+
 }
 
 @media (max-width: 767px) {
