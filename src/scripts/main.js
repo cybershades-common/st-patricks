@@ -723,8 +723,71 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        function buildHeroTitleSpans(titleEl) {
+            if (!titleEl) return [];
+
+            const existingSpans = Array.from(titleEl.querySelectorAll('span'));
+            if (existingSpans.length > 0) {
+                return existingSpans;
+            }
+
+            const hasElementChildren = Array.from(titleEl.childNodes)
+                .some((node) => node.nodeType === 1);
+            if (hasElementChildren) {
+                return [];
+            }
+
+            const text = titleEl.textContent || '';
+            if (!text.trim()) {
+                return [];
+            }
+
+            const splitAfterAttr = titleEl.getAttribute('data-hero-split-after');
+            const splitAfter = splitAfterAttr ? Number.parseInt(splitAfterAttr, 10) : Number.NaN;
+            const words = text.trim().split(/\s+/);
+
+            if (Number.isFinite(splitAfter) && splitAfter > 0 && words.length > splitAfter) {
+                const firstChunk = words.slice(0, splitAfter).join(' ');
+                const secondChunk = words.slice(splitAfter).join(' ');
+
+                titleEl.textContent = '';
+
+                const firstSpan = document.createElement('span');
+                firstSpan.textContent = `${firstChunk} `;
+                firstSpan.classList.add('hero-title-part');
+
+                const secondSpan = document.createElement('span');
+                secondSpan.textContent = secondChunk;
+                secondSpan.classList.add('hero-title-part');
+
+                titleEl.appendChild(firstSpan);
+                titleEl.appendChild(secondSpan);
+
+                return [firstSpan, secondSpan];
+            }
+
+            const parts = text.split(/(\s+)/);
+            titleEl.textContent = '';
+
+            parts.forEach((part) => {
+                if (!part) return;
+
+                if (/^\s+$/.test(part)) {
+                    titleEl.appendChild(document.createTextNode(part));
+                    return;
+                }
+
+                const span = document.createElement('span');
+                span.textContent = part;
+                span.classList.add('hero-title-word');
+                titleEl.appendChild(span);
+            });
+
+            return Array.from(titleEl.querySelectorAll('span'));
+        }
+
         const heroTitle = document.querySelector('.hero-title');
-        const heroTitleSpans = document.querySelectorAll('.hero-title span');
+        const heroTitleSpans = buildHeroTitleSpans(heroTitle);
         const heroText = document.querySelector('.hero-text p');
         const heroButton = document.querySelector('.hero-text button');
         const heroGradient = document.querySelector('.hero-gradient');
