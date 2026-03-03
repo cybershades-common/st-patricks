@@ -3161,6 +3161,7 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   z-index: 1;
 }
 .strategic-overlay {
+  padding: 3rem 0;
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
