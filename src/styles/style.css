@@ -440,6 +440,31 @@ hr {
   background-color: var(--primary-blue);
   color: var(--basic-white);
 }
+.btn-rounded-large-outline-golden {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-super-small);
+  padding: var(--spacing-2xs) var(--spacing-half-base);
+  border-radius: var(--radius-huge);
+  font-family: var(--font-family-helvetica-neue);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  border-color: var(--primary-gold, #84754E);
+  color: var(--primary-gold, #84754E);
+}
+.btn-rounded-large-outline-golden:hover {
+  background-color: var(--primary-gold, #84754E);
+  color: var(--basic-white);
+}
 .btn-rounded-large-outline-black {
   border-color: var(--basic-black);
   color: var(--basic-black);
@@ -3762,6 +3787,7 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   position: relative;
   min-height: 50.625rem;
   overflow: hidden;
+  padding: 2.0625rem 0;
 }
 .parents-community-background {
   top: 0;
