@@ -3,6 +3,7 @@
   padding-bottom: var(--spacing-small);
   background-color: var(--primary-gold-4);
   position: relative;
+  overflow: visible;
 }
 .internal-local-nav .container-fluid {
   position: relative;
@@ -89,6 +90,10 @@
     font-size: 2rem;
     letter-spacing: -0.02rem;
   }
+}
+.internal-local-nav + .internal-intro-text {
+  padding-top: 0;
+  background-color: transparent;
 }
 .internal-content {
   padding-top: var(--spacing-small-2);
