@@ -414,6 +414,7 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
+  max-width: fit-content;
 }
 .btn-rounded-large-outline-blue {
   display: inline-flex;
@@ -433,7 +434,8 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
-  border-color: var(--primary-blue);
+  max-width: fit-content;
+  border: 1px solid var(--primary-blue);
   color: var(--primary-blue);
 }
 .btn-rounded-large-outline-blue:hover {
@@ -458,7 +460,8 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
-  border-color: var(--primary-gold, #84754E);
+  max-width: fit-content;
+  border: 1px solid var(--primary-gold, #84754E);
   color: var(--primary-gold, #84754E);
 }
 .btn-rounded-large-outline-golden:hover {
@@ -466,7 +469,7 @@ hr {
   color: var(--basic-white);
 }
 .btn-rounded-large-outline-black {
-  border-color: var(--basic-black);
+  border: 1px solid var(--basic-black);
   color: var(--basic-black);
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
 }
@@ -490,9 +493,9 @@ hr {
   white-space: nowrap;
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
   cursor: pointer;
-  border: 1px solid transparent;
   background: transparent;
-  border-color: transparent;
+  max-width: fit-content;
+  border: 1px solid transparent;
   color: var(--primary-blue);
 }
 .btn-rounded-large-no-border svg {
@@ -506,7 +509,7 @@ hr {
   transform: translateX(4px);
 }
 .btn-rounded-large-outline-white {
-  border-color: var(--basic-white);
+  border: 1px solid var(--basic-white);
   color: var(--basic-white);
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
 }
@@ -532,6 +535,7 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
+  max-width: fit-content;
   background-color: var(--primary-blue);
   color: var(--basic-white);
   border-color: var(--primary-blue);
@@ -557,11 +561,13 @@ hr {
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
+  max-width: fit-content;
   background-color: var(--basic-white);
   color: var(--basic-black);
-  border-color: var(--basic-white);
+  border: 1px solid var(--basic-white);
 }
 .cta-button-solid-white:hover {
+  border: 1px solid var(--basic-black);
   background-color: var(--basic-black);
   color: var(--basic-white);
 }
@@ -1001,8 +1007,13 @@ hr {
 .internal-page .header:not(.menu-open):not(.header-scrolled) .logo-text {
   color: var(--basic-white);
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large-outline.btn-header {
-  border-color: var(--basic-white);
+.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-white {
+  borde: 1px solid var(--basic-white);
+  color: var(--basic-white);
+}
+.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-white:hover {
+  border: 1px solid var(--basic-black);
+  background: var(--basic-black);
   color: var(--basic-white);
 }
 .internal-page .header:not(.menu-open):not(.header-scrolled) .menu-text {
@@ -1014,6 +1025,16 @@ hr {
 }
 .internal-page .header:not(.menu-open):not(.header-scrolled) .hamburger-line {
   background-color: var(--basic-white);
+}
+.internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-white,
+.internal-page .header.header-scrolled .btn-rounded-large.btn-rounded-large-outline-white {
+  border: 1px solid var(--basic-black);
+  color: var(--basic-black);
+}
+.internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-white:hover,
+.internal-page .header.header-scrolled .btn-rounded-large.btn-rounded-large-outline-white:hover {
+  background: var(--basic-black);
+  color: var(--basic-white);
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .header.menu-open .dropdown-wrapper.hide-header-items {
@@ -1846,43 +1867,6 @@ body:has(.internal-content-single) .hero-internal-title {
   gap: var(--spacing-xs);
   align-items: center;
   flex-wrap: wrap;
-}
-.internal-content-buttons button {
-  border-color: var(--primary-blue);
-  color: var(--primary-blue);
-  background-color: transparent;
-  margin: 0;
-}
-.internal-content-buttons button:hover {
-  background-color: var(--primary-blue);
-  color: var(--basic-white);
-}
-.internal-content-buttons a {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-super-small);
-  padding: var(--spacing-2xs) var(--spacing-half-base);
-  border-radius: var(--radius-huge);
-  border-color: transparent;
-  color: var(--primary-blue);
-  background-color: transparent;
-  text-decoration: none;
-  margin: 0;
-  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
-}
-.internal-content-buttons a svg {
-  width: 0.75rem;
-  height: 0.75rem;
-  flex-shrink: 0;
-  transition: transform 0.4s ease-in-out;
-}
-.internal-content-buttons a:hover {
-  background-color: var(--primary-blue);
-  color: var(--basic-white);
-  text-decoration: none;
-}
-.internal-content-buttons a:hover svg {
-  transform: translateX(4px);
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .internal-content-text-col .internal-content-text,

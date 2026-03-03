@@ -22,11 +22,12 @@
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
+  max-width:fit-content;
 }
 
 .btn-rounded-large-outline-blue {
   .btn-rounded-large();
-  border-color: var(--primary-blue);
+  border:1px solid  var(--primary-blue);
   color: var(--primary-blue);
   &:hover {
     background-color: var(--primary-blue);
@@ -35,7 +36,7 @@
 }
 .btn-rounded-large-outline-golden{
   .btn-rounded-large();
-  border-color: var(--primary-gold, #84754E);
+  border:1px solid var(--primary-gold, #84754E);
   color:var(--primary-gold, #84754E);
   &:hover {
     background-color: var(--primary-gold, #84754E);
@@ -44,7 +45,7 @@
 
 }
 .btn-rounded-large-outline-black {
-  border-color: var(--basic-black);
+  border:1px solid var(--basic-black);
   color: var(--basic-black);
   transition:
     background-color 0.4s ease-in-out,
@@ -58,7 +59,7 @@
 
 .btn-rounded-large-no-border {
   .btn-rounded-large();
-  border-color: transparent;
+  border:1px solid transparent;
   color: var(--primary-blue);
 
   svg {
@@ -75,7 +76,7 @@
 }
 
 .btn-rounded-large-outline-white{
-  border-color: var(--basic-white);
+  border:1px solid var(--basic-white);
   color: var(--basic-white);
   transition:
     background-color 0.4s ease-in-out,
@@ -104,10 +105,11 @@
   .btn-rounded-large();
   background-color: var(--basic-white);
   color: var(--basic-black);
-  border-color: var(--basic-white);
+  border:1px solid var(--basic-white);
 
 
 &:hover {
+    border:1px solid var(--basic-black);
   background-color: var(--basic-black);
   color: var(--basic-white);
 }

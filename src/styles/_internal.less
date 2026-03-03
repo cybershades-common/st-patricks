@@ -225,51 +225,6 @@
   gap: var(--spacing-xs);
   align-items: center;
   flex-wrap: wrap;
-
-  button {
-    border-color: var(--primary-blue);
-    color: var(--primary-blue);
-    background-color: transparent;
-    margin: 0;
-
-    &:hover {
-      background-color: var(--primary-blue);
-      color: var(--basic-white);
-    }
-  }
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-super-small);
-    padding: var(--spacing-2xs) var(--spacing-half-base);
-    border-radius: var(--radius-huge);
-    border-color: transparent;
-    color: var(--primary-blue);
-    background-color: transparent;
-    text-decoration: none;
-    margin: 0;
-    transition:
-      background-color 0.4s ease-in-out,
-      color 0.4s ease-in-out;
-
-    svg {
-      width: 0.75rem;
-      height: 0.75rem;
-      flex-shrink: 0;
-      transition: transform 0.4s ease-in-out;
-    }
-
-    &:hover {
-      background-color: var(--primary-blue);
-      color: var(--basic-white);
-      text-decoration: none;
-
-      svg {
-        transform: translateX(4px);
-      }
-    }
-  }
 }
 
 // ==========================================================================

@@ -537,9 +537,16 @@
       .logo-text {
         color: var(--basic-white);
       }
-      .btn-rounded-large-outline.btn-header {
-        border-color: var(--basic-white);
+     .btn-rounded-large.btn-rounded-large-outline-white {
+        borde: 1px solid var(--basic-white);
         color: var(--basic-white);
+
+        &:hover{
+           border: 1px solid var(--basic-black);
+           background:var(--basic-black);
+           color: var(--basic-white);
+
+        }
       }
       .menu-text {
         color: var(--basic-white);
@@ -554,6 +561,18 @@
         background-color: var(--basic-white);
       }
     }
+        &.menu-open,
+        &.header-scrolled {
+             .btn-rounded-large.btn-rounded-large-outline-white {
+          border: 1px solid  var(--basic-black);
+        color: var(--basic-black);
+&:hover{
+    background: var(--basic-black);
+        color: var(--basic-white);
+}
+
+      }
+        }
   }
 }
 
