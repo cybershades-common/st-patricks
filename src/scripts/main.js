@@ -2693,15 +2693,32 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!slides.length) return;
 
         let currentIndex = 1;
-        let isAnimating = false;
+        let activeTimeline = null;
+        const itemSelector = 'small, h2, p, button';
+
+        function syncToIndex(index) {
+            slides.forEach((slide, i) => {
+                const isActive = i === index;
+                gsap.set(slide, { autoAlpha: isActive ? 1 : 0, zIndex: isActive ? 1 : 0 });
+                gsap.set(slide.querySelectorAll(itemSelector), { autoAlpha: isActive ? 1 : 0, y: 0 });
+            });
+            bgSlides.forEach((bg, i) => gsap.set(bg, { autoAlpha: i === index ? 1 : 0, scale: 1 }));
+        }
 
         // Initial state — active slide visible, rest hidden
-        slides.forEach((slide, i) => gsap.set(slide, { autoAlpha: i === currentIndex ? 1 : 0, zIndex: i === currentIndex ? 1 : 0 }));
-        bgSlides.forEach((bg, i) => gsap.set(bg, { autoAlpha: i === currentIndex ? 1 : 0 }));
+        syncToIndex(currentIndex);
 
         function goToSlide(newIndex) {
-            if (isAnimating || newIndex === currentIndex) return;
-            isAnimating = true;
+            if (newIndex === currentIndex) return;
+            if (newIndex < 0 || newIndex >= slides.length) return;
+
+            if (activeTimeline) {
+                activeTimeline.kill();
+                activeTimeline = null;
+            }
+
+            gsap.killTweensOf(section.querySelectorAll(`${itemSelector}, .cocurricular-bg-slide, .cocurricular-bg-slide img`));
+            syncToIndex(currentIndex);
 
             const dir = newIndex > currentIndex ? 1 : -1;
             const oldIndex = currentIndex;
@@ -2713,8 +2730,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const toSlide = slides[newIndex];
             const fromBg = bgSlides[oldIndex];
             const toBg = bgSlides[newIndex];
-            const fromItems = Array.from(fromSlide.querySelectorAll('small, h2, p, button'));
-            const toItems = Array.from(toSlide.querySelectorAll('small, h2, p, button'));
+            const fromItems = Array.from(fromSlide.querySelectorAll(itemSelector));
+            const toItems = Array.from(toSlide.querySelectorAll(itemSelector));
 
             // Stack: fromSlide on top during out, toSlide below
             gsap.set(fromSlide, { zIndex: 3 });
@@ -2723,8 +2740,11 @@ document.addEventListener('DOMContentLoaded', function () {
             gsap.set(toBg, { autoAlpha: 0, scale: 1.08 });
 
             const tl = gsap.timeline({
-                onComplete: () => { isAnimating = false; }
+                onComplete: () => {
+                    activeTimeline = null;
+                }
             });
+            activeTimeline = tl;
 
             // Content out — directional stagger
             tl.to(fromItems, {
