@@ -1464,8 +1464,8 @@ hr {
 .hero-internal {
   position: relative;
   width: 100%;
-  height: 88.88vh;
-  height: 88.88svh;
+  height: 100vh;
+  height: 100svh;
   min-height: 31.25rem;
   overflow: hidden;
   display: flex;
