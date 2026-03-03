@@ -16,7 +16,7 @@
   margin-bottom: 1.875rem;
 }
 .internal-local-nav .gradient-circle.top-right {
-  top: -48rem;
+  top: -42rem;
 }
 .internal-local-nav-tab {
   border-color: var(--primary-blue);
@@ -101,6 +101,10 @@
 }
 .internal-local-nav + .internal-intro-text {
   padding-top: 0;
+  background-color: transparent;
+}
+.internal-local-nav + .internal-intro-text + .internal-content,
+.internal-local-nav + .internal-intro-text + .internal-content-single {
   background-color: transparent;
 }
 .internal-content {
