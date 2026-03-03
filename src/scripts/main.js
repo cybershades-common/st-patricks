@@ -742,48 +742,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 return [];
             }
 
-            const splitAfterAttr = titleEl.getAttribute('data-hero-split-after');
-            const splitAfter = splitAfterAttr ? Number.parseInt(splitAfterAttr, 10) : Number.NaN;
-            const words = text.trim().split(/\s+/);
-
-            if (Number.isFinite(splitAfter) && splitAfter > 0 && words.length > splitAfter) {
-                const firstChunk = words.slice(0, splitAfter).join(' ');
-                const secondChunk = words.slice(splitAfter).join(' ');
-
-                titleEl.textContent = '';
-
-                const firstSpan = document.createElement('span');
-                firstSpan.textContent = `${firstChunk} `;
-                firstSpan.classList.add('hero-title-part');
-
-                const secondSpan = document.createElement('span');
-                secondSpan.textContent = secondChunk;
-                secondSpan.classList.add('hero-title-part');
-
-                titleEl.appendChild(firstSpan);
-                titleEl.appendChild(secondSpan);
-
-                return [firstSpan, secondSpan];
+            const words = text.trim().split(/\s+/).filter(Boolean);
+            if (words.length <= 2) {
+                return [];
             }
 
-            const parts = text.split(/(\s+)/);
+            const splitIndex = words.length === 3 ? 1 : Math.ceil(words.length / 2);
+            const firstChunk = words.slice(0, splitIndex).join(' ');
+            const secondChunk = words.slice(splitIndex).join(' ');
+
+            if (!firstChunk || !secondChunk) {
+                return [];
+            }
+
             titleEl.textContent = '';
 
-            parts.forEach((part) => {
-                if (!part) return;
+            const firstSpan = document.createElement('span');
+            firstSpan.textContent = firstChunk;
+            firstSpan.classList.add('hero-title-part');
 
-                if (/^\s+$/.test(part)) {
-                    titleEl.appendChild(document.createTextNode(part));
-                    return;
-                }
+            const secondSpan = document.createElement('span');
+            secondSpan.textContent = secondChunk;
+            secondSpan.classList.add('hero-title-part');
 
-                const span = document.createElement('span');
-                span.textContent = part;
-                span.classList.add('hero-title-word');
-                titleEl.appendChild(span);
-            });
+            titleEl.appendChild(firstSpan);
+            titleEl.appendChild(document.createTextNode(' '));
+            titleEl.appendChild(secondSpan);
 
-            return Array.from(titleEl.querySelectorAll('span'));
+            return [firstSpan, secondSpan];
         }
 
         const heroTitle = document.querySelector('.hero-title');
