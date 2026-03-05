@@ -90,6 +90,10 @@ select:focus-within {
   top: -48rem;
   right: -45%;
 }
+.section .gradient-circle.right-bottom {
+  bottom: -48rem;
+  right: -45%;
+}
 a[href^="tel"] {
   color: var(--basic-black);
   text-decoration: none;
