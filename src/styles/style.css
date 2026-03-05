@@ -3594,6 +3594,9 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   .cocurricular-section .container-fluid {
     min-height: 50.625rem;
   }
+  .cocurricular-section .container-fluid .cocurricular-content {
+    min-height: 700px;
+  }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
   html body .cocurricular-section .container-fluid > .row {
