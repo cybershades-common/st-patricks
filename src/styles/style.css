@@ -4065,7 +4065,7 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
     padding-right: var(--spacing-xs);
   }
   .testimonials-content {
-    gap: var(--spacing-small);
+    gap: 3rem;
   }
   .testimonials-image-wrapper {
     width: 100%;
