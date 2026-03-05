@@ -4065,7 +4065,7 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
     padding-right: var(--spacing-xs);
   }
   .testimonials-content {
-    gap: 3rem;
+    gap: var(--spacing-small);
   }
   .testimonials-image-wrapper {
     width: 100%;
@@ -4135,6 +4135,9 @@ body:has(.internal-content-single) .internal-intro-text .internal-intro-text-con
   .testimonials-image-col {
     padding: 0.625rem;
     margin-bottom: 1.5rem;
+  }
+  .testimonials-section .testimonials-content .testimonials-bottom-row {
+    padding-top: 2rem;
   }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
