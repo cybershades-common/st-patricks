@@ -169,7 +169,9 @@
   padding: 0;
   cursor: pointer;
   color: var(--basic-black);
-  transition: color 0.4s ease-in-out, transform 0.4s ease-in-out;
+  transition:
+    color 0.4s ease-in-out,
+    transform 0.4s ease-in-out;
 }
 
 .testimonials-arrow-btn:hover {
@@ -287,32 +289,28 @@
     margin-bottom: 1.5rem;
   }
 
-  
- .testimonials-section .testimonials-content  .testimonials-bottom-row {
-   padding-top:2rem;
+  .testimonials-section .testimonials-content .testimonials-bottom-row {
+    padding-top: 2rem;
   }
 }
 
-
-
-@media only screen and (min-device-width : 390px) and (max-device-width : 992px) and (orientation : landscape) {
+@media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
   html {
     body {
-
-      .testimonials-button-col,
-      .testimonials-arrows-col {
+      testimonials-button-col,
+      testimonials-arrows-col {
         width: 50%;
       }
 
-      .testimonials-arrows {
+      testimonials-arrows {
         justify-content: flex-end;
       }
 
-      .testimonials-text-col {
+      testimonials-text-col {
         height: 100%;
       }
 
-      .testimonials-image-wrapper {     
+      testimonials-image-wrapper {
         aspect-ratio: 446/500;
       }
     }
