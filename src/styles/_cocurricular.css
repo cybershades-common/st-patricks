@@ -57,12 +57,11 @@
 .cocurricular-left h2 {
   color: var(--basic-white);
   margin-bottom: 1.875rem;
-  max-width: 35rem;
 }
 .cocurricular-left p {
   color: rgba(255, 255, 255, 0.85);
-  max-width: 34.9375rem;
   margin-bottom: 2.5rem;
+  padding-right: 3rem;
 }
 .cocurricular-left button {
   border-color: var(--basic-white);
@@ -80,16 +79,10 @@
   gap: 1.25rem;
   flex-wrap: wrap;
 }
-.cocurricular-nav-buttons button {
-  border-color: var(--basic-white);
-  color: var(--basic-white);
+.cocurricular-nav-buttons a {
   white-space: nowrap;
 }
-.cocurricular-nav-buttons button:hover {
-  background-color: var(--basic-white);
-  color: var(--basic-black);
-}
-.cocurricular-nav-buttons button.active {
+.cocurricular-nav-buttons a.active {
   background-color: var(--basic-white);
   color: var(--basic-black);
 }
@@ -123,10 +116,12 @@
 }
 .cocurricular-slide .cocurricular-left {
   padding-top: 0;
-  max-width: 50%;
 }
 @media (max-width: 991px) {
-  .cocurricular-slide .cocurricular-left {
+  .cocurricular-slides {
+    overflow: visible;
+  }
+  .cocurricular-slides .cocurricular-slide .cocurricular-left {
     max-width: 100%;
   }
 }
@@ -172,7 +167,9 @@
   .cocurricular-section .container-fluid {
     min-height: 50.625rem;
   }
- 
+  .cocurricular-section .container-fluid .cocurricular-content {
+    min-height: 700px;
+  }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
   html body .cocurricular-section .container-fluid > .row {
