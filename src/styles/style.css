@@ -2845,7 +2845,7 @@ body:has(.internal-content-single) .hero-internal-title {
 }
 .contact-form-image {
   width: 100%;
-  max-width: 27.875rem;
+  /* max-width: 27.875rem; // 446px */
   height: 34.4375rem;
   overflow: hidden;
 }
@@ -2872,7 +2872,7 @@ body:has(.internal-content-single) .hero-internal-title {
 .contact-form-fields {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-base);
+  gap: 1.25rem;
 }
 .contact-form-fields > div:not(.row) {
   display: flex;
@@ -2883,7 +2883,7 @@ body:has(.internal-content-single) .hero-internal-title {
   font-size: var(--font-size-b2);
   font-weight: var(--font-weight-regular);
   line-height: 1;
-  letter-spacing: 0.3125rem;
+  letter-spacing: 0.04688rem;
   text-transform: uppercase;
   color: #0033a0;
   margin: 0;
@@ -3001,6 +3001,7 @@ body:has(.internal-content-single) .hero-internal-title {
   color: #041c2c;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
+  margin-bottom: 0;
 }
 .cf-dropdown-option.is-placeholder {
   color: rgba(4, 28, 44, 0.4);
@@ -3329,7 +3330,6 @@ body:has(.internal-content-single) .hero-internal-title {
   font-size: var(--font-size-b1);
   line-height: var(--line-height-b1);
   color: var(--basic-black-secondary);
-  width: 35.3125rem;
   max-width: 100%;
   margin: 0;
   margin-bottom: 1rem;
@@ -3488,12 +3488,11 @@ body:has(.internal-content-single) .hero-internal-title {
 .cocurricular-left h2 {
   color: var(--basic-white);
   margin-bottom: 1.875rem;
-  max-width: 35rem;
 }
 .cocurricular-left p {
   color: rgba(255, 255, 255, 0.85);
-  max-width: 34.9375rem;
   margin-bottom: 2.5rem;
+  padding-right: 3rem;
 }
 .cocurricular-left button {
   border-color: var(--basic-white);
@@ -3548,7 +3547,6 @@ body:has(.internal-content-single) .hero-internal-title {
 }
 .cocurricular-slide .cocurricular-left {
   padding-top: 0;
-  max-width: 50%;
 }
 @media (max-width: 991px) {
   .cocurricular-slides {
@@ -5103,9 +5101,11 @@ body:has(.internal-content-single) .hero-internal-title {
   }
 }
 @media (max-width: 767px) {
-  .news-detail-hero .news-detail-hero-content-wrap {
-    /* height: 35vh;
-      min-height: 300px; */
+  .news-detail-hero {
+    /* .news-detail-hero-content-wrap {
+      height: 35vh;
+      min-height: 300px; 
+    }*/
   }
   .news-detail-hero .container-fluid {
     justify-content: flex-start;

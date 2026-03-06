@@ -356,7 +356,7 @@
 
 .contact-form-image {
   width: 100%;
-  max-width: 27.875rem; // 446px
+  /* max-width: 27.875rem; // 446px */
   height: 34.4375rem; // 551px
   overflow: hidden;
 
@@ -388,7 +388,7 @@
 .contact-form-fields {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-base);
+  gap: 1.25rem;
 
   > div:not(.row) {
     display: flex;
@@ -400,7 +400,7 @@
     font-size: var(--font-size-b2);
     font-weight: var(--font-weight-regular);
     line-height: 1;
-    letter-spacing: 0.3125rem; // 5px
+    letter-spacing:0.04688rem; // 5px
     text-transform: uppercase;
     color: #0033a0; // bright-blue from Figma
     margin: 0;
@@ -544,6 +544,7 @@
     transition:
       background-color 0.15s ease,
       color 0.15s ease;
+      margin-bottom: 0;
 
     &.is-placeholder {
       color: rgba(4, 28, 44, 0.4);
