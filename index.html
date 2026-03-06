@@ -552,7 +552,7 @@
                     <div class="col-12 statistics-top" data-gsap-children='{
                         "h2":{"type":"fade-up"},
                         "p":{"type":"fade-up"},
-                        "button":{"type":"zoom-in"}
+                        "a":{"type":"zoom-in"}
                     }'>
                         <div class="row  align-items-start">
                             <div class="col-12 col-lg-5 col-md-5 statistics-heading-col">
@@ -622,7 +622,7 @@
             <div class="container-fluid position-relative">
                 <div class="row ">
                     <div class="col-lg-6 parents-community-content"
-                        data-gsap-children='{"h2":{"type":"fade-up"}, "p":{"type":"fade-up"}, "button":{"type":"zoom-in"}}'>
+                        data-gsap-children='{"h2":{"type":"fade-up"}, "p":{"type":"fade-up"}, "a":{"type":"zoom-in"}}'>
                         <h2>Parents and Friends Community</h2>
                         <p>Faith is at the heart of our life. Grounded in Gospel
                             spirituality, we foster meaningful relationships and service. Through retreats, prayer, and
@@ -695,8 +695,8 @@
                             </div>
                         </div>
                         <div class="row  align-items-center testimonials-bottom-row"
-                            data-gsap-children='{"button":{"type":"zoom-in", "start":"top 100%", "stagger" :"0.4"}}'
-                            data-gsap-children-mobile='{"button":{"start":"top 80%"}}'>
+                            data-gsap-children='{"a":{"type":"zoom-in", "start":"top 100%", "stagger" :"0.4"}}'
+                            data-gsap-children-mobile='{"a":{"start":"top 80%"}}'>
                             <div class="col-6 col-lg-6 testimonials-button-col">
                                 <a href="#"
                                     class=" btn-rounded-large btn-rounded-large-outline-blue testimonials-button">Read
@@ -744,7 +744,7 @@
                                 <h2>Latest News and Happenings</h2>
                             </div>
                             <div class="col-12 col-xl-5 offset-xl-2 col-lg-6 offset-lg-1 col-md-6 offset-md-1 latest-news-content-col"
-                                data-gsap-children='{"p":{"type":"fade-up"}, "button":{"type":"fade-in", "stagger":"0.4"}}'>
+                                data-gsap-children='{"p":{"type":"fade-up"}, "a":{"type":"fade-in", "stagger":"0.4"}}'>
                                 <p>Stay up to date with what's
                                     happening at SPC, from
                                     Open Days and community events, to student achievements and campus news, this is
@@ -767,14 +767,15 @@
                             <div class="col-12 col-lg-auto latest-news-filters-col"
                                 data-gsap-children='{"button":{"type":"fade-in", "stagger":"0.4"}}'>
                                 <div class="latest-news-filters d-flex align-items-center">
-                                    <a class="btn-rounded-large btn-rounded-large-outline-black latest-news-filter-btn latest-news-filter-btn-active"
-                                        data-filter="all">All News</a>
-                                    <a href="#"
+                                    <button
+                                        class="btn-rounded-large btn-rounded-large-outline-black latest-news-filter-btn latest-news-filter-btn-active"
+                                        data-filter="all">All News</button>
+                                    <button href="#"
                                         class="btn-rounded-large btn-rounded-large-outline-golden latest-news-filter-btn"
-                                        data-filter="junior">Junior</a>
-                                    <a href="#"
+                                        data-filter="junior">Junior</button>
+                                    <button href="#"
                                         class="btn-rounded-large btn-rounded-large-outline-golden latest-news-filter-btn"
-                                        data-filter="senior">Senior</a>
+                                        data-filter="senior">Senior</button>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-auto latest-news-arrows-col"
@@ -1092,7 +1093,7 @@
                     <div class="row">
                         <div class="col-xl-4 offset-xl-6 col-lg-6 col-md-6 offset-md-6 offset-lg-6">
                             <div class="cta-text-wrapper"
-                                data-gsap-children='{"p":{"type":"fade-up"}, "button":{"type":"zoom-in", "stagger":"0.5"}}'>
+                                data-gsap-children='{"p":{"type":"fade-up"}, "a":{"type":"zoom-in", "stagger":"0.5"}}'>
                                 <p>Every boy who walks through our gates begins a
                                     journey shaped by
                                     faith,

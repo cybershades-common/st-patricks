@@ -2738,12 +2738,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const slides = Array.from(section.querySelectorAll('.cocurricular-slide'));
         const bgSlides = Array.from(section.querySelectorAll('.cocurricular-bg-slide'));
-        const navBtns = Array.from(section.querySelectorAll('.cocurricular-nav-btn'));
+        const navBtns = Array.from(section.querySelectorAll('.cocurricular-nav-buttons button'));
         if (!slides.length) return;
 
         let currentIndex = 1;
         let activeTimeline = null;
-        const itemSelector = 'small, h2, p, button';
+        const itemSelector = 'small, h2, p, a';
 
         function syncToIndex(index) {
             slides.forEach((slide, i) => {
@@ -2756,6 +2756,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Initial state — active slide visible, rest hidden
         syncToIndex(currentIndex);
+        navBtns.forEach((btn, i) => btn.classList.toggle('active', i === currentIndex));
+
+        // Entrance animation for active slide content on scroll
+        const cocurricularLabel = section.querySelector('.cocurricular-label');
+        const activeSlide = slides[currentIndex];
+        const activeItems = Array.from(activeSlide.querySelectorAll(itemSelector));
+        const entranceEls = cocurricularLabel ? [cocurricularLabel, ...activeItems] : activeItems;
+        gsap.set(entranceEls, { autoAlpha: 0, y: 40 });
+        ScrollTrigger.create({
+            trigger: section,
+            start: 'top 70%',
+            once: true,
+            onEnter: () => {
+                gsap.to(entranceEls, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.7,
+                    stagger: 0.12,
+                    ease: 'power3.out',
+                    delay: 0.4
+                });
+            }
+        });
 
         function goToSlide(newIndex) {
             if (newIndex === currentIndex) return;
