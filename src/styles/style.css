@@ -2654,7 +2654,6 @@ body:has(.internal-content-single) .hero-internal-title {
   }
   .contact-intro-cards > [class*="col-"]:last-child .contact-intro-card {
     margin-bottom: 0;
-    padding-bottom: 0;
   }
 }
 @media (max-width: 767px) {
@@ -2662,10 +2661,10 @@ body:has(.internal-content-single) .hero-internal-title {
     max-width: 48%;
   }
   .contact-intro-cards .contact-intro-card {
-    padding: 1.875rem 0.75rem;
+    padding: 1.875rem 0;
   }
-  .contact-intro-cards .contact-intro-card:last-child {
-    padding: 1.875rem 0.75rem;
+  .contact-intro-card-content .card-footer .btn-rounded-large {
+    padding: 0.9375rem;
   }
 }
 .contact-social-section {
@@ -3036,7 +3035,7 @@ body:has(.internal-content-single) .hero-internal-title {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--spacing-base);
+  gap: var(--spacing-base) 0;
 }
 .contact-visit-header h2 {
   font-size: var(--font-size-h2);
@@ -3051,7 +3050,7 @@ body:has(.internal-content-single) .hero-internal-title {
   flex-direction: column;
   gap: var(--spacing-xs);
   flex: 1;
-  max-width: 35.3125rem;
+  /*  max-width: 35.3125rem; // 565px*/
 }
 .contact-visit-info p {
   font-size: var(--font-size-b1);
@@ -3114,8 +3113,6 @@ body:has(.internal-content-single) .hero-internal-title {
   .contact-visit-section {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
   }
   .contact-visit-section .container-fluid {
     gap: var(--spacing-base);
@@ -3133,6 +3130,9 @@ body:has(.internal-content-single) .hero-internal-title {
   }
 }
 @media (max-width: 767px) {
+  .contact-page-hero .hero-content-wrap {
+    height: auto;
+  }
   .contact-visit-header h2 {
     font-size: 2rem;
   }
