@@ -679,9 +679,11 @@
   }
 }
 @media (max-width: 767px) {
-  .news-detail-hero .news-detail-hero-content-wrap {
-    /* height: 35vh;
-      min-height: 300px; */
+  .news-detail-hero {
+    /* .news-detail-hero-content-wrap {
+      height: 35vh;
+      min-height: 300px; 
+    }*/
   }
   .news-detail-hero .container-fluid {
     justify-content: flex-start;
