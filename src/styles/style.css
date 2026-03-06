@@ -1382,7 +1382,7 @@ hr {
   opacity: 0;
   visibility: hidden;
 }
-.hero-text button {
+.hero-text a {
   opacity: 0;
   visibility: hidden;
   clip-path: none;

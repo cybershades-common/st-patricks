@@ -775,7 +775,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const heroTitle = document.querySelector('.hero-title');
         const heroTitleSpans = buildHeroTitleSpans(heroTitle);
         const heroText = document.querySelector('.hero-text p');
-        const heroButton = document.querySelector('.hero-text button');
+        const heroButton = document.querySelector('.hero-text a');
         const heroGradient = document.querySelector('.hero-gradient');
 
         if (!heroTitle || !heroText) {
@@ -1308,7 +1308,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function initMobileSlider() {
             const localTrack = activeTrack;
             const slides = Array.from(localTrack.querySelectorAll('.latest-news-slide'));
-            if (!slides.length) return () => {};
+            if (!slides.length) return () => { };
 
             const getSlideWidth = () => slides[0].offsetWidth;
             const getGap = () => parseFloat(getComputedStyle(localTrack).gap) || 20;
@@ -1421,7 +1421,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function initDesktopSlider() {
             const localTrack = activeTrack;
             const slides = Array.from(localTrack.querySelectorAll('.latest-news-slide'));
-            if (!slides.length) return () => {};
+            if (!slides.length) return () => { };
 
             const activeWidth = 680;
             const inactiveWidth = 333;
@@ -1739,24 +1739,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const TIMING = {
             lineDuration: 2.5,
-            lineEase:     'none',
-            lineStagger:  0.2,
+            lineEase: 'none',
+            lineStagger: 0.2,
             contentDuration: 1.2,
-            contentEase:     'back.out(1.1)',
-            contentDelay:    0.5,
-            contentStagger:  0.15
+            contentEase: 'back.out(1.1)',
+            contentDelay: 0.5,
+            contentStagger: 0.15
         };
 
         // Set initial states
         cards.forEach(card => {
-            const divider  = card.querySelector('.contact-intro-card-divider');
+            const divider = card.querySelector('.contact-intro-card-divider');
             const children = card.querySelectorAll('.contact-intro-card-content > *');
 
             if (divider) {
                 gsap.set(divider, {
-                    clipPath:       'inset(0 0 100% 0)',
+                    clipPath: 'inset(0 0 100% 0)',
                     webkitClipPath: 'inset(0 0 100% 0)',
-                    willChange:     'clip-path'
+                    willChange: 'clip-path'
                 });
             }
 
@@ -1767,35 +1767,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const tl = gsap.timeline({
             scrollTrigger: {
-                trigger:       container,
-                start:         'top 85%',
+                trigger: container,
+                start: 'top 85%',
                 toggleActions: 'play none none none'
             }
         });
 
         cards.forEach((card, index) => {
-            const divider  = card.querySelector('.contact-intro-card-divider');
+            const divider = card.querySelector('.contact-intro-card-divider');
             const children = card.querySelectorAll('.contact-intro-card-content > *');
             const cardStart = index * TIMING.lineStagger;
 
             // 1. Divider line reveals top → bottom
             if (divider) {
                 tl.to(divider, {
-                    clipPath:       'inset(0 0 0% 0)',
+                    clipPath: 'inset(0 0 0% 0)',
                     webkitClipPath: 'inset(0 0 0% 0)',
                     duration: TIMING.lineDuration,
-                    ease:     TIMING.lineEase
+                    ease: TIMING.lineEase
                 }, cardStart);
             }
 
             // 2. Content children stagger fade-up
             if (children.length) {
                 tl.to(children, {
-                    y:        0,
+                    y: 0,
                     autoAlpha: 1,
                     duration: TIMING.contentDuration,
-                    ease:     TIMING.contentEase,
-                    stagger:  TIMING.contentStagger
+                    ease: TIMING.contentEase,
+                    stagger: TIMING.contentStagger
                 }, cardStart + TIMING.contentDelay);
             }
         });
@@ -2887,11 +2887,11 @@ document.addEventListener('DOMContentLoaded', function () {
     initLatestNewsHeroSlider();
 
 });
-        function updateGradientSize() {
-            halfW = heroGradient.offsetWidth / 2;
-            halfH = heroGradient.offsetHeight / 2;
-            originalCenterX = originalLeft + halfW;
-            originalCenterY = originalBottom + halfH;
-        }
+function updateGradientSize() {
+    halfW = heroGradient.offsetWidth / 2;
+    halfH = heroGradient.offsetHeight / 2;
+    originalCenterX = originalLeft + halfW;
+    originalCenterY = originalBottom + halfH;
+}
 
-        window.addEventListener('resize', updateGradientSize);
+window.addEventListener('resize', updateGradientSize);
