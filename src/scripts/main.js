@@ -1519,8 +1519,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 gsap.to(oldTrack, {
                     opacity: 0,
-                    y: -10,
-                    duration: 0.38,
+                    y: -16,
+                    duration: 0.55,
                     ease: 'power2.inOut',
                     onComplete: () => {
                         // Reset and hide old track
@@ -1539,8 +1539,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         // Fade in new track
                         gsap.fromTo(newTrack,
-                            { display: 'flex', opacity: 0, y: 14 },
-                            { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' }
+                            { display: 'flex', opacity: 0, y: 20 },
+                            { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' }
                         );
                     }
                 });
