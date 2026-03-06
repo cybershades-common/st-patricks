@@ -1208,7 +1208,7 @@ class GSAPAnimations {
 
     // If called on a card, find the container (row)
     // If called on container, use it directly
-    const isCard = el.classList.contains('internal-explore-card') || el.classList.contains('latest-news-list-card') || el.classList.contains('about-nav-card');
+    const isCard = el.classList.contains('internal-explore-card') || el.classList.contains('latest-news-list-card') || el.classList.contains('about-nav-card') || el.classList.contains('news-detail-gallery-item');
     const container = isCard
       ? (el.closest('.news-detail-keep-reading-cards')
         || el.closest('.latest-news-list-grid')
@@ -1227,7 +1227,7 @@ class GSAPAnimations {
     const stagger = cfg.stagger ? parseFloat(cfg.stagger) : (isMobile ? 0.2 : 0.15);
 
     // Find all cards within the container (support all card types)
-    const cards = Array.from(container.querySelectorAll('.internal-explore-card, .latest-news-list-card, .about-nav-card'));
+    const cards = Array.from(container.querySelectorAll('.internal-explore-card, .latest-news-list-card, .about-nav-card, .news-detail-gallery-item'));
     if (!cards.length) return;
 
     // Group cards by their visual row based on offsetTop
@@ -1268,7 +1268,7 @@ class GSAPAnimations {
         // Get divider for news cards
         const divider = card.querySelector('.latest-news-list-card-divider');
 
-        if (!img || !h5) return;
+        if (!img) return;
 
         // Calculate stagger delay based on position in row
         const staggerDelay = cardIndexInRow * stagger;
@@ -1299,12 +1299,14 @@ class GSAPAnimations {
         });
 
         // Initial state for h5 (fade-up)
-        gsap.set(h5, {
-          y: 20,
-          autoAlpha: 0,
-          force3D: true,
-          willChange: 'transform, opacity'
-        });
+        if (h5) {
+          gsap.set(h5, {
+            y: 20,
+            autoAlpha: 0,
+            force3D: true,
+            willChange: 'transform, opacity'
+          });
+        }
 
         // Initial state for category content (news cards)
         if (category) {
@@ -1373,22 +1375,24 @@ class GSAPAnimations {
         }
 
         // Animate h5 with fade-up
-        gsap.to(h5, {
-          y: 0,
-          autoAlpha: 1,
-          duration: cfg.duration || 1.25,
-          ease: cfg.ease || 'power2.out',
-          delay: staggerDelay + 0.2,
-          force3D: true,
-          scrollTrigger: {
-            trigger: card,
-            start: start,
-            toggleActions: 'play none none none'
-          },
-          onComplete: () => {
-            gsap.set(h5, { clearProps: 'will-change' });
-          }
-        });
+        if (h5) {
+          gsap.to(h5, {
+            y: 0,
+            autoAlpha: 1,
+            duration: cfg.duration || 1.25,
+            ease: cfg.ease || 'power2.out',
+            delay: staggerDelay + 0.2,
+            force3D: true,
+            scrollTrigger: {
+              trigger: card,
+              start: start,
+              toggleActions: 'play none none none'
+            },
+            onComplete: () => {
+              gsap.set(h5, { clearProps: 'will-change' });
+            }
+          });
+        }
       });
     });
   }
