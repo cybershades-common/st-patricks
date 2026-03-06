@@ -1504,7 +1504,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Filter tabs
         const filterTabs = document.querySelectorAll('.latest-news-filter-btn');
         filterTabs.forEach(tab => {
-            tab.addEventListener('click', function () {
+            tab.addEventListener('click', function (e) {
+                e.preventDefault();
                 if (this.classList.contains('latest-news-filter-btn-active')) return;
                 filterTabs.forEach(t => t.classList.remove('latest-news-filter-btn-active'));
                 this.classList.add('latest-news-filter-btn-active');
