@@ -4160,6 +4160,12 @@ body:has(.internal-content-single) .hero-internal-title {
     aspect-ratio: 446/500;
   }
 }
+@media (max-width: 380px) {
+  .testimonials-text-col {
+    height: 21.4375rem;
+    margin-bottom: 1.275rem;
+  }
+}
 .latest-news-section {
   background-color: var(--basic-white);
   padding-top: var(--spacing-small-2);
