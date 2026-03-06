@@ -931,11 +931,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Pin hero-media so subsequent sections roll over it
     const heroMedia = document.querySelector('.hero-media');
-    if (heroMedia) {
+    const nextSection = heroMedia?.nextElementSibling;
+
+    if (heroMedia && nextSection) {
         ScrollTrigger.create({
             trigger: heroMedia,
             start: 'top top',
-            endTrigger: '.about-section',
+            endTrigger: nextSection,
             end: 'bottom top',
             pin: true,
             pinSpacing: false
