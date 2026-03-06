@@ -16,8 +16,9 @@
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
+  max-width: fit-content;
 }
-.btn-rounded-large-outline {
+.btn-rounded-large-outline-blue {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -35,19 +36,46 @@
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
-  border-color: var(--primary-blue);
+  max-width: fit-content;
+  border: 1px solid var(--primary-blue);
   color: var(--primary-blue);
 }
-.btn-rounded-large-outline:hover {
+.btn-rounded-large-outline-blue:hover {
   background-color: var(--primary-blue);
   color: var(--basic-white);
 }
-.btn-rounded-large-outline.btn-header {
-  border-color: var(--basic-black);
+.btn-rounded-large-outline-golden {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-super-small);
+  padding: var(--spacing-2xs) var(--spacing-half-base);
+  border-radius: var(--radius-huge);
+  font-family: var(--font-family-helvetica-neue);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  max-width: fit-content;
+  border: 1px solid var(--primary-gold, #84754E);
+  color: var(--primary-gold, #84754E);
+}
+.btn-rounded-large-outline-golden:hover {
+  background-color: var(--primary-gold, #84754E);
+  color: var(--basic-white);
+}
+.btn-rounded-large-outline-black {
+  border: 1px solid var(--basic-black);
   color: var(--basic-black);
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
 }
-.btn-rounded-large-outline.btn-header:hover {
+.btn-rounded-large-outline-black:hover {
   background-color: var(--basic-black);
   color: var(--basic-white);
 }
@@ -67,9 +95,9 @@
   white-space: nowrap;
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
   cursor: pointer;
-  border: 1px solid transparent;
   background: transparent;
-  border-color: transparent;
+  max-width: fit-content;
+  border: 1px solid transparent;
   color: var(--primary-blue);
 }
 .btn-rounded-large-no-border svg {
@@ -82,7 +110,16 @@
 .btn-rounded-large-no-border:hover svg {
   transform: translateX(4px);
 }
-.btn-rounded-large-solid {
+.btn-rounded-large-outline-white {
+  border: 1px solid var(--basic-white);
+  color: var(--basic-white);
+  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+}
+.btn-rounded-large-outline-white:hover {
+  background-color: var(--basic-white);
+  color: var(--basic-black);
+}
+.btn-rounded-large-solid-blue {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -100,20 +137,47 @@
   cursor: pointer;
   border: 1px solid transparent;
   background: transparent;
+  max-width: fit-content;
   background-color: var(--primary-blue);
   color: var(--basic-white);
   border-color: var(--primary-blue);
 }
-.btn-rounded-large-solid:hover {
+.btn-rounded-large-solid-blue:hover {
   background-color: var(--primary-blue-tint);
+}
+.cta-button-solid-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-super-small);
+  padding: var(--spacing-2xs) var(--spacing-half-base);
+  border-radius: var(--radius-huge);
+  font-family: var(--font-family-helvetica-neue);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  max-width: fit-content;
+  background-color: var(--basic-white);
+  color: var(--basic-black);
+  border: 1px solid var(--basic-white);
+}
+.cta-button-solid-white:hover {
+  border: 1px solid var(--basic-black);
+  background-color: var(--basic-black);
+  color: var(--basic-white);
 }
 @media (max-width: 767px) {
   .btn-rounded-large,
-  .btn-rounded-large-outline,
+  .btn-rounded-large-outline-blue,
   .btn-rounded-large-no-border,
-  .btn-rounded-large-solid {
+  .btn-rounded-large-solid-blue {
     line-height: 1;
-    padding-top: calc(var(--spacing-2xs) + 0.125rem);
-    padding-bottom: calc(var(--spacing-2xs) - 0.125rem);
   }
 }
