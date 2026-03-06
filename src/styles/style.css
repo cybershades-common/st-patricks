@@ -3120,10 +3120,6 @@ body:has(.internal-content-single) .hero-internal-title {
   .contact-visit-section .container-fluid {
     gap: var(--spacing-base);
   }
-  .contact-visit-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
   .contact-visit-header h2 {
     font-size: 2.5rem;
     white-space: normal;
