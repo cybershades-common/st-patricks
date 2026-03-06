@@ -2654,7 +2654,6 @@ body:has(.internal-content-single) .hero-internal-title {
   }
   .contact-intro-cards > [class*="col-"]:last-child .contact-intro-card {
     margin-bottom: 0;
-    padding-bottom: 0;
   }
 }
 @media (max-width: 767px) {
@@ -2662,10 +2661,10 @@ body:has(.internal-content-single) .hero-internal-title {
     max-width: 48%;
   }
   .contact-intro-cards .contact-intro-card {
-    padding: 1.875rem 0.75rem;
+    padding: 1.875rem 0;
   }
-  .contact-intro-cards .contact-intro-card:last-child {
-    padding: 1.875rem 0.75rem;
+  .contact-intro-card-content .card-footer .btn-rounded-large {
+    padding: 0.9375rem;
   }
 }
 .contact-social-section {
@@ -3114,8 +3113,6 @@ body:has(.internal-content-single) .hero-internal-title {
   .contact-visit-section {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
   }
   .contact-visit-section .container-fluid {
     gap: var(--spacing-base);
