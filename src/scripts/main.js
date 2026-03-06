@@ -2738,7 +2738,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const slides = Array.from(section.querySelectorAll('.cocurricular-slide'));
         const bgSlides = Array.from(section.querySelectorAll('.cocurricular-bg-slide'));
-        const navBtns = Array.from(section.querySelectorAll('.cocurricular-nav-buttons button'));
+        const navBtns = Array.from(section.querySelectorAll('.cocurricular-nav-buttons a'));
         if (!slides.length) return;
 
         let currentIndex = 1;
@@ -2846,7 +2846,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Nav button clicks
         navBtns.forEach((btn, i) => {
-            btn.addEventListener('click', () => goToSlide(i));
+            btn.addEventListener('click', (e) => { e.preventDefault(); goToSlide(i); });
         });
 
         // Touch swipe support
