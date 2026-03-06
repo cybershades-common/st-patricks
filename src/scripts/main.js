@@ -1,3 +1,11 @@
+// Scroll to top on page refresh/load
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.addEventListener('load', function () {
+    window.scrollTo(0, 0);
+});
+
 // Menu functionality
 document.addEventListener('DOMContentLoaded', function () {
     const header = document.getElementById('header');
