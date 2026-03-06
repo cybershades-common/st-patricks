@@ -929,6 +929,19 @@ document.addEventListener('DOMContentLoaded', function () {
         initHeroAnimations();
     }, 50);
 
+    // Pin hero-media so subsequent sections roll over it
+    const heroMedia = document.querySelector('.hero-media');
+    if (heroMedia) {
+        ScrollTrigger.create({
+            trigger: heroMedia,
+            start: 'top top',
+            endTrigger: '.about-section',
+            end: 'bottom top',
+            pin: true,
+            pinSpacing: false
+        });
+    }
+
     // Dropdown animation: clip-path curtain + stagger items
     function initDropdownAnimations() {
         const dropdowns = document.querySelectorAll('.dropdown');

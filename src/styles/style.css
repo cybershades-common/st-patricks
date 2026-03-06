@@ -1387,15 +1387,6 @@ hr {
   visibility: hidden;
   clip-path: none;
 }
-.sticky-wrapper {
-  position: relative;
-  z-index: 0;
-}
-.sticky-content {
-  position: relative;
-  z-index: 5;
-  transform: translateZ(0);
-}
 .hero-media {
   position: relative;
   width: 100%;
@@ -1405,11 +1396,6 @@ hr {
   overflow: hidden;
   z-index: 0;
   transform: translateZ(0);
-}
-.sticky-wrapper .hero-media {
-  position: sticky !important;
-  top: 0;
-  z-index: 1;
 }
 .hero-media-wrapper {
   position: relative;
@@ -2426,7 +2412,7 @@ body:has(.internal-content-single) .hero-internal-title {
   padding-bottom: 2rem;
   background-color: var(--primary-gold-4);
   position: relative;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
 }
 .about-section .container-fluid {
