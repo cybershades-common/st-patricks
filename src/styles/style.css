@@ -2409,6 +2409,7 @@ body:has(.internal-content-single) .hero-internal-title {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 1rem;
 }
 .about-nav-card-image {
   width: 100%;
