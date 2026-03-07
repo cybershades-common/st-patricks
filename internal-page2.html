@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <script>if('scrollRestoration'in history){history.scrollRestoration='manual';}window.scrollTo(0,0);</script>
+    <script>if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } window.scrollTo(0, 0);</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St Patrick's College</title>
     <link rel="icon" type="image/svg+xml" href="assets/icons/fevicon-logo.svg">
@@ -24,20 +24,24 @@
         <header class="header position-fixed top-0 start-0 end-0" id="header">
             <div class="container-fluid">
                 <div class="header-row row">
-                    <div class=" left-block">
-                        <div class="header-logo d-flex align-items-center">
-                            <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College" class="flex-shrink-0">
-                            <div class="header-logo-text d-flex flex-column justify-content-center">
-                                <span class="logo-text logo-text-main">ST PATRICK'S</span>
-                                <span class="logo-text logo-text-sub">COLLEGE</span>
-                            </div>
+                  <div class="left-block">
+                          <div class="header-logo d-flex align-items-center">
+                            <a href="/">
+                                <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College" class="flex-shrink-0">
+                                <div class="-text d-flex flex-column justify-content-center">
+                                    <span class="logo-text logo-text-main">ST PATRICK'S</span>
+                                    <span class="logo-text logo-text-sub">COLLEGE</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="right-block">
                         <div class="col-lg-auto header-nav d-flex  align-items-center">
-                            <a href="#" class="btn-rounded-large  btn-rounded-large-outline-white   btn-header btn-book-tour ">Book
+                            <a href="#"
+                                class="btn-rounded-large  btn-rounded-large-outline-white   btn-header btn-book-tour ">Book
                                 a Tour</a>
-                            <a href="#" class="btn-rounded-large  btn-rounded-large-outline-white  btn-header btn-enquire hide-header-items">Enquire
+                            <a href="#"
+                                class="btn-rounded-large  btn-rounded-large-outline-white  btn-header btn-enquire hide-header-items">Enquire
                                 Today</a>
                             <div class="dropdown-wrapper hide-header-items dropdown">
                                 <button class="menu-dropdown-btn dropdown-toggle" type="button"
@@ -83,14 +87,14 @@
                             </div>
                             <div class="icon-menu-wrap">
                                 <div class="header-icons-wrapper d-flex align-items-center d-none d-md-inline-flex">
-                                     <a href="#" class="header-icon-btn">
+                                    <a href="#" class="header-icon-btn">
                                         <img src="assets/icons/header-search-icon.svg" alt="Search">
-                                     </a>
+                                    </a>
                                     <a href="#" class="header-icon-btn">
                                         <img src="assets/icons/profile-icon.svg" alt="Profile">
                                     </a>
                                 </div>
-                                 <button class="menu-toggle d-flex align-items-center" id="menuToggle">
+                                <button class="menu-toggle d-flex align-items-center" id="menuToggle">
                                     <span class="menu-text">MENU</span>
                                     <div class="hamburger" id="hamburger">
                                         <span class="hamburger-line"></span>
@@ -113,19 +117,19 @@
             <div class="container-fluid d-flex flex-column h-100">
                 <div class="mega-menu-inner row g-4 flex-grow-1">
                     <div class="col-lg-4 col-md-5 menu-main-items d-flex flex-column">
-                        <a href="#" class="menu-main-item" data-menu="home"
+                        <a href="/" class="menu-main-item" data-menu="home"
                             data-image="assets/images/hero-image.jpg">Home</a>
-                        <a href="#" class="menu-main-item active" data-menu="about"
+                        <a href="about.html" class="menu-main-item active" data-menu="about"
                             data-image="assets/icons/menu-image.jpg">About</a>
-                        <a href="#" class="menu-main-item" data-menu="identity"
+                        <a href="our-identity.html" class="menu-main-item" data-menu="identity"
                             data-image="assets/images/about-image.jpg">Identity</a>
-                        <a href="#" class="menu-main-item" data-menu="learning"
+                        <a href="learning-at-spc.html" class="menu-main-item" data-menu="learning"
                             data-image="assets/images/news-1.jpg">Learning</a>
-                        <a href="#" class="menu-main-item" data-menu="cocurricular"
+                        <a href="co-curricular.html" class="menu-main-item" data-menu="cocurricular"
                             data-image="assets/images/cocurricular-bg.jpg">Co-Curricular</a>
-                        <a href="#" class="menu-main-item" data-menu="community"
+                        <a href="spc-community.html" class="menu-main-item" data-menu="community"
                             data-image="assets/images/parents-community-bg.jpg">Community</a>
-                        <a href="#" class="menu-main-item" data-menu="enrolment"
+                        <a href="enrolment.html" class="menu-main-item" data-menu="enrolment"
                             data-image="assets/images/strategic-bg-1.jpg">Enrolment</a>
                     </div>
                     <div class="col-lg-4 col-md-4 menu-sub-items d-flex flex-column" id="menuSubItems">
@@ -206,7 +210,7 @@
                 <div class="hero-internal-overlay position-absolute w-100 h-100"></div>
             </div>
             <div class="container-fluid position-relative">
-                <div class="hero-internal-content justify-content-center" 
+                <div class="hero-internal-content justify-content-center"
                     data-gsap-children='{"span":{"type":"masked-word","stagger":"0.3","delay":"0.3","ease":"back.out(1.3)"}}'
                     data-gsap-immediate="true">
                     <h1 class="hero-internal-title"><span>Principal's</span> <span>Welcome</span></h1>
@@ -217,18 +221,33 @@
         <!-- Local Navigation Section -->
         <section class="internal-local-nav position-relative section">
             <div class="container-fluid">
-                <div class="internal-local-nav-tabs justify-content-center" data-gsap-children='{"a":{"type":"fade-in","stagger":"0.08"}}'>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">About Us</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Principal's Welcome</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Captain's Welcome</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">History</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Building Our Future</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Mission and Strategic Plan</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Annual Reports</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Ideal Graduate</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Leadership Team</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Governance</a>
-                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Policies and Forms</a>
+                <div class="internal-local-nav-tabs justify-content-center"
+                    data-gsap-children='{"a":{"type":"fade-in","stagger":"0.08"}}'>
+                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">About
+                        Us</a>
+                    <a href="#"
+                        class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Principal's
+                        Welcome</a>
+                    <a href="#"
+                        class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Captain's
+                        Welcome</a>
+                    <a href="#"
+                        class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">History</a>
+                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Building
+                        Our Future</a>
+                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Mission
+                        and Strategic Plan</a>
+                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Annual
+                        Reports</a>
+                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Ideal
+                        Graduate</a>
+                    <a href="#"
+                        class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Leadership
+                        Team</a>
+                    <a href="#"
+                        class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Governance</a>
+                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue internal-local-nav-tab">Policies
+                        and Forms</a>
                 </div>
             </div>
         </section>
@@ -350,7 +369,7 @@
                         <div class="col-12 col-lg-4 offset-lg-1 internal-explore-content-col">
                             <p>St Patrick's College has built generations of leaders grounded in faith and integrity.
                                 Our students thrive academically and grow as people of conscience.</p>
-                             <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue">Discover our Impact</a>
+                            <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue">Discover our Impact</a>
                         </div>
                     </div>
                 </div>
@@ -480,7 +499,9 @@
                                     men learn to live with purpose and heart.</p>
                                 <div class="cta-buttons d-flex align-items-center">
                                     <a href="#" class="btn-rounded-large-solid cta-button-solid-white">Book a Tour</a>
-                                     <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue cta-button-outline">Enquire Today</a>
+                                    <a href="#"
+                                        class="btn-rounded-large btn-rounded-large-outline-blue cta-button-outline">Enquire
+                                        Today</a>
                                 </div>
                             </div>
                         </div>
@@ -586,7 +607,7 @@
                             </div>
                             <div class="col-2 col-lg-4 footer-arrow-wrapper">
                                 <div class="footer-arrow-up">
-                                     <button class="footer-arrow-btn" id="footerArrowUp" aria-label="Back to top">
+                                    <button class="footer-arrow-btn" id="footerArrowUp" aria-label="Back to top">
                                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M20 10L20 30M20 10L10 20M20 10L30 20" stroke="currentColor"

@@ -40,6 +40,12 @@
   opacity: 0;
   visibility: hidden;
   gap: 1rem;
+
+  a{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .header-logo img {
@@ -306,6 +312,7 @@
   display: none;
   flex-direction: column;
   gap: 0.3125rem;
+  padding: 0.5rem 0;
 }
 
 .menu-sub-items-group.is-active {
@@ -711,7 +718,9 @@
   }
 
   // Sub menu overlay that slides from left
-  .menu-sub-items {
+
+  .container-fluid .row > div{
+  &.menu-sub-items {
     position: fixed;
     top: 0;
     left: 0;
@@ -734,7 +743,7 @@
       pointer-events: auto;
     }
   }
-
+}
   // Back button
   .menu-sub-back {
     display: block;

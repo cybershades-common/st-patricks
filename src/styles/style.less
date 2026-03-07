@@ -85,10 +85,9 @@ select {
       right: -45%;
     }
     &.top-left {
-     
     }
-    &.right-bottom{
-        bottom: -48rem;
+    &.right-bottom {
+      bottom: -48rem;
       right: -45%;
     }
   }
@@ -99,15 +98,32 @@ a[href^="tel"] {
 }
 
 .ar-680-584 {
-    aspect-ratio: 680/584;
+  aspect-ratio: 680/584;
 }
 
+.container-fluid {
+  .row {
+    margin: 0 -0.625rem;
+    > div {
+      padding: 0 0.625rem;
+    }
+  }
+}
 
-.container-fluid{
-  .row{
-    margin:0 -0.625rem;
-    >div{
-      padding:0 0.625rem;
+.ar-680-460 {
+  aspect-ratio: 680/460;
+}
+.two-column-cta {
+  a {
+    h4 {
+      color: var(--primary-blue, #10069f);
+      /* Heading 4 Sans */
+      font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
+      font-size: var(--font-size-h4, 1.875rem);
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      margin: 1rem 0 2.5rem;
     }
   }
 }

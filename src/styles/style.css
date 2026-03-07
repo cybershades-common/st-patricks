@@ -107,6 +107,19 @@ a[href^="tel"] {
 .container-fluid .row > div {
   padding: 0 0.625rem;
 }
+.ar-680-460 {
+  aspect-ratio: 680/460;
+}
+.two-column-cta a h4 {
+  color: var(--primary-blue, #10069f);
+  /* Heading 4 Sans */
+  font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
+  font-size: var(--font-size-h4, 1.875rem);
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin: 1rem 0 2.5rem;
+}
 @font-face {
   font-family: 'Helvetica Neue LT Pro';
   src: url('../../assets/fonts/HelveticaNeueLTProLt.woff2') format('woff2'), url('../../assets/fonts/HelveticaNeueLTProLt.woff') format('woff');
@@ -615,6 +628,11 @@ hr {
   visibility: hidden;
   gap: 1rem;
 }
+.header-logo a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 .header-logo img {
   width: 4.375rem;
   height: auto;
@@ -835,6 +853,7 @@ hr {
   display: none;
   flex-direction: column;
   gap: 0.3125rem;
+  padding: 0.5rem 0;
 }
 .menu-sub-items-group.is-active {
   display: flex;
@@ -1147,7 +1166,7 @@ hr {
     margin-bottom: var(--spacing-xs);
     padding: 2rem 0;
   }
-  .menu-sub-items {
+  .container-fluid .row > div.menu-sub-items {
     position: fixed;
     top: 0;
     left: 0;
@@ -1165,7 +1184,7 @@ hr {
     visibility: visible;
     pointer-events: none;
   }
-  .menu-sub-items.active {
+  .container-fluid .row > div.menu-sub-items.active {
     transform: translateX(0);
     pointer-events: auto;
   }
@@ -3152,7 +3171,7 @@ body:has(.internal-content-single) .hero-internal-title {
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .contact-form-section .contact-form-image-wrapper {
-    justify-content: flex-start;
+    height: auto;
   }
 }
 .strategic-section {
