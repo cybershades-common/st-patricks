@@ -110,6 +110,9 @@ a[href^="tel"] {
 .ar-680-460 {
   aspect-ratio: 680/460;
 }
+.two-column-cta {
+  background: var(--primary-gold-4);
+}
 .two-column-cta a h4 {
   color: var(--primary-blue, #10069f);
   /* Heading 4 Sans */
