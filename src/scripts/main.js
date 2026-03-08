@@ -739,6 +739,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 return existingSpans;
             }
 
+            // Handle <br> tags: split content around <br> into two spans
+            const brEl = titleEl.querySelector('br');
+            if (brEl) {
+                const nodes = Array.from(titleEl.childNodes);
+                const brIndex = nodes.indexOf(brEl);
+                const firstText = nodes.slice(0, brIndex).map(n => n.textContent).join('').trim();
+                const secondText = nodes.slice(brIndex + 1).map(n => n.textContent).join('').trim();
+                if (firstText && secondText) {
+                    titleEl.innerHTML = '';
+                    const firstSpan = document.createElement('span');
+                    firstSpan.textContent = firstText;
+                    firstSpan.classList.add('hero-title-part');
+                    const secondSpan = document.createElement('span');
+                    secondSpan.textContent = secondText;
+                    secondSpan.classList.add('hero-title-part');
+                    titleEl.appendChild(firstSpan);
+                    titleEl.appendChild(document.createElement('br'));
+                    titleEl.appendChild(secondSpan);
+                    return [firstSpan, secondSpan];
+                }
+            }
+
             const hasElementChildren = Array.from(titleEl.childNodes)
                 .some((node) => node.nodeType === 1);
             if (hasElementChildren) {
