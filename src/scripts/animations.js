@@ -1290,7 +1290,7 @@ class GSAPAnimations {
 
         // Initial state for image
         gsap.set(img, {
-          scale: 1.3,
+          scale: 1.12,
           autoAlpha: 0,
           transformOrigin: '50% 50%',
           force3D: true,
@@ -1341,8 +1341,8 @@ class GSAPAnimations {
         gsap.to(img, {
           scale: 1,
           autoAlpha: 1,
-          duration: 1,
-          ease: cfg.ease || 'power2.out',
+          duration: 1.5,
+          ease: cfg.ease || 'power3.out',
           delay: staggerDelay,
           force3D: true,
           scrollTrigger: {
