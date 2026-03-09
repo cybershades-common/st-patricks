@@ -8,9 +8,9 @@ class GSAPAnimations {
       duration: 1.25,
       start: 'top 80%',
       ease: {
-        fade:  'power2.out',
+        fade: 'power2.out',
         slide: 'power2.out',
-        zoom:  'none'
+        zoom: 'none'
       }
     };
     this.init();
@@ -123,7 +123,7 @@ class GSAPAnimations {
       // Merge mobile config over desktop config
       let config = desktopConfig;
       if (isMobile && mobileConfig) {
-        config = {...desktopConfig};
+        config = { ...desktopConfig };
         Object.entries(mobileConfig).forEach(([selector, mobileAnim]) => {
           const desktopAnim = config[selector];
 
@@ -226,10 +226,10 @@ class GSAPAnimations {
 
     // Check if element or its parent has hero-related classes
     const hasHeroClass = el?.closest('.hero-section') ||
-                        el?.closest('.hero-content') ||
-                        el?.closest('.hero-text') ||
-                        el?.classList?.contains('hero-content') ||
-                        el?.classList?.contains('hero-text');
+      el?.closest('.hero-content') ||
+      el?.closest('.hero-text') ||
+      el?.classList?.contains('hero-content') ||
+      el?.classList?.contains('hero-text');
 
     if (hasHeroClass) {
       return true;
@@ -250,25 +250,25 @@ class GSAPAnimations {
   animateSingle(el, animation, cfg) {
     try {
       switch (animation) {
-        case 'fade-up':         this.fadeUp(el, cfg);        break;
-        case 'fade-in':         this.fadeIn(el, cfg);        break;
-        case 'slide-left':      this.slideLeft(el, cfg);     break;
-        case 'slide-right':     this.slideRight(el, cfg);    break;
-        case 'zoom-in':         this.zoomIn(el, cfg);        break;
-        case 'word-reveal':     this.wordReveal(el, cfg);     break;
-        case 'lines':           this.linesAnimation(el, cfg);  break;
-        case 'lines-scrub':     this.linesScrub(el, cfg);     break;
-        case 'masked-title':    this.maskedTitle(el, cfg);    break;
-        case 'masked-word':     this.maskedWord(el, cfg);     break;
-        case 'writing-text':    this.writingText(el, cfg);   break;
+        case 'fade-up': this.fadeUp(el, cfg); break;
+        case 'fade-in': this.fadeIn(el, cfg); break;
+        case 'slide-left': this.slideLeft(el, cfg); break;
+        case 'slide-right': this.slideRight(el, cfg); break;
+        case 'zoom-in': this.zoomIn(el, cfg); break;
+        case 'word-reveal': this.wordReveal(el, cfg); break;
+        case 'lines': this.linesAnimation(el, cfg); break;
+        case 'lines-scrub': this.linesScrub(el, cfg); break;
+        case 'masked-title': this.maskedTitle(el, cfg); break;
+        case 'masked-word': this.maskedWord(el, cfg); break;
+        case 'writing-text': this.writingText(el, cfg); break;
         case 'btn-clip-reveal': this.btnClipReveal(el, cfg); break;
-        case 'image-clip-top':    this.imageClipTop(el, cfg);    break;
+        case 'image-clip-top': this.imageClipTop(el, cfg); break;
         case 'image-clip-bottom': this.imageClipBottom(el, cfg); break;
-        case 'image-clip-left':   this.imageClipLeft(el, cfg);   break;
-        case 'image-clip-right':  this.imageClipRight(el, cfg);  break;
-        case 'image-fade-in':     this.imageFadeIn(el, cfg);    break;
-        case 'card-row-stagger':  this.cardRowStagger(el, cfg);  break;
-        case 'parallax-bg':     this.parallaxBg(el, cfg);    break;
+        case 'image-clip-left': this.imageClipLeft(el, cfg); break;
+        case 'image-clip-right': this.imageClipRight(el, cfg); break;
+        case 'image-fade-in': this.imageFadeIn(el, cfg); break;
+        case 'card-row-stagger': this.cardRowStagger(el, cfg); break;
+        case 'parallax-bg': this.parallaxBg(el, cfg); break;
       }
     } catch (err) {
       // Animation error
@@ -492,9 +492,9 @@ class GSAPAnimations {
     const wordEls = [];
     text.split(/(\s+)/).forEach(part => {
       if (part.trim()) {
-        const span       = document.createElement('span');
+        const span = document.createElement('span');
         span.style.display = 'inline-block';
-        span.textContent   = part;
+        span.textContent = part;
         el.appendChild(span);
         wordEls.push(span);
       } else if (part) {
@@ -505,9 +505,9 @@ class GSAPAnimations {
     void el.offsetHeight; // force layout so getBoundingClientRect is accurate
 
     // Bucket words into lines by comparing top edge (< 2px tolerance)
-    const lines   = [];
-    let   line    = [];
-    let   lineTop = null;
+    const lines = [];
+    let line = [];
+    let lineTop = null;
 
     wordEls.forEach(w => {
       const top = w.getBoundingClientRect().top;
@@ -516,7 +516,7 @@ class GSAPAnimations {
         if (lineTop === null) lineTop = top;
       } else {
         lines.push(line);
-        line    = [w];
+        line = [w];
         lineTop = top;
       }
     });
@@ -525,8 +525,8 @@ class GSAPAnimations {
     // Rebuild DOM: each line wrapped in a block <span>
     el.textContent = '';
     return lines.map(words => {
-      const wrapper       = document.createElement('span');
-      wrapper.className     = 'gsap-line';
+      const wrapper = document.createElement('span');
+      wrapper.className = 'gsap-line';
       wrapper.style.display = 'block';
       words.forEach((w, i) => {
         if (i > 0) wrapper.appendChild(document.createTextNode(' '));
@@ -542,8 +542,8 @@ class GSAPAnimations {
   // -----------------------------------------------------------------------
 
   fadeUp(el, cfg) {
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
     const targets = Array.isArray(target) ? target : [target];
 
@@ -555,8 +555,8 @@ class GSAPAnimations {
     gsap.to(target, {
       y: 0, autoAlpha: 1, force3D: true,
       duration: cfg.duration,
-      ease:     cfg.ease || this.defaults.ease.fade,
-      delay:    cfg.delay,
+      ease: cfg.ease || this.defaults.ease.fade,
+      delay: cfg.delay,
       stagger,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
@@ -566,8 +566,8 @@ class GSAPAnimations {
   }
 
   fadeIn(el, cfg) {
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
     const targets = Array.isArray(target) ? target : [target];
 
@@ -576,8 +576,8 @@ class GSAPAnimations {
     gsap.to(target, {
       autoAlpha: 1,
       duration: cfg.duration,
-      ease:     cfg.ease || this.defaults.ease.fade,
-      delay:    cfg.delay,
+      ease: cfg.ease || this.defaults.ease.fade,
+      delay: cfg.delay,
       stagger,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
@@ -591,10 +591,10 @@ class GSAPAnimations {
   // -----------------------------------------------------------------------
 
   slideLeft(el, cfg) {
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
-    const dist    = window.innerWidth <= 991 ? 80 : 300;
+    const dist = window.innerWidth <= 991 ? 80 : 300;
 
     const targets = Array.isArray(target) ? target : [target];
     gsap.set(targets, { transition: 'none' });
@@ -602,8 +602,8 @@ class GSAPAnimations {
     gsap.to(target, {
       x: 0, autoAlpha: 1, force3D: true,
       duration: cfg.duration,
-      ease:     cfg.ease || this.defaults.ease.slide,
-      delay:    cfg.delay,
+      ease: cfg.ease || this.defaults.ease.slide,
+      delay: cfg.delay,
       stagger,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
@@ -613,10 +613,10 @@ class GSAPAnimations {
   }
 
   slideRight(el, cfg) {
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
-    const dist    = window.innerWidth <= 991 ? 80 : 300;
+    const dist = window.innerWidth <= 991 ? 80 : 300;
     const skipScrollTrigger = cfg.immediate || this.isHeroElement(el);
 
     const targets = Array.isArray(target) ? target : [target];
@@ -626,8 +626,8 @@ class GSAPAnimations {
     const animConfig = {
       x: 0, autoAlpha: 1, force3D: true,
       duration: cfg.duration,
-      ease:     cfg.ease || this.defaults.ease.slide,
-      delay:    cfg.delay,
+      ease: cfg.ease || this.defaults.ease.slide,
+      delay: cfg.delay,
       stagger,
       onComplete: () => {
         targets.forEach(t => gsap.set(t, { clearProps: 'transition' }));
@@ -647,16 +647,16 @@ class GSAPAnimations {
   // -----------------------------------------------------------------------
 
   zoomIn(el, cfg) {
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
 
     gsap.set(target, { scale: 0.9, autoAlpha: 0, force3D: true });
     gsap.to(target, {
       scale: 1, autoAlpha: 1, force3D: true,
       duration: 0.6,  // Increased from 0.2s for smoother animation
-      ease:     cfg.ease || this.defaults.ease.zoom,
-      delay:    cfg.delay,
+      ease: cfg.ease || this.defaults.ease.zoom,
+      delay: cfg.delay,
       stagger,
       scrollTrigger: this.triggerCfg(el, cfg)
     });
@@ -687,13 +687,13 @@ class GSAPAnimations {
       if (textNode.parentNode === el) {
         // Direct child text — wrap each word
         const parts = textNode.nodeValue.split(/(\s+)/);
-        const frag  = document.createDocumentFragment();
+        const frag = document.createDocumentFragment();
         parts.forEach(part => {
           if (part.trim() === '') {
             frag.appendChild(document.createTextNode(part));
           } else {
             const span = document.createElement('span');
-            span.className   = 'gsap-word';
+            span.className = 'gsap-word';
             span.textContent = part;
             frag.appendChild(span);
           }
@@ -710,22 +710,22 @@ class GSAPAnimations {
     gsap.set(el, { autoAlpha: 1 });
     gsap.set(pieces, { opacity: 0 });
 
-    const startPos = cfg.start  || (isMobile ? 'top 90%' : 'top 85%');
-    const endPos   = cfg.end    || el.getAttribute('data-gsap-end') || (isMobile ? 'top 60%' : 'top 20%');
+    const startPos = cfg.start || (isMobile ? 'top 90%' : 'top 85%');
+    const endPos = cfg.end || el.getAttribute('data-gsap-end') || (isMobile ? 'top 60%' : 'top 20%');
 
     gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start:   startPos,
-        end:     endPos,
-        scrub:   1,
-        once:    true
+        start: startPos,
+        end: endPos,
+        scrub: 1,
+        once: true
       }
     }).to(pieces, {
-      opacity:  1,
+      opacity: 1,
       duration: cfg.duration || 0.9,
-      ease:     cfg.ease     || 'power3.out',
-      stagger:  cfg.stagger  || 0.12
+      ease: cfg.ease || 'power3.out',
+      stagger: cfg.stagger || 0.12
     });
   }
 
@@ -748,10 +748,10 @@ class GSAPAnimations {
       y: 0,
       autoAlpha: 1,
       duration: cfg.duration,
-      ease:     cfg.ease || this.defaults.ease.fade,
-      stagger:  cfg.stagger || 0.1,
-      delay:    cfg.delay,
-      force3D:  true,
+      ease: cfg.ease || this.defaults.ease.fade,
+      stagger: cfg.stagger || 0.1,
+      delay: cfg.delay,
+      force3D: true,
       onComplete: () => {
         // Clear GSAP properties to prevent jerkiness
         lines.forEach(line => {
@@ -780,18 +780,18 @@ class GSAPAnimations {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start:   cfg.start || 'top 90%',
-        end:     end,
-        scrub:   1,
-        once:    true
+        start: cfg.start || 'top 90%',
+        end: end,
+        scrub: 1,
+        once: true
       }
     });
 
     tl.to(lines, {
       y: 0, autoAlpha: 1, force3D: true,
       duration: cfg.duration || 1,
-      ease:     cfg.ease || this.defaults.ease.fade,
-      stagger:  0.5
+      ease: cfg.ease || this.defaults.ease.fade,
+      stagger: 0.5
     });
   }
 
@@ -799,7 +799,7 @@ class GSAPAnimations {
   // Splits on <br> only — all other nodes (spans, text) moved intact.
   maskedTitle(el, cfg) {
     const segments = [];
-    let current    = [];
+    let current = [];
 
     [...el.childNodes].forEach(node => {
       if (node.nodeName === 'BR') {
@@ -815,11 +815,11 @@ class GSAPAnimations {
     // paddingBottom gives descender room; negative marginBottom compensates layout
     const inners = [];
     segments.forEach(nodes => {
-      const mask  = document.createElement('span');
-      mask.style.display       = 'block';
-      mask.style.overflow      = 'hidden';
+      const mask = document.createElement('span');
+      mask.style.display = 'block';
+      mask.style.overflow = 'hidden';
       mask.style.paddingBottom = '0.2em';
-      mask.style.marginBottom  = '-0.2em';
+      mask.style.marginBottom = '-0.2em';
 
       const inner = document.createElement('span');
       inner.style.display = 'block';
@@ -842,10 +842,10 @@ class GSAPAnimations {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start:   cfg.start,
-        end:     end,
-        scrub:   1,
-        once:    true
+        start: cfg.start,
+        end: end,
+        scrub: 1,
+        once: true
       }
     });
 
@@ -853,8 +853,8 @@ class GSAPAnimations {
       tl.to(inner, {
         y: 0,
         duration: cfg.duration || 0.6,
-        ease:     cfg.ease || this.defaults.ease.fade,
-        force3D:  true
+        ease: cfg.ease || this.defaults.ease.fade,
+        force3D: true
       }, i * (cfg.stagger || 0.65));
     });
   }
@@ -928,9 +928,9 @@ class GSAPAnimations {
   writingText(el, cfg) {
     if (!el) return;
 
-    const target  = el.querySelector('.hero-script-text') || el;
-    const hidden  = 'inset(-0.4em 100% -0.4em 0)';
-    const shown   = 'inset(-0.4em 0%   -0.4em 0)';
+    const target = el.querySelector('.hero-script-text') || el;
+    const hidden = 'inset(-0.4em 100% -0.4em 0)';
+    const shown = 'inset(-0.4em 0%   -0.4em 0)';
 
     gsap.set(target, {
       clipPath: hidden, webkitClipPath: hidden,
@@ -948,7 +948,7 @@ class GSAPAnimations {
       clipPath: shown, webkitClipPath: shown,
       opacity: 1, y: 0,
       duration: cfg.duration || 1.6,
-      ease:  cfg.ease || 'power2.out',
+      ease: cfg.ease || 'power2.out',
       delay: cfg.delay,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => gsap.set(target, { clearProps: 'will-change' })
@@ -973,14 +973,14 @@ class GSAPAnimations {
     // Wrap bare text in a <span> for the two-step clip effect
     let txt = btn.querySelector('span');
     if (!txt) {
-      txt              = document.createElement('span');
-      txt.textContent  = btn.textContent.trim();
-      btn.innerHTML    = '';
+      txt = document.createElement('span');
+      txt.textContent = btn.textContent.trim();
+      btn.innerHTML = '';
       btn.appendChild(txt);
     }
 
     const hidden = 'inset(0 100% 0 0)';
-    const shown  = 'inset(0 -1px 0 0)';
+    const shown = 'inset(0 -1px 0 0)';
 
     gsap.set(btn, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', autoAlpha: 1 });
     gsap.set(txt, { clipPath: hidden, webkitClipPath: hidden, display: 'inline-block', lineHeight: 'normal', willChange: 'clip-path' });
@@ -1013,20 +1013,20 @@ class GSAPAnimations {
   imageClipTop(el, cfg) {
     if (!el) return;
 
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
-    const hidden  = 'inset(0 0 100% 0)';
-    const shown   = 'inset(0 0 0%   0)';
+    const hidden = 'inset(0 0 100% 0)';
+    const shown = 'inset(0 0 0%   0)';
 
     gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
     gsap.to(target, {
       clipPath: shown, webkitClipPath: shown,
       duration: cfg.duration || 0.6,
-      ease:     cfg.ease || 'power2.inOut',
-      delay:    cfg.delay,
+      ease: cfg.ease || 'power2.inOut',
+      delay: cfg.delay,
       stagger,
-      force3D:  true,
+      force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
         (Array.isArray(target) ? target : [target]).forEach(e =>
@@ -1040,20 +1040,20 @@ class GSAPAnimations {
   imageClipBottom(el, cfg) {
     if (!el) return;
 
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
-    const hidden  = 'inset(100% 0 0 0)';
-    const shown   = 'inset(0%   0 0 0)';
+    const hidden = 'inset(100% 0 0 0)';
+    const shown = 'inset(0%   0 0 0)';
 
     gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
     gsap.to(target, {
       clipPath: shown, webkitClipPath: shown,
       duration: cfg.duration || 0.6,
-      ease:     cfg.ease || 'power2.inOut',
-      delay:    cfg.delay,
+      ease: cfg.ease || 'power2.inOut',
+      delay: cfg.delay,
       stagger,
-      force3D:  true,
+      force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
         (Array.isArray(target) ? target : [target]).forEach(e =>
@@ -1067,20 +1067,20 @@ class GSAPAnimations {
   imageClipLeft(el, cfg) {
     if (!el) return;
 
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
-    const hidden  = 'inset(0 100% 0 0)';
-    const shown   = 'inset(0 0%   0 0)';
+    const hidden = 'inset(0 100% 0 0)';
+    const shown = 'inset(0 0%   0 0)';
 
     gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
     gsap.to(target, {
       clipPath: shown, webkitClipPath: shown,
       duration: cfg.duration || 0.6,
-      ease:     cfg.ease || 'power2.inOut',
-      delay:    cfg.delay,
+      ease: cfg.ease || 'power2.inOut',
+      delay: cfg.delay,
       stagger,
-      force3D:  true,
+      force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
         (Array.isArray(target) ? target : [target]).forEach(e =>
@@ -1094,20 +1094,20 @@ class GSAPAnimations {
   imageClipRight(el, cfg) {
     if (!el) return;
 
-    const kids    = this.animChildren(el);
-    const target  = kids && cfg.stagger ? kids : el;
+    const kids = this.animChildren(el);
+    const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
-    const hidden  = 'inset(0 0 0 100%)';
-    const shown   = 'inset(0 0 0 0%)';
+    const hidden = 'inset(0 0 0 100%)';
+    const shown = 'inset(0 0 0 0%)';
 
     gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
     gsap.to(target, {
       clipPath: shown, webkitClipPath: shown,
       duration: cfg.duration || 0.6,
-      ease:     cfg.ease || 'power2.inOut',
-      delay:    cfg.delay,
+      ease: cfg.ease || 'power2.inOut',
+      delay: cfg.delay,
       stagger,
-      force3D:  true,
+      force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
         (Array.isArray(target) ? target : [target]).forEach(e =>
@@ -1121,10 +1121,10 @@ class GSAPAnimations {
   imageFadeIn(el, cfg) {
     if (!el) return;
 
-    const kids    = this.animChildren(el);
+    const kids = this.animChildren(el);
     const isMobile = window.innerWidth <= 991;
     const start = cfg.start || 'top 50%';
-    const scaleFrom = isMobile ? 1.4 : 1.4;
+    const scaleFrom = isMobile ? 1.2 : 1.2;
 
     // On mobile with stagger:0, treat each element separately
     // On desktop or when stagger is set, use group animation
@@ -1157,10 +1157,10 @@ class GSAPAnimations {
         gsap.to(element, {
           scale: 1,
           autoAlpha: 1,
-          duration:  1,
-          ease:     cfg.ease || 'power2.out',
-          delay:    cfg.delay || 0,
-          force3D:  true,
+          duration: 1,
+          ease: cfg.ease || 'power2.out',
+          delay: cfg.delay || 0,
+          force3D: true,
           scrollTrigger: {
             trigger: element,
             start,
@@ -1176,11 +1176,11 @@ class GSAPAnimations {
       gsap.to(target, {
         scale: 1,
         autoAlpha: 1,
-        duration:  1,
-        ease:     cfg.ease || 'power2.out',
-        delay:    cfg.delay,
+        duration: 1,
+        ease: cfg.ease || 'power2.out',
+        delay: cfg.delay,
         stagger,
-        force3D:  true,
+        force3D: true,
         scrollTrigger: {
           trigger: el,
           start,
@@ -1215,7 +1215,7 @@ class GSAPAnimations {
         || el.closest('.row')
         || el.parentElement)
       : el;
-    
+
     if (!container) return;
 
     // Check if already initialized
@@ -1240,7 +1240,7 @@ class GSAPAnimations {
       const containerTop = container.offsetTop;
       const cardTop = card.offsetTop;
       const relativeTop = cardTop - containerTop;
-      
+
       // Round to nearest 10px to group cards in same row (handles small variations)
       const rowKey = Math.round(relativeTop / 10) * 10;
 
@@ -1422,9 +1422,9 @@ class GSAPAnimations {
       force3D: true,
       scrollTrigger: {
         trigger: section,
-        start:   'top bottom',
-        end:     'bottom top',
-        scrub:   true
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
       }
     });
   }
