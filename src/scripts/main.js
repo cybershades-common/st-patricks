@@ -1212,7 +1212,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function initSectionGradientFades() {
         const items = [
             { selector: '.about-section .gradient-circle', trigger: '.about-section', start: 'top 85%' },
-            { selector: '.academics-gradient', trigger: '.academics-section', start: 'top 85%' },
             { selector: '.testimonials-gradient', trigger: '.testimonials-section', start: 'top 60%' }
         ];
 

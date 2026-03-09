@@ -357,7 +357,6 @@
 
         <!-- Academics Section -->
         <section class="academics-section position-relative section">
-            <div class="academics-gradient position-absolute"></div>
             <div class="container-fluid">
                 <div class="row ">
                     <div class="col-12 academics-top" data-gsap-children='{
@@ -391,36 +390,40 @@
                             <div class="col-12 col-lg-1"></div>
                         </div>
                     </div>
-                    <div class="col-12 academics-cards">
-                        <div class="row " data-gsap-children='{
-                            "img":{"type":"image-fade-in", "start":"top 60%", "stagger":"0.4"},
-                            "h4":{"type":"fade-up", "start":"top 90%"}
-                        }' data-gsap-children-mobile='{
-                            "img":{"type":"image-fade-in", "start":"top 70%", "stagger":0},
-                            "h4":{"start":"top 95%"}
-                        }'>
-                            <div class="col-12 col-md-6 academics-card">
-                                <div class="academics-card-image">
-                                    <img src="assets/images/Entry Point Card-1.jpg" alt="Middle School"
-                                        class="w-100 h-100" loading="eager" decoding="async">
-                                </div>
-                                <h4>Middle
-                                    School (Years 5 to 8)</h4>
-                            </div>
-                            <div class="col-12 col-md-6 academics-card">
-                                <div class="academics-card-image">
-                                    <img data-gsap-delay="0.2" src="assets/images/Entry Point Card.jpg"
-                                        alt="Senior School" class="w-100 h-100" loading="eager" decoding="async">
-                                </div>
-                                <h4>Senior
-                                    School (Years 9 to 12)</h4>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="gradient-circle left">
+        </section>
 
+        <!-- Academics Two Column CTA Section -->
+        <section class="section two-column-cta position-relative" data-gsap-children='{
+                        "img":{"type":"image-fade-in", "start":"top 70%", "stagger":"0.15"},
+                        "h4":{"type":"fade-up", "start":"top 90%", "stagger":"0.2"}
+                    }' data-gsap-children-mobile='{
+                        "img":{"type":"image-fade-in", "start":"top 80%", "stagger":"0.2"},
+                        "h4":{"type":"fade-up", "start":"top 95%", "stagger":"0.2"}
+                    }'>
+            <div class="gradient-circle left"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <a href="#">
+                            <div class="image-wrap">
+                                <img src="assets/images/Entry Point Card-1.jpg" class="ar-680-460 full"
+                                    alt="Middle School (Years 5 to 8)" loading="eager" decoding="async">
+                            </div>
+                            <h4>Middle School (Years 5 to 8)</h4>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <a href="#">
+                            <div class="image-wrap">
+                                <img src="assets/images/Entry Point Card.jpg" class="ar-680-460 full"
+                                    alt="Senior School (Years 9 to 12)" loading="eager" decoding="async">
+                            </div>
+                            <h4>Senior School (Years 9 to 12)</h4>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
