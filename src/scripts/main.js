@@ -2721,6 +2721,53 @@ document.addEventListener('DOMContentLoaded', function () {
         updatePagination();
         updateNavState();
 
+        // First-load intro:
+        // 1) reveal entire media container with same clip animation as home/about
+        // 2) reveal first-slide content only when user scrolls into this section
+        const firstSlide = slides[currentIndex];
+        const firstItems = firstSlide ? getSlideItems(firstSlide) : [];
+        const firstContentTrigger = firstSlide
+            ? firstSlide.querySelector('.hero-media-slide-bottom-content')
+            : null;
+
+        const hidden = 'inset(0 100% 0 0)';
+        const shown = 'inset(0 0% 0 0)';
+        gsap.set(slider, {
+            clipPath: hidden,
+            webkitClipPath: hidden,
+            opacity: 1,
+            visibility: 'visible',
+            willChange: 'clip-path',
+            force3D: true
+        });
+
+        gsap.to(slider, {
+            clipPath: shown,
+            webkitClipPath: shown,
+            duration: 1.2,
+            ease: 'power2.inOut',
+            delay: 0.2,
+            force3D: true,
+            autoRound: false,
+            onComplete: () => {
+                gsap.set(slider, { clearProps: 'will-change' });
+            }
+        });
+
+        gsap.set(firstItems, { y: 40, autoAlpha: 0 });
+        gsap.to(firstItems, {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: firstContentTrigger || slider,
+                start: 'top 72%',
+                once: true
+            }
+        });
+
         prevBtns.forEach(btn => btn.addEventListener('click', () => goToSlide(currentIndex - 1)));
         nextBtns.forEach(btn => btn.addEventListener('click', () => goToSlide(currentIndex + 1)));
 
@@ -2740,40 +2787,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, { passive: true });
 
-        // Mouse parallax for active background
-        const PARALLAX_INTENSITY = 15; // px
-        let mouseX = 0;
-        let mouseY = 0;
-        let currentX = 0;
-        let currentY = 0;
-
-        slider.addEventListener('mousemove', (e) => {
-            const rect = slider.getBoundingClientRect();
-            mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-            mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            mouseX = 0;
-            mouseY = 0;
-        });
-
-        function updateParallax() {
-            currentX += (mouseX - currentX) * 0.06;
-            currentY += (mouseY - currentY) * 0.06;
-
-            const activeBg = bgSlides[currentIndex];
-            const activeImg = activeBg ? activeBg.querySelector('img') : null;
-            if (activeImg) {
-                const moveX = currentX * PARALLAX_INTENSITY;
-                const moveY = currentY * PARALLAX_INTENSITY;
-                gsap.set(activeImg, { x: moveX, y: moveY });
-            }
-
-            requestAnimationFrame(updateParallax);
-        }
-
-        requestAnimationFrame(updateParallax);
     }
 
     // Co-Curricular Slider
