@@ -285,7 +285,7 @@ class GSAPAnimations {
           gsap.set(elements, { y: yDist, autoAlpha: 0, force3D: true });
           gsap.to(elements, {
             y: 0, autoAlpha: 1, force3D: true,
-            duration: cfg.duration,
+            duration: cfg.duration * 0.8,
             ease: cfg.ease || this.defaults.ease.fade,
             delay: cfg.delay,
             stagger: cfg.stagger,
@@ -554,7 +554,7 @@ class GSAPAnimations {
     gsap.set(target, { y: yDist, autoAlpha: 0, force3D: true });
     gsap.to(target, {
       y: 0, autoAlpha: 1, force3D: true,
-      duration: cfg.duration,
+      duration: cfg.duration * 0.8,
       ease: cfg.ease || this.defaults.ease.fade,
       delay: cfg.delay,
       stagger,
