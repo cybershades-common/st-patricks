@@ -1,8 +1,61 @@
-1. no inline styles or script
-2. for core tags of html like h2, h3 etc , CSS should be for common - no class based css, if any needed put through parent.
-3. buttons- define btns and use same- no separate css, 
-4. background image should not be inserted through css
-only through html
-5.permanent usable assets should be in separate file, temp. assets which will be changed when it will be converted in backend to be dynamic  should be in separate 
 
-7.use bootstrap as much as posiible, less only when needed, also in all sections i want you to use common styles as much possible, we need minimum code, all things should be in rem,vh or vw as per industry standards- modern standards, in styles, dont use & or __ for child styles, use tradition one in which parent and then inside childs, max-width,max-height use only very neccesary otherwise set these by bootstrap use international grade responsivenedd breakpoints to make it fully resposive in all devices with mobile first aproach, do not write so many comments, only write comments when neccesary, write comment on start of section in html, full line comment, in styles when start as section styles, in js separating functionality so  
+## Development Guidelines
+
+1. **Do not use inline styles or inline scripts.**
+
+2. For core HTML tags such as `h1`, `h2`, `h3`, `p`, `ul`, `li`, etc., use **common global CSS styling** instead of class-based styling wherever possible.
+   If specific styling is needed, apply it through the **parent section/container**, not directly on each core tag.
+
+3. Use a **common button system**.
+   Define reusable button classes such as `.btn`, `.btn-primary`, `.btn-secondary`, etc., and use them across the entire project.
+   Do not create separate button CSS for each section.
+
+4. **Background images must not be added through CSS.**
+   They should only be inserted through HTML.
+
+5. Assets should be separated properly:
+
+   * **Permanent/reusable assets** should be kept in a separate file/folder.
+   * **Temporary or dynamic assets** that may later be replaced during backend integration should be kept in a different file/folder.
+
+6. Use **Bootstrap as much as possible**.
+   Write custom CSS only when absolutely necessary.
+
+7. Across all sections, use **common reusable styles as much as possible**.
+   The goal is to keep the code minimal, clean, and maintainable.
+
+8. Use only modern, scalable units such as:
+
+   * `rem`
+   * `vw`
+   * `vh`
+     Follow modern industry standards for responsive design.
+
+9. In CSS, do not use nested conventions like `&` or naming patterns like `__`.
+   Use a **traditional clear structure**, such as:
+
+   * parent class
+   * child selectors inside the parent context
+
+10. Avoid excessive use of `max-width` and `max-height`.
+    Use Bootstrap utilities and layout system wherever possible.
+    Only use custom `max-width` or `max-height` when truly necessary.
+
+11. Follow **international-grade responsive breakpoints** and ensure the design is fully responsive across all screen sizes.
+
+12. Use a **mobile-first approach** for layout and styling.
+
+13. Do not write too many comments.
+
+* In HTML: add comments only at the **start of each section**
+* In CSS: add comments only when starting **section styles**
+* In JS: add comments only to separate **functional blocks**
+
+14. Keep the codebase:
+
+* clean
+* reusable
+* minimal
+* scalable
+* backend-friendly
+
