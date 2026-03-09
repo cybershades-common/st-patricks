@@ -13,9 +13,18 @@
   padding-bottom: var(--spacing-base);
   background-color: var(--primary-gold-4);
   position: relative;
+  overflow-x: clip;
+  overflow-y: visible;
+
+  .gradient-circle {
+    z-index: 1;
+    clip-path: inset(48rem -200rem -100rem -200rem);
+    pointer-events: none;
+  }
 
   .container-fluid {
     position: relative;
+    z-index: 2;
   }
 }
 
