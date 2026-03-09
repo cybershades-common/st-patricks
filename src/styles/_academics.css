@@ -12,6 +12,17 @@
 .two-column-cta .container-fluid {
   z-index: 2;
 }
+.academics-section + .two-column-cta {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+.academics-section + .two-column-cta .gradient-circle.left {
+  z-index: 1;
+  left: -37.625rem;
+  bottom: -50.1875rem;
+  clip-path: inset(-200rem -200rem 50rem -200rem);
+  pointer-events: none;
+}
 .academics-top {
   margin-bottom: 7rem;
 }

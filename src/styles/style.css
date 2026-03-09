@@ -131,17 +131,6 @@ a[href^="tel"] {
   line-height: normal;
   margin: 1rem 0 2.5rem;
 }
-.academics-section + .two-column-cta {
-  overflow-x: clip;
-  overflow-y: visible;
-}
-.academics-section + .two-column-cta .gradient-circle.left {
-  z-index: 1;
-  left: -37.625rem;
-  bottom: -50.1875rem;
-  clip-path: inset(-200rem -200rem 50rem -200rem);
-  pointer-events: none;
-}
 @font-face {
   font-family: 'Helvetica Neue LT Pro';
   src: url('../../assets/fonts/HelveticaNeueLTProLt.woff2') format('woff2'), url('../../assets/fonts/HelveticaNeueLTProLt.woff') format('woff');
@@ -2520,10 +2509,16 @@ body:has(.internal-content-single) .hero-internal-title {
   height: 36.5rem;
   overflow: hidden;
 }
+.about-image .image-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 .about-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .about-section h2 {
@@ -3337,6 +3332,17 @@ body:has(.internal-content-single) .hero-internal-title {
 }
 .two-column-cta .container-fluid {
   z-index: 2;
+}
+.academics-section + .two-column-cta {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+.academics-section + .two-column-cta .gradient-circle.left {
+  z-index: 1;
+  left: -37.625rem;
+  bottom: -50.1875rem;
+  clip-path: inset(-200rem -200rem 50rem -200rem);
+  pointer-events: none;
 }
 .academics-top {
   margin-bottom: 7rem;
