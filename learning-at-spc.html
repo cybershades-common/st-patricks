@@ -248,7 +248,8 @@
         <section class="about-intro-section position-relative section">
             <div class="container-fluid">
                 <div class="row align-items-start">
-                    <div class="col-12 col-lg-5 about-intro-section-left" data-gsap-children='{"h2":{"type":"fade-up"}}'>
+                    <div class="col-12 col-lg-5 about-intro-section-left"
+                        data-gsap-children='{"h2":{"type":"fade-up"}}'>
                         <h2 class="about-intro-section-title">A
                             community shaped by purpose.</h2>
                     </div>
@@ -324,7 +325,11 @@
         </section>
 
         <!-- Two Column CTA Section -->
-        <section class="section two-column-cta position-relative">
+        <section class="section two-column-cta position-relative" data-gsap-children='{
+                                "img":{"type":"image-fade-in", "start":"top 70%", "stagger":"0.3"}
+                            }' data-gsap-children-mobile='{
+                                "img":{"type":"image-fade-in", "start":"top 80%", "stagger":"0.3"}
+                            }'>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6"><a href="#">
@@ -538,7 +543,9 @@
                                     young
                                     men learn to live with purpose and heart.</p>
                                 <div class="cta-buttons d-flex align-items-center">
-                                    <a href="#" class="btn-rounded-large-solid cta-button-solid-white btn-book-tour">Book a Tour</a>
+                                    <a href="#"
+                                        class="btn-rounded-large-solid cta-button-solid-white btn-book-tour">Book a
+                                        Tour</a>
                                     <a href="#" class=" btn-rounded-large btn-rounded-large-outline-white">Enquire
                                         Today</a>
                                 </div>

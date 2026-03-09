@@ -113,6 +113,13 @@ a[href^="tel"] {
 .two-column-cta {
   background: var(--primary-gold-4);
 }
+.two-column-cta .image-wrap {
+  overflow: hidden;
+}
+.two-column-cta .image-wrap img {
+  display: block;
+  width: 100%;
+}
 .two-column-cta a h4 {
   color: var(--primary-blue, #10069f);
   /* Heading 4 Sans */
