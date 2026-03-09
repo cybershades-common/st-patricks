@@ -1038,9 +1038,9 @@ hr {
   color: var(--basic-white);
 }
 .internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-black:hover {
-  border: 1px solid var(--basic-black);
-  background: var(--basic-black);
-  color: var(--basic-white);
+  border: 1px solid var(--basic-white);
+  background: var(--basic-white);
+  color: var(--basic-black);
 }
 .internal-page .header:not(.menu-open):not(.header-scrolled) .menu-text {
   color: var(--basic-white);
@@ -1054,7 +1054,7 @@ hr {
 }
 .internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-black,
 .internal-page .header.header-scrolled .btn-rounded-large.btn-rounded-large-outline-black {
-  border: 1px solid var(--basic-black);
+  background: 1px solid var(--basic-black);
   color: var(--basic-black);
 }
 .internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-black:hover,
