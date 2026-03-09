@@ -140,6 +140,19 @@ a[href^="tel"] {
   }
 }
 
+// Let the Academics two-column CTA gradient bleed upward like About intro.
+.academics-section + .two-column-cta {
+  overflow-x: clip;
+  overflow-y: visible;
+
+  .gradient-circle.left {
+    z-index: 1;
+    left: -37.625rem;
+    bottom: -50.1875rem;
+    pointer-events: none;
+  }
+}
+
 @import "_fonts";
 @import "_variables";
 @import "_typography";
