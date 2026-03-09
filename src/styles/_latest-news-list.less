@@ -427,6 +427,15 @@
   }
 }
 
+.latest-news-list-card.is-revealed .latest-news-list-card-image img {
+  transition: transform 0.45s ease;
+}
+
+.latest-news-list-card.is-revealed:hover .latest-news-list-card-image img,
+.latest-news-list-card.is-revealed:focus-within .latest-news-list-card-image img {
+  transform: scale(1.08);
+}
+
 .latest-news-list-card-content {
   display: flex;
   flex-direction: column;

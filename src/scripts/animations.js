@@ -397,6 +397,13 @@ class GSAPAnimations {
           break;
         case 'image-fade-in':
           const scaleFrom = 1.3;
+          elements.forEach(node => {
+            const img = node.tagName === 'IMG' ? node : node.querySelector?.('img');
+            const wrapper = img ? img.parentElement : node.parentElement;
+            if (wrapper && wrapper.style.overflow !== 'hidden') {
+              wrapper.style.overflow = 'hidden';
+            }
+          });
           gsap.set(elements, { scale: scaleFrom, autoAlpha: 0, transformOrigin: '50% 50%', force3D: true });
           gsap.to(elements, {
             scale: 1, autoAlpha: 1, force3D: true,
@@ -404,7 +411,13 @@ class GSAPAnimations {
             ease: cfg.ease || 'power2.out',
             delay: cfg.delay,
             stagger: cfg.stagger,
-            scrollTrigger: this.triggerCfg(firstEl, cfg)
+            scrollTrigger: this.triggerCfg(firstEl, cfg),
+            onComplete: () => {
+              elements.forEach(node => {
+                node.classList.add('is-revealed');
+                gsap.set(node, { clearProps: 'transform,will-change' });
+              });
+            }
           });
           break;
         case 'image-clip-top':
@@ -1167,7 +1180,8 @@ class GSAPAnimations {
             toggleActions: 'play none none none'
           },
           onComplete: () => {
-            gsap.set(element, { clearProps: 'will-change,transition' });
+            element.classList.add('is-revealed');
+            gsap.set(element, { clearProps: 'transform,will-change,transition' });
           }
         });
       });
@@ -1187,9 +1201,10 @@ class GSAPAnimations {
           toggleActions: 'play none none none'
         },
         onComplete: () => {
-          (Array.isArray(target) ? target : [target]).forEach(e =>
-            gsap.set(e, { clearProps: 'will-change,transition' })
-          );
+          (Array.isArray(target) ? target : [target]).forEach(e => {
+            e.classList.add('is-revealed');
+            gsap.set(e, { clearProps: 'transform,will-change,transition' });
+          });
         }
       });
     }
@@ -1289,6 +1304,7 @@ class GSAPAnimations {
         }
 
         const isAboutNavCard = card.classList.contains('about-nav-card');
+        const isLatestNewsCard = card.classList.contains('latest-news-list-card');
 
         // Initial state for image
         gsap.set(img, {
@@ -1353,10 +1369,10 @@ class GSAPAnimations {
             toggleActions: 'play none none none'
           },
           onComplete: () => {
-            if (isAboutNavCard) {
+            if (isAboutNavCard || isLatestNewsCard) {
               card.classList.add('is-revealed');
             }
-            gsap.set(img, { clearProps: isAboutNavCard ? 'transform,will-change' : 'will-change' });
+            gsap.set(img, { clearProps: (isAboutNavCard || isLatestNewsCard) ? 'transform,will-change' : 'will-change' });
           }
         });
 

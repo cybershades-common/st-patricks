@@ -126,6 +126,16 @@ a[href^="tel"] {
     width: 100%;
   }
 
+  .image-wrap img.is-revealed {
+    transition: transform 0.45s ease;
+  }
+
+  a:hover .image-wrap img.is-revealed,
+  .image-wrap:hover img.is-revealed,
+  a:focus-within .image-wrap img.is-revealed {
+    transform: scale(1.04);
+  }
+
   a {
     h4 {
       color: var(--primary-blue, #10069f);
