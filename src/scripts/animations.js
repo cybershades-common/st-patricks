@@ -1288,6 +1288,8 @@ class GSAPAnimations {
           });
         }
 
+        const isAboutNavCard = card.classList.contains('about-nav-card');
+
         // Initial state for image
         gsap.set(img, {
           scale: 1.12,
@@ -1351,7 +1353,10 @@ class GSAPAnimations {
             toggleActions: 'play none none none'
           },
           onComplete: () => {
-            gsap.set(img, { clearProps: 'will-change' });
+            if (isAboutNavCard) {
+              card.classList.add('is-revealed');
+            }
+            gsap.set(img, { clearProps: isAboutNavCard ? 'transform,will-change' : 'will-change' });
           }
         });
 
