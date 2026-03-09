@@ -432,11 +432,11 @@
 .internal-page .header:not(.menu-open):not(.header-scrolled) .logo-text {
   color: var(--basic-white);
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-white {
-  borde: 1px solid var(--basic-white);
+.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-black {
+  border: 1px solid var(--basic-white);
   color: var(--basic-white);
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-white:hover {
+.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-black:hover {
   border: 1px solid var(--basic-black);
   background: var(--basic-black);
   color: var(--basic-white);
@@ -451,13 +451,13 @@
 .internal-page .header:not(.menu-open):not(.header-scrolled) .hamburger-line {
   background-color: var(--basic-white);
 }
-.internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-white,
-.internal-page .header.header-scrolled .btn-rounded-large.btn-rounded-large-outline-white {
+.internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-black,
+.internal-page .header.header-scrolled .btn-rounded-large.btn-rounded-large-outline-black {
   border: 1px solid var(--basic-black);
   color: var(--basic-black);
 }
-.internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-white:hover,
-.internal-page .header.header-scrolled .btn-rounded-large.btn-rounded-large-outline-white:hover {
+.internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-black:hover,
+.internal-page .header.header-scrolled .btn-rounded-large.btn-rounded-large-outline-black:hover {
   background: var(--basic-black);
   color: var(--basic-white);
 }
