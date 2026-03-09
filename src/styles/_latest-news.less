@@ -175,6 +175,15 @@
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.latest-news-card .latest-news-image.is-revealed {
+  transition: height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.45s ease;
+}
+
+.latest-news-card:hover .latest-news-image.is-revealed,
+.latest-news-card:focus-within .latest-news-image.is-revealed {
+  transform: scale(1.08);
+}
+
 .latest-news-slide.active .latest-news-image {
   height: 31.25rem;
 }
