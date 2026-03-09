@@ -4988,6 +4988,8 @@ body:has(.internal-content-single) .hero-internal-title {
   z-index: 3;
   position: relative;
   margin-bottom: 3rem;
+  opacity: 0;
+  visibility: hidden;
 }
 .news-detail-hero-back-link {
   position: absolute;
@@ -5002,6 +5004,8 @@ body:has(.internal-content-single) .hero-internal-title {
   color: var(--primary-blue);
   text-decoration: none;
   transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
 }
 .news-detail-hero-back-link svg {
   width: 1.25rem;

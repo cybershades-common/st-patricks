@@ -1158,6 +1158,35 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize header animations
     initHeaderAnimations();
 
+    // News detail hero navigation reveal
+    function initNewsDetailHeroNavigationReveal() {
+        const hero = document.querySelector('.news-detail-hero');
+        if (!hero) return;
+
+        const nav = hero.querySelector('.news-detail-hero-navigation');
+        const backLink = hero.querySelector('.news-detail-hero-back-link');
+        const targets = [nav, backLink].filter(Boolean);
+        if (!targets.length) return;
+
+        gsap.set(targets, { autoAlpha: 0, y: 14, force3D: true });
+        gsap.to(targets, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.35,
+            ease: 'power2.out',
+            stagger: 0.08,
+            force3D: true,
+            scrollTrigger: {
+                trigger: hero,
+                start: 'top 80%',
+                toggleActions: 'play none none none',
+                once: true
+            }
+        });
+    }
+
+    initNewsDetailHeroNavigationReveal();
+
     // Section gradient circles - fade in on section reveal
     function initGradientCircleFades() {
         const circles = gsap.utils.toArray('.section .gradient-circle');
