@@ -2434,7 +2434,7 @@ body:has(.internal-content-single) .hero-internal-title {
 }
 .about-nav-card.is-revealed:hover .about-nav-card-image img,
 .about-nav-card.is-revealed:focus-within .about-nav-card-image img {
-  transform: scale(1.04);
+  transform: scale(1.08);
 }
 .about-nav-card h5 {
   color: var(--primary-blue, #10069f);
