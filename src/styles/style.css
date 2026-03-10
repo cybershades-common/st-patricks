@@ -1306,7 +1306,7 @@ hr {
     padding: 1rem 0;
   }
   body .mega-menu-footer {
-    padding: 0.5rem 0;
+    padding: 3rem 0 0;
   }
   body .header.menu-open .header-row .right-block {
     max-width: 40%;
@@ -4083,7 +4083,6 @@ body:has(.internal-content-single) .hero-internal-title {
   .testimonials-bottom-row {
     flex-direction: row;
     justify-content: space-between;
-    gap: var(--spacing-xs);
     flex-wrap: nowrap;
     align-items: center;
   }
@@ -4126,6 +4125,7 @@ body:has(.internal-content-single) .hero-internal-title {
   }
   .testimonials-section .testimonials-content .testimonials-bottom-row {
     padding-top: 2rem;
+    gap: 1.5rem 0;
   }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
