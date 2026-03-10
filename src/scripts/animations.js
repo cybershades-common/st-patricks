@@ -269,6 +269,7 @@ class GSAPAnimations {
         case 'image-fade-in': this.imageFadeIn(el, cfg); break;
         case 'card-row-stagger': this.cardRowStagger(el, cfg); break;
         case 'card-row-clip-top': this.cardRowClipTop(el, cfg); break;
+        case 'card-row-clip-bottom': this.cardRowClipBottom(el, cfg); break;
         case 'parallax-bg': this.parallaxBg(el, cfg); break;
       }
     } catch (err) {
@@ -1457,21 +1458,21 @@ class GSAPAnimations {
       .map(entry => entry[1]);
 
     const hidden = 'inset(0 0 100% 0)';
-    const shown  = 'inset(0 0 0%   0)';
+    const shown = 'inset(0 0 0%   0)';
 
     sortedRows.forEach((row) => {
       row.forEach((card, cardIndexInRow) => {
-        const img          = card.querySelector('img');
-        const h5           = card.querySelector('h5');
+        const img = card.querySelector('img');
+        const h5 = card.querySelector('h5');
         const imageWrapper = card.querySelector('.internal-explore-card-image') || card.querySelector('.latest-news-list-card-image') || card.querySelector('.about-nav-card-image');
-        const category     = card.querySelector('.latest-news-list-card-category');
-        const divider      = card.querySelector('.latest-news-list-card-divider');
+        const category = card.querySelector('.latest-news-list-card-category');
+        const divider = card.querySelector('.latest-news-list-card-divider');
 
         if (!img) return;
 
-        const staggerDelay  = cardIndexInRow * stagger;
-        const isAboutNavCard    = card.classList.contains('about-nav-card');
-        const isLatestNewsCard  = card.classList.contains('latest-news-list-card');
+        const staggerDelay = cardIndexInRow * stagger;
+        const isAboutNavCard = card.classList.contains('about-nav-card');
+        const isLatestNewsCard = card.classList.contains('latest-news-list-card');
 
         if (imageWrapper && imageWrapper.style.overflow !== 'hidden') {
           imageWrapper.style.overflow = 'hidden';
@@ -1492,6 +1493,123 @@ class GSAPAnimations {
         }
 
         // Image — clip-path from top instead of scale+fade
+        gsap.set(img, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
+        gsap.to(img, {
+          clipPath: shown, webkitClipPath: shown,
+          duration: cfg.duration || 0.7,
+          ease: cfg.ease || 'power2.inOut',
+          delay: staggerDelay,
+          force3D: true,
+          scrollTrigger: { trigger: card, start, toggleActions: 'play none none none' },
+          onComplete: () => {
+            if (isAboutNavCard || isLatestNewsCard) card.classList.add('is-revealed');
+            gsap.set(img, { clearProps: 'clip-path,webkitClipPath,will-change' });
+          }
+        });
+
+        // Category fade
+        if (category) {
+          gsap.set(category, { autoAlpha: 0, force3D: true, willChange: 'opacity' });
+          gsap.to(category, {
+            autoAlpha: 1,
+            duration: cfg.duration || 1.25,
+            ease: cfg.ease || 'power2.out',
+            delay: staggerDelay + 0.1,
+            force3D: true,
+            scrollTrigger: { trigger: card, start, toggleActions: 'play none none none' },
+            onComplete: () => { gsap.set(category, { clearProps: 'will-change' }); }
+          });
+        }
+
+        // h5 fade-up
+        if (h5) {
+          gsap.set(h5, { y: 20, autoAlpha: 0, force3D: true, willChange: 'transform, opacity' });
+          gsap.to(h5, {
+            y: 0, autoAlpha: 1,
+            duration: cfg.duration || 1.25,
+            ease: cfg.ease || 'power2.out',
+            delay: staggerDelay + 0.2,
+            force3D: true,
+            scrollTrigger: { trigger: card, start, toggleActions: 'play none none none' },
+            onComplete: () => { gsap.set(h5, { clearProps: 'will-change' }); }
+          });
+        }
+      });
+    });
+  }
+
+  // Card row reveal: clip from bottom (curtain rises up)
+  cardRowClipBottom(el, cfg) {
+    if (!el) return;
+
+    const isCard = el.classList.contains('internal-explore-card') || el.classList.contains('latest-news-list-card') || el.classList.contains('about-nav-card') || el.classList.contains('news-detail-gallery-item');
+    const container = isCard
+      ? (el.closest('.news-detail-keep-reading-cards')
+        || el.closest('.latest-news-list-grid')
+        || el.closest('.row')
+        || el.parentElement)
+      : el;
+
+    if (!container) return;
+
+    if (container.hasAttribute('data-card-row-clip-bottom-initialized')) return;
+    container.setAttribute('data-card-row-clip-bottom-initialized', 'true');
+
+    const isMobile = window.innerWidth <= 991;
+    const start = cfg.start || 'top 70%';
+    const stagger = cfg.stagger ? parseFloat(cfg.stagger) : (isMobile ? 0.2 : 0.15);
+
+    const cards = Array.from(container.querySelectorAll('.internal-explore-card, .latest-news-list-card, .about-nav-card, .news-detail-gallery-item'));
+    if (!cards.length) return;
+
+    const rowMap = new Map();
+    cards.forEach((card) => {
+      const relativeTop = card.offsetTop - container.offsetTop;
+      const rowKey = Math.round(relativeTop / 10) * 10;
+      if (!rowMap.has(rowKey)) rowMap.set(rowKey, []);
+      rowMap.get(rowKey).push(card);
+    });
+
+    const sortedRows = Array.from(rowMap.entries())
+      .sort((a, b) => a[0] - b[0])
+      .map(entry => entry[1]);
+
+    const hidden = 'inset(100% 0 0 0)';
+    const shown = 'inset(0%   0 0 0)';
+
+    sortedRows.forEach((row) => {
+      row.forEach((card, cardIndexInRow) => {
+        const img = card.querySelector('img');
+        const h5 = card.querySelector('h5');
+        const imageWrapper = card.querySelector('.internal-explore-card-image') || card.querySelector('.latest-news-list-card-image') || card.querySelector('.about-nav-card-image');
+        const category = card.querySelector('.latest-news-list-card-category');
+        const divider = card.querySelector('.latest-news-list-card-divider');
+
+        if (!img) return;
+
+        const staggerDelay = cardIndexInRow * stagger;
+        const isAboutNavCard = card.classList.contains('about-nav-card');
+        const isLatestNewsCard = card.classList.contains('latest-news-list-card');
+
+        if (imageWrapper && imageWrapper.style.overflow !== 'hidden') {
+          imageWrapper.style.overflow = 'hidden';
+        }
+
+        // Divider
+        if (divider) {
+          gsap.set(divider, { clipPath: 'inset(100% 0 0% 0)', webkitClipPath: 'inset(100% 0 0% 0)', force3D: true, willChange: 'clip-path' });
+          gsap.to(divider, {
+            clipPath: 'inset(0% 0 0% 0)', webkitClipPath: 'inset(0% 0 0% 0)',
+            duration: 1.2,
+            ease: cfg.ease || 'power2.out',
+            delay: staggerDelay,
+            force3D: true,
+            scrollTrigger: { trigger: card, start, toggleActions: 'play none none none' },
+            onComplete: () => { gsap.set(divider, { clearProps: 'will-change' }); }
+          });
+        }
+
+        // Image — clip-path from bottom
         gsap.set(img, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
         gsap.to(img, {
           clipPath: shown, webkitClipPath: shown,
