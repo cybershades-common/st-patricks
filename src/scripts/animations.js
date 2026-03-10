@@ -1600,7 +1600,7 @@ class GSAPAnimations {
           gsap.set(divider, { clipPath: 'inset(100% 0 0% 0)', webkitClipPath: 'inset(100% 0 0% 0)', force3D: true, willChange: 'clip-path' });
           gsap.to(divider, {
             clipPath: 'inset(0% 0 0% 0)', webkitClipPath: 'inset(0% 0 0% 0)',
-            duration: 1.2,
+            duration: 0.7,
             ease: cfg.ease || 'power2.out',
             delay: staggerDelay,
             force3D: true,
@@ -1613,8 +1613,8 @@ class GSAPAnimations {
         gsap.set(img, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
         gsap.to(img, {
           clipPath: shown, webkitClipPath: shown,
-          duration: cfg.duration || 0.7,
-          ease: cfg.ease || 'power2.inOut',
+          duration: cfg.duration || 0.45,
+          ease: cfg.ease || 'power2.out',
           delay: staggerDelay,
           force3D: true,
           scrollTrigger: { trigger: card, start, toggleActions: 'play none none none' },
@@ -1629,7 +1629,7 @@ class GSAPAnimations {
           gsap.set(category, { autoAlpha: 0, force3D: true, willChange: 'opacity' });
           gsap.to(category, {
             autoAlpha: 1,
-            duration: cfg.duration || 1.25,
+            duration: cfg.duration || 0.7,
             ease: cfg.ease || 'power2.out',
             delay: staggerDelay + 0.1,
             force3D: true,
@@ -1643,7 +1643,7 @@ class GSAPAnimations {
           gsap.set(h5, { y: 20, autoAlpha: 0, force3D: true, willChange: 'transform, opacity' });
           gsap.to(h5, {
             y: 0, autoAlpha: 1,
-            duration: cfg.duration || 1.25,
+            duration: cfg.duration || 0.7,
             ease: cfg.ease || 'power2.out',
             delay: staggerDelay + 0.2,
             force3D: true,
