@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-super-small);
-  padding: var(--spacing-2xs) var(--spacing-half-base);
+  padding: .657rem var(--spacing-half-base);
   border-radius: var(--radius-huge);
   font-family: var(--font-family-helvetica-neue);
   font-size: 0.9375rem;
@@ -178,6 +178,6 @@
   .btn-rounded-large-outline-blue,
   .btn-rounded-large-no-border,
   .btn-rounded-large-solid-blue {
-    line-height: 10px;
+    line-height: normal;
   }
 }
