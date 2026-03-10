@@ -1216,6 +1216,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const footer = document.querySelector('footer.footer');
         if (!footerGradient || !footer) return;
 
+        if (isMobile()) return; // visible via CSS on mobile, no GSAP needed
+
         gsap.set(footerGradient, {
             autoAlpha: 0,
             y: 300, // Start below, out of view

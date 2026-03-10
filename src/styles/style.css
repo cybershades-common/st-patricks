@@ -6042,7 +6042,10 @@ body:has(.internal-content-single) .hero-internal-title {
     padding-bottom: 0;
   }
   .footer .footer-gradient {
-    top: 100%;
+    top: auto;
+    bottom: -20rem;
+    opacity: 1;
+    visibility: visible;
   }
   .footer .footer-mission,
   .footer .footer-logo {
