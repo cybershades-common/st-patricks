@@ -1730,7 +1730,8 @@ body:has(.internal-content-single) .hero-internal-title {
   padding-bottom: var(--spacing-small);
   background-color: var(--primary-gold-4);
   position: relative;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 .internal-local-nav .container-fluid {
   position: relative;
