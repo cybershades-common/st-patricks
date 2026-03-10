@@ -21,10 +21,10 @@
   padding: 1.88rem 0;
 }
 .footer .footer-right .footer-column {
-  color: var(--primary-black-c, #27251F);
+  color: var(--primary-black-c, #27251f);
 }
 .footer .footer-right .footer-column h3 {
-  color: var(--primary-black-c, #27251F);
+  color: var(--primary-black-c, #27251f);
   font-family: "Helvetica Neue LT Pro";
   font-size: 0.9375rem;
   font-style: normal;
@@ -51,7 +51,7 @@
   border-radius: 50%;
   filter: blur(15.625rem);
   pointer-events: none;
-  background: var(--primary-yellow-bright, #FFF02A);
+  background: var(--primary-yellow-bright, #fff02a);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
@@ -309,6 +309,7 @@
 .footer-bottom-links-left {
   gap: 1.5rem;
   flex-shrink: 0;
+  width: 100%;
 }
 .footer-bottom-links-left span {
   font-family: var(--font-family-helvetica-neue);
@@ -334,6 +335,9 @@
 .footer-bottom-links-left a:hover,
 .footer-design-link:hover {
   color: var(--primary-blue);
+}
+.footer-design-link {
+  margin-left: auto;
 }
 .footer-decoration {
   position: absolute;
@@ -497,6 +501,9 @@
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
     width: 100%;
+  }
+  .footer-bottom .footer-bottom-links-left a.footer-design-link {
+    margin-left: 0;
   }
   .footer .footer-right {
     padding: 0 0.75rem;
