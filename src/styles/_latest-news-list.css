@@ -1043,9 +1043,10 @@
     font-size: 2.5rem;
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 420px) {
   .testimonials-bottom-row {
     flex-wrap: wrap;
     padding-top: 1.5rem;
+    gap: 0;
   }
 }
