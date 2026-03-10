@@ -6043,7 +6043,7 @@ body:has(.internal-content-single) .hero-internal-title {
   }
   .footer .footer-gradient {
     top: auto;
-    bottom: -10rem;
+    bottom: -30rem;
     width: 50rem;
     height: 50rem;
     opacity: 1;
