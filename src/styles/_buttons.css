@@ -178,6 +178,6 @@
   .btn-rounded-large-outline-blue,
   .btn-rounded-large-no-border,
   .btn-rounded-large-solid-blue {
-    line-height: 1rem;
+    line-height: 100%;
   }
 }
