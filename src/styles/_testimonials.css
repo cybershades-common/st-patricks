@@ -202,7 +202,6 @@
   .testimonials-bottom-row {
     flex-direction: row;
     justify-content: space-between;
-    gap: 0;
     flex-wrap: nowrap;
     align-items: center;
   }
@@ -245,7 +244,7 @@
   }
   .testimonials-section .testimonials-content .testimonials-bottom-row {
     padding-top: 2rem;
-    gap:1.5rem 0;
+    gap: 1.5rem 0;
   }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
