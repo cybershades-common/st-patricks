@@ -991,7 +991,7 @@ class GSAPAnimations {
     gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
     gsap.to(target, {
       clipPath: shown, webkitClipPath: shown,
-      duration: cfg.duration || 0.8,
+      duration: cfg.duration || 1,
       ease: cfg.ease || 'power2.out',
       delay: cfg.delay,
       stagger,
