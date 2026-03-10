@@ -612,7 +612,7 @@ hr {
   .btn-rounded-large-outline-blue,
   .btn-rounded-large-no-border,
   .btn-rounded-large-solid-blue {
-    line-height: 1;
+    line-height: 90%;
   }
 }
 .header {
