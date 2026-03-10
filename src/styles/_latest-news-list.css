@@ -1047,6 +1047,6 @@
   .testimonials-bottom-row {
     flex-wrap: wrap;
     padding-top: 1.5rem;
-    gap: 0;
+    gap:1.5rem 0;
   }
 }
