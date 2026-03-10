@@ -188,9 +188,10 @@ class GSAPAnimations {
         }
 
         // Apply animation to elements
+        const clipTypes = ['image-clip-top', 'image-clip-bottom', 'image-clip-left', 'image-clip-right'];
         const cfg = {
           delay: delay,
-          duration: duration || this.defaults.duration,
+          duration: duration || (clipTypes.includes(animation) ? undefined : this.defaults.duration),
           start: start || triggerStart,
           end: end || null,
           ease: ease || null,
@@ -1037,8 +1038,8 @@ class GSAPAnimations {
     gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
     gsap.to(target, {
       clipPath: shown, webkitClipPath: shown,
-      duration: cfg.duration || 0.6,
-      ease: cfg.ease || 'power2.inOut',
+      duration: cfg.duration || 0.7,
+      ease: cfg.ease || 'power2.out',
       delay: cfg.delay,
       stagger,
       force3D: true,
