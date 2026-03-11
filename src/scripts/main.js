@@ -1035,6 +1035,7 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdown.addEventListener('show.bs.dropdown', () => {
                 gsap.killTweensOf(menu);
                 const items = menu.querySelectorAll('.dropdown-item');
+                gsap.killTweensOf(items);
 
                 menu.style.display = 'block';
                 menu.style.overflow = 'hidden';
@@ -1067,18 +1068,25 @@ document.addEventListener('DOMContentLoaded', function () {
                     }, 0.08);
             });
 
+            let skipCloseAnimation = false;
+
             dropdown.addEventListener('hide.bs.dropdown', (e) => {
+                if (skipCloseAnimation) return;
                 e.preventDefault();
+
                 gsap.killTweensOf(menu);
+                gsap.killTweensOf(menu.querySelectorAll('.dropdown-item'));
                 const items = menu.querySelectorAll('.dropdown-item');
 
                 const tl = gsap.timeline({
                     onComplete: () => {
-                        menu.classList.remove('show');
-                        dropdown.classList.remove('show');
+                        // Let Bootstrap properly update its internal state
+                        skipCloseAnimation = true;
+                        dropdownInstance.hide();
+                        skipCloseAnimation = false;
+
                         menu.style.display = 'none';
                         menu.style.overflow = '';
-                        toggle.setAttribute('aria-expanded', 'false');
                         gsap.set(menu, { clearProps: 'clipPath' });
                         gsap.set(items, { clearProps: 'opacity,transform' });
                     }
