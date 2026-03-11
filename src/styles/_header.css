@@ -6,7 +6,7 @@
   z-index: 1000;
   padding: 1.25rem 0;
   background-color: transparent;
-  transition: transform 0.35s ease, padding 0.4s ease;
+  transition: background-color 0s, border-color 0s, transform 0.35s ease, padding 0.4s ease;
   will-change: transform;
   border-bottom: 0.0625rem solid transparent;
 }
@@ -703,7 +703,6 @@
   }
   body .header .header-row > .mobile-only-btns {
     margin: 1rem 0 0;
-    display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
@@ -717,6 +716,9 @@
   }
   body .header .header-row > .mobile-only-btns .menu-dropdown-btn:after {
     display: none;
+  }
+  body .header .header-row > .mobile-only-btns .dropdown-menu {
+    z-index: 1001;
   }
   body .mega-menu-inner {
     padding: 0 0.75rem;

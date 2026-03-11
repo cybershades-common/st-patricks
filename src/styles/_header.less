@@ -9,8 +9,8 @@
   padding: 1.25rem 0;
   background-color: transparent;
   transition:
-    /*background-color 0.1s ease-in-out,
-    border-color 0.1s ease-in-out,*/
+    background-color 0s,
+    border-color 0s,
     transform 0.35s ease,
     padding 0.4s ease;
   will-change: transform;
@@ -45,7 +45,10 @@
 }
 
 .header.menu-open {
-  background-color: var(--basic-white);
+  // No background-color here — the mega menu (z-index: 998, top: 0) sits directly
+  // behind the transparent header and provides the white background visually.
+  // This means open/close is entirely driven by the mega menu's own fade, with
+  // no separate header background snap at all.
   border-bottom-color: transparent;
 }
 
@@ -983,7 +986,7 @@
         height: calc(100vh - env(safe-area-inset-bottom));
         max-height: calc(100vh - env(safe-area-inset-bottom));
 
-        .menu-sub-item{
+        .menu-sub-item {
           font-size: 1.25rem;
         }
       }

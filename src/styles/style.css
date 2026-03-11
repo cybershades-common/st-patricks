@@ -623,7 +623,7 @@ hr {
   z-index: 1000;
   padding: 1.25rem 0;
   background-color: transparent;
-  transition: transform 0.35s ease, padding 0.4s ease;
+  transition: background-color 0s, border-color 0s, transform 0.35s ease, padding 0.4s ease;
   will-change: transform;
   border-bottom: 0.0625rem solid transparent;
 }
@@ -648,7 +648,6 @@ hr {
   letter-spacing: -0.0411rem;
 }
 .header.menu-open {
-  background-color: var(--basic-white);
   border-bottom-color: transparent;
 }
 .header .container-fluid {
