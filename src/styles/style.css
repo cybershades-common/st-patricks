@@ -1320,7 +1320,6 @@ hr {
   }
   body .header .header-row > .mobile-only-btns {
     margin: 1rem 0 0;
-    display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
@@ -1334,6 +1333,9 @@ hr {
   }
   body .header .header-row > .mobile-only-btns .menu-dropdown-btn:after {
     display: none;
+  }
+  body .header .header-row > .mobile-only-btns .dropdown-menu {
+    z-index: 1001;
   }
   body .mega-menu-inner {
     padding: 0 0.75rem;

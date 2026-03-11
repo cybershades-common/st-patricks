@@ -348,6 +348,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const isMobileView = isMobile();
 
+        // Mobile-only header dropdowns — set grid + hidden before timeline starts
+        const mobileHeaderBtns = isMobileView
+            ? header.querySelector('.header-row > .mobile-only-btns')
+            : null;
+        if (mobileHeaderBtns) {
+            gsap.set(mobileHeaderBtns, { display: 'grid', opacity: 0, y: 8, force3D: true });
+        }
+
         menuTimeline
             // Mega menu + overlay quick fade in
             .fromTo(megaMenu,
@@ -403,6 +411,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 menuOverlay.style.pointerEvents = 'auto';
             }, null, 0.35);
 
+        // Mobile header dropdowns fade in after main items have staggered
+        if (mobileHeaderBtns) {
+            menuTimeline.to(mobileHeaderBtns, {
+                opacity: 1,
+                y: 0,
+                duration: 0.35,
+                ease: 'power2.out',
+                force3D: true
+            }, 1.1);
+        }
+
     }
 
     function closeMenu() {
@@ -422,6 +441,16 @@ document.addEventListener('DOMContentLoaded', function () {
         );
         const bookTourBtn = document.querySelector('.header-nav .btn-book-tour');
         const rightBlock = header ? header.querySelector('.right-block') : null;
+        const mobileHeaderBtns = header.querySelector('.header-row > .mobile-only-btns');
+
+        // Close any open Bootstrap dropdowns before the menu animates out
+        if (mobileHeaderBtns && window.bootstrap?.Dropdown) {
+            mobileHeaderBtns.querySelectorAll('.dropdown-toggle[aria-expanded="true"]').forEach(btn => {
+                const instance = window.bootstrap.Dropdown.getInstance(btn);
+                if (instance) instance.hide();
+            });
+        }
+
         gsap.killTweensOf([menuMainItems, menuSubItems, menuImageSlide, menuImage, menuFooter, megaMenu, menuOverlay]);
 
         function getRightBlockMaxWidth() {
@@ -445,6 +474,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 gsap.set(headerMenuItems, { clearProps: 'opacity,transform' });
                 if (rightBlock) {
                     gsap.set(rightBlock, { clearProps: 'max-width' });
+                }
+                // Hide mobile header dropdowns and clear all GSAP inline styles
+                if (mobileHeaderBtns) {
+                    gsap.set(mobileHeaderBtns, { display: 'none', clearProps: 'opacity,y,transform' });
                 }
                 // Remove padding from body AND header
                 if (usePaddingCompensation) {
@@ -476,6 +509,17 @@ document.addEventListener('DOMContentLoaded', function () {
             duration: 0.25,
             ease: 'power1.inOut'
         }, 0);
+
+        // Fade out mobile header dropdowns alongside the menu
+        if (mobileHeaderBtns) {
+            closeTimeline.to(mobileHeaderBtns, {
+                opacity: 0,
+                y: 8,
+                duration: 0.2,
+                ease: 'power1.in',
+                force3D: true
+            }, 0);
+        }
 
         // Hide header menu items (except Book a Tour) smoothly
         closeTimeline.to(headerMenuItemsHidden, {
