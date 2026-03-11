@@ -1005,34 +1005,6 @@ document.addEventListener('DOMContentLoaded', function () {
         initHeroAnimations();
     }, 50);
 
-    // Pin hero-media so subsequent sections roll over it
-    const heroMedia = document.querySelector('.hero-media');
-    const nextSection = heroMedia?.nextElementSibling;
-
-    if (heroMedia && nextSection) {
-        ScrollTrigger.create({
-            trigger: heroMedia,
-            start: 'top top',
-            endTrigger: nextSection,
-            end: 'bottom top',
-            pin: true,
-            pinSpacing: false,
-            invalidateOnRefresh: true
-        });
-    }
-
-    // Re-measure the pin after all assets (images, fonts) have finished loading.
-    // DOMContentLoaded fires before images/fonts are ready, so the initial pin
-    // measurements can be stale — this corrects them without a manual refresh.
-    window.addEventListener('load', function () {
-        // Double rAF ensures the browser has completed layout after asset load
-        requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                ScrollTrigger.refresh();
-            });
-        });
-    }, { once: true });
-
     // Dropdown animation: clip-path curtain + stagger items
     function initDropdownAnimations() {
         const dropdowns = document.querySelectorAll('.dropdown');
