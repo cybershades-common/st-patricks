@@ -1665,6 +1665,7 @@ hr {
 @-moz-document url-prefix() {
   body .hero .hero-gradient {
     background: #fff350;
+    filter: blur(50.625rem);
   }
 }
 .hero-internal {
