@@ -625,14 +625,14 @@ hr {
   background-color: transparent;
   transition: all ease 0.4s, background-color 0s, border-color 0s, transform 0.35s ease, padding 0.4s ease;
   will-change: transform;
-  border-bottom: 0.0625rem solid transparent;
+  border-bottom: none;
 }
 .header.header-hidden {
   transform: translateY(-110%);
 }
 .header.header-scrolled {
   background-color: var(--basic-white);
-  border-bottom-color: transparent;
+  border-bottom: none;
 }
 .header.header-compact {
   padding: 1rem 0 0;
@@ -1660,6 +1660,11 @@ hr {
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
   html body .hero .hero-title {
     font-size: 7rem;
+  }
+}
+@-moz-document url-prefix() {
+  body .hero .hero-gradient {
+    background: #fff350;
   }
 }
 .hero-internal {
