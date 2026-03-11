@@ -1180,6 +1180,9 @@ hr {
   .mega-menu-inner::-webkit-scrollbar {
     display: none;
   }
+  .container-fluid .mega-menu-inner {
+    padding: 0;
+  }
   .container-fluid .mega-menu-inner > div {
     height: auto;
   }
@@ -1347,8 +1350,12 @@ hr {
     max-width: 40%;
   }
   body .mega-menu .container-fluid {
-    height: calc(101vh - env(safe-area-inset-bottom));
-    max-height: calc(101vh - env(safe-area-inset-bottom));
+    height: calc(100vh - 7rem - env(safe-area-inset-bottom));
+    max-height: calc(100vh - 7rem - env(safe-area-inset-bottom));
+  }
+  body .mega-menu .container-fluid .menu-sub-items {
+    height: calc(100vh - env(safe-area-inset-bottom));
+    max-height: calc(100vh - env(safe-area-inset-bottom));
   }
 }
 @media (max-width: 575px) {
