@@ -20,9 +20,13 @@
     left: -150%;
     bottom: -75%;
   }
+  .section .gradient-circle.top-right {
+    top: -48rem;
+    right: -48rem;
+  }
   .section .testimonials-gradient {
-    left: 92%;
-    top: 95%;
+    left: 50%;
+    top: 80%;
   }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
