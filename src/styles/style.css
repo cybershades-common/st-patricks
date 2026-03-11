@@ -1239,7 +1239,7 @@ hr {
     height: 65vh;
     max-height: 65vh;
     background: #fff;
-    padding: 7.5rem 2.5rem 1.5rem;
+    padding: 8.5rem 2.5rem 1.5rem;
     transform: translateX(-100%);
     transition: transform 0.65s cubic-bezier(0.215, 0.61, 0.355, 1);
     z-index: 1000;
@@ -1259,7 +1259,7 @@ hr {
     font-weight: var(--font-weight-regular);
     color: var(--basic-black);
     text-decoration: none;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     cursor: pointer;
     padding: 0.5rem 0;
   }
@@ -1328,9 +1328,6 @@ hr {
   body .header .header-row > .mobile-only-btns .menu-dropdown-btn {
     display: flex;
     padding: 0.75rem 1.25rem;
-    background: var(--basic-black);
-    color: var(--basic-white);
-    border-radius: 10rem;
     justify-content: space-between;
     width: 100%;
   }
@@ -1395,6 +1392,9 @@ hr {
     height: calc(100vh - env(safe-area-inset-bottom));
     max-height: calc(100vh - env(safe-area-inset-bottom));
   }
+  body .mega-menu .container-fluid .menu-sub-items .menu-sub-item {
+    font-size: 1.25rem;
+  }
   body .header.header-compact {
     padding: 0.6rem 0;
   }
@@ -1426,7 +1426,7 @@ hr {
     font-size: 2.2875rem;
   }
   .menu-sub-item {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
