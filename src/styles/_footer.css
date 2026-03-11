@@ -506,6 +506,7 @@
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
     width: 100%;
+    justify-content: center;
   }
   .footer-bottom .footer-bottom-links-left a.footer-design-link {
     margin-left: 0;
@@ -518,6 +519,11 @@
   }
   .footer-bottom-links {
     flex-direction: column;
+  }
+  .footer-bottom .row {
+    width: auto;
+    max-width: inherit;
+    text-align: center;
   }
 }
 @media only screen and (min-device-width: 390px) and (max-device-width: 992px) and (orientation: landscape) {
