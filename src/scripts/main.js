@@ -637,8 +637,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isMenuOpen) {
             if (currentScrollY > 0) {
                 header.classList.add('header-scrolled');
+                header.classList.add('header-compact');
             } else {
                 header.classList.remove('header-scrolled');
+                header.classList.remove('header-compact');
             }
 
             if (currentScrollY > headerHeight && delta > 0) {
