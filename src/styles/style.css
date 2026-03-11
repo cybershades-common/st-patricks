@@ -847,6 +847,9 @@ hr {
   opacity: 1;
   visibility: visible;
 }
+.mega-menu-inner {
+  flex-grow: 1;
+}
 @media (max-width: 991px) {
   .mega-menu-overlay {
     height: 100vh;
@@ -1094,6 +1097,9 @@ hr {
   background: var(--basic-black);
   color: var(--basic-white);
 }
+.mobile-only-btns {
+  display: none;
+}
 @media (min-width: 992px) and (max-width: 1200px) {
   .header.menu-open .dropdown-wrapper.hide-header-items {
     display: none !important;
@@ -1186,6 +1192,8 @@ hr {
   }
   .mega-menu {
     --menu-scroll-offset: 6.25rem;
+    max-height: 100vh;
+    height: 100vh;
   }
   .mega-menu-inner {
     overflow-y: auto;
@@ -1195,8 +1203,22 @@ hr {
   .mega-menu-inner::-webkit-scrollbar {
     display: none;
   }
-  .mega-menu-inner .row > div {
+  .container-fluid .mega-menu-inner {
+    padding: 0;
+  }
+  .container-fluid .mega-menu-inner > div {
     height: auto;
+  }
+  .container-fluid .mega-menu-inner > div.mobile-only-btns {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 0;
+  }
+  .container-fluid .mega-menu-inner > div.mobile-only-btns .btn-rounded-large {
+    width: 100%;
+    max-width: 100%;
   }
   .menu-main-item {
     font-size: 2.625rem;
@@ -1298,6 +1320,7 @@ hr {
   }
   body .mega-menu-inner {
     padding: 0 0.75rem;
+    flex-grow: inherit;
   }
   body .logo-text {
     font-size: 1.125rem;
@@ -1329,10 +1352,38 @@ hr {
     padding: 1rem 0;
   }
   body .mega-menu-footer {
-    padding: 3rem 0 0;
+    padding: 2rem 0 0;
+    /*  margin-top: auto;*/
+  }
+  body .mega-menu-footer .mobile-only-btns {
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  body .mega-menu-footer .mobile-only-btns .menu-dropdown-btn {
+    display: flex;
+    padding: 0.75rem 1.25rem;
+    background: var(--basic-black);
+    color: var(--basic-white);
+    border-radius: 10rem;
+    justify-content: space-between;
+    width: 100%;
+  }
+  body .mega-menu-footer .mobile-only-btns .menu-dropdown-btn:after {
+    display: none;
   }
   body .header.menu-open .header-row .right-block {
     max-width: 40%;
+  }
+  body .mega-menu .container-fluid {
+    height: calc(100vh - 7rem - env(safe-area-inset-bottom));
+    max-height: calc(100vh - 7rem - env(safe-area-inset-bottom));
+  }
+  body .mega-menu .container-fluid .menu-sub-items {
+    height: calc(100vh - env(safe-area-inset-bottom));
+    max-height: calc(100vh - env(safe-area-inset-bottom));
   }
   body .header.header-compact {
     padding: 0.6rem 0;
