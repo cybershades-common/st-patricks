@@ -779,7 +779,7 @@
     font-size: 1.25rem;
   }
   body .header.header-compact {
-    padding: 0.6rem 0;
+    padding: 0;
   }
 }
 @media (max-width: 575px) {
