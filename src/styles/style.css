@@ -1191,7 +1191,7 @@ hr {
     display: none;
   }
   .mega-menu {
-    --menu-scroll-offset: 10.25rem;
+    --menu-scroll-offset: 10rem;
     max-height: 100vh;
     height: 100vh;
   }
