@@ -623,7 +623,7 @@ hr {
   z-index: 1000;
   padding: 1.25rem 0;
   background-color: transparent;
-  transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out, transform 0.35s ease, padding 0.4s ease;
+  transition: transform 0.35s ease, padding 0.4s ease;
   will-change: transform;
   border-bottom: 0.0625rem solid transparent;
 }
@@ -1191,7 +1191,7 @@ hr {
     display: none;
   }
   .mega-menu {
-    --menu-scroll-offset: 6.25rem;
+    --menu-scroll-offset: 10.25rem;
     max-height: 100vh;
     height: 100vh;
   }
@@ -1319,7 +1319,7 @@ hr {
     max-width: 35%;
   }
   body .header .header-row > .mobile-only-btns {
-    margin-bottom: 2rem;
+    margin: 1rem 0 0;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
