@@ -510,15 +510,9 @@ document.addEventListener('DOMContentLoaded', function () {
             ease: 'power1.inOut'
         }, 0);
 
-        // Fade out mobile header dropdowns alongside the menu
+        // Hide mobile header dropdowns immediately on close
         if (mobileHeaderBtns) {
-            closeTimeline.to(mobileHeaderBtns, {
-                opacity: 0,
-                y: 8,
-                duration: 0.2,
-                ease: 'power1.in',
-                force3D: true
-            }, 0);
+            gsap.set(mobileHeaderBtns, { display: 'none', opacity: 0, clearProps: 'y,transform' });
         }
 
         // Hide header menu items (except Book a Tour) smoothly
