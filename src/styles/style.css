@@ -645,7 +645,7 @@ hr {
   align-items: center;
 }
 .header.header-compact .header-nav {
-  min-height: 3.75rem;
+  min-height: 4rem;
 }
 .header.menu-open {
   border-bottom-color: transparent;
