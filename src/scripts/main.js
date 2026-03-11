@@ -503,8 +503,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Fade everything away, then reset state
-        closeTimeline.to([megaMenu, menuOverlay], {
+        // Hide overlay instantly, fade mega menu
+        gsap.set(menuOverlay, { opacity: 0 });
+        closeTimeline.to(megaMenu, {
             opacity: 0,
             duration: 0.25,
             ease: 'power1.inOut'
