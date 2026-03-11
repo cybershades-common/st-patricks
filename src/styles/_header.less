@@ -713,9 +713,12 @@
         height: auto;
 
         &.mobile-only-btns {
-          display: flex;
+          display: grid;
+          grid-template-rows: 1fr;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
           margin-bottom: 0;
-          padding: 0;
+         
 
           .btn-rounded-large {
             width: 100%;
@@ -897,11 +900,14 @@
 
     .mega-menu-footer {
       padding: 2rem 0 0;
-    /*  margin-top: auto;*/
+      /*  margin-top: auto;*/
       .mobile-only-btns {
         margin-bottom: 2rem;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+       
         .menu-dropdown-btn {
           display: flex;
           padding: 0.75rem 1.25rem;
@@ -930,7 +936,6 @@
         max-height: calc(100vh - env(safe-area-inset-bottom));
       }
     }
-    
   }
 }
 
