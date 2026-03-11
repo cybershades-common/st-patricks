@@ -20,18 +20,10 @@
 .header.header-compact {
   padding: 1rem 0;
 }
-.header.header-compact .header-logo img {
-  width: 3.5rem;
-}
-.header.header-compact .header-logo-text {
-  padding-top: 0.731rem;
-}
-.header.header-compact .logo-text {
-  font-size: 1.37rem;
-  letter-spacing: -0.0411rem;
+.header.header-compact .header-logo {
+  transform: scale(0.8) !important;
 }
 .header.menu-open {
-  background-color: var(--basic-white);
   border-bottom-color: transparent;
 }
 .header .container-fluid {
@@ -42,6 +34,9 @@
   opacity: 0;
   visibility: hidden;
   gap: 1rem;
+  transform: scale(1);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 .header-logo a {
   display: flex;
@@ -554,13 +549,6 @@
   .header.menu-open .header-row .right-block {
     max-width: 57.875%;
   }
-  .header.header-compact .logo-text {
-    font-size: 1rem;
-    letter-spacing: -0.02rem;
-  }
-  .header.header-compact .header-logo-text {
-    padding-top: 0.75rem;
-  }
 }
 @media (max-width: 767px) {
   .header-nav .btn-book-tour {
@@ -783,13 +771,6 @@
   body .header.header-compact {
     padding: 0.6rem 0;
   }
-  body .header.header-compact .logo-text {
-    font-size: 0.9rem;
-    letter-spacing: -0.015rem;
-  }
-  body .header.header-compact .header-logo-text {
-    padding-top: 0.5rem;
-  }
 }
 @media (max-width: 575px) {
   .header-logo {
@@ -800,9 +781,6 @@
   }
   .header-logo-text {
     padding-top: 0.3125rem;
-  }
-  .header.header-compact .header-logo img {
-    width: 2.8rem;
   }
   .header.header-compact .header-logo-text {
     padding-top: 0.25rem;
