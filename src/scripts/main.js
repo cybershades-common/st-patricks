@@ -972,9 +972,22 @@ document.addEventListener('DOMContentLoaded', function () {
             endTrigger: nextSection,
             end: 'bottom top',
             pin: true,
-            pinSpacing: false
+            pinSpacing: false,
+            invalidateOnRefresh: true
         });
     }
+
+    // Re-measure the pin after all assets (images, fonts) have finished loading.
+    // DOMContentLoaded fires before images/fonts are ready, so the initial pin
+    // measurements can be stale — this corrects them without a manual refresh.
+    window.addEventListener('load', function () {
+        // Double rAF ensures the browser has completed layout after asset load
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                ScrollTrigger.refresh();
+            });
+        });
+    }, { once: true });
 
     // Dropdown animation: clip-path curtain + stagger items
     function initDropdownAnimations() {
