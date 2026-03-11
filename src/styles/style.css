@@ -1346,6 +1346,10 @@ hr {
   body .header.menu-open .header-row .right-block {
     max-width: 40%;
   }
+  body .mega-menu .container-fluid {
+    height: calc(90vh - 3rem);
+    max-height: calc(90vh - 3rem);
+  }
 }
 @media (max-width: 575px) {
   .header-logo {
