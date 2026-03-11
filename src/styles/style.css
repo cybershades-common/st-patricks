@@ -6168,7 +6168,7 @@ body:has(.internal-content-single) .hero-internal-title {
   }
   .footer-bottom .footer-bottom-links-left {
     flex-wrap: wrap;
-    gap: 0.5rem 1rem;
+    gap: 0.5rem 1.5rem;
     width: 100%;
     justify-content: center;
   }
