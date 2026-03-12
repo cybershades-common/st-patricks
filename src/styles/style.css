@@ -5505,6 +5505,12 @@ body:has(.internal-content-single) .hero-internal-title {
     padding-top: 1.5rem;
   }
 }
+@-moz-document url-prefix() {
+  body .testimonials-section .testimonials-gradient {
+    background: #fff350;
+    filter: blur(50.625rem);
+  }
+}
 .cta-block-wrap {
   display: flex;
   justify-content: space-between;
@@ -5801,7 +5807,7 @@ body:has(.internal-content-single) .hero-internal-title {
 .footer-divider-vertical {
   width: 0.02488125rem;
   align-self: stretch;
-  background-color: var(--primary-gold-3);
+  background-color: var(--primary-gold-bright);
   flex-shrink: 0;
   margin: 0;
 }
@@ -6205,6 +6211,12 @@ body:has(.internal-content-single) .hero-internal-title {
   }
   html body .footer .footer-gradient {
     top: 100%;
+  }
+}
+@-moz-document url-prefix() {
+  body .footer .footer-gradient {
+    background: #fff350;
+    filter: blur(50.625rem);
   }
 }
 @media (min-width: 992px) and (max-width: 1200px) {

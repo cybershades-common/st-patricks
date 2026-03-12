@@ -143,7 +143,7 @@
 .footer-divider-vertical {
   width: 0.02488125rem;
   align-self: stretch;
-  background-color: var(--primary-gold-3);
+  background-color: var(--primary-gold-bright);
   flex-shrink: 0;
   margin: 0;
 }
