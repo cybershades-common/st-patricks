@@ -66,6 +66,8 @@
 }
 .footer-left {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .footer-crest {
   width: 7.75rem;
@@ -98,6 +100,7 @@
   align-items: center;
   width: 25.625rem;
   max-width: 100%;
+  margin-top: auto;
 }
 .footer-logo-centenary {
   width: 5.665rem;
@@ -260,6 +263,7 @@
   width: 100vw;
   overflow: hidden;
   white-space: nowrap;
+  padding-top: 5.8125rem;
 }
 .footer-large-text h1 {
   font-family: var(--font-family-helvetica-neue);
