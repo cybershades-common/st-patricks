@@ -1012,7 +1012,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const dropdownInstance =
                 window.bootstrap && window.bootstrap.Dropdown
-                    ? window.bootstrap.Dropdown.getOrCreateInstance(toggle, { autoClose: false })
+                    ? window.bootstrap.Dropdown.getOrCreateInstance(toggle, { autoClose: isMobile() ? true : false })
                     : null;
 
             // Desktop hover opens dropdown (keeps GSAP animation)
