@@ -68,9 +68,6 @@
   margin: 0;
 }
 @media (max-width: 991px) {
-  .strategic-section {
-    min-height: 600px;
-  }
   .strategic-section .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
