@@ -50,21 +50,39 @@ document.addEventListener('DOMContentLoaded', function () {
         return nextIndex > currentIndex ? 1 : -1;
     }
 
-    // Simple crossfade image transition
+    // Image transition matching johnxxiii slider: fade crossFade + parallax scale (Swiper equivalent)
+    // Old image: fades out while scaling up to 1.5 | New image: starts at 1.5, zooms out to 1 while fading in
     function setMenuImage(src, instant) {
         if (!menuImageWrapper || !src) return;
         const img = menuImageWrapper.querySelector('img.menu-image');
         if (!img || img.getAttribute('src') === src) return;
 
         gsap.killTweensOf(img);
-        img.setAttribute('src', src);
 
         if (instant) {
-            gsap.set(img, { opacity: 1 });
+            img.setAttribute('src', src);
+            gsap.set(img, { opacity: 1, scale: 1 });
             return;
         }
 
-        gsap.fromTo(img, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power1.out' });
+        const next = document.createElement('img');
+        next.className = img.className;
+        next.setAttribute('src', src);
+        next.setAttribute('alt', img.getAttribute('alt') || '');
+        next.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
+        menuImageWrapper.appendChild(next);
+
+        gsap.set(next, { opacity: 0, scale: 1.5 });
+
+        gsap.to(img, { opacity: 0, scale: 1.5, duration: 0.9, ease: 'power1.inOut' });
+        gsap.to(next, {
+            opacity: 1, scale: 1, duration: 0.9, ease: 'power1.inOut',
+            onComplete: () => {
+                img.setAttribute('src', src);
+                gsap.set(img, { opacity: 1, scale: 1 });
+                next.remove();
+            }
+        });
     }
 
     function setActiveSubGroup(nextKey, direction, instant) {

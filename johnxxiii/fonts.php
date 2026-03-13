@@ -1,0 +1,2 @@
+<link rel="preload" as="font" href="./assets/fonts/FiraSans-Regular.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="./assets/fonts/FiraSans-Medium.woff2" type="font/woff2" crossorigin>
