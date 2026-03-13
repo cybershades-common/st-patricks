@@ -1,8 +1,9 @@
 .strategic-section {
   position: relative;
   overflow: hidden;
-  height: 810px;
-  max-height: 90vh;
+}
+.strategic-section > img.full {
+  aspect-ratio: 1440/810;
 }
 .strategic-background {
   top: 0;
@@ -10,6 +11,7 @@
   z-index: 1;
 }
 .strategic-overlay {
+  padding: 3rem 0;
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;

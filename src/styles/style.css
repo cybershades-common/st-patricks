@@ -3273,8 +3273,9 @@ body:has(.internal-content-single) .hero-internal-title {
 .strategic-section {
   position: relative;
   overflow: hidden;
-  height: 810px;
-  max-height: 90vh;
+}
+.strategic-section > img.full {
+  aspect-ratio: 1440/810;
 }
 .strategic-background {
   top: 0;
