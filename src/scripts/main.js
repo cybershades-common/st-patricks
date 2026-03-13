@@ -443,11 +443,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const rightBlock = header ? header.querySelector('.right-block') : null;
         const mobileHeaderBtns = header.querySelector('.header-row > .mobile-only-btns');
 
-        // Close any open Bootstrap dropdowns before the menu animates out
-        if (mobileHeaderBtns && window.bootstrap?.Dropdown) {
+        // Close any open dropdowns before the menu animates out
+        if (mobileHeaderBtns) {
             mobileHeaderBtns.querySelectorAll('.dropdown-toggle[aria-expanded="true"]').forEach(btn => {
-                const instance = window.bootstrap.Dropdown.getInstance(btn);
-                if (instance) instance.hide();
+                if (typeof btn._dropdownClose === 'function') btn._dropdownClose();
             });
         }
 
@@ -1010,110 +1009,61 @@ document.addEventListener('DOMContentLoaded', function () {
             const menu = dropdown.querySelector('.dropdown-menu');
             if (!toggle || !menu) return;
 
-            const dropdownInstance =
-                window.bootstrap && window.bootstrap.Dropdown
-                    ? window.bootstrap.Dropdown.getOrCreateInstance(toggle, { autoClose: isMobile() ? true : false })
-                    : null;
+            let isOpen = false;
 
-            // Desktop hover opens dropdown (keeps GSAP animation)
-            dropdown.addEventListener('mouseenter', () => {
-                if (isMobile() || !dropdownInstance) return;
-                dropdownInstance.show();
-            });
-            dropdown.addEventListener('mouseleave', () => {
-                if (isMobile() || !dropdownInstance) return;
-                dropdownInstance.hide();
-            });
+            function open() {
+                if (isOpen) return;
+                isOpen = true;
+                toggle.setAttribute('aria-expanded', 'true');
 
-            // On desktop: prevent click (hover controls it)
-            // On mobile: take full control to avoid Bootstrap's delegated toggle
-            //            mis-reading _isShown() on the very first interaction
-            toggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (!isMobile() || !dropdownInstance) return;
-                e.stopPropagation(); // block Bootstrap's document-level delegated listener
-                if (toggle.getAttribute('aria-expanded') === 'true') {
-                    dropdownInstance.hide();
-                } else {
-                    dropdownInstance.show();
-                }
-            });
-
-            dropdown.addEventListener('show.bs.dropdown', () => {
-                gsap.killTweensOf(menu);
                 const items = menu.querySelectorAll('.dropdown-item');
-                gsap.killTweensOf(items);
+                gsap.killTweensOf([menu, items]);
 
                 menu.style.display = 'block';
-                menu.style.overflow = 'hidden';
-
-                gsap.set(menu, {
-                    clipPath: 'inset(0 0 100% 0)',
-                    opacity: 1,
-                    willChange: 'clip-path,opacity'
-                });
-
+                gsap.set(menu, { clipPath: 'inset(0 0 100% 0)', overflow: 'hidden' });
                 gsap.set(items, { opacity: 0, x: -12, force3D: true });
 
-                const tl = gsap.timeline({
-                    onComplete: () => {
-                        gsap.set(menu, { clearProps: 'will-change,overflow,clipPath' });
-                    }
-                });
+                gsap.timeline({ onComplete: () => gsap.set(menu, { clearProps: 'overflow,clipPath' }) })
+                    .to(menu, { clipPath: 'inset(0 0 0% 0)', duration: 0.35, ease: 'power2.out' }, 0)
+                    .to(items, { opacity: 1, x: 0, duration: 0.3, ease: 'power2.out', stagger: 0.04 }, 0.08);
+            }
 
-                tl.to(menu, {
-                    clipPath: 'inset(0 0 0% 0)',
-                    duration: 0.35,
-                    ease: 'power2.out'
-                }, 0)
-                    .to(items, {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.3,
-                        ease: 'power2.out',
-                        stagger: 0.04
-                    }, 0.08);
-            });
-
-            let skipCloseAnimation = false;
-
-            dropdown.addEventListener('hide.bs.dropdown', (e) => {
-                if (skipCloseAnimation) return;
-                e.preventDefault();
-
-                // Immediately update aria-expanded so the arrow rotates in sync with the close animation
+            function close() {
+                if (!isOpen) return;
+                isOpen = false;
                 toggle.setAttribute('aria-expanded', 'false');
 
-                gsap.killTweensOf(menu);
-                gsap.killTweensOf(menu.querySelectorAll('.dropdown-item'));
                 const items = menu.querySelectorAll('.dropdown-item');
+                gsap.killTweensOf([menu, items]);
 
-                const tl = gsap.timeline({
+                gsap.timeline({
                     onComplete: () => {
-                        // Let Bootstrap properly update its internal state
-                        skipCloseAnimation = true;
-                        dropdownInstance.hide();
-                        skipCloseAnimation = false;
-
                         menu.style.display = 'none';
-                        menu.style.overflow = '';
                         gsap.set(menu, { clearProps: 'clipPath' });
                         gsap.set(items, { clearProps: 'opacity,transform' });
                     }
-                });
+                })
+                    .to(items, { opacity: 0, x: -12, duration: 0.2, ease: 'power2.in', stagger: 0.03 }, 0)
+                    .to(menu, { clipPath: 'inset(0 0 100% 0)', duration: 0.25, ease: 'power2.in' }, 0.05);
+            }
 
-                tl.to(items, {
-                    opacity: 0,
-                    x: -12,
-                    duration: 0.2,
-                    ease: 'power2.in',
-                    stagger: 0.03
-                }, 0)
-                    .to(menu, {
-                        clipPath: 'inset(0 0 100% 0)',
-                        duration: 0.25,
-                        ease: 'power2.in'
-                    }, 0.05);
+            // Store close fn on element so mega-menu teardown can call it
+            toggle._dropdownClose = close;
+
+            // Desktop: hover
+            dropdown.addEventListener('mouseenter', () => { if (!isMobile()) open(); });
+            dropdown.addEventListener('mouseleave', () => { if (!isMobile()) close(); });
+
+            // Mobile: click toggle
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (!isMobile()) return;
+                isOpen ? close() : open();
+            });
+
+            // Mobile: close on outside tap
+            document.addEventListener('click', (e) => {
+                if (isMobile() && isOpen && !dropdown.contains(e.target)) close();
             });
         });
     }
