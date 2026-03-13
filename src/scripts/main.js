@@ -1050,16 +1050,21 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdown.addEventListener('mouseenter', () => { if (!isMobile()) open(); });
             dropdown.addEventListener('mouseleave', () => { if (!isMobile()) close(); });
 
-            // Mobile: click toggle
-            toggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (!isMobile()) return;
-                isOpen ? close() : open();
-            });
+            // Desktop: block click (hover controls it)
+            toggle.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); });
 
-            // Mobile: close on outside tap
+            // Mobile: touchstart fires before click — preventDefault kills the entire
+            // subsequent click chain so Bootstrap's delegated listener never sees it
+            toggle.addEventListener('touchstart', (e) => {
+                if (!isMobile()) return;
+                e.preventDefault();
+                e.stopPropagation();
+                isOpen ? close() : open();
+            }, { passive: false });
+
+            // Close on outside tap/click
             document.addEventListener('click', (e) => {
-                if (isMobile() && isOpen && !dropdown.contains(e.target)) close();
+                if (isOpen && !dropdown.contains(e.target)) close();
             });
         });
     }
