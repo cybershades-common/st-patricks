@@ -2935,11 +2935,3 @@ document.addEventListener('DOMContentLoaded', function () {
     initLatestNewsHeroSlider();
 
 });
-function updateGradientSize() {
-    halfW = heroGradient.offsetWidth / 2;
-    halfH = heroGradient.offsetHeight / 2;
-    originalCenterX = originalLeft + halfW;
-    originalCenterY = originalBottom + halfH;
-}
-
-window.addEventListener('resize', updateGradientSize);
