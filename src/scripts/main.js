@@ -1009,6 +1009,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const menu = dropdown.querySelector('.dropdown-menu');
             if (!toggle || !menu) return;
 
+            // Prevent Bootstrap's delegated click listener from interfering
+            toggle.removeAttribute('data-bs-toggle');
+
             let isOpen = false;
 
             function open() {
