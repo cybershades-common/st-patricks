@@ -209,7 +209,7 @@
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0;
-  color: var(--primary-blue);
+  color: var(--primary-black-c);
 }
 .footer-social-links {
   gap: 1.25rem;
