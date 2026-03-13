@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentMenuKey = null;
     let isSubMenuAnimating = false;
     let pendingMenuKey = null;
+    let menuImageNext = null; // tracks any in-progress overlay img
 
     function getMenuDirection(nextKey) {
         const currentIndex = menuOrder.indexOf(currentMenuKey);
@@ -57,20 +58,31 @@ document.addEventListener('DOMContentLoaded', function () {
         const img = menuImageWrapper.querySelector('img.menu-image');
         if (!img || img.getAttribute('src') === src) return;
 
+        // Abort any in-progress transition cleanly
+        if (menuImageNext) {
+            const abortedSrc = menuImageNext.getAttribute('src');
+            gsap.killTweensOf(menuImageNext);
+            menuImageNext.remove();
+            menuImageNext = null;
+            img.setAttribute('src', abortedSrc);
+        }
+
         gsap.killTweensOf(img);
+        gsap.set(img, { opacity: 1, scale: 1, x: 0 });
+
+        if (img.getAttribute('src') === src) return;
 
         if (instant) {
             img.setAttribute('src', src);
-            gsap.set(img, { opacity: 1, scale: 1 });
             return;
         }
 
         const next = document.createElement('img');
-        next.className = img.className;
         next.setAttribute('src', src);
         next.setAttribute('alt', img.getAttribute('alt') || '');
-        next.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
+        next.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;';
         menuImageWrapper.appendChild(next);
+        menuImageNext = next;
 
         gsap.set(next, { opacity: 0, scale: 1.5 });
 
@@ -79,8 +91,9 @@ document.addEventListener('DOMContentLoaded', function () {
             opacity: 1, scale: 1, duration: 0.9, ease: 'power1.inOut',
             onComplete: () => {
                 img.setAttribute('src', src);
-                gsap.set(img, { opacity: 1, scale: 1 });
+                gsap.set(img, { opacity: 1, scale: 1, x: 0 });
                 next.remove();
+                menuImageNext = null;
             }
         });
     }
