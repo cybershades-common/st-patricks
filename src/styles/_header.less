@@ -362,8 +362,10 @@
   text-decoration: none;
 
   opacity: 0;
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  align-self: flex-start;
 }
 
 .menu-sub-item.active,
@@ -373,15 +375,6 @@
 
 .menu-sub-item:hover {
   color: var(--primary-blue) !important;
-}
-
-@media (min-width: 992px) {
-  .menu-sub-item {
-    display: inline-block;
-    width: auto;
-    max-width: 100%;
-    align-self: flex-start;
-  }
 }
 
 .menu-image-wrapper {
