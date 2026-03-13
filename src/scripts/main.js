@@ -379,12 +379,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const bookTourBtn = document.querySelector('.header-nav .btn-book-tour');
         const rightBlock = header ? header.querySelector('.right-block') : null;
         const mobileHeaderBtns = header.querySelector('.header-row > .mobile-only-btns');
+        const logoTexts = header.querySelectorAll('.logo-text');
 
         // Close any open dropdowns before the menu animates out
         if (mobileHeaderBtns) {
             mobileHeaderBtns.querySelectorAll('.dropdown-toggle[aria-expanded="true"]').forEach(btn => {
                 if (typeof btn._dropdownClose === 'function') btn._dropdownClose();
             });
+        }
+
+        // Snap logo to its post-close color immediately — mirrors the instant snap when the menu opens
+        const isInternal = document.body.classList.contains('internal-page');
+        const isScrolled = header.classList.contains('header-scrolled');
+        if (isInternal && !isScrolled) {
+            logoTexts.forEach(t => { t.style.color = 'var(--basic-white)'; });
         }
 
         gsap.killTweensOf([menuMainItems, menuSubItems, menuImageWrapper, menuImage, menuFooter, megaMenu, menuOverlay]);
@@ -421,7 +429,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     header.style.paddingRight = '';
                 }
 
+                // Disable btn transition so color snaps to its post-close CSS state (e.g. white on internal pages)
+                if (bookTourBtn) {
+                    bookTourBtn.style.transition = 'none';
+                }
                 header.classList.remove('menu-open');
+                logoTexts.forEach(t => { t.style.color = ''; }); // restore CSS
                 hamburger.classList.remove('active');
                 menuText.textContent = 'MENU';
 
@@ -433,7 +446,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (bookTourBtn) {
                     gsap.fromTo(bookTourBtn,
                         { opacity: 0, y: -12, force3D: true },
-                        { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out', force3D: true }
+                        {
+                            opacity: 1, y: 0, duration: 0.25, ease: 'power2.out', force3D: true,
+                            onComplete: () => { bookTourBtn.style.transition = ''; }
+                        }
                     );
                 }
             }
