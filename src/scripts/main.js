@@ -1305,9 +1305,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const trackMap = { all: trackAll, junior: trackJunior, senior: trackSenior };
         let activeTrack = trackAll;
         let currentIndex = 0;
-        let isDragging = false;
-        let startX = 0;
-        let currentTranslate = 0;
         let prevTranslate = 0;
         let cleanupFn = null;
 
@@ -1331,7 +1328,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentIndex = index;
                 const offset = -(currentIndex * (getSlideWidth() + getGap()));
                 prevTranslate = offset;
-                currentTranslate = offset;
 
                 if (!animate) {
                     gsap.killTweensOf(slides);
@@ -1357,75 +1353,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             };
 
-            let startY = 0;
-            let dragDirection = null; // 'h' | 'v' | null
-            const handleDragStart = (e) => {
-                isDragging = true;
-                dragDirection = null;
-                // Kill any running slide animation so drag starts from current position
-                gsap.killTweensOf(slides);
-                gsap.set(slides, { scale: 1 });
-                startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-                startY = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
-                localTrack.classList.add('dragging');
-                localTrack.style.transition = 'none';
-            };
-            const handleDragMove = (e) => {
-                if (!isDragging) return;
-                const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-                const y = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
-                if (!dragDirection) {
-                    const dx = Math.abs(x - startX);
-                    const dy = Math.abs(y - startY);
-                    if (dx < 5 && dy < 5) return;
-                    dragDirection = dx >= dy ? 'h' : 'v';
-                }
-                if (dragDirection === 'v') {
-                    isDragging = false;
-                    localTrack.classList.remove('dragging');
-                    localTrack.style.transition = '';
-                    return;
-                }
-                e.preventDefault();
-                currentTranslate = prevTranslate + (x - startX);
-                localTrack.style.transform = `translateX(${currentTranslate}px)`;
-            };
-            const handleDragEnd = () => {
-                if (!isDragging) return;
-                isDragging = false;
-                localTrack.classList.remove('dragging');
-                localTrack.style.transition = '';
-                const movedBy = currentTranslate - prevTranslate;
-                const threshold = getSlideWidth() * 0.2;
-                if (movedBy < -threshold && currentIndex < slides.length - 1) moveToSlide(currentIndex + 1);
-                else if (movedBy > threshold && currentIndex > 0) moveToSlide(currentIndex - 1);
-                else moveToSlide(currentIndex);
-            };
             const handlePrev = () => { if (currentIndex > 0) moveToSlide(currentIndex - 1); };
             const handleNext = () => { if (currentIndex < slides.length - 1) moveToSlide(currentIndex + 1); };
 
             prevBtn.addEventListener('click', handlePrev);
             nextBtn.addEventListener('click', handleNext);
-            localTrack.addEventListener('mousedown', handleDragStart);
-            localTrack.addEventListener('mousemove', handleDragMove);
-            localTrack.addEventListener('mouseup', handleDragEnd);
-            localTrack.addEventListener('mouseleave', handleDragEnd);
-            localTrack.addEventListener('touchstart', handleDragStart, { passive: false });
-            localTrack.addEventListener('touchmove', handleDragMove, { passive: false });
-            localTrack.addEventListener('touchend', handleDragEnd);
 
             moveToSlide(0, false);
 
             return () => {
                 prevBtn.removeEventListener('click', handlePrev);
                 nextBtn.removeEventListener('click', handleNext);
-                localTrack.removeEventListener('mousedown', handleDragStart);
-                localTrack.removeEventListener('mousemove', handleDragMove);
-                localTrack.removeEventListener('mouseup', handleDragEnd);
-                localTrack.removeEventListener('mouseleave', handleDragEnd);
-                localTrack.removeEventListener('touchstart', handleDragStart);
-                localTrack.removeEventListener('touchmove', handleDragMove);
-                localTrack.removeEventListener('touchend', handleDragEnd);
             };
         }
 
@@ -1456,38 +1394,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 prevTranslate = pos;
             };
 
-            const handleDragStart = (e) => {
-                isDragging = true;
-                startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-                localTrack.classList.add('dragging');
-            };
-            const handleDragMove = (e) => {
-                if (!isDragging) return;
-                const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-                currentTranslate = prevTranslate + (x - startX);
-                localTrack.style.transform = `translateX(${currentTranslate}px)`;
-            };
-            const handleDragEnd = () => {
-                if (!isDragging) return;
-                isDragging = false;
-                localTrack.classList.remove('dragging');
-                const movedBy = currentTranslate - prevTranslate;
-                if (movedBy < -100) moveToSlide(currentIndex + 1);
-                else if (movedBy > 100) moveToSlide(currentIndex - 1);
-                else moveToSlide(currentIndex);
-            };
             const handlePrev = () => moveToSlide(currentIndex - 1);
             const handleNext = () => moveToSlide(currentIndex + 1);
 
             prevBtn.addEventListener('click', handlePrev);
             nextBtn.addEventListener('click', handleNext);
-            localTrack.addEventListener('mousedown', handleDragStart);
-            localTrack.addEventListener('mousemove', handleDragMove);
-            localTrack.addEventListener('mouseup', handleDragEnd);
-            localTrack.addEventListener('mouseleave', handleDragEnd);
-            localTrack.addEventListener('touchstart', handleDragStart, { passive: true });
-            localTrack.addEventListener('touchmove', handleDragMove, { passive: true });
-            localTrack.addEventListener('touchend', handleDragEnd);
 
             moveToSlide(0);
             // Clear any inline transition override so CSS transition takes over for subsequent moves
@@ -1496,13 +1407,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return () => {
                 prevBtn.removeEventListener('click', handlePrev);
                 nextBtn.removeEventListener('click', handleNext);
-                localTrack.removeEventListener('mousedown', handleDragStart);
-                localTrack.removeEventListener('mousemove', handleDragMove);
-                localTrack.removeEventListener('mouseup', handleDragEnd);
-                localTrack.removeEventListener('mouseleave', handleDragEnd);
-                localTrack.removeEventListener('touchstart', handleDragStart);
-                localTrack.removeEventListener('touchmove', handleDragMove);
-                localTrack.removeEventListener('touchend', handleDragEnd);
             };
         }
 
@@ -1542,7 +1446,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         activeTrack = newTrack;
                         currentIndex = 0;
                         prevTranslate = 0;
-                        currentTranslate = 0;
                         newTrack.style.transition = 'none';
                         newTrack.style.transform = 'translateX(0)';
 
