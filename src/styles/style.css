@@ -3340,9 +3340,6 @@ body:has(.internal-content-single) .hero-internal-title {
   margin: 0;
 }
 @media (max-width: 991px) {
-  .strategic-section {
-    min-height: 600px;
-  }
   .strategic-section .container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
@@ -3388,6 +3385,9 @@ body:has(.internal-content-single) .hero-internal-title {
 @media (max-width: 767px) {
   .strategic-section h2 {
     font-size: 1.875rem;
+  }
+  .strategic-section > img.full {
+    min-height: 600px;
   }
 }
 .academics-section {
