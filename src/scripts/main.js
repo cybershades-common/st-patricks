@@ -40,8 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const menuOrder = Array.from(menuMainItems).map(item => item.dataset.menu || '');
     let currentMenuKey = null;
-    let isMenuImageAnimating = false;
-    let pendingMenuImageSrc = null;
     let isSubMenuAnimating = false;
     let pendingMenuKey = null;
 
@@ -52,117 +50,21 @@ document.addEventListener('DOMContentLoaded', function () {
         return nextIndex > currentIndex ? 1 : -1;
     }
 
-    function ensureMenuImageSlide() {
-        if (!menuImageWrapper) return null;
-
-        let activeSlide = menuImageWrapper.querySelector('.menu-image-slide.is-active');
-        if (activeSlide) return activeSlide;
-
-        let img = menuImageWrapper.querySelector('img.menu-image:not(.menu-image-placeholder)');
-        let placeholder = menuImageWrapper.querySelector('.menu-image-placeholder');
-        if (!img) {
-            img = document.createElement('img');
-            img.className = 'menu-image w-100';
-            img.alt = 'Menu image';
-        }
-
-        if (!placeholder) {
-            placeholder = img.cloneNode(true);
-            placeholder.classList.add('menu-image-placeholder');
-            menuImageWrapper.insertBefore(placeholder, menuImageWrapper.firstChild);
-        }
-
-        const slide = document.createElement('div');
-        slide.className = 'menu-image-slide is-active';
-        slide.appendChild(img);
-        menuImageWrapper.appendChild(slide);
-
-        gsap.set(slide, { clipPath: 'inset(0% 0% 0% 0%)', zIndex: 1 });
-        gsap.set(img, { scale: 1, x: 0, opacity: 1 });
-
-        return slide;
-    }
-
-    function setMenuImage(src, instant, directionOverride) {
+    // Simple crossfade image transition
+    function setMenuImage(src, instant) {
         if (!menuImageWrapper || !src) return;
-        const activeSlide = ensureMenuImageSlide();
-        if (!activeSlide) return;
+        const img = menuImageWrapper.querySelector('img.menu-image');
+        if (!img || img.getAttribute('src') === src) return;
 
-        const activeImg = activeSlide.querySelector('img.menu-image');
-        const placeholder = menuImageWrapper.querySelector('.menu-image-placeholder');
-        if (activeImg && activeImg.getAttribute('src') === src) return;
+        gsap.killTweensOf(img);
+        img.setAttribute('src', src);
 
         if (instant) {
-            if (activeImg) {
-                activeImg.setAttribute('src', src);
-            }
+            gsap.set(img, { opacity: 1 });
             return;
         }
 
-        if (isMenuImageAnimating) {
-            pendingMenuImageSrc = src;
-            return;
-        }
-        isMenuImageAnimating = true;
-
-        const direction = directionOverride || getMenuDirection(currentMenuKey || 'about');
-        const clipFrom = direction === 1 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)';
-        const oldClipTo = direction === 1 ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 0% 100%)';
-        const parallaxFrom = direction === 1 ? -100 : 100;
-        const oldParallaxTo = direction === 1 ? 100 : -100;
-
-        const newSlide = document.createElement('div');
-        newSlide.className = 'menu-image-slide';
-        const newImg = document.createElement('img');
-        newImg.className = 'menu-image w-100';
-        newImg.src = src;
-        newImg.alt = activeImg ? activeImg.alt : 'Menu image';
-        newSlide.appendChild(newImg);
-        menuImageWrapper.appendChild(newSlide);
-
-        // Ensure current image is fully visible before new slide moves in
-        gsap.set(activeSlide, { clipPath: 'inset(0% 0% 0% 0%)', zIndex: 1 });
-        gsap.set(activeImg, { opacity: 1 });
-
-        gsap.set(newSlide, { clipPath: clipFrom, zIndex: 2 });
-        gsap.set(newImg, { scale: 1.3, x: parallaxFrom, opacity: 1 });
-
-        gsap.to(activeImg, {
-            x: oldParallaxTo,
-            scale: 1.1,
-            duration: 1.2,
-            ease: 'power3.inOut'
-        });
-        gsap.to(activeSlide, {
-            clipPath: oldClipTo,
-            duration: 1.2,
-            ease: 'power3.inOut',
-            delay: 0.05
-        });
-
-        gsap.to(newSlide, {
-            clipPath: 'inset(0% 0% 0% 0%)',
-            duration: 1.2,
-            ease: 'power3.inOut'
-        });
-        gsap.to(newImg, {
-            scale: 1,
-            x: 0,
-            duration: 1.4,
-            ease: 'power3.out',
-            onComplete: () => {
-                activeSlide.remove();
-                newSlide.classList.add('is-active');
-                isMenuImageAnimating = false;
-                if (pendingMenuImageSrc && pendingMenuImageSrc !== src) {
-                    const nextSrc = pendingMenuImageSrc;
-                    pendingMenuImageSrc = null;
-                    setMenuImage(nextSrc, false, directionOverride);
-                } else {
-                    pendingMenuImageSrc = null;
-                }
-            }
-        });
+        gsap.fromTo(img, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power1.out' });
     }
 
     function setActiveSubGroup(nextKey, direction, instant) {
@@ -251,36 +153,41 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!nextKey) return;
         if (nextKey === currentMenuKey && !instant) return;
 
-        const activeItem = Array.from(menuMainItems).find(item => item.dataset.menu === nextKey);
-        const imageSrc = activeItem ? activeItem.dataset.image : null;
         const direction = currentMenuKey ? getMenuDirection(nextKey) : 1;
 
         if (!instant && isSubMenuAnimating) {
             pendingMenuKey = nextKey;
-            if (imageSrc) {
-                pendingMenuImageSrc = imageSrc;
-            }
             return;
         }
         currentMenuKey = nextKey;
 
         if (instant) {
             setActiveSubGroup(nextKey, direction, true);
-            if (imageSrc) {
-                setMenuImage(imageSrc, true, direction);
-            }
+            // Set default image from first sub-item with data-image in this group
+            const group = menuSubGroupMap.get(nextKey);
+            const firstSubItem = group ? group.querySelector('.menu-sub-item[data-image]') : null;
+            if (firstSubItem) setMenuImage(firstSubItem.dataset.image, true);
             return;
         }
 
         setActiveSubGroup(nextKey, direction, false);
-        if (imageSrc) {
-            setMenuImage(imageSrc, false, direction);
-        }
+        // Set default image from first sub-item with data-image in this group
+        const group = menuSubGroupMap.get(nextKey);
+        const firstSubItem = group ? group.querySelector('.menu-sub-item[data-image]') : null;
+        if (firstSubItem) setMenuImage(firstSubItem.dataset.image, false);
     }
 
     const initialActiveItem = document.querySelector('.menu-main-item.active');
     const initialKey = initialActiveItem ? initialActiveItem.dataset.menu : 'about';
     updateMenuForKey(initialKey, true);
+
+    // Sub-item hover: change image when hovering sub-items that have data-image
+    menuSubItems.forEach(item => {
+        if (!item.dataset.image) return;
+        item.addEventListener('mouseenter', () => {
+            setMenuImage(item.dataset.image, false);
+        });
+    });
 
     function openMenu() {
         isMenuOpen = true;
@@ -339,12 +246,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const menuMainItems = document.querySelectorAll('.menu-main-item');
         const menuSubItems = document.querySelectorAll('.menu-sub-item');
-        const menuImageSlide = menuImageWrapper ? menuImageWrapper.querySelector('.menu-image-slide.is-active') : null;
-        const menuImage = menuImageSlide ? menuImageSlide.querySelector('.menu-image') : document.querySelector('.menu-image');
+        const menuImage = menuImageWrapper ? menuImageWrapper.querySelector('.menu-image') : document.querySelector('.menu-image');
         const menuFooter = document.querySelector('.mega-menu-footer');
 
         // Clear any existing properties
-        gsap.set([menuMainItems, menuSubItems, menuImageSlide, menuImage], { clearProps: 'all' });
+        gsap.set([menuMainItems, menuSubItems, menuImage], { clearProps: 'all' });
+        if (menuImageWrapper) gsap.set(menuImageWrapper, { clearProps: 'clipPath' });
 
         const isMobileView = isMobile();
 
@@ -390,8 +297,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 { opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: 'power1.out', force3D: true },
                 0.95
             )
-            // Menu image - same transition as testimonials (clip + parallax)
-            .fromTo(menuImageSlide,
+            // Menu image - clip + parallax on wrapper/image
+            .fromTo(menuImageWrapper,
                 { clipPath: 'inset(0% 100% 0% 0%)' },
                 { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'power3.inOut' },
                 1.1
@@ -430,8 +337,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Reset menu items AFTER fade to avoid flicker
         const menuMainItems = document.querySelectorAll('.menu-main-item');
         const menuSubItems = document.querySelectorAll('.menu-sub-item');
-        const menuImageSlide = menuImageWrapper ? menuImageWrapper.querySelector('.menu-image-slide.is-active') : null;
-        const menuImage = menuImageSlide ? menuImageSlide.querySelector('.menu-image') : document.querySelector('.menu-image');
+        const menuImage = menuImageWrapper ? menuImageWrapper.querySelector('.menu-image') : document.querySelector('.menu-image');
         const menuFooter = document.querySelector('.mega-menu-footer');
         const headerMenuItems = document.querySelectorAll(
             '.header-nav .btn-book-tour, .header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
@@ -450,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        gsap.killTweensOf([menuMainItems, menuSubItems, menuImageSlide, menuImage, menuFooter, megaMenu, menuOverlay]);
+        gsap.killTweensOf([menuMainItems, menuSubItems, menuImageWrapper, menuImage, menuFooter, megaMenu, menuOverlay]);
 
         function getRightBlockMaxWidth() {
             const width = window.innerWidth;
@@ -461,11 +367,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const closeTimeline = gsap.timeline({
             onComplete: () => {
-                if (menuImageSlide) {
-                    gsap.set(menuImageSlide, { clipPath: 'inset(0% 100% 0% 0%)' });
+                if (menuImageWrapper) {
+                    gsap.set(menuImageWrapper, { clipPath: 'inset(0% 100% 0% 0%)' });
                 }
                 if (menuImage) {
-                    gsap.set(menuImage, { opacity: 0, scale: 1.15, x: 0 });
+                    gsap.set(menuImage, { opacity: 1, scale: 1.15, x: 0 });
                 }
                 gsap.set(menuMainItems, { opacity: 0, x: -60 });
                 gsap.set(menuSubItems, { opacity: 0, x: -20 });
