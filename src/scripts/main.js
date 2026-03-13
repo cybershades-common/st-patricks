@@ -1035,16 +1035,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const items = menu.querySelectorAll('.dropdown-item');
                 gsap.killTweensOf([menu, items]);
-
-                gsap.timeline({
-                    onComplete: () => {
-                        menu.style.display = 'none';
-                        gsap.set(menu, { clearProps: 'clipPath' });
-                        gsap.set(items, { clearProps: 'opacity,transform' });
-                    }
-                })
-                    .to(items, { opacity: 0, x: -12, duration: 0.2, ease: 'power2.in', stagger: 0.03 }, 0)
-                    .to(menu, { clipPath: 'inset(0 0 100% 0)', duration: 0.25, ease: 'power2.in' }, 0.05);
+                menu.style.display = 'none';
+                gsap.set(menu, { clearProps: 'clipPath' });
+                gsap.set(items, { clearProps: 'opacity,transform' });
             }
 
             // Store close fn on element so mega-menu teardown can call it
