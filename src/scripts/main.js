@@ -1016,6 +1016,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             function open() {
                 if (isOpen) return;
+                // Close any other open dropdown first
+                document.querySelectorAll('.dropdown-toggle').forEach(t => {
+                    if (t !== toggle && typeof t._dropdownClose === 'function') t._dropdownClose();
+                });
                 isOpen = true;
                 toggle.setAttribute('aria-expanded', 'true');
 
