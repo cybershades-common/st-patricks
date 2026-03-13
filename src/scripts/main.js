@@ -1074,6 +1074,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (skipCloseAnimation) return;
                 e.preventDefault();
 
+                // Immediately update aria-expanded so the arrow rotates in sync with the close animation
+                toggle.setAttribute('aria-expanded', 'false');
+
                 gsap.killTweensOf(menu);
                 gsap.killTweensOf(menu.querySelectorAll('.dropdown-item'));
                 const items = menu.querySelectorAll('.dropdown-item');
