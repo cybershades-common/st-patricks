@@ -3,8 +3,10 @@
 .strategic-section {
   position: relative;
   overflow: hidden;
-  height: 810px;
-  max-height: 90vh;
+  >img.full{
+    aspect-ratio: 1440/810;
+  }
+
 }
 
 .strategic-background {
@@ -18,6 +20,9 @@
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   left: 0;
   z-index: 4;
 }
@@ -84,9 +89,7 @@
 }
 
 @media (max-width: 991px) {
-  .strategic-section {
-    min-height: 600px;
-  }
+
 
   .strategic-section .container-fluid {
     padding-left: 1.25rem;
@@ -143,5 +146,8 @@
 @media (max-width: 767px) {
   .strategic-section h2 {
     font-size: 1.875rem;
+  }
+  .strategic-section > img.full{
+    min-height: 600px;
   }
 }
