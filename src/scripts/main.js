@@ -1025,10 +1025,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 dropdownInstance.hide();
             });
 
-            // Prevent click toggle on desktop
+            // On desktop: prevent click (hover controls it)
+            // On mobile: take full control to avoid Bootstrap's delegated toggle
+            //            mis-reading _isShown() on the very first interaction
             toggle.addEventListener('click', (e) => {
-                if (!isMobile()) {
-                    e.preventDefault();
+                e.preventDefault();
+                if (!isMobile() || !dropdownInstance) return;
+                e.stopPropagation(); // block Bootstrap's document-level delegated listener
+                if (toggle.getAttribute('aria-expanded') === 'true') {
+                    dropdownInstance.hide();
+                } else {
+                    dropdownInstance.show();
                 }
             });
 
