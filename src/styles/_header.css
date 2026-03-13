@@ -419,6 +419,11 @@
 .header .header-row .right-block .menu-dropdown-btn:after {
   display: none;
 }
+.header .dropdown-menu {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .header .dropdown-menu li {
   font-family: var(--font-family-helvetica-neue);
   font-weight: var(--font-weight-light);
