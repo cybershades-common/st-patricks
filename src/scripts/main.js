@@ -2854,6 +2854,29 @@ document.addEventListener('DOMContentLoaded', function () {
     initLatestNewsHeroSlider();
 
     // ─── Search Overlay ────────────────────────────────────────────────────────
+    function liveSearch(query) {
+
+        $.ajax({
+            type: 'get',
+            url: '/search',
+            data: {
+                query: query
+            },
+
+            beforeSend: function () {
+                $('#searchResults').html('<div class="searching">Searching...</div>');
+            },
+
+            success: function (e) {
+                $('#searchResults').html(e);
+            },
+
+            error: function () {
+                $('#searchResults').html('<div class="error">Error loading results</div>');
+            }
+        });
+    }
+
 
     function initSearch() {
         const searchOverlay = document.getElementById('searchOverlay');
@@ -2976,7 +2999,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        if (searchInputDemo) {
+        if (searchInput) {
             searchInput.addEventListener('input', function () {
                 const val = this.value;
                 if (val.trim()) {
@@ -2989,9 +3012,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
                 clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(() => renderResults(val), 200);
+                if (searchInputDemo) {
+
+                    debounceTimer = setTimeout(() => renderResults(val), 200);
+
+                }
+
+                else {
+
+                    debounceTimer = setTimeout(() => liveSearch(val), 200);
+
+                }
+
             });
         }
+
+
 
         if (searchClearBtn) {
             searchClearBtn.addEventListener('click', function () {
