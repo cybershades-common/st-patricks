@@ -2871,11 +2871,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchData = window.SPC_SEARCH_DATA || [];
         let debounceTimer = null;
 
+        // Replace search icon img with dual-icon wrapper for smooth open/close transition
+        const CLOSE_ICON_SVG = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.664062 1.99219L0 1.32812L1.28906 0L1.95312 0.664062L7.85156 6.5625L13.75 0.664062L14.4141 0L15.7422 1.32812L15.0781 1.99219L9.17969 7.89062L15.0781 13.7891L15.7422 14.4531L14.4141 15.7812L13.75 15.1172L7.85156 9.21875L1.95312 15.1172L1.28906 15.7812L0 14.4531L0.664062 13.7891L6.5625 7.89062L0.664062 1.99219Z" fill="currentColor"/></svg>`;
+        searchTriggers.forEach(trigger => {
+            const img = trigger.querySelector('img');
+            if (!img) return;
+            const wrap = document.createElement('span');
+            wrap.className = 'search-icon-wrap';
+            wrap.innerHTML = `<span class="search-icon-search"><img src="${img.src}" alt="${img.alt}"></span><span class="search-icon-close" aria-hidden="true">${CLOSE_ICON_SVG}</span>`;
+            trigger.replaceChild(wrap, img);
+        });
+
         function openSearch() {
             const headerH = header ? header.offsetHeight : 0;
             searchOverlay.style.setProperty('--search-header-h', headerH + 'px');
             searchOverlay.classList.add('is-open');
             document.body.classList.add('search-is-open');
+            searchTriggers.forEach(t => t.classList.add('search-active'));
             if (isMenuOpen) closeMenu();
             if (searchInput) setTimeout(() => searchInput.focus(), 350);
         }
@@ -2883,6 +2895,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function closeSearch() {
             searchOverlay.classList.remove('is-open');
             document.body.classList.remove('search-is-open');
+            searchTriggers.forEach(t => t.classList.remove('search-active'));
         }
 
         function scoreResult(item, query) {
@@ -2930,7 +2943,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <img src="${item.image}" alt="${escapeHtml(item.title)}" onerror="this.parentElement.style.display='none'">
                         </div>
                         <div class="search-overlay-results-item-body">
-                            <p class="search-overlay-results-item-title">${highlightMatch(item.title, q)}</p>
+                            <h4 class="search-overlay-results-item-title">${highlightMatch(item.title, q)}</h4>
                             <p>${highlightMatch(item.description, q)}</p>
                         </div>
                     </li>`).join('');
@@ -2961,10 +2974,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchOverlay.classList.contains('is-open') ? closeSearch() : openSearch();
             });
         });
-
-        if (searchClose) {
-            searchClose.addEventListener('click', closeSearch);
-        }
 
         if (searchInput) {
             searchInput.addEventListener('input', function () {
