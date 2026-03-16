@@ -163,13 +163,10 @@
   display: block;
 }
 
-// Search icon hover — scale the inner wrap (GSAP sets inline styles on the button, so target child)
-.header-icon-btn--search {
-  overflow: visible;
 
-  &:hover .search-icon-wrap {
-    transform: scale(1.1);
-  }
+.header-icon-btn--search:hover .search-icon-search,
+.header-icon-btn--search:hover .search-icon-close svg {
+  transform: scale(1.1);
 }
 
 .search-icon-wrap {
@@ -179,7 +176,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s ease;
 }
 
 .search-icon-search,
@@ -189,7 +185,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
 .search-icon-close {
@@ -198,12 +194,17 @@
   svg {
     width: 1.125rem;
     height: 1.125rem;
+    transition: transform 0.25s ease;
   }
 }
 
 .header-icon-btn--search.search-active {
-  .search-icon-search { opacity: 0; }
-  .search-icon-close  { opacity: 1; }
+  .search-icon-search {
+    opacity: 0;
+  }
+  .search-icon-close {
+    opacity: 1;
+  }
 }
 
 .menu-toggle {

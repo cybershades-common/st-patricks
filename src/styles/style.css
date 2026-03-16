@@ -739,10 +739,8 @@ hr {
   height: 1.875rem;
   display: block;
 }
-.header-icon-btn--search {
-  overflow: visible;
-}
-.header-icon-btn--search:hover .search-icon-wrap {
+.header-icon-btn--search:hover .search-icon-search,
+.header-icon-btn--search:hover .search-icon-close svg {
   transform: scale(1.1);
 }
 .search-icon-wrap {
@@ -752,7 +750,6 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s ease;
 }
 .search-icon-search,
 .search-icon-close {
@@ -761,7 +758,7 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease;
+  transition: transform 0.25s ease;
 }
 .search-icon-close {
   opacity: 0;
@@ -769,6 +766,7 @@ hr {
 .search-icon-close svg {
   width: 1.125rem;
   height: 1.125rem;
+  transition: transform 0.25s ease;
 }
 .header-icon-btn--search.search-active .search-icon-search {
   opacity: 0;
