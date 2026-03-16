@@ -87,9 +87,9 @@
                             </div>
                             <div class="icon-menu-wrap">
                                 <div class="header-icons-wrapper d-flex align-items-center d-none d-md-inline-flex">
-                                    <a href="#" class="header-icon-btn">
+                                    <button type="button" class="header-icon-btn header-icon-btn--search">
                                         <img src="assets/icons/header-search-icon.svg" alt="Search">
-                                    </a>
+                                    </button>
                                     <a href="#" class="header-icon-btn">
                                         <img src="assets/icons/profile-icon.svg" alt="Profile">
                                     </a>
@@ -884,8 +884,247 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script src="src/scripts/animations.js"></script>
+    <script src="src/scripts/search-data.js"></script>
     <script src="src/scripts/main.js"></script>
 
+    <!-- Search Overlay -->
+    <div class="search-overlay position-fixed" id="searchOverlay">
+        <div class="search-overlay-content">
+            <div class="container-fluid">
+                <div class="search-overlay-back-row">
+                    <button class="search-overlay-back-btn" id="searchClose">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 8H1M1 8L8 1M1 8L8 15" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Back</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-7 search-overlay-col--main">
+                        <h2 class="search-overlay-title">Search St Patrick's College</h2>
+                        <div class="search-overlay-input-wrap position-relative">
+                            <input type="text" id="searchInput" class="search-overlay-input"
+                                placeholder="Type anything and press enter" autocomplete="off">
+                            <button type="button" class="search-overlay-input-btn is-active position-absolute"
+                                id="searchIconBtn">
+                                <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.3359 8.125C14.3359 4.6875 11.5625 1.875 8.08594 1.875C4.64844 1.875 1.83594 4.6875 1.83594 8.125C1.83594 11.5625 4.64844 14.375 8.08594 14.375C11.5625 14.375 14.3359 11.5625 14.3359 8.125ZM13.1641 14.4922C11.7578 15.5859 10 16.25 8.125 16.25C3.63281 16.25 0 12.6172 0 8.125C0 3.63281 3.63281 0 8.125 0C12.5781 0 16.25 3.63281 16.25 8.125C16.25 10.0391 15.5859 11.7969 14.4922 13.1641L19.7266 18.3984L20.3906 19.0625L19.0625 20.3906L18.3984 19.7266L13.1641 14.4922Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </button>
+                            <button type="button" class="search-overlay-input-btn position-absolute"
+                                id="searchClearBtn">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M0.664062 1.99219L0 1.32812L1.28906 0L1.95312 0.664062L7.85156 6.5625L13.75 0.664062L14.4141 0L15.7422 1.32812L15.0781 1.99219L9.17969 7.89062L15.0781 13.7891L15.7422 14.4531L14.4141 15.7812L13.75 15.1172L7.85156 9.21875L1.95312 15.1172L1.28906 15.7812L0 14.4531L0.664062 13.7891L6.5625 7.89062L0.664062 1.99219Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="search-overlay-results d-none" id="searchResults">
+                            <p class="search-overlay-label">Search Results</p>
+                            <ul class="search-overlay-results-list list-unstyled">
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img
+                                            src="assets/images/Entry Point Card-1.jpg" alt="Principal" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Principal's Welcome</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img
+                                            src="assets/images/Entry Point Card.jpg" alt="Heritage" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Heritage</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img
+                                            src="assets/images/about-image.jpg" alt="Governance" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Governance</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img
+                                            src="assets/images/social-media-image.jpg" alt="Enrolment" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Enrolment</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img src="assets/images/m2.jpg"
+                                            alt="Learning" loading="lazy" onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Learning at SPC</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img src="assets/images/m3.jpg"
+                                            alt="Co-Curricular" loading="lazy" onerror="this.style.display='none'">
+                                    </div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Co-Curricular</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5 search-overlay-col--popular" id="searchPopularCol">
+                        <p class="search-overlay-label">Popular Searches</p>
+                        <ul class="search-overlay-popular-list list-unstyled">
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Enrolment</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Latest News</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Events and Calendar</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Book a Tour</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Pay Fees Online</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Canvas Login</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Sport Fixtures</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Old Boys' Network</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Annual Reports</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Term Dates</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Virtual College Tour</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Contact Us</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

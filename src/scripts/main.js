@@ -2853,4 +2853,153 @@ document.addEventListener('DOMContentLoaded', function () {
     initCocurricularSlider();
     initLatestNewsHeroSlider();
 
+    // ─── Search Overlay ────────────────────────────────────────────────────────
+
+    function initSearch() {
+        const searchOverlay = document.getElementById('searchOverlay');
+        if (!searchOverlay) return;
+
+        const searchInput      = document.getElementById('searchInput');
+        const searchIconBtn    = document.getElementById('searchIconBtn');
+        const searchClearBtn   = document.getElementById('searchClearBtn');
+        const searchResults    = document.getElementById('searchResults');
+        const searchResultsList = searchResults ? searchResults.querySelector('.search-overlay-results-list') : null;
+        const searchPopularCol  = document.getElementById('searchPopularCol');
+        const searchClose      = document.getElementById('searchClose');
+        const searchTriggers   = document.querySelectorAll('.header-icon-btn--search');
+
+        const searchData = window.SPC_SEARCH_DATA || [];
+        let debounceTimer = null;
+
+        function openSearch() {
+            const headerH = header ? header.offsetHeight : 0;
+            searchOverlay.style.setProperty('--search-header-h', headerH + 'px');
+            searchOverlay.classList.add('is-open');
+            document.body.classList.add('search-is-open');
+            if (isMenuOpen) closeMenu();
+            if (searchInput) setTimeout(() => searchInput.focus(), 350);
+        }
+
+        function closeSearch() {
+            searchOverlay.classList.remove('is-open');
+            document.body.classList.remove('search-is-open');
+        }
+
+        function scoreResult(item, query) {
+            const q = query.toLowerCase().trim();
+            const titleLow = item.title.toLowerCase();
+            const descLow = item.description.toLowerCase();
+            const tagsStr = (item.tags || []).join(' ').toLowerCase();
+            let score = 0;
+            if (titleLow.startsWith(q)) score += 10;
+            if (titleLow.includes(q)) score += 6;
+            if (tagsStr.includes(q)) score += 4;
+            if (descLow.includes(q)) score += 2;
+            // Also check individual words
+            const words = q.split(/\s+/).filter(Boolean);
+            words.forEach(w => {
+                if (titleLow.includes(w)) score += 3;
+                if (tagsStr.includes(w)) score += 2;
+                if (descLow.includes(w)) score += 1;
+            });
+            return score;
+        }
+
+        function renderResults(query) {
+            if (!searchResultsList) return;
+            const q = query.trim();
+            if (!q) {
+                showPopular();
+                return;
+            }
+
+            const scored = searchData
+                .map(item => ({ item, score: scoreResult(item, q) }))
+                .filter(({ score }) => score > 0)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 8)
+                .map(({ item }) => item);
+
+            if (scored.length === 0) {
+                searchResultsList.innerHTML = `<li style="padding: 1.25rem 0; color: var(--basic-black); font-family: var(--font-family-helvetica-neue); font-size: var(--font-size-b2); opacity: 0.5;">No results found for "<strong>${escapeHtml(q)}</strong>"</li>`;
+            } else {
+                searchResultsList.innerHTML = scored.map(item => `
+                    <li class="search-overlay-results-item position-relative">
+                        <a href="${item.url}" class="search-overlay-results-item-link position-absolute w-100 h-100" aria-label="${escapeHtml(item.title)}"></a>
+                        <div class="search-overlay-results-item-img">
+                            <img src="${item.image}" alt="${escapeHtml(item.title)}" onerror="this.parentElement.style.display='none'">
+                        </div>
+                        <div class="search-overlay-results-item-body">
+                            <p class="search-overlay-results-item-title">${highlightMatch(item.title, q)}</p>
+                            <p>${highlightMatch(item.description, q)}</p>
+                        </div>
+                    </li>`).join('');
+            }
+
+            searchResults?.classList.remove('d-none');
+            searchPopularCol?.classList.add('d-none');
+        }
+
+        function showPopular() {
+            searchResults?.classList.add('d-none');
+            searchPopularCol?.classList.remove('d-none');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function highlightMatch(text, query) {
+            if (!query) return escapeHtml(text);
+            const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            return escapeHtml(text).replace(new RegExp(`(${escaped})`, 'gi'), '<mark style="background:rgba(16,6,159,0.1);color:inherit;padding:0;">$1</mark>');
+        }
+
+        searchTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                searchOverlay.classList.contains('is-open') ? closeSearch() : openSearch();
+            });
+        });
+
+        if (searchClose) {
+            searchClose.addEventListener('click', closeSearch);
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                const val = this.value;
+                if (val.trim()) {
+                    searchIconBtn?.classList.remove('is-active');
+                    searchClearBtn?.classList.add('is-active');
+                } else {
+                    searchIconBtn?.classList.add('is-active');
+                    searchClearBtn?.classList.remove('is-active');
+                    showPopular();
+                    return;
+                }
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => renderResults(val), 200);
+            });
+        }
+
+        if (searchClearBtn) {
+            searchClearBtn.addEventListener('click', function () {
+                if (searchInput) searchInput.value = '';
+                searchIconBtn?.classList.add('is-active');
+                this.classList.remove('is-active');
+                showPopular();
+                if (searchInput) searchInput.focus();
+            });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && searchOverlay.classList.contains('is-open')) {
+                closeSearch();
+            }
+        });
+    }
+
+    initSearch();
+
 });
