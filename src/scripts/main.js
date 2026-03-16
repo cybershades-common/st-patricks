@@ -2859,14 +2859,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchOverlay = document.getElementById('searchOverlay');
         if (!searchOverlay) return;
 
-        const searchInput      = document.getElementById('searchInput');
-        const searchIconBtn    = document.getElementById('searchIconBtn');
-        const searchClearBtn   = document.getElementById('searchClearBtn');
-        const searchResults    = document.getElementById('searchResults');
+        const searchInput = document.getElementById('searchInput');
+        const searchIconBtn = document.getElementById('searchIconBtn');
+        const searchInputDemo = document.getElementsByClassName('searchInputDemo');
+        const searchClearBtn = document.getElementById('searchClearBtn');
+        const searchResults = document.getElementById('searchResults');
         const searchResultsList = searchResults ? searchResults.querySelector('.search-overlay-results-list') : null;
-        const searchPopularCol  = document.getElementById('searchPopularCol');
-        const searchClose      = document.getElementById('searchClose');
-        const searchTriggers   = document.querySelectorAll('.header-icon-btn--search');
+        const searchPopularCol = document.getElementById('searchPopularCol');
+        const searchClose = document.getElementById('searchClose');
+        const searchTriggers = document.querySelectorAll('.header-icon-btn--search');
 
         const searchData = window.SPC_SEARCH_DATA || [];
         let debounceTimer = null;
@@ -2975,7 +2976,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        if (searchInput) {
+        if (searchInputDemo) {
             searchInput.addEventListener('input', function () {
                 const val = this.value;
                 if (val.trim()) {
