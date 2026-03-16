@@ -739,9 +739,9 @@ hr {
   height: 1.875rem;
   display: block;
 }
-.header-icon-btn--search:hover .search-icon-search,
+.header-icon-btn--search:hover .search-icon-search svg,
 .header-icon-btn--search:hover .search-icon-close svg {
-  transform: scale(1.1);
+  transform: scale(1.04);
 }
 .search-icon-wrap {
   position: relative;
@@ -760,13 +760,20 @@ hr {
   justify-content: center;
   transition: transform 0.25s ease;
 }
+.search-icon-search svg,
+.search-icon-close svg {
+  transition: transform 0.25s ease;
+}
+.search-icon-search svg {
+  width: 1.875rem;
+  height: 1.875rem;
+}
 .search-icon-close {
   opacity: 0;
 }
 .search-icon-close svg {
   width: 1.125rem;
   height: 1.125rem;
-  transition: transform 0.25s ease;
 }
 .header-icon-btn--search.search-active .search-icon-search {
   opacity: 0;

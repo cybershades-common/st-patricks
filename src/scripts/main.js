@@ -2895,14 +2895,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchData = window.SPC_SEARCH_DATA || [];
         let debounceTimer = null;
 
-        // Replace search icon img with dual-icon wrapper for smooth open/close transition
+        // Replace search icon img with dual inline-SVG wrapper for smooth open/close transition
+        const SEARCH_ICON_SVG = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.75C21 8.20312 17.2969 4.5 12.75 4.5C8.20312 4.5 4.5 8.20312 4.5 12.75C4.5 17.2969 8.20312 21 12.75 21C17.2969 21 21 17.2969 21 12.75ZM19.0781 20.1562C17.3906 21.6094 15.1875 22.5 12.75 22.5C7.35938 22.5 3 18.1406 3 12.75C3 7.35938 7.35938 3 12.75 3C18.1406 3 22.5 7.35938 22.5 12.75C22.5 15.1875 21.6094 17.3906 20.1562 19.0781L26.7656 25.7344C27.0938 26.0156 27.0938 26.4844 26.7656 26.7656C26.4844 27.0938 26.0156 27.0938 25.7344 26.7656L19.0781 20.1562Z" fill="currentColor"/></svg>`;
         const CLOSE_ICON_SVG = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.664062 1.99219L0 1.32812L1.28906 0L1.95312 0.664062L7.85156 6.5625L13.75 0.664062L14.4141 0L15.7422 1.32812L15.0781 1.99219L9.17969 7.89062L15.0781 13.7891L15.7422 14.4531L14.4141 15.7812L13.75 15.1172L7.85156 9.21875L1.95312 15.1172L1.28906 15.7812L0 14.4531L0.664062 13.7891L6.5625 7.89062L0.664062 1.99219Z" fill="currentColor"/></svg>`;
         searchTriggers.forEach(trigger => {
             const img = trigger.querySelector('img');
             if (!img) return;
             const wrap = document.createElement('span');
             wrap.className = 'search-icon-wrap';
-            wrap.innerHTML = `<span class="search-icon-search"><img src="${img.src}" alt="${img.alt}"></span><span class="search-icon-close" aria-hidden="true">${CLOSE_ICON_SVG}</span>`;
+            wrap.innerHTML = `<span class="search-icon-search" aria-label="${img.alt}">${SEARCH_ICON_SVG}</span><span class="search-icon-close" aria-hidden="true">${CLOSE_ICON_SVG}</span>`;
             trigger.replaceChild(wrap, img);
         });
 
@@ -2974,12 +2975,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             searchResults?.classList.remove('d-none');
-            searchPopularCol?.classList.add('d-none');
         }
 
         function showPopular() {
             searchResults?.classList.add('d-none');
-            searchPopularCol?.classList.remove('d-none');
         }
 
         function escapeHtml(str) {
@@ -3012,7 +3011,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
                 clearTimeout(debounceTimer);
-                if (searchInputDemo) {
+                if (searchInputDemo.length > 0) {
 
                     debounceTimer = setTimeout(() => renderResults(val), 200);
 

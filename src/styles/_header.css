@@ -122,13 +122,9 @@
   height: 1.875rem;
   display: block;
 }
-.search-icon-search img,
-.search-icon-close svg {
-  transition: transform 0.25s ease;
-}
-.header-icon-btn--search:hover .search-icon-search img,
+.header-icon-btn--search:hover .search-icon-search,
 .header-icon-btn--search:hover .search-icon-close svg {
-  transform: scale(1.1);
+  transform: scale(1.04);
 }
 .search-icon-wrap {
   position: relative;
@@ -145,7 +141,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease;
+  transition: transform 0.25s ease;
 }
 .search-icon-close {
   opacity: 0;
@@ -153,6 +149,7 @@
 .search-icon-close svg {
   width: 1.125rem;
   height: 1.125rem;
+  transition: transform 0.25s ease;
 }
 .header-icon-btn--search.search-active .search-icon-search {
   opacity: 0;
