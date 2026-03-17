@@ -1781,7 +1781,6 @@ body.search-is-open {
 .hero .hero-content-wrap {
   height: 75vh;
   display: flex;
-  min-height: 525px;
   align-items: flex-end;
   padding-bottom: 0;
   position: relative;
@@ -6578,6 +6577,11 @@ body:has(.internal-content-single) .hero-internal-title {
     font-size: 14px;
   }
 }
+@media (min-width: 1201px) and (max-width: 1229px) {
+  html {
+    font-size: 12.8px;
+  }
+}
 @media (min-width: 768px) and (max-width: 991px) {
   html {
     font-size: 14px;
@@ -6617,6 +6621,11 @@ body:has(.internal-content-single) .hero-internal-title {
 @media (min-width: 1900px) {
   html {
     font-size: 21px;
+  }
+}
+@media (min-width: 1900px) and (max-width: 2499px) {
+  .hero .hero-title {
+    font-size: 9.5625rem;
   }
 }
 @media (min-width: 2500px) {
