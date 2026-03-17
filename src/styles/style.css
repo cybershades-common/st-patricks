@@ -833,10 +833,11 @@ hr {
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 0.3125rem 0;
   transition: transform 0.3s ease;
+  min-height: 0.625rem;
 }
 .hamburger-line {
   display: block;
