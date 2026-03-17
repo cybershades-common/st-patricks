@@ -3009,6 +3009,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 $('#searchResults').html('<div class="error">Error loading results</div>');
             }
         });
+        $('#searchResults').removeClass('d-none');
     }
 
 
@@ -3061,7 +3062,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function animateSearchIntro(delay = 0.1) {
-            const introTargets = [searchTitle, searchInputWrap, searchIconBtn].filter(Boolean);
+            const introTargets = [searchTitle, searchInputWrap].filter(Boolean);
             if (!introTargets.length) return delay;
 
             const duration = 0.32;
@@ -3090,7 +3091,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function resetSearchIntro() {
-            const introTargets = [searchTitle, searchInputWrap, searchIconBtn].filter(Boolean);
+            const introTargets = [searchTitle, searchInputWrap].filter(Boolean);
             if (!introTargets.length) return;
             gsap.killTweensOf(introTargets);
             gsap.set(introTargets, { clearProps: 'opacity,transform' });
@@ -3266,7 +3267,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 else {
 
-                    debounceTimer = setTimeout(() => liveSearch(val), 200);
+                    debounceTimer = setTimeout(() => liveSearch(val), 600);
 
                 }
 
