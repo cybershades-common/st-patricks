@@ -3023,6 +3023,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchResults = document.getElementById('searchResults');
         const searchResultsList = searchResults ? searchResults.querySelector('.search-overlay-results-list') : null;
         const searchTriggers = document.querySelectorAll('.header-icon-btn--search');
+        const searchPopularList = searchOverlay.querySelector('.search-overlay-popular-list');
+        const searchTitle = searchOverlay.querySelector('.search-overlay-title');
+        const searchInputWrap = searchOverlay.querySelector('.search-overlay-input-wrap');
 
         const searchData = window.SPC_SEARCH_DATA || [];
         let debounceTimer = null;
@@ -3038,6 +3041,60 @@ document.addEventListener('DOMContentLoaded', function () {
             wrap.innerHTML = `<span class="search-icon-search" aria-label="${img.alt}">${SEARCH_ICON_SVG}</span><span class="search-icon-close" aria-hidden="true">${CLOSE_ICON_SVG}</span>`;
             trigger.replaceChild(wrap, img);
         });
+
+        function animatePopularItems(delay = 0.16) {
+            if (!searchPopularList) return;
+            const popularItems = searchPopularList.querySelectorAll('.search-overlay-popular-item');
+            if (!popularItems.length) return;
+
+            gsap.killTweensOf(popularItems);
+            gsap.set(popularItems, { opacity: 0, x: -24, force3D: true });
+            gsap.to(popularItems, {
+                opacity: 1,
+                x: 0,
+                duration: 0.35,
+                ease: 'power2.out',
+                stagger: 0.05,
+                delay: delay,
+                force3D: true
+            });
+        }
+
+        function animateSearchIntro(delay = 0.1) {
+            const introTargets = [searchTitle, searchInputWrap, searchIconBtn].filter(Boolean);
+            if (!introTargets.length) return delay;
+
+            const duration = 0.32;
+            const stagger = 0.06;
+            gsap.killTweensOf(introTargets);
+            gsap.set(introTargets, { opacity: 0, x: -20, force3D: true });
+            gsap.to(introTargets, {
+                opacity: 1,
+                x: 0,
+                duration: duration,
+                ease: 'power2.out',
+                stagger: stagger,
+                delay: delay,
+                force3D: true
+            });
+
+            return delay + duration + ((introTargets.length - 1) * stagger);
+        }
+
+        function resetPopularItems() {
+            if (!searchPopularList) return;
+            const popularItems = searchPopularList.querySelectorAll('.search-overlay-popular-item');
+            if (!popularItems.length) return;
+            gsap.killTweensOf(popularItems);
+            gsap.set(popularItems, { clearProps: 'opacity,transform' });
+        }
+
+        function resetSearchIntro() {
+            const introTargets = [searchTitle, searchInputWrap, searchIconBtn].filter(Boolean);
+            if (!introTargets.length) return;
+            gsap.killTweensOf(introTargets);
+            gsap.set(introTargets, { clearProps: 'opacity,transform' });
+        }
 
         function openSearch() {
             const switchingFromMenu = isMenuOpen;
@@ -3066,11 +3123,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
+            const introEnd = animateSearchIntro(switchingFromMenu ? 0.04 : 0.12);
+            animatePopularItems(introEnd + 0.03);
+
             if (searchInput) setTimeout(() => searchInput.focus(), 350);
         }
 
         function closeSearch() {
             setSearchOverlayVisibility(false, false);
+            resetSearchIntro();
+            resetPopularItems();
 
             if (!isMenuOpen && !isMobile()) {
                 const headerMenuItemsHidden = document.querySelectorAll(
@@ -3160,6 +3222,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function showPopular() {
             searchResults?.classList.add('d-none');
+            animatePopularItems(0);
         }
 
         function escapeHtml(str) {
