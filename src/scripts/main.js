@@ -237,6 +237,31 @@ document.addEventListener('DOMContentLoaded', function () {
         return '65.875%';
     }
 
+    function revealBookTourButton(bookTourBtn) {
+        if (!bookTourBtn) return;
+
+        gsap.killTweensOf(bookTourBtn);
+        gsap.fromTo(bookTourBtn,
+            {
+                opacity: 0,
+                willChange: 'opacity',
+                force3D: true
+            },
+            {
+                opacity: 1,
+                duration: 0.42,
+                delay: 0.1,
+                ease: 'power2.out',
+                overwrite: 'auto',
+                force3D: true,
+                onComplete: () => {
+                    gsap.set(bookTourBtn, { clearProps: 'willChange' });
+                    bookTourBtn.style.transition = '';
+                }
+            }
+        );
+    }
+
     function setSearchOverlayVisibility(open, instant) {
         const searchOverlay = document.getElementById('searchOverlay');
         if (!searchOverlay) return;
@@ -538,13 +563,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.body.style.overflow = '';
 
                 if (!keepHeaderItems && bookTourBtn) {
-                    gsap.fromTo(bookTourBtn,
-                        { opacity: 0, force3D: true },
-                        {
-                            opacity: 1, duration: 0.25, ease: 'power2.out', force3D: true,
-                            onComplete: () => { bookTourBtn.style.transition = ''; }
-                        }
-                    );
+                    revealBookTourButton(bookTourBtn);
                 }
 
                 if (keepHeaderItems && !isMobile()) {
@@ -3139,8 +3158,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const headerMenuItemsHidden = document.querySelectorAll(
                     '.header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
                 );
+                const bookTourBtn = document.querySelector('.header-nav .btn-book-tour');
                 const rightBlock = header ? header.querySelector('.right-block') : null;
                 gsap.killTweensOf(headerMenuItemsHidden);
+                if (bookTourBtn) {
+                    bookTourBtn.style.transition = 'none';
+                }
                 gsap.to(headerMenuItemsHidden, {
                     opacity: 0,
                     duration: 0.2,
@@ -3153,6 +3176,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             wrapper.style.display = 'none';
                         });
                         if (rightBlock) rightBlock.style.maxWidth = '';
+
+                        if (bookTourBtn) {
+                            revealBookTourButton(bookTourBtn);
+                        }
                     }
                 });
             }
