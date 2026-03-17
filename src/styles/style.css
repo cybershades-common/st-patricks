@@ -835,7 +835,7 @@ hr {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0;
+  gap: 0.3125rem 0;
   transition: transform 0.3s ease;
 }
 .hamburger-line {
@@ -848,19 +848,14 @@ hr {
   border-radius: 0.0625rem;
   will-change: transform;
 }
-.hamburger-line:nth-child(1) {
-  margin-bottom: 0.1875rem;
-}
-@media (min-width: 768px) {
-  .menu-toggle:hover .hamburger {
-    transform: scale(1.1);
-  }
+.hamburger.active {
+  gap: 0.15rem 0;
 }
 .hamburger.active .hamburger-line:nth-child(1) {
-  transform: translateY(0.17rem) rotate(45deg);
+  transform: translateY(0.15rem) rotate(45deg);
 }
 .hamburger.active .hamburger-line:nth-child(2) {
-  transform: translateY(-0.17rem) rotate(-45deg);
+  transform: translateY(-0.15rem) rotate(-45deg);
 }
 .mega-menu {
   position: fixed;
