@@ -739,9 +739,9 @@ hr {
   height: 1.875rem;
   display: block;
 }
-.header-icon-btn--search:hover .search-icon-search svg,
-.header-icon-btn--search:hover .search-icon-close svg {
-  transform: scale(1.04);
+.header-icon-btn--search:not(.search-active):hover .search-icon-search svg,
+.header-icon-btn--search.search-active:hover .search-icon-close svg {
+  transform: scale(1.1);
 }
 .search-icon-wrap {
   position: relative;

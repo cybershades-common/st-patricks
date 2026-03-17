@@ -1333,6 +1333,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const localTrack = activeTrack;
             const slides = Array.from(localTrack.querySelectorAll('.latest-news-slide'));
             if (!slides.length) return () => { };
+            let touchStartX = 0;
+            let touchStartY = 0;
 
             const getSlideWidth = () => slides[0].offsetWidth;
             const getGap = () => parseFloat(getComputedStyle(localTrack).gap) || 20;
@@ -1371,15 +1373,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const handlePrev = () => { if (currentIndex > 0) moveToSlide(currentIndex - 1); };
             const handleNext = () => { if (currentIndex < slides.length - 1) moveToSlide(currentIndex + 1); };
+            const handleTouchStart = (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            };
+            const handleTouchEnd = (e) => {
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                const dy = e.changedTouches[0].clientY - touchStartY;
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
+                    if (dx < 0) handleNext();
+                    else handlePrev();
+                }
+            };
 
             prevBtn.addEventListener('click', handlePrev);
             nextBtn.addEventListener('click', handleNext);
+            localTrack.addEventListener('touchstart', handleTouchStart, { passive: true });
+            localTrack.addEventListener('touchend', handleTouchEnd, { passive: true });
 
             moveToSlide(0, false);
 
             return () => {
                 prevBtn.removeEventListener('click', handlePrev);
                 nextBtn.removeEventListener('click', handleNext);
+                localTrack.removeEventListener('touchstart', handleTouchStart);
+                localTrack.removeEventListener('touchend', handleTouchEnd);
             };
         }
 
