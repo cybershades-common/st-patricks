@@ -2096,6 +2096,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const oldIndex = currentIndex;
             currentIndex = newIndex;
+            updateNavState();
 
             // ── IMAGE PARALLAX TRANSITION ──
             const newImageSlide = imageSlides[currentIndex];
@@ -2203,12 +2204,24 @@ document.addEventListener('DOMContentLoaded', function () {
         // =====================
         // NAVIGATION
         // =====================
+        function updateNavState() {
+            const isAtStart = currentIndex === 0;
+            const isAtEnd = currentIndex === totalSlides - 1;
+
+            prevBtn.disabled = isAtStart;
+            nextBtn.disabled = isAtEnd;
+            prevBtn.classList.toggle('is-disabled', isAtStart);
+            nextBtn.classList.toggle('is-disabled', isAtEnd);
+        }
+
         function nextSlide() {
-            goToSlide((currentIndex + 1) % totalSlides, 1);
+            if (currentIndex >= totalSlides - 1) return;
+            goToSlide(currentIndex + 1, 1);
         }
 
         function prevSlide() {
-            goToSlide((currentIndex - 1 + totalSlides) % totalSlides, -1);
+            if (currentIndex <= 0) return;
+            goToSlide(currentIndex - 1, -1);
         }
 
         prevBtn.addEventListener('click', prevSlide);
@@ -2240,6 +2253,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // INIT
         // =====================
         initSlides();
+        updateNavState();
     })();
 
     // Hero video lazy loading with smooth poster-to-video transition

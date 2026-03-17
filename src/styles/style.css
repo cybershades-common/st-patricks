@@ -4421,7 +4421,7 @@ body:has(.internal-content-single) .hero-internal-title {
   padding: 0;
   cursor: pointer;
   color: var(--basic-black);
-  transition: color 0.4s ease-in-out, transform 0.4s ease-in-out;
+  transition: opacity 0.35s ease, color 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 .testimonials-arrow-btn:hover {
   color: var(--primary-blue);
