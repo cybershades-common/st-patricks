@@ -17,7 +17,7 @@
   margin-bottom: 0;
 }
 .hero:has(+ .hero-media-slider) .hero-title {
-  color: var(--primary-blue-tint, #1406C5);
+  color: var(--primary-blue-tint, #1406c5);
   leading-trim: both;
   text-edge: cap;
   font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
@@ -41,7 +41,7 @@
   font-size: var(--font-size-b1, 1.25rem);
   font-weight: 300;
   line-height: 1.4;
-  color: var(--primary-black-c, #27251F);
+  color: var(--primary-black-c, #27251f);
   margin: 0;
 }
 .hero-media-slider {
@@ -323,11 +323,6 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.1);
   z-index: 1;
-}
-@media (max-width: 991px) {
-  .latest-news-list-card-divider {
-    display: none;
-  }
 }
 .latest-news-list-card-image {
   width: 100%;
@@ -788,7 +783,7 @@
 .news-detail-gallery-item img {
   width: 100%;
   object-fit: cover;
-  aspect-ratio: 1 ;
+  aspect-ratio: 1;
 }
 .news-detail-gallery-item .news-detail-gallery-overlay {
   position: absolute;
@@ -934,7 +929,7 @@
   gap: var(--spacing-small);
 }
 .news-detail-keep-reading-title {
-  color: var(--primary-blue, #10069F);
+  color: var(--primary-blue, #10069f);
   font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
   font-size: var(--font-size-h3, 2.8125rem);
   font-style: normal;
@@ -954,6 +949,19 @@
 }
 .news-detail-keep-reading-card .latest-news-list-card-image {
   height: 15.5rem;
+}
+.latest-news-list-card:first-child .latest-news-list-card-divider {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .latest-news-list-card:nth-child(4n + 1) .latest-news-list-card-divider {
+    display: none;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .latest-news-list-card:nth-child(2n + 1) .latest-news-list-card-divider {
+    display: none;
+  }
 }
 @media (max-width: 991px) {
   .news-detail-lead p {
@@ -988,6 +996,9 @@
   .news-detail-content-section {
     padding-top: var(--spacing-small);
     padding-bottom: var(--spacing-small);
+  }
+  .latest-news-list-card-divider {
+    display: none;
   }
   .news-detail-lead {
     margin-bottom: var(--spacing-small);
