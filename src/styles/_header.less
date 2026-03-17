@@ -667,6 +667,14 @@
 
 .internal-page:not(.search-is-open) {
   .header {
+    .btn-rounded-large.btn-rounded-large-outline-black {
+      transition:
+        background-color 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+      transition-delay: 0s;
+    }
+
     &:not(.menu-open):not(.header-scrolled) {
       .header-icon-btn--search {
         color: var(--basic-white);
@@ -700,7 +708,7 @@
     &.menu-open,
     &.header-scrolled {
       .btn-rounded-large.btn-rounded-large-outline-black {
-        background: 1px solid var(--basic-black);
+        border: 1px solid var(--basic-black);
         color: var(--basic-black);
         &:hover {
           background: var(--basic-black);
