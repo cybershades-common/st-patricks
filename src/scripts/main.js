@@ -3303,17 +3303,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
                 clearTimeout(debounceTimer);
-                if (searchInputDemo.length > 0) {
 
-                    debounceTimer = setTimeout(() => renderResults(val), 200);
-
-                }
-
-                else {
-
-                    debounceTimer = setTimeout(() => liveSearch(val), 600);
-
-                }
+                debounceTimer = setTimeout(function () {
+                    liveSearch(val);
+                }, 800); // wait 0.8 sec after typing stops
 
             });
         }
