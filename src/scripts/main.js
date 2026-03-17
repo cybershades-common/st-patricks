@@ -1528,25 +1528,34 @@ document.addEventListener('DOMContentLoaded', function () {
             const slides = Array.from(localTrack.querySelectorAll('.latest-news-slide'));
             if (!slides.length) return () => { };
 
-            const activeWidth = 680;
-            const inactiveWidth = 333;
-            const gap = 20;
-
             const updateSlides = () => {
                 slides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
             };
-            const getPosition = (index) => {
-                let pos = 0;
-                for (let i = 0; i < index; i++) pos += inactiveWidth + gap;
-                return -pos;
+
+            const getGap = () => {
+                const styles = getComputedStyle(localTrack);
+                const gapValue = styles.columnGap || styles.gap;
+                return parseFloat(gapValue) || 20;
             };
+
+            const getInactiveWidth = () => {
+                const probeSlide =
+                    slides.find((slide, i) => i !== currentIndex && !slide.classList.contains('active')) ||
+                    slides.find((slide, i) => i !== currentIndex) ||
+                    slides[0];
+                return probeSlide ? probeSlide.getBoundingClientRect().width : 333;
+            };
+
             const moveToSlide = (index) => {
                 if (index < 0) index = slides.length - 1;
                 if (index >= slides.length) index = 0;
+
+                // Use actual rendered dimensions so large-screen rem scaling never drifts.
+                const step = getInactiveWidth() + getGap();
                 currentIndex = index;
                 updateSlides();
-                const pos = getPosition(currentIndex);
-                localTrack.style.transform = `translateX(${pos}px)`;
+                const pos = -(currentIndex * step);
+                localTrack.style.transform = `translate3d(${pos}px, 0, 0)`;
                 prevTranslate = pos;
             };
 
