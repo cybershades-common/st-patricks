@@ -1070,8 +1070,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Create master timeline
+        const isInternalPage = document.body.classList.contains('internal-page');
         const headerTimeline = gsap.timeline({
-            delay: 1.8 // Start after all hero animations complete
+            delay: isInternalPage ? 0.6 : 1.8 // Internal pages have less hero content so animate sooner
         });
 
         // Set initial states - slide from top for all items at once
