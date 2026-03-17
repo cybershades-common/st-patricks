@@ -40,6 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
         window.CSS.supports('scrollbar-gutter: stable');
     const usePaddingCompensation = !supportsStableScrollbarGutter;
 
+    function isMobile() {
+        return window.innerWidth <= 767;
+    }
+
     const menuSubGroups = menuSubItemsContainer
         ? Array.from(menuSubItemsContainer.querySelectorAll('.menu-sub-items-group'))
         : [];
@@ -226,14 +230,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    function getExpandedRightBlockMaxWidth() {
+        const width = window.innerWidth;
+        if (width <= 767) return '40%';
+        if (width <= 991) return '57.875%';
+        return '65.875%';
+    }
+
     function openMenu() {
-        // Close search overlay if open
-        const _so = document.getElementById('searchOverlay');
-        if (_so && _so.classList.contains('is-open')) {
-            _so.classList.remove('is-open');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const wasSearchOpen = searchOverlay && searchOverlay.classList.contains('is-open');
+        const rightBlock = header ? header.querySelector('.right-block') : null;
+
+        if (wasSearchOpen) {
+            searchOverlay.classList.remove('is-open');
             document.body.classList.remove('search-is-open');
             document.querySelectorAll('.header-icon-btn--search').forEach(t => t.classList.remove('search-active'));
+            if (rightBlock) rightBlock.style.maxWidth = '';
         }
+
         isMenuOpen = true;
 
         // Calculate scrollbar width
@@ -248,8 +263,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const headerMenuItems = document.querySelectorAll(
             '.header-nav .btn-book-tour, .header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
         );
+        const bookTourBtn = document.querySelector('.header-nav .btn-book-tour');
 
-        gsap.set(headerMenuItems, { opacity: 0, y: -20, force3D: true });
+        if (!wasSearchOpen) {
+            gsap.set(headerMenuItems, { opacity: 0, force3D: true });
+        }
 
         header.classList.add('menu-open');
         header.classList.remove('header-hidden');
@@ -318,17 +336,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 { opacity: 0 },
                 { opacity: 1, duration: 0.2, ease: 'power1.out' },
                 0
-            )
-            // Header menu items (slide in from top)
-            .to(headerMenuItems, {
+            );
+
+        if (!wasSearchOpen) {
+            // Header menu items (fade in)
+            menuTimeline.to(headerMenuItems, {
                 opacity: 1,
-                y: 0,
                 duration: 0.35,
                 ease: 'power2.out',
                 stagger: 0.08,
                 force3D: true,
                 immediateRender: false
-            }, 0.2)
+            }, 0.2);
+        } else {
+            gsap.killTweensOf(headerMenuItems);
+            gsap.set(headerMenuItems, { opacity: 1, clearProps: 'transform' });
+            if (bookTourBtn) {
+                gsap.set(bookTourBtn, { opacity: 1, clearProps: 'transform' });
+            }
+        }
+
+        menuTimeline
             // Main menu items (after header items)
             .fromTo(menuMainItems,
                 { opacity: 0, x: -60, force3D: true },
@@ -375,7 +403,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
-    function closeMenu() {
+    function closeMenu(options = {}) {
+        const keepHeaderItems = options.keepHeaderItems === true;
         isMenuOpen = false;
 
         // Reset menu items AFTER fade to avoid flicker
@@ -428,7 +457,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 gsap.set(menuMainItems, { opacity: 0, x: -60 });
                 gsap.set(menuSubItems, { opacity: 0, x: -20 });
                 gsap.set(menuFooter, { opacity: 0, y: 20 });
-                gsap.set(headerMenuItems, { clearProps: 'opacity,transform' });
+                if (keepHeaderItems && !isMobile()) {
+                    gsap.set(headerMenuItems, { opacity: 1, clearProps: 'transform' });
+                } else {
+                    gsap.set(headerMenuItems, { clearProps: 'opacity,transform' });
+                }
                 if (rightBlock) {
                     gsap.set(rightBlock, { clearProps: 'max-width' });
                 }
@@ -443,7 +476,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 // Disable btn transition so color snaps to its post-close CSS state (e.g. white on internal pages)
-                if (bookTourBtn) {
+                if (!keepHeaderItems && bookTourBtn) {
                     bookTourBtn.style.transition = 'none';
                 }
                 header.classList.remove('menu-open');
@@ -456,14 +489,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 menuOverlay.style.pointerEvents = '';
                 document.body.style.overflow = '';
 
-                if (bookTourBtn) {
+                if (!keepHeaderItems && bookTourBtn) {
                     gsap.fromTo(bookTourBtn,
-                        { opacity: 0, y: -12, force3D: true },
+                        { opacity: 0, force3D: true },
                         {
-                            opacity: 1, y: 0, duration: 0.25, ease: 'power2.out', force3D: true,
+                            opacity: 1, duration: 0.25, ease: 'power2.out', force3D: true,
                             onComplete: () => { bookTourBtn.style.transition = ''; }
                         }
                     );
+                }
+
+                if (keepHeaderItems && !isMobile()) {
+                    if (rightBlock) rightBlock.style.maxWidth = getExpandedRightBlockMaxWidth();
+                    btnEnquire.style.display = 'inline-flex';
+                    dropdownWrappers.forEach(wrapper => {
+                        wrapper.style.display = 'flex';
+                    });
                 }
             }
         });
@@ -481,29 +522,30 @@ document.addEventListener('DOMContentLoaded', function () {
             gsap.set(mobileHeaderBtns, { display: 'none', opacity: 0, clearProps: 'y,transform' });
         }
 
-        // Hide header menu items (except Book a Tour) smoothly
-        closeTimeline.to(headerMenuItemsHidden, {
-            opacity: 0,
-            y: -20,
-            duration: 0.2,
-            ease: 'power1.in',
-            force3D: true
-        }, 0);
-
-        // Fade Book a Tour out so width shift isn't visible
-        if (bookTourBtn) {
-            closeTimeline.to(bookTourBtn, {
+        if (!keepHeaderItems) {
+            // Hide header menu items (except Book a Tour) smoothly
+            closeTimeline.to(headerMenuItemsHidden, {
                 opacity: 0,
-                duration: 0.15,
-                ease: 'power1.in'
+                duration: 0.2,
+                ease: 'power1.in',
+                force3D: true
             }, 0);
-        }
 
-        // Instantly return header width to closed state while items are faded out
-        if (rightBlock) {
-            closeTimeline.set(rightBlock, {
-                maxWidth: getRightBlockMaxWidth()
-            }, 0.18);
+            // Fade Book a Tour out so width shift isn't visible
+            if (bookTourBtn) {
+                closeTimeline.to(bookTourBtn, {
+                    opacity: 0,
+                    duration: 0.15,
+                    ease: 'power1.in'
+                }, 0);
+            }
+
+            // Instantly return header width to closed state while items are faded out
+            if (rightBlock) {
+                closeTimeline.set(rightBlock, {
+                    maxWidth: getRightBlockMaxWidth()
+                }, 0.18);
+            }
         }
 
         // Reset mobile menu overlay
@@ -516,10 +558,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        btnEnquire.style.display = 'none';
-        dropdownWrappers.forEach(wrapper => {
-            wrapper.style.display = 'none';
-        });
+        if (!keepHeaderItems) {
+            btnEnquire.style.display = 'none';
+            dropdownWrappers.forEach(wrapper => {
+                wrapper.style.display = 'none';
+            });
+        }
 
         updateHeaderOnScroll();
     }
@@ -535,9 +579,6 @@ document.addEventListener('DOMContentLoaded', function () {
     menuOverlay.addEventListener('click', closeMenu);
 
     // Mobile menu navigation
-    function isMobile() {
-        return window.innerWidth <= 767;
-    }
 
     function initMobileMenu() {
         if (!isMobile()) return;
@@ -2931,8 +2972,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchClearBtn = document.getElementById('searchClearBtn');
         const searchResults = document.getElementById('searchResults');
         const searchResultsList = searchResults ? searchResults.querySelector('.search-overlay-results-list') : null;
-        const searchPopularCol = document.getElementById('searchPopularCol');
-        const searchClose = document.getElementById('searchClose');
         const searchTriggers = document.querySelectorAll('.header-icon-btn--search');
 
         const searchData = window.SPC_SEARCH_DATA || [];
@@ -2956,7 +2995,30 @@ document.addEventListener('DOMContentLoaded', function () {
             searchOverlay.classList.add('is-open');
             document.body.classList.add('search-is-open');
             searchTriggers.forEach(t => t.classList.add('search-active'));
-            if (isMenuOpen) closeMenu();
+
+            if (isMenuOpen) {
+                closeMenu({ keepHeaderItems: true });
+            } else if (!isMobile()) {
+                const headerMenuItems = document.querySelectorAll(
+                    '.header-nav .btn-book-tour, .header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
+                );
+                const rightBlock = header ? header.querySelector('.right-block') : null;
+                if (rightBlock) rightBlock.style.maxWidth = getExpandedRightBlockMaxWidth();
+                btnEnquire.style.display = 'inline-flex';
+                dropdownWrappers.forEach(wrapper => {
+                    wrapper.style.display = 'flex';
+                });
+                gsap.set(headerMenuItems, { opacity: 0, force3D: true });
+                gsap.to(headerMenuItems, {
+                    opacity: 1,
+                    duration: 0.35,
+                    ease: 'power2.out',
+                    stagger: 0.08,
+                    force3D: true,
+                    immediateRender: false
+                });
+            }
+
             if (searchInput) setTimeout(() => searchInput.focus(), 350);
         }
 
@@ -2964,6 +3026,28 @@ document.addEventListener('DOMContentLoaded', function () {
             searchOverlay.classList.remove('is-open');
             document.body.classList.remove('search-is-open');
             searchTriggers.forEach(t => t.classList.remove('search-active'));
+
+            if (!isMenuOpen && !isMobile()) {
+                const headerMenuItemsHidden = document.querySelectorAll(
+                    '.header-nav .btn-enquire, .header-nav .dropdown-wrapper.hide-header-items'
+                );
+                const rightBlock = header ? header.querySelector('.right-block') : null;
+                gsap.killTweensOf(headerMenuItemsHidden);
+                gsap.to(headerMenuItemsHidden, {
+                    opacity: 0,
+                    duration: 0.2,
+                    ease: 'power1.in',
+                    force3D: true,
+                    onComplete: () => {
+                        gsap.set(headerMenuItemsHidden, { clearProps: 'opacity,transform' });
+                        btnEnquire.style.display = 'none';
+                        dropdownWrappers.forEach(wrapper => {
+                            wrapper.style.display = 'none';
+                        });
+                        if (rightBlock) rightBlock.style.maxWidth = '';
+                    }
+                });
+            }
         }
 
         // Close search when clicking anywhere in the header except the search button
