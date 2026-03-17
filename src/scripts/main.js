@@ -3223,7 +3223,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function showPopular() {
             searchResults?.classList.add('d-none');
-            animatePopularItems(0);
         }
 
         function escapeHtml(str) {
