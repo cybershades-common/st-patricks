@@ -320,13 +320,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .fromTo(menuMainItems,
                 { opacity: 0, x: -60, force3D: true },
                 { opacity: 1, x: 0, duration: 0.3, stagger: 0.1, ease: 'power1.out', force3D: true },
-                0.55
+                0.15
             )
             // Sub menu items (after main menu)
             .fromTo(menuSubItems,
                 { opacity: 0, x: -20, force3D: true },
                 { opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: 'power1.out', force3D: true },
-                0.95
+                0.45
             )
             // Menu image - clip + parallax on wrapper/image
             .fromTo(menuImageWrapper,
@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .fromTo(menuFooter,
                 { opacity: 0, y: 20 },
                 { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
-                isMobileView ? 1.25 : 2.1
+                isMobileView ? 0.8 : 1.1
             )
             .call(() => {
                 menuOverlay.style.pointerEvents = 'auto';
