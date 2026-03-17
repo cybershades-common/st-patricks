@@ -51,8 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return nextIndex > currentIndex ? 1 : -1;
     }
 
-    // Image transition matching johnxxiii slider: fade crossFade + parallax scale (Swiper equivalent)
-    // Old image: fades out while scaling up to 1.5 | New image: starts at 1.5, zooms out to 1 while fading in
+
     function setMenuImage(src, instant) {
         if (!menuImageWrapper || !src) return;
         const img = menuImageWrapper.querySelector('img.menu-image');
