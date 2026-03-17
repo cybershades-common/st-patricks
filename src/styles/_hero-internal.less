@@ -178,18 +178,8 @@ body:has(.internal-content-single) {
     letter-spacing: -0.125rem;
   }
 
-  // Fix for masked-word animation clipping on mobile
+  // Add extra top room to avoid title animation clipping on mobile
   .hero-internal-content {
-    // Add extra top padding to prevent mask clipping
     padding-top: var(--spacing-small) !important;
-  }
-
-  .hero-internal-title {
-    // Add padding to title spans to prevent top clipping
-    span {
-      display: inline-block;
-      padding-top: 0.15em;
-      margin-top: -0.15em;
-    }
   }
 }
