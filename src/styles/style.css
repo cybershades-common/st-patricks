@@ -1103,7 +1103,7 @@ hr {
     width: 0.9rem;
     height: 0.9rem;
   }
-  .internal-page .header:not(.menu-open):not(.header-scrolled) .header-icon-btn--search.d-md-none {
+  .internal-page:not(.search-is-open) .header:not(.menu-open):not(.header-scrolled) .header-icon-btn--search.d-md-none {
     color: var(--basic-white);
   }
 }
@@ -1151,26 +1151,26 @@ hr {
   opacity: 1;
   visibility: visible;
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .logo-text {
+.internal-page:not(.search-is-open) .header:not(.menu-open):not(.header-scrolled) .logo-text {
   color: var(--basic-white);
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-black {
+.internal-page:not(.search-is-open) .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-black {
   border: 1px solid var(--basic-white);
   color: var(--basic-white);
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-black:hover {
+.internal-page:not(.search-is-open) .header:not(.menu-open):not(.header-scrolled) .btn-rounded-large.btn-rounded-large-outline-black:hover {
   border: 1px solid var(--basic-white);
   background: var(--basic-white);
   color: var(--basic-black);
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .menu-text {
+.internal-page:not(.search-is-open) .header:not(.menu-open):not(.header-scrolled) .menu-text {
   color: var(--basic-white);
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .header-icon-btn img {
+.internal-page:not(.search-is-open) .header:not(.menu-open):not(.header-scrolled) .header-icon-btn img {
   transition: all ease 0.25s;
   filter: brightness(0) invert(1);
 }
-.internal-page .header:not(.menu-open):not(.header-scrolled) .hamburger-line {
+.internal-page:not(.search-is-open) .header:not(.menu-open):not(.header-scrolled) .hamburger-line {
   background-color: var(--basic-white);
 }
 .internal-page .header.menu-open .btn-rounded-large.btn-rounded-large-outline-black,
