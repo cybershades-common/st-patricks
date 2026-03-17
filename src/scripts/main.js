@@ -220,6 +220,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function openMenu() {
+        // Close search overlay if open
+        const _so = document.getElementById('searchOverlay');
+        if (_so && _so.classList.contains('is-open')) {
+            _so.classList.remove('is-open');
+            document.body.classList.remove('search-is-open');
+            document.querySelectorAll('.header-icon-btn--search').forEach(t => t.classList.remove('search-active'));
+        }
         isMenuOpen = true;
 
         // Calculate scrollbar width
@@ -2949,6 +2956,15 @@ document.addEventListener('DOMContentLoaded', function () {
             searchOverlay.classList.remove('is-open');
             document.body.classList.remove('search-is-open');
             searchTriggers.forEach(t => t.classList.remove('search-active'));
+        }
+
+        // Close search when clicking anywhere in the header except the search button
+        if (header) {
+            header.addEventListener('click', function (e) {
+                if (!searchOverlay.classList.contains('is-open')) return;
+                if (e.target.closest('.header-icon-btn--search')) return;
+                closeSearch();
+            });
         }
 
         function scoreResult(item, query) {
