@@ -237,15 +237,41 @@ document.addEventListener('DOMContentLoaded', function () {
         return '65.875%';
     }
 
+    function setSearchOverlayVisibility(open, instant) {
+        const searchOverlay = document.getElementById('searchOverlay');
+        if (!searchOverlay) return;
+
+        if (open) {
+            const headerH = header ? header.offsetHeight : 0;
+            searchOverlay.style.setProperty('--search-header-h', headerH + 'px');
+        }
+
+        const applyState = () => {
+            searchOverlay.classList.toggle('is-open', open);
+            document.body.classList.toggle('search-is-open', open);
+            document.querySelectorAll('.header-icon-btn--search').forEach(trigger => {
+                trigger.classList.toggle('search-active', open);
+            });
+        };
+
+        if (!instant) {
+            applyState();
+            return;
+        }
+
+        const prevTransition = searchOverlay.style.transition;
+        searchOverlay.style.transition = 'none';
+        applyState();
+        void searchOverlay.offsetHeight;
+        searchOverlay.style.transition = prevTransition;
+    }
+
     function openMenu() {
         const searchOverlay = document.getElementById('searchOverlay');
         const wasSearchOpen = searchOverlay && searchOverlay.classList.contains('is-open');
         const rightBlock = header ? header.querySelector('.right-block') : null;
 
         if (wasSearchOpen) {
-            searchOverlay.classList.remove('is-open');
-            document.body.classList.remove('search-is-open');
-            document.querySelectorAll('.header-icon-btn--search').forEach(t => t.classList.remove('search-active'));
             if (rightBlock) rightBlock.style.maxWidth = '';
         }
 
@@ -278,6 +304,12 @@ document.addEventListener('DOMContentLoaded', function () {
         hamburger.classList.add('active');
         animateMenuText('CLOSE');
         document.body.style.overflow = 'hidden';
+
+        if (wasSearchOpen) {
+            gsap.set(megaMenu, { opacity: 1 });
+            gsap.set(menuOverlay, { opacity: 1 });
+            setSearchOverlayVisibility(false, true);
+        }
 
         let activeItem = document.querySelector('.menu-main-item.active');
         if (!activeItem || activeItem.dataset.menu === 'home') {
@@ -325,18 +357,24 @@ document.addEventListener('DOMContentLoaded', function () {
             gsap.set(mobileHeaderBtns, { display: 'grid', opacity: 0, y: 8, force3D: true });
         }
 
-        menuTimeline
-            // Mega menu + overlay quick fade in
-            .fromTo(megaMenu,
-                { opacity: 0 },
-                { opacity: 1, duration: 0.2, ease: 'power1.out' },
-                0
-            )
-            .fromTo(menuOverlay,
-                { opacity: 0 },
-                { opacity: 1, duration: 0.2, ease: 'power1.out' },
-                0
-            );
+        if (!wasSearchOpen) {
+            menuTimeline
+                // Mega menu + overlay quick fade in
+                .fromTo(megaMenu,
+                    { opacity: 0 },
+                    { opacity: 1, duration: 0.2, ease: 'power1.out' },
+                    0
+                )
+                .fromTo(menuOverlay,
+                    { opacity: 0 },
+                    { opacity: 1, duration: 0.2, ease: 'power1.out' },
+                    0
+                );
+        } else {
+            menuTimeline
+                .set(megaMenu, { opacity: 1 }, 0)
+                .set(menuOverlay, { opacity: 1 }, 0);
+        }
 
         if (!wasSearchOpen) {
             // Header menu items (fade in)
@@ -433,11 +471,21 @@ document.addEventListener('DOMContentLoaded', function () {
         // Snap logo to its post-close color immediately — mirrors the instant snap when the menu opens
         const isInternal = document.body.classList.contains('internal-page');
         const isScrolled = header.classList.contains('header-scrolled');
-        if (isInternal && !isScrolled) {
+        if (!keepHeaderItems && isInternal && !isScrolled) {
             logoTexts.forEach(t => { t.style.color = 'var(--basic-white)'; });
         }
 
-        gsap.killTweensOf([menuMainItems, menuSubItems, menuImageWrapper, menuImage, menuFooter, megaMenu, menuOverlay]);
+        gsap.killTweensOf([
+            menuMainItems,
+            menuSubItems,
+            menuImageWrapper,
+            menuImage,
+            menuFooter,
+            megaMenu,
+            menuOverlay,
+            headerMenuItems,
+            bookTourBtn
+        ]);
 
         function getRightBlockMaxWidth() {
             const width = window.innerWidth;
@@ -506,14 +554,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         wrapper.style.display = 'flex';
                     });
                 }
+
+                updateHeaderOnScroll();
             }
         });
 
         // Hide overlay instantly, fade mega menu
+        const menuCloseDuration = keepHeaderItems ? 0 : 0.25;
         gsap.set(menuOverlay, { opacity: 0 });
         closeTimeline.to(megaMenu, {
             opacity: 0,
-            duration: 0.25,
+            duration: menuCloseDuration,
             ease: 'power1.inOut'
         }, 0);
 
@@ -565,7 +616,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        updateHeaderOnScroll();
     }
 
     menuToggle.addEventListener('click', function () {
@@ -2990,13 +3040,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         function openSearch() {
-            const headerH = header ? header.offsetHeight : 0;
-            searchOverlay.style.setProperty('--search-header-h', headerH + 'px');
-            searchOverlay.classList.add('is-open');
-            document.body.classList.add('search-is-open');
-            searchTriggers.forEach(t => t.classList.add('search-active'));
+            const switchingFromMenu = isMenuOpen;
+            setSearchOverlayVisibility(true, switchingFromMenu);
 
-            if (isMenuOpen) {
+            if (switchingFromMenu) {
                 closeMenu({ keepHeaderItems: true });
             } else if (!isMobile()) {
                 const headerMenuItems = document.querySelectorAll(
@@ -3023,9 +3070,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function closeSearch() {
-            searchOverlay.classList.remove('is-open');
-            document.body.classList.remove('search-is-open');
-            searchTriggers.forEach(t => t.classList.remove('search-active'));
+            setSearchOverlayVisibility(false, false);
 
             if (!isMenuOpen && !isMobile()) {
                 const headerMenuItemsHidden = document.querySelectorAll(
