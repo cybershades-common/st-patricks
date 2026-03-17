@@ -1328,6 +1328,8 @@ document.addEventListener('DOMContentLoaded', function () {
         gsap.set([trackJunior, trackSenior], { display: 'none' });
 
         const isMobile = () => window.innerWidth <= 768;
+        let lastViewportWidth = window.innerWidth;
+        let lastMobileMode = isMobile();
 
         function initMobileSlider() {
             const localTrack = activeTrack;
@@ -1498,8 +1500,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // Reinit on resize
         let resizeTimeout;
         window.addEventListener('resize', () => {
+            const currentWidth = window.innerWidth;
+            const currentMobileMode = isMobile();
+
+            if (currentWidth === lastViewportWidth && currentMobileMode === lastMobileMode) return;
             clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(init, 250);
+            resizeTimeout = setTimeout(() => {
+                lastViewportWidth = window.innerWidth;
+                lastMobileMode = isMobile();
+                init();
+            }, 250);
         });
 
         init();
