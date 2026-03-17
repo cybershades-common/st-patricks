@@ -1566,6 +1566,12 @@ hr {
 .search-overlay-input::placeholder {
   color: rgba(39, 37, 31, 0.35);
 }
+@media (min-width: 768px) {
+  .search-overlay-input-wrap,
+  .search-overlay-results {
+    width: 90%;
+  }
+}
 .search-overlay-input-btn {
   right: 0;
   top: 0;

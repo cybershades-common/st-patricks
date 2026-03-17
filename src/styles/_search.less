@@ -71,8 +71,12 @@
   margin-bottom: 2.5rem;
 }
 
-.search-overlay-input-wrap {
+.search-overlay-input-wrap,
+.search-overlay-results {
   // position-relative via Bootstrap class in HTML
+  @media (min-width: 768px) {
+    width: 90%;
+  }
 }
 
 .search-overlay-input {
