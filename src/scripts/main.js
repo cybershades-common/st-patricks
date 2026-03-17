@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuOverlay = document.getElementById('menuOverlay');
     const hamburger = document.getElementById('hamburger');
     const menuText = menuToggle.querySelector('.menu-text');
+    function animateMenuText(newText) {
+        gsap.timeline()
+            .to(menuText, { opacity: 0, duration: 0.15, ease: 'none' })
+            .call(() => { menuText.textContent = newText; })
+            .to(menuText, { opacity: 1, duration: 0.2, ease: 'none' });
+    }
+
     const menuMainItems = document.querySelectorAll('.menu-main-item');
     const menuSubItems = document.querySelectorAll('.menu-sub-item');
     const footerArrowUp = document.getElementById('footerArrowUp');
@@ -251,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
         menuOverlay.classList.add('active');
         menuOverlay.style.pointerEvents = 'none';
         hamburger.classList.add('active');
-        menuText.textContent = 'CLOSE';
+        animateMenuText('CLOSE');
         document.body.style.overflow = 'hidden';
 
         let activeItem = document.querySelector('.menu-main-item.active');
@@ -442,7 +449,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 header.classList.remove('menu-open');
                 logoTexts.forEach(t => { t.style.color = ''; }); // restore CSS
                 hamburger.classList.remove('active');
-                menuText.textContent = 'MENU';
+                animateMenuText('MENU');
 
                 megaMenu.classList.remove('active');
                 menuOverlay.classList.remove('active');
