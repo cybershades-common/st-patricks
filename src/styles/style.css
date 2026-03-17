@@ -1084,6 +1084,26 @@ hr {
   .header .header-row .right-block .icon-menu-wrap {
     gap: 0.2rem;
   }
+  .header-icon-btn--search.d-md-none {
+    color: var(--basic-black);
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .header-icon-btn--search.d-md-none .search-icon-wrap {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .header-icon-btn--search.d-md-none .search-icon-search svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .header-icon-btn--search.d-md-none .search-icon-close svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+  .internal-page .header:not(.menu-open):not(.header-scrolled) .header-icon-btn--search.d-md-none {
+    color: var(--basic-white);
+  }
 }
 .header .header-row .right-block .menu-dropdown-btn {
   white-space: nowrap;

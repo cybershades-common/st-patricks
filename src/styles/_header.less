@@ -215,6 +215,33 @@
   }
 }
 
+@media (max-width: 767px) {
+  .header-icon-btn--search.d-md-none {
+    color: var(--basic-black);
+    width: 1.5rem;
+    height: 1.5rem;
+
+    .search-icon-wrap {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .search-icon-search svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .search-icon-close svg {
+      width: 0.9rem;
+      height: 0.9rem;
+    }
+  }
+
+  .internal-page .header:not(.menu-open):not(.header-scrolled) .header-icon-btn--search.d-md-none {
+    color: var(--basic-white);
+  }
+}
+
 .menu-toggle {
   gap: 1rem;
   background: transparent;
