@@ -1080,6 +1080,11 @@ hr {
   margin-left: auto;
   gap: 1.5rem;
 }
+@media (max-width: 767px) {
+  .header .header-row .right-block .icon-menu-wrap {
+    gap: 0.2rem;
+  }
+}
 .header .header-row .right-block .menu-dropdown-btn {
   white-space: nowrap;
 }
@@ -1545,6 +1550,12 @@ hr {
   color: var(--primary-blue);
   margin-bottom: 2.5rem;
 }
+@media (min-width: 768px) {
+  .search-overlay-input-wrap,
+  .search-overlay-results {
+    width: 90%;
+  }
+}
 .search-overlay-input {
   font-family: var(--font-family-helvetica-neue);
   font-size: var(--font-size-b1);
@@ -1565,12 +1576,6 @@ hr {
 }
 .search-overlay-input::placeholder {
   color: rgba(39, 37, 31, 0.35);
-}
-@media (min-width: 768px) {
-  .search-overlay-input-wrap,
-  .search-overlay-results {
-    width: 90%;
-  }
 }
 .search-overlay-input-btn {
   right: 0;
