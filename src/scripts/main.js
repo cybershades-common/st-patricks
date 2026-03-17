@@ -243,19 +243,14 @@ document.addEventListener('DOMContentLoaded', function () {
         gsap.killTweensOf(bookTourBtn);
         gsap.fromTo(bookTourBtn,
             {
-                opacity: 0,
-                willChange: 'opacity',
-                force3D: true
+                autoAlpha: 0
             },
             {
-                opacity: 1,
-                duration: 0.42,
-                delay: 0.1,
-                ease: 'power2.out',
+                autoAlpha: 1,
+                duration: 0.5,
+                ease: 'power1.out',
                 overwrite: 'auto',
-                force3D: true,
                 onComplete: () => {
-                    gsap.set(bookTourBtn, { clearProps: 'willChange' });
                     bookTourBtn.style.transition = '';
                 }
             }
