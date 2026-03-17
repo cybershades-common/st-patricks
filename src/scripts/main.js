@@ -653,10 +653,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!isMobile()) return;
 
                 const nextKey = item.dataset.menu;
+                const hasSubmenu = item.classList.contains('has-submenu');
 
                 // If Home is clicked, redirect to home page instead of showing submenu
                 if (nextKey === 'home') {
                     window.location.href = '/';
+                    return;
+                }
+
+                if (!hasSubmenu) {
                     return;
                 }
 
@@ -724,11 +729,16 @@ document.addEventListener('DOMContentLoaded', function () {
         item.addEventListener('click', function (e) {
             if (isMobile()) return;
             const nextKey = item.dataset.menu;
+            const hasSubmenu = item.classList.contains('has-submenu');
             if (!nextKey) return;
 
             // If Home is clicked, redirect to home page instead of changing menu
             if (nextKey === 'home') {
                 window.location.href = '/';
+                return;
+            }
+
+            if (!hasSubmenu) {
                 return;
             }
 
