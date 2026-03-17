@@ -1036,7 +1036,8 @@ document.addEventListener('DOMContentLoaded', function () {
             '.header-nav .btn-header, ' +
             '.header-nav .menu-dropdown-btn, ' +
             '.header-icons-wrapper .header-icon-btn, ' +
-            '.menu-toggle'
+            '.menu-toggle, ' +
+            '.icon-menu-wrap .header-icon-btn--search.d-md-none'
         );
 
         if (headerItems.length === 0) {
@@ -3032,6 +3033,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (val.trim()) {
                     searchIconBtn?.classList.remove('is-active');
                     searchClearBtn?.classList.add('is-active');
+                    if (window.innerWidth < 768) {
+                        searchResults?.classList.remove('d-none');
+                    }
                 } else {
                     searchIconBtn?.classList.add('is-active');
                     searchClearBtn?.classList.remove('is-active');
