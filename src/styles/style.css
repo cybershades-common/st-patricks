@@ -1779,7 +1779,7 @@ body.search-is-open {
   overflow: hidden;
 }
 .hero .hero-content-wrap {
-  height: 75vh;
+  height: 82vh;
   display: flex;
   align-items: flex-end;
   padding-bottom: 0;
@@ -6580,6 +6580,9 @@ body:has(.internal-content-single) .hero-internal-title {
 @media (min-width: 1201px) and (max-width: 1229px) {
   html {
     font-size: 12.8px;
+  }
+  .hero .hero-title {
+    font-size: 11.25rem;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
