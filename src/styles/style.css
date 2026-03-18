@@ -2876,6 +2876,13 @@ body:has(.internal-content-single) .hero-internal-title {
   text-underline-offset: auto;
   text-underline-position: from-font;
   display: inline;
+  color: inherit;
+  text-decoration-color: currentColor;
+}
+.about-section h2 a.underline:visited,
+.about-section h2 a.underline:hover,
+.about-section h2 a.underline:focus {
+  color: inherit;
 }
 .about-content-row {
   margin-top: 12.5rem;
