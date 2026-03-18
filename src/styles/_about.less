@@ -170,27 +170,10 @@
     display: inline;
     color: inherit;
     text-decoration-color: currentColor;
-    transition:
-      color 0.25s ease,
-      text-decoration-color 0.25s ease,
-      text-decoration-thickness 0.25s ease,
-      text-underline-offset 0.25s ease;
-
     &:visited {
       color: inherit;
     }
 
-    &:hover,
-    &:focus-visible {
-      color: var(--primary-blue-tint);
-      text-decoration-color: var(--primary-blue-tint);
-      text-decoration-thickness: 4px;
-      text-underline-offset: 0.14em;
-    }
-
-    &:focus:not(:focus-visible) {
-      color: inherit;
-    }
   }
 }
 
