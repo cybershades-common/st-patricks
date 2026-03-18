@@ -1138,8 +1138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Desktop: block click (hover controls it)
             toggle.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); });
 
-            // Mobile: touchstart fires before click — preventDefault kills the entire
-            // subsequent click chain so Bootstrap's delegated listener never sees it
+
             toggle.addEventListener('touchstart', (e) => {
                 if (!isMobile()) return;
                 e.preventDefault();
@@ -1172,11 +1171,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Filter out items that are display: none (but keep visibility: hidden items since we'll animate them)
+
         const visibleItems = Array.from(headerItems).filter(item => {
             if (!item) return false;
             const style = window.getComputedStyle(item);
-            // Only filter out if display is none, not visibility hidden (we'll animate those)
+
             return style.display !== 'none';
         });
 
@@ -1190,9 +1189,6 @@ document.addEventListener('DOMContentLoaded', function () {
             delay: isInternalPage ? 0.6 : 1.8 // Internal pages have less hero content so animate sooner
         });
 
-        // Set initial states - slide from top for all items at once
-        // Override CSS visibility: hidden by setting visibility: visible in GSAP
-        // Clear ALL CSS that might interfere (transitions, animations, delays)
         visibleItems.forEach(item => {
             // Kill any existing animations first
             gsap.killTweensOf(item);
@@ -1436,17 +1432,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initAboutReveal();
 
-    //==================== Latest news slider (custom)===============================================================
-    // Single-track architecture: all slides live in one DOM track, each tagged with
-    // data-categories (space-separated slugs, e.g. "junior" or "senior").
-    // Filtering shows/hides slides via .latest-news-slide--hidden so the slider
-    // always operates on the visible slide set — no duplicate tracks needed.
-    //
-    // Wagtail integration points:
-    //   • Filter buttons: rendered from {{ news_categories }} in the template.
-    //     "All News" is always first; remaining buttons have data-filter="{{ cat.slug }}".
-    //   • Slides: rendered via {% for item in news_items %} with
-    //     data-categories="{{ item.categories|join:' ' }}" on each .latest-news-slide.
+
 
 
     function initLatestNewsSlider() {
@@ -2780,9 +2766,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updatePagination();
         updateNavState();
 
-        // First-load intro:
-        // 1) reveal entire media container with same clip animation as home/about
-        // 2) reveal first-slide content only when user scrolls into this section
+
         const firstSlide = slides[currentIndex];
         const firstItems = firstSlide ? getSlideItems(firstSlide) : [];
         const firstContentTrigger = firstSlide
