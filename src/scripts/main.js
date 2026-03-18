@@ -1437,39 +1437,53 @@ document.addEventListener('DOMContentLoaded', function () {
     initAboutReveal();
 
     //==================== Latest news slider (custom)===============================================================
+    // Single-track architecture: all slides live in one DOM track, each tagged with
+    // data-categories (space-separated slugs, e.g. "junior" or "senior").
+    // Filtering shows/hides slides via .latest-news-slide--hidden so the slider
+    // always operates on the visible slide set — no duplicate tracks needed.
+    //
+    // Wagtail integration points:
+    //   • Filter buttons: rendered from {{ news_categories }} in the template.
+    //     "All News" is always first; remaining buttons have data-filter="{{ cat.slug }}".
+    //   • Slides: rendered via {% for item in news_items %} with
+    //     data-categories="{{ item.categories|join:' ' }}" on each .latest-news-slide.
 
 
     function initLatestNewsSlider() {
-        const trackAll = document.getElementById('latestNewsTrackAll');
-        const trackJunior = document.getElementById('latestNewsTrackJunior');
-        const trackSenior = document.getElementById('latestNewsTrackSenior');
+        const track = document.getElementById('latestNewsTrack');
         const prevBtn = document.getElementById('latestNewsPrev');
         const nextBtn = document.getElementById('latestNewsNext');
 
-        if (!trackAll || !prevBtn || !nextBtn) return;
+        if (!track || !prevBtn || !nextBtn) return;
 
-        const trackMap = { all: trackAll, junior: trackJunior, senior: trackSenior };
-        let activeTrack = trackAll;
         let currentIndex = 0;
-        let prevTranslate = 0;
         let cleanupFn = null;
-
-        // Hide non-active tracks on init
-        gsap.set([trackJunior, trackSenior], { display: 'none' });
 
         const isMobile = () => window.innerWidth <= 768;
         let lastViewportWidth = window.innerWidth;
         let lastMobileMode = isMobile();
 
+        // Returns only the slides currently visible (not filtered out)
+        const getVisibleSlides = () =>
+            Array.from(track.querySelectorAll('.latest-news-slide:not(.latest-news-slide--hidden)'));
+
+        // Show/hide slides based on their data-categories attribute
+        function applyFilter(filter) {
+            Array.from(track.querySelectorAll('.latest-news-slide')).forEach(slide => {
+                const cats = (slide.dataset.categories || '').trim().split(/\s+/);
+                const visible = filter === 'all' || cats.includes(filter);
+                slide.classList.toggle('latest-news-slide--hidden', !visible);
+            });
+        }
+
         function initMobileSlider() {
-            const localTrack = activeTrack;
-            const slides = Array.from(localTrack.querySelectorAll('.latest-news-slide'));
+            const slides = getVisibleSlides();
             if (!slides.length) return () => { };
             let touchStartX = 0;
             let touchStartY = 0;
 
             const getSlideWidth = () => slides[0].offsetWidth;
-            const getGap = () => parseFloat(getComputedStyle(localTrack).gap) || 20;
+            const getGap = () => parseFloat(getComputedStyle(track).gap) || 20;
 
             const moveToSlide = (index, animate = true) => {
                 if (index < 0) index = 0;
@@ -1477,29 +1491,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 const isChanging = animate && index !== currentIndex;
                 currentIndex = index;
                 const offset = -(currentIndex * (getSlideWidth() + getGap()));
-                prevTranslate = offset;
 
                 if (!animate) {
                     gsap.killTweensOf(slides);
                     gsap.set(slides, { scale: 1 });
-                    localTrack.style.transition = 'none';
-                    localTrack.style.transform = `translateX(${offset}px)`;
+                    track.style.transition = 'none';
+                    track.style.transform = `translateX(${offset}px)`;
                     return;
                 }
 
                 gsap.killTweensOf(slides);
 
                 if (isChanging) {
-                    // Pan and zoom happen simultaneously — no snap
-                    localTrack.style.transition = 'transform 0.46s cubic-bezier(0.4, 0, 0.2, 1)';
-                    localTrack.style.transform = `translateX(${offset}px)`;
+                    track.style.transition = 'transform 0.46s cubic-bezier(0.4, 0, 0.2, 1)';
+                    track.style.transform = `translateX(${offset}px)`;
                     gsap.timeline()
                         .to(slides, { scale: 0.9, duration: 0.2, ease: 'power2.in' })
                         .to(slides, { scale: 1, duration: 0.38, ease: 'power3.out' });
                 } else {
-                    // Snap back to same slide
-                    localTrack.style.transition = 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    localTrack.style.transform = `translateX(${offset}px)`;
+                    track.style.transition = 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    track.style.transform = `translateX(${offset}px)`;
                 }
             };
 
@@ -1520,22 +1531,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
             prevBtn.addEventListener('click', handlePrev);
             nextBtn.addEventListener('click', handleNext);
-            localTrack.addEventListener('touchstart', handleTouchStart, { passive: true });
-            localTrack.addEventListener('touchend', handleTouchEnd, { passive: true });
+            track.addEventListener('touchstart', handleTouchStart, { passive: true });
+            track.addEventListener('touchend', handleTouchEnd, { passive: true });
 
             moveToSlide(0, false);
 
             return () => {
                 prevBtn.removeEventListener('click', handlePrev);
                 nextBtn.removeEventListener('click', handleNext);
-                localTrack.removeEventListener('touchstart', handleTouchStart);
-                localTrack.removeEventListener('touchend', handleTouchEnd);
+                track.removeEventListener('touchstart', handleTouchStart);
+                track.removeEventListener('touchend', handleTouchEnd);
             };
         }
 
         function initDesktopSlider() {
-            const localTrack = activeTrack;
-            const slides = Array.from(localTrack.querySelectorAll('.latest-news-slide'));
+            const slides = getVisibleSlides();
             if (!slides.length) return () => { };
 
             const updateSlides = () => {
@@ -1543,9 +1553,8 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             const getGap = () => {
-                const styles = getComputedStyle(localTrack);
-                const gapValue = styles.columnGap || styles.gap;
-                return parseFloat(gapValue) || 20;
+                const styles = getComputedStyle(track);
+                return parseFloat(styles.columnGap || styles.gap) || 20;
             };
 
             const getInactiveWidth = () => {
@@ -1559,14 +1568,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const moveToSlide = (index) => {
                 if (index < 0) index = slides.length - 1;
                 if (index >= slides.length) index = 0;
-
-                // Use actual rendered dimensions so large-screen rem scaling never drifts.
                 const step = getInactiveWidth() + getGap();
                 currentIndex = index;
                 updateSlides();
-                const pos = -(currentIndex * step);
-                localTrack.style.transform = `translate3d(${pos}px, 0, 0)`;
-                prevTranslate = pos;
+                track.style.transform = `translate3d(${-(currentIndex * step)}px, 0, 0)`;
             };
 
             const handlePrev = () => moveToSlide(currentIndex - 1);
@@ -1576,8 +1581,8 @@ document.addEventListener('DOMContentLoaded', function () {
             nextBtn.addEventListener('click', handleNext);
 
             moveToSlide(0);
-            // Clear any inline transition override so CSS transition takes over for subsequent moves
-            requestAnimationFrame(() => { localTrack.style.transition = ''; });
+            // Clear inline transition override so CSS transition takes over for subsequent moves
+            requestAnimationFrame(() => { track.style.transition = ''; });
 
             return () => {
                 prevBtn.removeEventListener('click', handlePrev);
@@ -1588,10 +1593,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const init = () => {
             if (cleanupFn) cleanupFn();
             currentIndex = 0;
+            track.style.transform = 'translateX(0)';
             cleanupFn = isMobile() ? initMobileSlider() : initDesktopSlider();
         };
 
-        // Filter tabs
+        // Filter tabs — works with any number of buttons; no hardcoded category map needed
         const filterTabs = document.querySelectorAll('.latest-news-filter-btn');
         filterTabs.forEach(tab => {
             tab.addEventListener('click', function (e) {
@@ -1601,47 +1607,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.classList.add('latest-news-filter-btn-active');
 
                 const filter = this.dataset.filter;
-                const newTrack = trackMap[filter];
-                if (!newTrack || newTrack === activeTrack) return;
-
-                const oldTrack = activeTrack;
                 if (cleanupFn) { cleanupFn(); cleanupFn = null; }
 
-                gsap.to(oldTrack, {
+                gsap.to(track, {
                     opacity: 0,
                     y: -16,
-                    duration: 0.55,
+                    duration: 0.35,
                     ease: 'power2.inOut',
                     onComplete: () => {
-                        // Reset and hide old track
-                        gsap.set(oldTrack, { display: 'none', opacity: 1, y: 0 });
-                        oldTrack.style.transform = 'translateX(0)';
-
-                        // Swap active track and reinit slider
-                        activeTrack = newTrack;
+                        applyFilter(filter);
+                        track.style.transition = 'none';
+                        track.style.transform = 'translateX(0)';
                         currentIndex = 0;
-                        prevTranslate = 0;
-                        newTrack.style.transition = 'none';
-                        newTrack.style.transform = 'translateX(0)';
-
                         cleanupFn = isMobile() ? initMobileSlider() : initDesktopSlider();
-
-                        // Fade in new track
-                        gsap.fromTo(newTrack,
-                            { display: 'flex', opacity: 0, y: 20 },
-                            { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' }
+                        gsap.fromTo(track,
+                            { opacity: 0, y: 20 },
+                            { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' }
                         );
                     }
                 });
             });
         });
 
-        // Reinit on resize
+        // Reinit on resize (only when mobile ↔ desktop boundary is crossed)
         let resizeTimeout;
         window.addEventListener('resize', () => {
             const currentWidth = window.innerWidth;
             const currentMobileMode = isMobile();
-
             if (currentWidth === lastViewportWidth && currentMobileMode === lastMobileMode) return;
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {

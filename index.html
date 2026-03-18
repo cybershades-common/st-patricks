@@ -897,9 +897,15 @@
                             <div class="col-12 col-lg-auto latest-news-filters-col"
                                 data-gsap-children='{"a":{"type":"fade-in", "stagger":"0.4"}}'>
                                 <div class="latest-news-filters d-flex align-items-center">
+                                    <!-- "All News" is always first and active by default -->
                                     <a href="#"
                                         class="btn-rounded-large btn-rounded-large-outline-black latest-news-filter-btn latest-news-filter-btn-active"
                                         data-filter="all">All News</a>
+                                    <!-- Wagtail: {% for cat in news_categories %}
+                                    <a href="#"
+                                        class="btn-rounded-large btn-rounded-large-outline-golden latest-news-filter-btn"
+                                        data-filter="{{ cat.slug }}">{{ cat.name }}</a>
+                                    {% endfor %} -->
                                     <a href="#"
                                         class="btn-rounded-large btn-rounded-large-outline-golden latest-news-filter-btn"
                                         data-filter="junior">Junior</a>
@@ -931,266 +937,183 @@
                             </div>
                         </div>
                         <div class="latest-news-slider">
-                            <div class="latest-news-tracks-wrapper">
+                            <!--
+                                Single track — all news items here, each tagged with data-categories.
+                                JS filters by toggling .latest-news-slide--hidden on non-matching slides.
 
-                                <!-- ALL NEWS TRACK -->
-                                <div class="latest-news-track" id="latestNewsTrackAll">
-                                    <div class="latest-news-slide active">
-                                        <div class="latest-news-card"
-                                            data-gsap-children='{"img":{"type":"image-clip-top", "start":"top 60%"}, "div":{"type":"fade-up", "start":"top 150%"}}'
-                                            data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
-                                            <a href="#"><img loading="lazy" src="assets/images/m3.jpg"
-                                                    alt="Black Tie Liturgy" class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Black Tie Liturgy</h3>
-                                                    <p>22.09.25</p>
-                                                </div>
-                                            </a>
+                                Wagtail template structure:
+                                <div class="latest-news-track" id="latestNewsTrack">
+                                  {% for item in news_items %}
+                                  <div class="latest-news-slide{% if forloop.first %} active{% endif %}"
+                                       data-categories="{% for cat in item.categories.all %}{{ cat.slug }} {% endfor %}">
+                                    <div class="latest-news-card"
+                                         {% if forloop.counter0 < 4 %}
+                                         data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%"{% if forloop.counter0 > 0 %},"delay":"0.{{ forloop.counter0|multiply:2 }}s"{% endif %}},"div":{"type":"fade-up","start":"top 150%"}}'
+                                         data-gsap-children-mobile='{"img":{"start":"top 80%"}}'
+                                         {% endif %}>
+                                      <a href="{{ item.url }}">
+                                        <img loading="lazy" src="{{ item.thumbnail.url }}" alt="{{ item.title }}" class="latest-news-image">
+                                        <div class="latest-news-card-content">
+                                          <h3>{{ item.title }}</h3>
+                                          <p>{{ item.date|date:"d.m.y" }}</p>
                                         </div>
+                                      </a>
                                     </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"
-                                            data-gsap-children='{"img":{"type":"image-clip-top", "start":"top 60%", "delay":"0.2s" }, "div":{"type":"fade-up", "start":"top 150%"}}'
-                                            data-gsap-children-mobile='{"img":{"start":"top 80%"}}'><a href="#"><img
-                                                    loading="lazy" src="assets/images/m4.jpg"
-                                                    alt="Celebrating Father's Day" class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Celebrating Father's Day</h3>
-                                                    <p>10.09.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"
-                                            data-gsap-children='{"img":{"type":"image-clip-top", "start":"top 60%" ,"delay":"0.4s" }, "div":{"type":"fade-up", "start":"top 150%"}}'
-                                            data-gsap-children-mobile='{"img":{"start":"top 80%"}}'><a href="#"><img
-                                                    loading="lazy" src="assets/images/m2.jpg"
-                                                    alt="Farewell to the Class of 2025!" class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Farewell to the Class of 2025!</h3>
-                                                    <p>18.09.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div data-gsap-children='{"img":{"type":"image-clip-top", "start":"top 60%" ,"delay":"0.6s" }, "div":{"type":"fade-up", "start":"top 150%"}}'
-                                            data-gsap-children-mobile='{"img":{"start":"top 80%"}}'
-                                            class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m3.jpg" alt="Year 5 Welcome Day"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Year 5 Welcome Day</h3>
-                                                    <p>05.09.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m4.jpg" alt="Year 12 Formal 2025"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Year 12 Formal 2025</h3>
-                                                    <p>01.09.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m2.jpg" alt="Middle School Science Fair"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Middle School Science Fair</h3>
-                                                    <p>28.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m3.jpg" alt="HSC Study Skills Day"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>HSC Study Skills Day</h3>
-                                                    <p>22.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m4.jpg" alt="Junior Drama Workshop"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Junior Drama Workshop</h3>
-                                                    <p>18.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m2.jpg" alt="Senior Leadership Forum"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Senior Leadership Forum</h3>
-                                                    <p>15.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m3.jpg" alt="Year 8 Outdoor Education"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Year 8 Outdoor Education</h3>
-                                                    <p>10.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m4.jpg" alt="Class of 2025 Assembly"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Class of 2025 Assembly</h3>
-                                                    <p>05.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m2.jpg" alt="Middle School Art Exhibition"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Middle School Art Exhibition</h3>
-                                                    <p>01.08.25</p>
-                                                </div>
-                                            </a></div>
+                                  </div>
+                                  {% endfor %}
+                                </div>
+                            -->
+                            <div class="latest-news-track" id="latestNewsTrack">
+
+                                <div class="latest-news-slide active" data-categories="senior">
+                                    <div class="latest-news-card"
+                                        data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%"},"div":{"type":"fade-up","start":"top 150%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m3.jpg" alt="Black Tie Liturgy" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Black Tie Liturgy</h3>
+                                                <p>22.09.25</p>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
 
-                                <!-- JUNIOR TRACK -->
-                                <div class="latest-news-track" id="latestNewsTrackJunior">
-                                    <div class="latest-news-slide active">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m4.jpg" alt="Celebrating Father's Day"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Celebrating Father's Day</h3>
-                                                    <p>10.09.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m3.jpg" alt="Year 5 Welcome Day"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Year 5 Welcome Day</h3>
-                                                    <p>05.09.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m2.jpg" alt="Middle School Science Fair"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Middle School Science Fair</h3>
-                                                    <p>28.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m4.jpg" alt="Junior Drama Workshop"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Junior Drama Workshop</h3>
-                                                    <p>18.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m3.jpg" alt="Year 8 Outdoor Education"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Year 8 Outdoor Education</h3>
-                                                    <p>10.08.25</p>
-                                                </div>
-                                            </a></div>
-                                    </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m2.jpg" alt="Middle School Art Exhibition"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Middle School Art Exhibition</h3>
-                                                    <p>01.08.25</p>
-                                                </div>
-                                            </a></div>
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card"
+                                        data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%","delay":"0.2s"},"div":{"type":"fade-up","start":"top 150%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m4.jpg" alt="Celebrating Father's Day" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Celebrating Father's Day</h3>
+                                                <p>10.09.25</p>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
 
-                                <!-- SENIOR TRACK -->
-                                <div class="latest-news-track" id="latestNewsTrackSenior">
-                                    <div class="latest-news-slide active">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m3.jpg" alt="Black Tie Liturgy"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Black Tie Liturgy</h3>
-                                                    <p>22.09.25</p>
-                                                </div>
-                                            </a></div>
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card"
+                                        data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%","delay":"0.4s"},"div":{"type":"fade-up","start":"top 150%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m2.jpg" alt="Farewell to the Class of 2025!" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Farewell to the Class of 2025!</h3>
+                                                <p>18.09.25</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m2.jpg" alt="Farewell to the Class of 2025!"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Farewell to the Class of 2025!</h3>
-                                                    <p>18.09.25</p>
-                                                </div>
-                                            </a></div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card"
+                                        data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%","delay":"0.6s"},"div":{"type":"fade-up","start":"top 150%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m3.jpg" alt="Year 5 Welcome Day" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Year 5 Welcome Day</h3>
+                                                <p>05.09.25</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m4.jpg" alt="Year 12 Formal 2025"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Year 12 Formal 2025</h3>
-                                                    <p>01.09.25</p>
-                                                </div>
-                                            </a></div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m4.jpg" alt="Year 12 Formal 2025" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Year 12 Formal 2025</h3>
+                                                <p>01.09.25</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m3.jpg" alt="HSC Study Skills Day"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>HSC Study Skills Day</h3>
-                                                    <p>22.08.25</p>
-                                                </div>
-                                            </a></div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m2.jpg" alt="Middle School Science Fair" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Middle School Science Fair</h3>
+                                                <p>28.08.25</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m2.jpg" alt="Senior Leadership Forum"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Senior Leadership Forum</h3>
-                                                    <p>15.08.25</p>
-                                                </div>
-                                            </a></div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m3.jpg" alt="HSC Study Skills Day" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>HSC Study Skills Day</h3>
+                                                <p>22.08.25</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="latest-news-slide">
-                                        <div class="latest-news-card"><a href="#"><img loading="lazy"
-                                                    src="assets/images/m4.jpg" alt="Class of 2025 Assembly"
-                                                    class="latest-news-image">
-                                                <div class="latest-news-card-content">
-                                                    <h3>Class of 2025 Assembly</h3>
-                                                    <p>05.08.25</p>
-                                                </div>
-                                            </a></div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m4.jpg" alt="Junior Drama Workshop" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Junior Drama Workshop</h3>
+                                                <p>18.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m2.jpg" alt="Senior Leadership Forum" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Senior Leadership Forum</h3>
+                                                <p>15.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m3.jpg" alt="Year 8 Outdoor Education" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Year 8 Outdoor Education</h3>
+                                                <p>10.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m4.jpg" alt="Class of 2025 Assembly" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Class of 2025 Assembly</h3>
+                                                <p>05.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m2.jpg" alt="Middle School Art Exhibition" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Middle School Art Exhibition</h3>
+                                                <p>01.08.25</p>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
 

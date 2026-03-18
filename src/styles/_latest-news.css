@@ -125,6 +125,10 @@
 .latest-news-slide.active {
   width: 42.5rem;
 }
+
+.latest-news-slide--hidden {
+  display: none;
+}
 .latest-news-card {
   display: flex;
   flex-direction: column;
