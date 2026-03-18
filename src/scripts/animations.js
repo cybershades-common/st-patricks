@@ -636,7 +636,7 @@ class GSAPAnimations {
   // -----------------------------------------------------------------------
 
   // Word-by-word opacity reveal, scrub-driven (same style as about section).
-  // Works on plain text and preserves child elements (e.g. .underline spans).
+  // Works on plain text and preserves child elements (e.g. links).
   // Usage: data-gsap-children='{"h2":{"type":"word-reveal"}}'
   wordReveal(el, cfg) {
     if (!el) return;
@@ -644,7 +644,7 @@ class GSAPAnimations {
     const isMobile = window.innerWidth <= 991;
 
     // Wrap each direct text-node word in <span class="gsap-word">
-    // Child elements (like .underline spans) are left intact
+    // Child elements (like links) are left intact
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
     const textNodes = [];
     let node;
@@ -669,11 +669,11 @@ class GSAPAnimations {
         });
         textNode.parentNode.replaceChild(frag, textNode);
       }
-      // Text inside child elements (e.g. .underline) stays untouched
+      // Text inside child elements (e.g. links) stays untouched
     });
 
-    // Animate .gsap-word spans plus any preserved child element spans
-    const pieces = gsap.utils.toArray(el.querySelectorAll('.gsap-word, .underline'));
+    // Animate .gsap-word spans plus any preserved child links
+    const pieces = gsap.utils.toArray(el.querySelectorAll('.gsap-word, a'));
     if (!pieces.length) return;
 
     gsap.set(el, { autoAlpha: 1 });

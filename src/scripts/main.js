@@ -1356,7 +1356,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         textNodes.forEach(node => {
-            if (node.parentNode && node.parentNode.closest && node.parentNode.closest('.underline')) {
+            if (node.parentNode && node.parentNode.closest && node.parentNode.closest('a')) {
                 return;
             }
             const words = node.nodeValue.split(/(\s+)/);
@@ -1399,10 +1399,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const aboutParagraphs = document.querySelectorAll('.about-text p');
         aboutParagraphs.forEach(p => wrapSentences(p));
 
-        gsap.set('.about-section h2 .word, .about-section h2 .underline', { opacity: 0 });
+        gsap.set('.about-section h2 .word, .about-section h2 a', { opacity: 0 });
         gsap.set('.about-text .sentence', { opacity: 0 });
 
-        const headingPieces = gsap.utils.toArray('.about-section h2 .word, .about-section h2 .underline');
+        const headingPieces = gsap.utils.toArray('.about-section h2 .word, .about-section h2 a');
 
         const isMobile = window.innerWidth <= 991;
         const aboutTl = gsap.timeline({

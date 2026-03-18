@@ -115,20 +115,29 @@
   display: inline;
   text-decoration: inherit;
 }
-.about-section h2 .underline {
+.about-section h2 a {
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-skip-ink: auto;
   text-decoration-thickness: 3px;
-  text-underline-offset: auto;
+  text-underline-offset: 0.08em;
   text-underline-position: from-font;
   display: inline;
   color: inherit;
   text-decoration-color: currentColor;
+  transition: color 0.25s ease, text-decoration-color 0.25s ease, text-decoration-thickness 0.25s ease, text-underline-offset 0.25s ease;
 }
-.about-section h2 a.underline:visited,
-.about-section h2 a.underline:hover,
-.about-section h2 a.underline:focus {
+.about-section h2 a:visited {
+  color: inherit;
+}
+.about-section h2 a:hover,
+.about-section h2 a:focus-visible {
+  color: var(--primary-blue-tint);
+  text-decoration-color: var(--primary-blue-tint);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 0.14em;
+}
+.about-section h2 a:focus:not(:focus-visible) {
   color: inherit;
 }
 .about-content-row {
