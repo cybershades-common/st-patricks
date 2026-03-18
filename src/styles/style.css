@@ -1906,6 +1906,11 @@ body.search-is-open {
     font-size: 8.5rem;
   }
 }
+@media (min-width: 1201px) and (max-width: 1535px) {
+  .hero .hero-content-wrap {
+    height: clamp(34.5rem, 46vw, 42.1875rem);
+  }
+}
 @media (min-width: 992px) and (max-width: 1200px) {
   .hero .hero-content-wrap {
     height: auto;
@@ -1985,8 +1990,12 @@ body.search-is-open {
   .hero {
     padding-top: 5rem;
   }
+  .hero .hero-content-wrap {
+    padding-top: 3rem;
+  }
   .hero-text {
     gap: var(--spacing-xs);
+    padding: 1rem 0 1.5rem;
   }
   .hero-media {
     height: 100vh;
