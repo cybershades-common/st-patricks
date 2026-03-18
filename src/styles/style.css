@@ -1833,7 +1833,7 @@ body.search-is-open {
   position: relative;
   z-index: 2;
   height: 100%;
-  padding: 1.325rem 0 2.5rem;
+  padding: 1.5rem 0 2.5rem;
   gap: 2rem 0;
 }
 .hero-text p {
