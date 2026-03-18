@@ -18,8 +18,6 @@
   margin-top: 12.0625rem; // 193px gap from top section
 }
 
-
-
 .statistics-section h2 {
   font-size: var(--font-size-h2);
   line-height: var(--line-height-h2);
@@ -39,7 +37,6 @@
 .statistics-button {
   margin-top: 0;
 }
-
 
 .statistics-card {
   position: relative;
@@ -65,7 +62,6 @@
     margin-bottom: var(--spacing-base);
     padding-bottom: var(--spacing-base);
     border-bottom: 1px solid @card-divider-color;
-
   }
 
   &:last-child {
@@ -107,6 +103,7 @@
   letter-spacing: 0;
   color: var(--basic-black);
   margin: 0;
+  max-width: 10.0265rem;
 }
 
 .statistics-card-content p:last-child {
@@ -117,7 +114,7 @@
   margin: 0;
 }
 
-@media (min-width:992px) and (max-width:1200px) {
+@media (min-width: 992px) and (max-width: 1200px) {
   .statistics-heading-col {
     padding-right: 6rem;
 
@@ -170,11 +167,8 @@
   }
 
   .statistics-heading-col {
-   
     margin-bottom: var(--spacing-xs);
   }
-
-
 
   .statistics-top p {
     margin-bottom: var(--spacing-xs);
@@ -197,9 +191,8 @@
   .statistics-card-content p:last-child {
     font-size: 3.5rem;
   }
-    .statistics-cards {
-       .row {
-     
+  .statistics-cards {
+    .row {
       .statistics-card {
         max-width: 48%;
         padding: 1.875rem 0.75rem;
