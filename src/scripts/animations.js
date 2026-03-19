@@ -999,7 +999,7 @@ class GSAPAnimations {
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
         (Array.isArray(target) ? target : [target]).forEach(e =>
-          gsap.set(e, { clearProps: 'will-change' })
+          gsap.set(e, { clearProps: 'clipPath,webkitClipPath,willChange' })
         );
       }
     });

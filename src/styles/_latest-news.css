@@ -104,21 +104,14 @@
   --latest-news-gap: 1.25rem;
   display: flex;
   gap: var(--latest-news-gap);
-  cursor: grab;
-  user-select: none;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   align-items: flex-start;
   will-change: transform;
-}
-.latest-news-track.dragging {
-  cursor: grabbing;
-  transition: none;
 }
 .latest-news-slide {
   flex-shrink: 0;
   position: relative;
   width: 20.8125rem;
-  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   opacity: 1;
   transform: scale(1);
 }
@@ -141,18 +134,19 @@
 .latest-news-card a {
   text-decoration: none;
 }
+.latest-news-img-wrap {
+  overflow: hidden;
+}
 .latest-news-image {
   width: 100%;
   height: 13.75rem;
   object-fit: cover;
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.55s ease;
 }
-.latest-news-card .latest-news-image.is-revealed {
-  transition: height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.45s ease;
-}
-.latest-news-card:hover .latest-news-image.is-revealed,
-.latest-news-card:focus-within .latest-news-image.is-revealed {
-  transform: scale(1.08);
+.latest-news-card:hover .latest-news-image,
+.latest-news-card:focus-within .latest-news-image {
+  transform: scale(1.07);
 }
 .latest-news-slide.active .latest-news-image {
   height: 31.25rem;
