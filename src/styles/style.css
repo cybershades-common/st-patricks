@@ -21,6 +21,11 @@ video {
   max-width: 100%;
   object-fit: cover;
 }
+.batch-item--clip-js:not(.disable-clip) {
+  --clip-value: 100%;
+  -webkit-clip-path: inset(0 0 var(--clip-value) 0);
+  clip-path: inset(0 0 var(--clip-value) 0);
+}
 [data-gsap="image-fade-in"] {
   opacity: 0;
   visibility: hidden;

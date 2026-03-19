@@ -437,33 +437,36 @@ class GSAPAnimations {
           elements.forEach(el => this.animateSingle(el, animation, cfg));
       }
     } catch (err) {
-      // Animation error with stagger
+
     }
   }
 
-  // Direct children that don't have their own data-gsap (avoids double-animating)
+
   animChildren(el) {
     if (!el?.children?.length) return null;
     const kids = [...el.children].filter(c => !c.hasAttribute('data-gsap'));
     return kids.length ? kids : null;
   }
 
-  // Marks revealed state used by hover CSS and clears GSAP inline styles that can block hover transforms.
-  finalizeClipReveal(target) {
+
+  finalizeClipReveal(target, opts = {}) {
+    const addDisableClip = !!opts.addDisableClip;
     const nodes = Array.isArray(target) ? target : [target];
     nodes.forEach(node => {
       if (!node) return;
 
       node.classList.add('is-revealed');
+      if (addDisableClip) node.classList.add('disable-clip');
 
       const revealCard = node.closest?.('.about-nav-card, .latest-news-list-card, .latest-news-card');
       if (revealCard) revealCard.classList.add('is-revealed');
 
+      node.style.removeProperty('--clip-value');
       node.style.removeProperty('transform');
       node.style.removeProperty('clip-path');
       node.style.removeProperty('-webkit-clip-path');
       node.style.removeProperty('will-change');
-      gsap.set(node, { clearProps: 'clipPath,webkitClipPath,willChange,transform' });
+      gsap.set(node, { clearProps: '--clip-value,clipPath,webkitClipPath,willChange,transform' });
     });
   }
 
@@ -1004,20 +1007,24 @@ class GSAPAnimations {
     const kids = this.animChildren(el);
     const target = kids && cfg.stagger ? kids : el;
     const stagger = kids && cfg.stagger ? cfg.stagger : 0;
-    const hidden = 'inset(0 0 100% 0)';
-    const shown = 'inset(0 0 0%   0)';
 
-    gsap.set(target, { clipPath: hidden, webkitClipPath: hidden, willChange: 'clip-path', force3D: true });
+    const targets = Array.isArray(target) ? target : [target];
+    targets.forEach(node => {
+      node.classList.add('batch-item--clip-js');
+      node.classList.remove('disable-clip');
+    });
+
+    gsap.set(target, { '--clip-value': '100%', willChange: 'clip-path', force3D: true });
     gsap.to(target, {
-      clipPath: shown, webkitClipPath: shown,
-      duration: cfg.duration || 1,
-      ease: cfg.ease || 'power2.out',
+      '--clip-value': '0%',
+      duration: cfg.duration || 1.1,
+      ease: cfg.ease || 'power3.out',
       delay: cfg.delay,
       stagger,
       force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
-        this.finalizeClipReveal(target);
+        this.finalizeClipReveal(target, { addDisableClip: true });
       }
     });
   }

@@ -27,6 +27,12 @@ video {
   object-fit: cover;
 }
 
+.batch-item--clip-js:not(.disable-clip) {
+  --clip-value: 100%;
+  -webkit-clip-path: inset(0 0 var(--clip-value) 0);
+  clip-path: inset(0 0 var(--clip-value) 0);
+}
+
 // Prevent flash before GSAP initializes image reveal
 [data-gsap="image-fade-in"] {
   opacity: 0;
@@ -172,6 +178,4 @@ a[href^="tel"] {
 @import "_cta";
 @import "_footer";
 @import "_responsive";
-
-
 
