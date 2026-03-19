@@ -124,13 +124,11 @@ a[href^="tel"] {
 .two-column-cta .image-wrap img {
   display: block;
   width: 100%;
-}
-.two-column-cta .image-wrap img.is-revealed {
   transition: transform 0.45s ease;
 }
-.two-column-cta a:hover .image-wrap img.is-revealed,
-.two-column-cta .image-wrap:hover img.is-revealed,
-.two-column-cta a:focus-within .image-wrap img.is-revealed {
+.two-column-cta a:hover .image-wrap img,
+.two-column-cta .image-wrap:hover img,
+.two-column-cta a:focus-within .image-wrap img {
   transform: scale(1.04);
 }
 .two-column-cta a h4 {

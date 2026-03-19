@@ -448,6 +448,25 @@ class GSAPAnimations {
     return kids.length ? kids : null;
   }
 
+  // Marks revealed state used by hover CSS and clears GSAP inline styles that can block hover transforms.
+  finalizeClipReveal(target) {
+    const nodes = Array.isArray(target) ? target : [target];
+    nodes.forEach(node => {
+      if (!node) return;
+
+      node.classList.add('is-revealed');
+
+      const revealCard = node.closest?.('.about-nav-card, .latest-news-list-card, .latest-news-card');
+      if (revealCard) revealCard.classList.add('is-revealed');
+
+      node.style.removeProperty('transform');
+      node.style.removeProperty('clip-path');
+      node.style.removeProperty('-webkit-clip-path');
+      node.style.removeProperty('will-change');
+      gsap.set(node, { clearProps: 'clipPath,webkitClipPath,willChange,transform' });
+    });
+  }
+
   // Detects rendered text lines by measuring word positions.
   // Returns array of <span class="gsap-line"> block wrappers.
   splitLines(el) {
@@ -998,9 +1017,7 @@ class GSAPAnimations {
       force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
-        (Array.isArray(target) ? target : [target]).forEach(e =>
-          gsap.set(e, { clearProps: 'clipPath,webkitClipPath,willChange' })
-        );
+        this.finalizeClipReveal(target);
       }
     });
   }
@@ -1025,9 +1042,7 @@ class GSAPAnimations {
       force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
-        (Array.isArray(target) ? target : [target]).forEach(e =>
-          gsap.set(e, { clearProps: 'will-change' })
-        );
+        this.finalizeClipReveal(target);
       }
     });
   }
@@ -1052,9 +1067,7 @@ class GSAPAnimations {
       force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
-        (Array.isArray(target) ? target : [target]).forEach(e =>
-          gsap.set(e, { clearProps: 'will-change' })
-        );
+        this.finalizeClipReveal(target);
       }
     });
   }
@@ -1079,9 +1092,7 @@ class GSAPAnimations {
       force3D: true,
       scrollTrigger: this.triggerCfg(el, cfg),
       onComplete: () => {
-        (Array.isArray(target) ? target : [target]).forEach(e =>
-          gsap.set(e, { clearProps: 'will-change' })
-        );
+        this.finalizeClipReveal(target);
       }
     });
   }

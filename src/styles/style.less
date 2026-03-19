@@ -127,15 +127,12 @@ a[href^="tel"] {
   .image-wrap img {
     display: block;
     width: 100%;
-  }
-
-  .image-wrap img.is-revealed {
     transition: transform 0.45s ease;
   }
 
-  a:hover .image-wrap img.is-revealed,
-  .image-wrap:hover img.is-revealed,
-  a:focus-within .image-wrap img.is-revealed {
+  a:hover .image-wrap img,
+  .image-wrap:hover img,
+  a:focus-within .image-wrap img {
     transform: scale(1.04);
   }
 
