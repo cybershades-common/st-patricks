@@ -2,6 +2,9 @@
   html {
     font-size: 14px;
   }
+  html .strategic-section > img.full {
+    max-height: 100vh;
+  }
 }
 @media (min-width: 1201px) and (max-width: 1229px) {
   .hero .hero-title {
