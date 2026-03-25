@@ -34,8 +34,20 @@
 @media (min-width: 992px) and (max-width: 1300px) {
   html {
     font-size: 14px;
-    .strategic-section > img.full{
-      max-height: 100vh;  
+    .strategic-section > img.full {
+      max-height: 100vh;
+    }
+    .cocurricular-section {
+       min-height: auto;
+      .container-fluid {
+        min-height: auto;
+        >.row{
+          height:80vh;
+          .cocurricular-left h2{
+            font-size: 3rem;
+          }
+        }
+      }
     }
   }
 }

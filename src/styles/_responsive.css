@@ -5,6 +5,18 @@
   html .strategic-section > img.full {
     max-height: 100vh;
   }
+  html .cocurricular-section {
+    min-height: auto;
+  }
+  html .cocurricular-section .container-fluid {
+    min-height: auto;
+  }
+  html .cocurricular-section .container-fluid > .row {
+    height: 80vh;
+  }
+  html .cocurricular-section .container-fluid > .row .cocurricular-left h2 {
+    font-size: 3rem;
+  }
 }
 @media (min-width: 1201px) and (max-width: 1229px) {
   .hero .hero-title {
