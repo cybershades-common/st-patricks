@@ -6621,6 +6621,13 @@ body:has(.internal-content-single) .hero-internal-title {
   html .cocurricular-section .container-fluid > .row .cocurricular-left h2 {
     font-size: 3rem;
   }
+  html .testimonials-text-col,
+  html .testimonials-image-wrapper {
+    height: 25rem;
+  }
+  html .testimonials-slide-content p:first-child {
+    font-size: 2.5rem;
+  }
 }
 @media (min-width: 1201px) and (max-width: 1229px) {
   .hero .hero-title {
