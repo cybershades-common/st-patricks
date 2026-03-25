@@ -84,7 +84,7 @@
   padding: 0;
   cursor: pointer;
   color: var(--basic-black);
-  transition: all 0.3s ease;
+  transition: color 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 .latest-news-arrow-btn:hover {
   color: var(--primary-blue);
@@ -93,6 +93,9 @@
 .latest-news-arrow-btn svg {
   width: 100%;
   height: 100%;
+}
+.latest-news-arrow-btn.latest-news-prev svg {
+  transform: rotate(180deg);
 }
 .latest-news-slider {
   position: relative;
@@ -118,7 +121,6 @@
 .latest-news-slide.active {
   width: 42.5rem;
 }
-
 .latest-news-slide--hidden {
   display: none;
 }
@@ -141,8 +143,7 @@
   width: 100%;
   height: 13.75rem;
   object-fit: cover;
-  transition: height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.55s ease;
+  transition: height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.55s ease;
 }
 .latest-news-card:hover .latest-news-image,
 .latest-news-card:focus-within .latest-news-image {
@@ -157,7 +158,7 @@
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .latest-news-card-content h3 {
-  color: var(--primary-blue, #10069F);
+  color: var(--primary-blue, #10069f);
   leading-trim: both;
   text-edge: cap;
   font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
@@ -168,7 +169,7 @@
   /* 1.75rem */
 }
 .latest-news-slide.active .latest-news-card-content h3 {
-  color: var(--primary-blue, #10069F);
+  color: var(--primary-blue, #10069f);
   leading-trim: both;
   text-edge: cap;
   font-family: var(--font-family-helvetica-neue, "Helvetica Neue LT Pro");
@@ -210,7 +211,6 @@
   }
   .latest-news-buttons {
     gap: var(--spacing-xs);
-    flex-wrap: inherit;
   }
   .latest-news-filters-row {
     margin-bottom: var(--spacing-small);
@@ -242,7 +242,8 @@
   }
   .latest-news-image,
   .latest-news-slide.active .latest-news-image {
-    height: 18.75rem;
+    height: auto;
+    aspect-ratio: 1;
   }
   .latest-news-card-content,
   .latest-news-slide.active .latest-news-card-content {
