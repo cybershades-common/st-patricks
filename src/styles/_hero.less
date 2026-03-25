@@ -7,7 +7,7 @@
   overflow: hidden;
 
   .hero-content-wrap {
-    height: 675px;
+    height: 635px;
     display: flex;
     align-items: flex-end;
     padding-bottom: 0;
@@ -173,7 +173,7 @@
   .hero {
     .hero-content-wrap {
       // Keep large-screen look while preventing oversized hero on mid/small desktops.
-      height: clamp(34.5rem, 46vw, 42.1875rem);
+      //  height: clamp(34.5rem, 46vw, 42.1875rem);
     }
   }
 }
@@ -194,6 +194,15 @@
         width: 20.75rem;
         height: 26.75rem;
       }
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+  .hero {
+    .hero-content-wrap {
+      height: 635px;
+      max-height:88vh;
     }
   }
 }

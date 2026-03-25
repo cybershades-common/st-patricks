@@ -895,3 +895,18 @@
     max-height: 100vh;
   }
 }
+.header .logo a {
+  display: inline-flex;
+}
+.header .logo object,
+.header .logo img {
+  pointer-events: none;
+}
+.header .left-block .btn.btn-white:hover {
+  border-color: var(--basic-white);
+  color: var(--primary-navy);
+  background: var(--basic-white);
+}
+.breadcrumb-wrap .breadcrumb li + li:before {
+  font-family: var(--fa-family-classic);
+}
