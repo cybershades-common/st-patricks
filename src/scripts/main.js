@@ -1288,7 +1288,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initGradientCircleFades();
 
-    // Footer gradient - rise up from below when footer enters
+    // Footer gradient - fade in when the footer enters view
     function initFooterGradientFade() {
         const footerGradient = document.querySelector('.footer-gradient');
         const footer = document.querySelector('footer.footer');
@@ -1297,15 +1297,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isMobile()) return; // visible via CSS on mobile, no GSAP needed
 
         gsap.set(footerGradient, {
-            autoAlpha: 0,
-            y: 300, // Start below, out of view
-            scale: 0.7 // Start smaller
+            autoAlpha: 0
         });
         gsap.to(footerGradient, {
             autoAlpha: 1,
-            y: 0, // Rise to final position
-            scale: 1, // Grow to full size
-            duration: 1.5, // Faster for more noticeable entrance
+            duration: 1.2,
             ease: 'power2.out',
             scrollTrigger: {
                 trigger: footer,
@@ -2187,80 +2183,154 @@ document.addEventListener('DOMContentLoaded', function () {
     // Footer marquee - JS driven, seamless infinite loop
     function initFooterMarquee() {
         const marquee = document.querySelector('.footer-large-text');
-        if (!marquee) return;
+        if (!marquee || marquee.dataset.marqueeInitialized === 'true') return;
 
         const original = marquee.querySelector('h1');
         if (!original) return;
 
-        const isMobile = window.innerWidth <= 991;
-        const durationAttr = (isMobile && marquee.getAttribute('data-marquee-duration-mobile'))
-            || marquee.getAttribute('data-marquee-duration');
-        let duration = parseFloat(durationAttr) || 10;
+        marquee.dataset.marqueeInitialized = 'true';
 
-        const track = document.createElement('div');
-        track.className = 'footer-marquee-track';
-        track.style.display = 'inline-flex';
-        track.style.willChange = 'transform';
-        track.style.whiteSpace = 'nowrap';
-
-        const item = original;
-        item.classList.add('footer-marquee-item');
-        item.style.display = 'inline-block';
-        item.style.whiteSpace = 'nowrap';
-
-        track.appendChild(item);
-        const clone = item.cloneNode(true);
-        clone.style.display = 'inline-block';
-        clone.style.whiteSpace = 'nowrap';
-        track.appendChild(clone);
-
-        marquee.innerHTML = '';
-        marquee.appendChild(track);
-
-        let itemWidth = 1;
-        let position = 0;
-
-        const measure = () => {
-            itemWidth = item.getBoundingClientRect().width;
-            if (itemWidth === 0) itemWidth = 1;
-        };
-
-        measure();
-
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                const isMobileNow = window.innerWidth <= 991;
-                const durationAttrNow = (isMobileNow && marquee.getAttribute('data-marquee-duration-mobile'))
+        const setup = () => {
+            const readDuration = () => {
+                const isMobileViewport = window.innerWidth <= 991;
+                const durationAttr = (isMobileViewport && marquee.getAttribute('data-marquee-duration-mobile'))
                     || marquee.getAttribute('data-marquee-duration');
-                const parsed = parseFloat(durationAttrNow);
-                if (!Number.isNaN(parsed) && parsed > 0) {
-                    duration = parsed;
+                const parsed = parseFloat(durationAttr);
+                return !Number.isNaN(parsed) && parsed > 0 ? parsed : 10;
+            };
+
+            let duration = readDuration();
+
+            const track = document.createElement('div');
+            track.className = 'footer-marquee-track';
+
+            const item = original;
+            item.classList.add('footer-marquee-item');
+
+            track.appendChild(item);
+            const clone = item.cloneNode(true);
+            clone.classList.add('footer-marquee-item');
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+
+            marquee.replaceChildren(track);
+
+            let itemWidth = 1;
+            let position = 0;
+            let rafId = null;
+            let lastTime = 0;
+            let isInView = false;
+
+            const applyTransform = () => {
+                track.style.transform = `translate3d(${position}px, 0, 0)`;
+            };
+
+            const measure = () => {
+                const nextWidth = item.getBoundingClientRect().width;
+                if (!nextWidth) return;
+
+                const progress = itemWidth > 0 ? position / itemWidth : 0;
+                itemWidth = nextWidth;
+                position = progress * itemWidth;
+
+                while (position <= -itemWidth) {
+                    position += itemWidth;
                 }
-                measure();
-                position = position % itemWidth;
-            }, 100);
-        });
 
-        const speed = () => itemWidth / duration;
-        let lastTime = performance.now();
+                while (position > 0) {
+                    position -= itemWidth;
+                }
 
-        const tick = (now) => {
-            const delta = (now - lastTime) / 1000;
-            lastTime = now;
+                applyTransform();
+            };
 
-            position -= speed() * delta;
+            const stop = () => {
+                if (rafId === null) return;
+                cancelAnimationFrame(rafId);
+                rafId = null;
+                lastTime = 0;
+            };
 
-            while (position <= -itemWidth) {
-                position += itemWidth;
+            const speed = () => itemWidth / duration;
+
+            const tick = (now) => {
+                if (lastTime === 0) {
+                    lastTime = now;
+                }
+
+                const delta = (now - lastTime) / 1000;
+                lastTime = now;
+
+                position -= speed() * delta;
+
+                while (position <= -itemWidth) {
+                    position += itemWidth;
+                }
+
+                applyTransform();
+                rafId = requestAnimationFrame(tick);
+            };
+
+            const start = () => {
+                if (rafId !== null || document.hidden || !isInView) return;
+                lastTime = 0;
+                rafId = requestAnimationFrame(tick);
+            };
+
+            measure();
+
+            const footer = marquee.closest('footer') || marquee;
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    isInView = entries.some((entry) => entry.isIntersecting);
+
+                    if (isInView) {
+                        start();
+                        return;
+                    }
+
+                    stop();
+                }, {
+                    rootMargin: '200px 0px'
+                });
+
+                observer.observe(footer);
+            } else {
+                isInView = true;
+                start();
             }
 
-            track.style.transform = `translate3d(${position}px, 0, 0)`;
-            requestAnimationFrame(tick);
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stop();
+                    return;
+                }
+
+                start();
+            });
+
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    duration = readDuration();
+                    measure();
+                }, 100);
+            });
+
+            if (document.fonts && typeof document.fonts.addEventListener === 'function') {
+                document.fonts.addEventListener('loadingdone', measure);
+            } else {
+                window.addEventListener('load', measure, { once: true });
+            }
         };
 
-        requestAnimationFrame(tick);
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(setup);
+            return;
+        }
+
+        setup();
     }
 
     initFooterMarquee();
@@ -2382,8 +2452,6 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentY = 0;
         let hasMouseMoved = false;
         let isInFooter = false;
-        let frameCount = 0;
-
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
@@ -2434,19 +2502,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 targetX = Math.max(-CONFIG.maxLeft, Math.min(CONFIG.maxRight, deltaX * scale));
                 targetY = Math.max(0, Math.min(CONFIG.maxUp, moveUp * scale));
-
-                if (frameCount % 30 === 0) {
-                    footerGradient.style.opacity = isInFooter ? '1' : '0.8';
-                }
             }
 
             const currentEase = isInFooter ? CONFIG.followEase : CONFIG.returnEase;
             currentX += (targetX - currentX) * currentEase;
             currentY += (targetY - currentY) * currentEase;
 
-            footerGradient.style.transform = `translate(calc(-50% + ${currentX}px), ${-currentY}px)`;
+            footerGradient.style.setProperty('--gradient-offset-x', `${currentX}px`);
+            footerGradient.style.setProperty('--gradient-offset-y', `${-currentY}px`);
 
-            frameCount++;
             requestAnimationFrame(animate);
         }
 

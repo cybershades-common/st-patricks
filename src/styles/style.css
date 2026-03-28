@@ -6093,12 +6093,13 @@ body:has(.internal-content-single) .hero-internal-title {
   left: 50%;
   --gradient-offset-x: 0px;
   --gradient-offset-y: 0px;
-  transform: translate(calc(-50% + var(--gradient-offset-x)), var(--gradient-offset-y));
+  transform: translate3d(calc(-50% + var(--gradient-offset-x)), var(--gradient-offset-y), 0);
   width: 128.1875rem;
   height: 128.1875rem;
   border-radius: 50%;
   filter: blur(15.625rem);
   pointer-events: none;
+  will-change: transform, opacity;
   background: var(--primary-yellow-bright, #fff02a);
   opacity: 0;
   visibility: hidden;
