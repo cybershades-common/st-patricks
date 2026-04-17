@@ -1,0 +1,63 @@
+{
+  "files": {
+    "code": [
+      "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
+      "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
+      "D:\\Kailash\\st-patricks\\src\\scripts\\search-data.js"
+    ],
+    "document": [
+      "D:\\Kailash\\st-patricks\\AGENTS.md",
+      "D:\\Kailash\\st-patricks\\build notes.txt",
+      "D:\\Kailash\\st-patricks\\docs\\sticky-hero-scroll.md",
+      "D:\\Kailash\\st-patricks\\README.md",
+      "D:\\Kailash\\st-patricks\\Whole Page-build notes.txt"
+    ],
+    "paper": [],
+    "image": [
+      "D:\\Kailash\\st-patricks\\assets\\icons\\brand-logo-header.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\Crest-logo.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\dropdown-icon.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\EREA Australia Logo Colour.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\fevicon-logo.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\hamburger-line.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\header-search-icon.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\IBSC-Logo.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\Logo Centenary.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\Logo Old Boys.svg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\menu-image.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\icons\\profile-icon.svg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\about-image.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\about-menu.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\arrow-icon.svg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\cocurricular-bg.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\contact-form-image.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\CTA.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\Entry Point Card-1.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\Entry Point Card.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\hero-image.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\history.webp",
+      "D:\\Kailash\\st-patricks\\assets\\images\\m2.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\m3.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\m4.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\menu-image.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\news-1.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\news-2.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\news-3.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\parents-community-bg.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\social-media-image.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\strategic-bg-1.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\testimonial-1.jpg",
+      "D:\\Kailash\\st-patricks\\assets\\images\\Tie.png",
+      "D:\\Kailash\\st-patricks\\screenshots\\Image.jpg"
+    ],
+    "video": [
+      "D:\\Kailash\\st-patricks\\assets\\videos\\hero-vid.mp4"
+    ]
+  },
+  "total_files": 44,
+  "total_words": 138021,
+  "needs_graph": true,
+  "warning": null,
+  "skipped_sensitive": [],
+  "graphifyignore_patterns": 0
+}

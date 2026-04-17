@@ -1,0 +1,8 @@
+{
+  "runtime": "typescript",
+  "version": "0.3.28",
+  "node": "C:\\Program Files\\nodejs\\node.exe",
+  "script": "C:\\Users\\shivd\\AppData\\Roaming\\npm\\node_modules\\graphifyy\\dist\\skill-runtime.js",
+  "module": "C:\\Users\\shivd\\AppData\\Roaming\\npm\\node_modules\\graphifyy\\dist\\index.js",
+  "cli": "C:\\Users\\shivd\\AppData\\Roaming\\npm\\node_modules\\graphifyy\\dist\\cli.js"
+}

@@ -1,0 +1,237 @@
+{
+  "communities": {
+    "0": [
+      "main",
+      "main_getexpandedrightblockmaxwidth",
+      "main_initcocurricularslider",
+      "main_initcontactcardsanimation",
+      "main_initcontactformdropdowns",
+      "main_initdropdownanimations",
+      "main_initfootergradientcursoreffect",
+      "main_initfootermarquee",
+      "main_initgradientcirclefades",
+      "main_initgradientcursoreffect",
+      "main_initheaderanimations",
+      "main_initheroanimations",
+      "main_initlatestnewsslider",
+      "main_initnewsdetailheronavigationreveal",
+      "main_initsectiongradientfades",
+      "main_initslides",
+      "main_initstatsanimation",
+      "main_inittestimonialsgradientcursoreffect",
+      "main_revealbooktourbutton",
+      "main_startvideoplayback",
+      "main_updateheaderonscroll",
+      "main_wrapsentences"
+    ],
+    "1": [
+      "animations",
+      "animations_gsapanimations",
+      "animations_gsapanimations_animatemultiple",
+      "animations_gsapanimations_btnclipreveal",
+      "animations_gsapanimations_cardrowclipbottom",
+      "animations_gsapanimations_finalizeclipreveal",
+      "animations_gsapanimations_isheroelement",
+      "animations_gsapanimations_linesanimation",
+      "animations_gsapanimations_linesscrub",
+      "animations_gsapanimations_maskedword",
+      "animations_gsapanimations_slideright",
+      "animations_gsapanimations_splitlines"
+    ],
+    "2": [
+      "animations_gsapanimations_animchildren",
+      "animations_gsapanimations_fadein",
+      "animations_gsapanimations_fadeup",
+      "animations_gsapanimations_imageclipbottom",
+      "animations_gsapanimations_imageclipleft",
+      "animations_gsapanimations_imageclipright",
+      "animations_gsapanimations_imagecliptop",
+      "animations_gsapanimations_imagefadein",
+      "animations_gsapanimations_slideleft",
+      "animations_gsapanimations_triggercfg",
+      "animations_gsapanimations_writingtext",
+      "animations_gsapanimations_zoomin"
+    ],
+    "3": [
+      "animations_gsapanimations_animatesingle",
+      "animations_gsapanimations_cardrowcliptop",
+      "animations_gsapanimations_cardrowstagger",
+      "animations_gsapanimations_maskedtitle",
+      "animations_gsapanimations_parallaxbg",
+      "animations_gsapanimations_wordreveal"
+    ],
+    "4": [
+      "main_gotoslide",
+      "main_initlatestnewsheroslider",
+      "main_nextslide",
+      "main_prevslide",
+      "main_updatenavstate"
+    ],
+    "5": [
+      "animations_gsapanimations_constructor",
+      "animations_gsapanimations_init",
+      "animations_gsapanimations_setupanimations",
+      "animations_gsapanimations_setupsectionanimations"
+    ],
+    "6": [
+      "main_animatemenutext",
+      "main_openmenu",
+      "main_setactivemenuitem",
+      "main_setsearchoverlayvisibility"
+    ],
+    "7": [
+      "main_closemenu",
+      "main_initfootergradientfade",
+      "main_initmobilemenu",
+      "main_ismobile"
+    ],
+    "8": [
+      "main_getmenudirection",
+      "main_setactivesubgroup",
+      "main_setmenuimage",
+      "main_updatemenuforkey"
+    ],
+    "9": [
+      "main_initaboutreveal",
+      "main_wrapwords"
+    ],
+    "10": [
+      "main_initsearch",
+      "main_livesearch"
+    ],
+    "11": [
+      "search_data"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09,
+    "1": 0.27,
+    "2": 0.27,
+    "3": 0.33,
+    "4": 0.4,
+    "5": 0.5,
+    "6": 0.5,
+    "7": 0.5,
+    "8": 0.5,
+    "9": 1,
+    "10": 1,
+    "11": 1
+  },
+  "gods": [
+    {
+      "id": "main",
+      "label": "main.js",
+      "edges": 42
+    },
+    {
+      "id": "animations_gsapanimations",
+      "label": "GSAPAnimations",
+      "edges": 33
+    },
+    {
+      "id": "main_openmenu",
+      "label": "openMenu()",
+      "edges": 6
+    },
+    {
+      "id": "main_ismobile",
+      "label": "isMobile()",
+      "edges": 5
+    },
+    {
+      "id": "main_updatemenuforkey",
+      "label": "updateMenuForKey()",
+      "edges": 5
+    },
+    {
+      "id": "main_gotoslide",
+      "label": "goToSlide()",
+      "edges": 4
+    },
+    {
+      "id": "main_updatenavstate",
+      "label": "updateNavState()",
+      "edges": 3
+    },
+    {
+      "id": "main_animatemenutext",
+      "label": "animateMenuText()",
+      "edges": 2
+    },
+    {
+      "id": "main_getmenudirection",
+      "label": "getMenuDirection()",
+      "edges": 2
+    },
+    {
+      "id": "main_setmenuimage",
+      "label": "setMenuImage()",
+      "edges": 2
+    }
+  ],
+  "surprises": [
+    {
+      "source": "openMenu()",
+      "target": "updateMenuForKey()",
+      "source_files": [
+        "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
+        "D:\\Kailash\\st-patricks\\src\\scripts\\main.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 6 → community 8"
+    },
+    {
+      "source": "openMenu()",
+      "target": "isMobile()",
+      "source_files": [
+        "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
+        "D:\\Kailash\\st-patricks\\src\\scripts\\main.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 6 → community 7"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `main.js` connect `Community 0` to `Community 6`, `Community 7`, `Community 8`, `Community 9`, `Community 4`, `Community 10`?",
+      "why": "High betweenness centrality (0.284) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `GSAPAnimations` connect `Community 1` to `Community 5`, `Community 2`, `Community 3`?",
+      "why": "High betweenness centrality (0.116) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `openMenu()` connect `Community 6` to `Community 0`, `Community 8`, `Community 7`?",
+      "why": "High betweenness centrality (0.002) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `animations.js`, `search-data.js` to the rest of the system?",
+      "why": "2 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09 - nodes in this community are weakly interconnected."
+    }
+  ],
+  "labels": {
+    "0": "Community 0",
+    "1": "Community 1",
+    "2": "Community 2",
+    "3": "Community 3",
+    "4": "Community 4",
+    "5": "Community 5",
+    "6": "Community 6",
+    "7": "Community 7",
+    "8": "Community 8",
+    "9": "Community 9",
+    "10": "Community 10",
+    "11": "Community 11"
+  }
+}
