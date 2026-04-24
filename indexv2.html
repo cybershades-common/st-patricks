@@ -101,14 +101,17 @@
         }
 
         .loader-text {
-            max-width: 560px;
+            max-width: 620px;
             margin: 1.8rem auto 0;
-            font-family: "DM Mono", monospace;
-            font-size: clamp(0.62rem, 1vw, 0.78rem);
-            line-height: 1.85;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--loader-muted);
+            font-family: var(--font-family-helvetica-neue);
+            font-size: var(--font-size-b1);
+            font-weight: var(--font-weight-light);
+            line-height: var(--line-height-b1);
+            letter-spacing: 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.88);
+            text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+            text-wrap: pretty;
             opacity: 0;
             transform: translateY(1rem);
             animation: textIn 0.9s ease 1.35s forwards;
@@ -173,7 +176,7 @@
             }
 
             .loader-text {
-                max-width: 310px;
+                max-width: 88vw;
             }
         }
     </style>
