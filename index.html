@@ -18,9 +18,133 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="src/styles/style.css">
+    <style>
+        :root {
+            --spc-loader-flame: #fff02a;
+            --spc-loader-cream-1: #fff56b;
+            --spc-loader-cream-2: #fde98a;
+            --spc-loader-cream-3: #f7efb8;
+            --spc-loader-cream-4: #faf3c4;
+            --spc-loader-cream-5: #fbf6d8;
+        }
+
+        body.is-loading {
+            overflow: hidden;
+        }
+
+        .spc-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--spc-loader-cream-5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 99999;
+            will-change: transform;
+        }
+
+        .spc-loader__sky {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .spc-loader__sunlight {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 260%;
+            height: 260%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle at 50% 50%,
+                    var(--spc-loader-flame) 0%,
+                    var(--spc-loader-cream-1) 14%,
+                    var(--spc-loader-cream-2) 28%,
+                    var(--spc-loader-cream-3) 48%,
+                    var(--spc-loader-cream-4) 68%,
+                    var(--spc-loader-cream-5) 92%);
+        }
+
+        .spc-loader__sun-wrap {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 360px;
+            height: 360px;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spc-loader__sun-halo,
+        .spc-loader__sun-core {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+        }
+
+        .spc-loader__sun-halo {
+            inset: -60%;
+            background: radial-gradient(circle, rgba(255, 240, 42, .25) 0%, rgba(255, 240, 42, .1) 35%, transparent 65%);
+            filter: blur(30px);
+        }
+
+        .spc-loader__sun-core {
+            background: radial-gradient(circle, var(--spc-loader-flame) 0%, #fff02add 45%, rgba(255, 240, 42, .4) 75%, transparent 100%);
+            filter: blur(6px);
+        }
+
+        .spc-loader__logo {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, calc(-50% - 20px));
+            z-index: 5;
+            width: 160px;
+            height: 200px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
+            opacity: 0;
+        }
+
+        .spc-loader__text {
+            position: absolute;
+            left: 50%;
+            bottom: 100px;
+            transform: translateX(-50%);
+            width: min(900px, 86vw);
+            margin: 0;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.7;
+            font-weight: 400;
+            color: #2a2a2a;
+            letter-spacing: .01em;
+            text-wrap: pretty;
+            opacity: 0;
+            z-index: 5;
+        }
+    </style>
 </head>
 
-<body>
+<body class="is-loading">
+    <div class="spc-loader" id="spcLoader" aria-hidden="true">
+        <div class="spc-loader__sky" id="spcLoaderSky">
+            <div class="spc-loader__sunlight"></div>
+            <div class="spc-loader__sun-wrap">
+                <div class="spc-loader__sun-halo"></div>
+                <div class="spc-loader__sun-core"></div>
+            </div>
+        </div>
+        <img class="spc-loader__logo" id="spcLoaderLogo" src="assets/icons/Crest-logo.svg" alt="">
+        <p class="spc-loader__text" id="spcLoaderText">We acknowledge the Traditional Custodians of the land on which St Patrick's College stands, the Wangal clan of the Darug People. We pay our respects to Elders past and present, and recognise their enduring connection to Country. As a College community, we are committed to listening, learning and walking together with First Nations peoples in a spirit of respect, justice and reconciliation.</p>
+    </div>
 
     <div class="wrapper">
 
@@ -1546,7 +1670,77 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        function spcRevealPage() {
+            var loader = document.getElementById('spcLoader');
+            if (!loader) return;
+            if (window.gsap) {
+                window.gsap.to(loader, {
+                    yPercent: -100,
+                    duration: 1.2,
+                    ease: 'power3.inOut',
+                    onComplete: function () {
+                        loader.remove();
+                        document.body.classList.remove('is-loading');
+                    }
+                });
+                return;
+            }
+
+            loader.style.transition = 'transform 1.2s ease-in-out';
+            loader.style.transform = 'translateY(-100%)';
+            setTimeout(function () {
+                loader.remove();
+                document.body.classList.remove('is-loading');
+            }, 1250);
+        }
+
+        function spcRunLoaderArc() {
+            var W = window.innerWidth;
+            var H = window.innerHeight;
+            var startX = -W * 0.15;
+            var startY = H * 1.15;
+            var midX = W * 0.32;
+            var midY = H * 0.15;
+            var endX = W * 0.55;
+            var endY = -H * 0.25;
+
+            window.gsap.set('#spcLoaderSky', { x: startX - W / 2, y: startY - H / 2 });
+            return window.gsap.to('#spcLoaderSky', {
+                duration: 5,
+                ease: 'power1.inOut',
+                motionPath: {
+                    path: [
+                        { x: startX - W / 2, y: startY - H / 2 },
+                        { x: midX - W / 2, y: midY - H / 2 },
+                        { x: endX - W / 2, y: endY - H / 2 }
+                    ],
+                    curviness: 1.5
+                }
+            });
+        }
+
+        window.addEventListener('load', function () {
+            var hasGsap = typeof window.gsap !== 'undefined';
+            var hasMotionPath = typeof window.MotionPathPlugin !== 'undefined';
+
+            if (!hasGsap || !hasMotionPath) {
+                spcRevealPage();
+                return;
+            }
+
+            window.gsap.registerPlugin(window.MotionPathPlugin);
+            window.gsap.timeline()
+                .to('#spcLoaderLogo', { opacity: 1, duration: 1.6, ease: 'power2.out' })
+                .to('#spcLoaderText', { opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.4');
+
+            var arc = spcRunLoaderArc();
+            arc.eventCallback('onComplete', spcRevealPage);
+        });
+    </script>
 
     <script defer src="src/scripts/animations.js"></script>
     <script defer src="src/scripts/search-data.js"></script>

@@ -1,7 +1,7 @@
-# Graph Report - D:\Kailash\st-patricks  (2026-04-17)
+# Graph Report - .  (2026-04-24)
 
 ## Corpus Check
-- 45 files · ~1,38,549 words
+- 3 files · ~0 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
