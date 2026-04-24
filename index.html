@@ -77,8 +77,8 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 520px;
-            height: 520px;
+            width: 598px;
+            height: 598px;
             transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
@@ -95,12 +95,12 @@
         .spc-loader__sun-halo {
             inset: -60%;
             background: radial-gradient(circle, rgba(255, 240, 42, .3) 0%, rgba(255, 240, 42, .12) 40%, transparent 70%);
-            filter: blur(30px);
+            filter: blur(48px);
         }
 
         .spc-loader__sun-core {
             background: radial-gradient(circle, var(--spc-loader-flame) 0%, #fff02add 40%, rgba(255, 240, 42, .3) 65%, transparent 100%);
-            filter: blur(12px);
+            filter: blur(22px);
         }
 
         .spc-loader__logo-outer {
@@ -112,15 +112,6 @@
             opacity: 0;
         }
 
-        @keyframes spcLogoBreathe {
-            0%, 100% { transform: scale(0.98); }
-            50%       { transform: scale(1.06); }
-        }
-
-        .spc-loader__logo-breathe {
-            animation: spcLogoBreathe 3.2s ease-in-out infinite;
-            will-change: transform;
-        }
 
         .spc-loader__logo {
             width: 160px;
@@ -137,11 +128,11 @@
             }
 
             .spc-loader__sun-halo {
-                filter: blur(16px);
+                filter: blur(28px);
             }
 
             .spc-loader__sun-core {
-                filter: blur(6px);
+                filter: blur(12px);
             }
 
             .spc-loader__logo-outer {
@@ -1768,7 +1759,7 @@
 
             window.gsap.set('#spcLoaderSky', { visibility: 'visible', x: startX - W / 2, y: startY - H / 2 });
             return window.gsap.to('#spcLoaderSky', {
-                duration: 8,
+                duration: 5.5,
                 ease: 'power1.inOut',
                 motionPath: {
                     path: [
@@ -1794,12 +1785,12 @@
             window.gsap.registerPlugin(window.MotionPathPlugin);
 
             // Initial states
-            window.gsap.set('#spcLoaderLogo', { autoAlpha: 0 });
+            window.gsap.set('#spcLoaderLogo', { autoAlpha: 0, filter: 'blur(18px)' });
             window.gsap.set('#spcLoaderText', { y: 16, autoAlpha: 0 });
 
             window.gsap.timeline()
-                // 1. Logo fades in — breathing CSS handles the heartbeat
-                .to('#spcLoaderLogo', { autoAlpha: 1, duration: 1.2, ease: 'power2.out' })
+                // 1. Logo blurs in
+                .to('#spcLoaderLogo', { autoAlpha: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power3.out' })
                 // 2. Text fades up
                 .to('#spcLoaderText', { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '+=0.15')
                 // 3. Sun rises
