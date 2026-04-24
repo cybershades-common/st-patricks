@@ -52,6 +52,7 @@
             height: 100%;
             pointer-events: none;
             will-change: transform;
+            visibility: hidden;
         }
 
         .spc-loader__sunlight {
@@ -1738,6 +1739,20 @@
                 }
             });
         }
+
+        function spcPrepositionSky() {
+            var sky = document.getElementById('spcLoaderSky');
+            if (!sky) return;
+            var W = window.innerWidth;
+            var H = window.innerHeight;
+            var startX = -W * 0.15;
+            var startY = H * 1.15;
+            sky.style.transform = 'translate(' + (startX - W / 2) + 'px, ' + (startY - H / 2) + 'px)';
+            sky.style.visibility = 'visible';
+        }
+
+        // Pre-position immediately to avoid center flicker before GSAP kicks in.
+        spcPrepositionSky();
 
         window.addEventListener('load', function () {
             var hasGsap = typeof window.gsap !== 'undefined';
