@@ -177,10 +177,29 @@
 
         .spc-loader--animate .spc-loader__logo {
             animation: spcLoaderLogoIn 1.2s cubic-bezier(.22, .61, .36, 1) 0.45s both;
+            opacity: 1;
+            transform: scale(1);
         }
 
         .spc-loader--animate .spc-loader__text {
             animation: spcLoaderTextIn 0.95s cubic-bezier(.22, .61, .36, 1) 0.95s both;
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .spc-loader--exiting .spc-loader__logo,
+        .spc-loader--exiting .spc-loader__text {
+            animation: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        .spc-loader--exiting .spc-loader__logo {
+            transform: scale(1) !important;
+        }
+
+        .spc-loader--exiting .spc-loader__text {
+            transform: translate(-50%, 0) !important;
         }
 
         @media (max-width: 991px) {
@@ -1794,6 +1813,7 @@
             window.dispatchEvent(new CustomEvent('spc-loader-done'));
             var loader = document.getElementById('spcLoader');
             if (!loader) return;
+            loader.classList.add('spc-loader--exiting');
             if (window.gsap) {
                 window.gsap.to(loader, {
                     yPercent: -100,
