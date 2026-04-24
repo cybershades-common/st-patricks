@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } window.scrollTo(0, 0);</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St Patrick's College</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icons/fevicon-logo.svg">
+
+    <!-- Preload critical fonts for faster loading -->
+    <link rel="preload" href="assets/fonts/HelveticaNeueLTProLt.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/HelveticaNeueLTProRoman.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/style.css">
+    <style>
+        :root {
+            --spc-loader-flame: #fff02a;
+            --spc-loader-cream-1: #fff56b;
+            --spc-loader-cream-2: #fde98a;
+            --spc-loader-cream-3: #f7efb8;
+            --spc-loader-cream-4: #faf3c4;
+            --spc-loader-cream-5: #fbf6d8;
+        }
+
+        body.is-loading {
+            overflow: hidden;
+        }
+
+        .spc-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--spc-loader-cream-5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 99999;
+            will-change: transform;
+        }
+
+        .spc-loader__sky {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            will-change: transform;
+            visibility: hidden;
+        }
+
+        .spc-loader__sunlight {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 260%;
+            height: 260%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 50%,
+                    var(--spc-loader-flame) 0%,
+                    var(--spc-loader-cream-1) 14%,
+                    var(--spc-loader-cream-2) 28%,
+                    var(--spc-loader-cream-3) 48%,
+                    var(--spc-loader-cream-4) 68%,
+                    var(--spc-loader-cream-5) 92%);
+        }
+
+        .spc-loader__sun-wrap {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 520px;
+            height: 520px;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spc-loader__sun-halo,
+        .spc-loader__sun-core {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+        }
+
+        .spc-loader__sun-halo {
+            inset: -60%;
+            background: radial-gradient(circle, rgba(255, 240, 42, .3) 0%, rgba(255, 240, 42, .12) 40%, transparent 70%);
+            filter: blur(30px);
+        }
+
+        .spc-loader__sun-core {
+            background: radial-gradient(circle, var(--spc-loader-flame) 0%, #fff02add 40%, rgba(255, 240, 42, .3) 65%, transparent 100%);
+            filter: blur(12px);
+        }
+
+        .spc-loader__logo-outer {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, calc(-50% - 20px));
+            z-index: 5;
+            opacity: 0;
+        }
+
+        @keyframes spcLogoBreathe {
+            0%, 100% { transform: scale(0.98); }
+            50%       { transform: scale(1.06); }
+        }
+
+        .spc-loader__logo-breathe {
+            animation: spcLogoBreathe 3.2s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .spc-loader__logo {
+            width: 160px;
+            height: 200px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
+            display: block;
+        }
+
+        @media (max-width: 767px) {
+            .spc-loader__sun-wrap {
+                width: 260px;
+                height: 260px;
+            }
+
+            .spc-loader__sun-halo {
+                filter: blur(16px);
+            }
+
+            .spc-loader__sun-core {
+                filter: blur(6px);
+            }
+
+            .spc-loader__logo-outer {
+                transform: translate(-50%, calc(-50% - 80px));
+            }
+
+            .spc-loader__logo {
+                width: 100px;
+                height: 130px;
+            }
+
+            .spc-loader__text {
+                bottom: 32px;
+                width: 88vw;
+            }
+        }
+
+        body.is-loading .header {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spc-loader__text {
+            position: absolute;
+            left: 50%;
+            bottom: 100px;
+            transform: translateX(-50%);
+            width: min(900px, 86vw);
+            margin: 0;
+            text-align: center;
+            font-family: var(--font-family-helvetica-neue);
+            font-size: var(--font-size-b1);
+            font-weight: var(--font-weight-light);
+            line-height: var(--line-height-b1);
+            letter-spacing: 0;
+            color: var(--basic-black);
+            text-wrap: pretty;
+            opacity: 0;
+            z-index: 5;
+        }
+    </style>
+</head>
+
+<body class="is-loading">
+    <div class="spc-loader" id="spcLoader" aria-hidden="true">
+        <div class="spc-loader__sky" id="spcLoaderSky">
+            <div class="spc-loader__sunlight"></div>
+            <div class="spc-loader__sun-wrap">
+                <div class="spc-loader__sun-halo"></div>
+                <div class="spc-loader__sun-core"></div>
+            </div>
+        </div>
+        <div class="spc-loader__logo-outer" id="spcLoaderLogo">
+            <div class="spc-loader__logo-breathe">
+                <img class="spc-loader__logo" src="assets/icons/Crest-logo.svg" alt="">
+            </div>
+        </div>
+        <p class="spc-loader__text" id="spcLoaderText">We acknowledge the Traditional Custodians of the land on which St Patrick's College stands, the Wangal clan of the Darug People. We pay our respects to Elders past and present, and recognise their enduring connection to Country. As a College community, we are committed to listening, learning and walking together with First Nations peoples in a spirit of respect, justice and reconciliation.</p>
+    </div>
+
+    <div class="wrapper">
+
+        <!-- Header Section -->
+        <header class="header position-fixed top-0 start-0 end-0" id="header">
+            <div class="container-fluid">
+                <div class="header-row row">
+                    <div class=" left-block">
+                        <div class="header-logo d-flex align-items-center">
+                            <a href="/">
+                                <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College" class="flex-shrink-0">
+                                <div class="header-logo-text d-flex flex-column justify-content-center">
+                                    <span class="logo-text logo-text-main">ST PATRICK'S</span>
+                                    <span class="logo-text logo-text-sub">COLLEGE</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="right-block">
+                        <div class="col-lg-auto header-nav d-flex  align-items-center">
+                            <a href="#"
+                                class="btn-rounded-large btn-rounded-large-outline-black btn-header   btn-book-tour ">Book
+                                a Tour</a>
+                            <a href="#"
+                                class="btn-rounded-large btn-rounded-large-outline-black  btn-enquire hide-header-items">Enquire
+                                Today</a>
+                            <div class="dropdown-wrapper hide-header-items dropdown">
+                                <button class="menu-dropdown-btn dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Work with Us
+                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Label-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Label-2</a></li>
+                                    <li><a class="dropdown-item" href="#">Label-3</a></li>
+                                    <li><a class="dropdown-item" href="#">Label-4</a></li>
+                                    <li><a class="dropdown-item" href="#">Label-5</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-wrapper hide-header-items dropdown">
+
+
+                                <button class=" menu-dropdown-btn dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Quick Links
+                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Enrolment Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Pay Fees Online</a></li>
+                                    <li><a class="dropdown-item" href="#">Canvas</a></li>
+                                    <li><a class="dropdown-item" href="#">Sport Fixtures</a></li>
+                                    <li><a class="dropdown-item" href="#">Old Boys’ Website</a></li>
+                                    <li><a class="dropdown-item" href="#">Edval</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Staff Kiosk</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Student Café</a></li>
+                                    <li><a class="dropdown-item" href="#">TASS Parent Lounge</a></li>
+                                </ul>
+                            </div>
+                            <div class="icon-menu-wrap">
+                                <div class="header-icons-wrapper d-flex align-items-center d-none d-md-inline-flex">
+                                    <button type="button" class="header-icon-btn header-icon-btn--search">
+                                        <img src="assets/icons/header-search-icon.svg" alt="Search">
+                                    </button>
+                                    <a href="#" class="header-icon-btn">
+                                        <img src="assets/icons/profile-icon.svg" alt="Profile">
+                                    </a>
+                                </div>
+                                <button type="button" class="header-icon-btn header-icon-btn--search d-md-none">
+                                    <img src="assets/icons/header-search-icon.svg" alt="Search">
+                                </button>
+                                <button class="menu-toggle d-flex align-items-center" id="menuToggle">
+                                    <span class="menu-text">MENU</span>
+                                    <div class="hamburger" id="hamburger">
+                                        <span class="hamburger-line"></span>
+                                        <span class="hamburger-line"></span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mobile-only-btns">
+                        <div class=" dropdown">
+                            <button class="menu-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Work with Us
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Label-1</a></li>
+                                <li><a class="dropdown-item" href="#">Label-2</a></li>
+                                <li><a class="dropdown-item" href="#">Label-3</a></li>
+                                <li><a class="dropdown-item" href="#">Label-4</a></li>
+                                <li><a class="dropdown-item" href="#">Label-5</a></li>
+                            </ul>
+                        </div>
+
+                        <div class=" dropdown">
+
+
+                            <button class=" menu-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Quick Links
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Enrolment Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#">Pay Fees Online</a></li>
+                                <li><a class="dropdown-item" href="#">Canvas</a></li>
+                                <li><a class="dropdown-item" href="#">Sport Fixtures</a></li>
+                                <li><a class="dropdown-item" href="#">Old Boys’ Website</a></li>
+                                <li><a class="dropdown-item" href="#">Edval</a></li>
+                                <li><a class="dropdown-item" href="#">TASS Staff Kiosk</a></li>
+                                <li><a class="dropdown-item" href="#">TASS Student Café</a></li>
+                                <li><a class="dropdown-item" href="#">TASS Parent Lounge</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mega Menu Overlay -->
+        <div class="mega-menu-overlay" id="menuOverlay"></div>
+
+        <!-- Mega Menu -->
+        <div class="mega-menu position-fixed top-0 start-0 end-0" id="megaMenu">
+            <div class="container-fluid d-flex flex-column h-100">
+                <div class="mega-menu-inner row g-4 ">
+
+
+
+                    <div class="col-lg-4 col-md-5 menu-main-items d-flex flex-column">
+
+
+
+                        <a href="/" class="menu-main-item " data-menu="home">Home</a>
+                        <a href="about.html" class="menu-main-item active has-submenu" data-menu="about">About</a>
+                        <a href="our-identity.html" class="menu-main-item has-submenu" data-menu="identity">Identity</a>
+                        <a href="learning-at-spc.html" class="menu-main-item" data-menu="learning">Learning</a>
+                        <a href="co-curricular.html" class="menu-main-item has-submenu" data-menu="cocurricular">Co-Curricular</a>
+                        <a href="spc-community.html" class="menu-main-item has-submenu" data-menu="community">Community</a>
+                        <a href="enrolment.html" class="menu-main-item has-submenu" data-menu="enrolment">Enrolment</a>
+                        <a href="contact.html" class="menu-main-item" data-menu="contact">Contact</a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 menu-sub-items d-flex flex-column" id="menuSubItems">
+                        <div class="menu-sub-items-group is-active" data-menu="about">
+                            <a href="about.html" class="menu-sub-item active"
+                                data-image="assets/images/about-menu.jpg">About</a>
+                            <a href="our-identity.html" class="menu-sub-item"
+                                data-image="assets/images/about-image.jpg">Our Identity</a>
+                            <a href="learning-at-spc.html" class="menu-sub-item"
+                                data-image="assets/images/m3.jpg">Learning at SPC</a>
+                            <a href="co-curricular.html" class="menu-sub-item"
+                                data-image="assets/images/cocurricular-bg.jpg">Co-Curricular</a>
+                            <a href="spc-community.html" class="menu-sub-item"
+                                data-image="assets/images/parents-community-bg.jpg">SPC Community</a>
+                            <a href="enrolment.html" class="menu-sub-item"
+                                data-image="assets/images/strategic-bg-1.jpg">Enrolment</a>
+                            <a href="latest-news.html" class="menu-sub-item" data-image="assets/images/m2.jpg">Latest
+                                News</a>
+                            <a href="news-detail.html" class="menu-sub-item" data-image="assets/images/m4.jpg">News
+                                Detail</a>
+                            <a href="internal-page1.html" class="menu-sub-item"
+                                data-image="assets/images/hero-image.jpg">Internal Page 1</a>
+                            <a href="internal-page2.html" class="menu-sub-item"
+                                data-image="assets/images/CTA.jpg">Internal Page 2</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="identity">
+                            <a href="#" class="menu-sub-item active" data-image="assets/images/about-image.jpg">Mission
+                                and Values</a>
+                            <a href="#" class="menu-sub-item">Catholic Tradition</a>
+                            <a href="#" class="menu-sub-item">Edmund Rice Heritage</a>
+                            <a href="#" class="menu-sub-item">Student Wellbeing</a>
+                            <a href="#" class="menu-sub-item">Diversity and Inclusion</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="cocurricular">
+                            <a href="#" class="menu-sub-item active"
+                                data-image="assets/images/cocurricular-bg.jpg">Sport</a>
+                            <a href="#" class="menu-sub-item">Music and Performance</a>
+                            <a href="#" class="menu-sub-item">Clubs and Societies</a>
+                            <a href="#" class="menu-sub-item">Outdoor Education</a>
+                            <a href="#" class="menu-sub-item">Leadership Programs</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="community">
+                            <a href="#" class="menu-sub-item active"
+                                data-image="assets/images/parents-community-bg.jpg">Parents and Carers</a>
+                            <a href="#" class="menu-sub-item">Old Boys Network</a>
+                            <a href="#" class="menu-sub-item">Community Partnerships</a>
+                            <a href="#" class="menu-sub-item">Events and Calendar</a>
+                            <a href="#" class="menu-sub-item">Support and Giving</a>
+                        </div>
+                        <div class="menu-sub-items-group" data-menu="enrolment">
+                            <a href="#" class="menu-sub-item active" data-image="assets/images/strategic-bg-1.jpg">How
+                                to Apply</a>
+                            <a href="#" class="menu-sub-item">Fees and Scholarships</a>
+                            <a href="#" class="menu-sub-item">Tours and Open Days</a>
+                            <a href="#" class="menu-sub-item">International Students</a>
+                            <a href="#" class="menu-sub-item">Enrolment FAQs</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-3 menu-image-wrapper d-flex align-items-stretch justify-content-center">
+                        <img src="assets/icons/menu-image.jpg" alt="St Patrick's College" class="menu-image w-100">
+                    </div>
+                </div>
+                <div class="mega-menu-footer flex-shrink-0">
+                    <div class="mobile-only-btns">
+
+                        <a href="#"
+                            class="btn-rounded-large btn-rounded-large-outline-black btn-header   btn-book-tour ">Book
+                            a Tour</a>
+
+
+                        <a href="#"
+                            class="btn-rounded-large btn-rounded-large-outline-black  btn-enquire hide-header-items">Enquire
+                            Today</a>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-6 menu-footer-left ">
+                            <span>Francis Street, Strathfield 2135 NSW</span>
+                            <span>+612 9763 1000</span>
+                        </div>
+                        <div class="col-md-6 menu-footer-right">
+                            <span class="follow-label ">Follow Us</span>
+                            <a href="#">Facebook</a>
+                            <a href="#">Instagram</a>
+                            <a href="#">Linkedin</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Hero Section -->
+        <section class="hero position-relative">
+            <div class="hero-content-wrap">
+                <div class="container-fluid position-relative">
+                    <div class="row ">
+                        <div class="col-xl-7 col-lg-8 col-md-8">
+                            <div class="col-lg-auto hero-content">
+                                <div class="hero-gradient position-absolute"></div>
+                                <h1 class="hero-title">Let your light shine.</h1>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 offset-xl-1 col-lg-4 col-md-8">
+                            <div
+                                class="col-lg-auto hero-text d-flex flex-column justify-content-between align-items-start">
+                                <p class="mb-0">An independent Catholic day school for boys from Years 5 to 12 in
+                                    the
+                                    Edmund
+                                    Rice tradition educating spirited men of faith and purpose.</p>
+                                <a href="#" class="btn btn-rounded-large btn-rounded-large-outline-blue mt-auto">Welcome
+                                    to St Patrick's</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="hero-media w-100">
+            <div class="hero-media-wrapper position-relative w-100 ">
+                <!-- Hero Video with Image Fallback -->
+                <video class="hero-video position-absolute top-0 start-0 w-100 " id="heroVideo" autoplay muted loop
+                    playsinline preload="none" poster="assets/images/hero-image.jpg">
+                    <source src="assets/videos/hero-vid.mp4" type="video/mp4">
+                    <!-- Fallback image  -->
+                    <img src="assets/images/hero-image.jpg" alt="St Patrick's College" class="hero-image w-100 h-100" fetchpriority="high" loading="eager">
+                </video>
+
+                <div class="hero-media-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section class="about-section position-relative section">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-9">
+                        <h2>Inspired by the gospel and <a href="about.html">Edmund
+                                Rice</a>, St Patrick's College <a href="learning-at-spc.html">liberates the whole
+                                person</a> and educates for <a href="our-identity.html">resilient, spirited and
+                                inclusive men</a> who are <a href="co-curricular.html">challenged</a> to create
+                            <a href="spc-community.html">a better world</a> <a href="contact.html">for
+                                all</a>.
+                        </h2>
+                    </div>
+                    <div class="col-12 col-lg-3"></div>
+                </div>
+                <div class="about-content-row">
+
+                    <div class="row about-content-wrap" data-gsap-children='{
+                                    "p":{"type":"fade-up", "start":"top 90%"},
+                                    "a":{"type":"zoom-in","ease":"power2.out", "stagger":"0.3", "delay":"0.2"},
+                                    "img":{"type":"image-clip-top", "start":"top 50%"}
+                                }' data-gsap-children-mobile='{
+                                    "a":{"ease":"none"},
+                                    "img":{"start":"top 70%"}
+                                }'>
+
+                        <div class="col-12 col-lg-4 col-md-6 about-content">
+                            <div class="about-text">
+                                <p>St Patrick's College continues to be a 'lighthouse'
+                                    school for boys' education in Australia. As a College, we wish to stand tall
+                                    and strong, illuminating our community from within and shining a light over
+                                    our students to guide them to a safe harbour.</p>
+                                <p>As reflected in our motto,
+                                    Luceat Lux Vestra, we are
+                                    committed to nurturing and challenging each boy to let his light shine. Our
+                                    graduates will be men of integrity and wisdom who are called to share their
+                                    light with others.</p>
+                            </div>
+                            <div class="about-buttons d-flex align-items-center">
+                                <a href="#" class="btn btn-rounded-large btn-rounded-large-outline-blue">Hear
+                                    from
+                                    our Principal</a>
+                                <a href="#" class="btn btn-rounded-large btn-rounded-large-no-border">Our Ideal
+                                    Graduate <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4.5 2L8 5.5L4.5 9" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg></a>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-5 offset-md-1 col-lg-6 offset-lg-2 about-image">
+                            <div class="image-wrap">
+                                <img src="assets/images/about-image.jpg" alt="St Patrick's College" class="w-100 h-100"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gradient-circle right">
+
+            </div>
+
+        </section>
+        <!-- Strategic Section -->
+        <section class="strategic-section position-relative section">
+            <img src="assets/images/strategic-bg-1.jpg" class="full" alt="">
+            <div class="strategic-overlay">
+                <div class="container-fluid position-relative">
+                    <div class="row  full">
+                        <div class="col-12 strategic-content" data-gsap-children='{
+                            "h2":{"type":"fade-up", "start":"top 90%"},
+                            "a":{"type":"zoom-in", "delay":"0.2"},
+                            "p":{"type":"fade-up", "start":"top 105%"}
+                        }'>
+                            <div class="row ">
+                                <div class="col-12 col-lg-5 strategic-top">
+                                    <h2>Our
+                                        Strategic <br>Future and Growth
+                                    </h2>
+                                    <a href="#"
+                                        class=" btn-rounded-large btn-rounded-large-outline-blue strategic-button">View
+                                        our Mission and Strategic Plan</a>
+                                </div>
+                            </div>
+                            <div class="row  full">
+                                <div class="col-12 col-md-6 strategic-text-wrapper">
+                                    <div class="row ">
+                                        <div class="col-12 col-md-6 strategic-text-col">
+                                            <p>As part of our commitment to
+                                                excellence and growth, we are investing in the Scientia Building, a
+                                                state-of-the-art centre for science, hospitality and learning.</p>
+                                        </div>
+                                        <div class="col-12 col-md-6 strategic-text-col">
+                                            <p>It will support
+                                                cross-curricular education and foster a culture of innovation. We
+                                                continue
+                                                to shape a future where learning and community flourish.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+
+        <!-- Academics Section -->
+        <section class="academics-section position-relative section">
+            <div class="container-fluid">
+                <div class="row ">
+                    <div class="col-12 academics-top" data-gsap-children='{
+                        "h2":{"type":"fade-up"},
+                        "p":{"type":"fade-up"},
+                        "a":{"type":"zoom-in", "stagger":"0.7", "delay":"0.3"}
+                    }'>
+                        <div class="row  align-items-start">
+                            <div class="col-12 col-xl-4 col-lg-5 col-md-5 academics-heading-col">
+                                <h2>Academics <br>and Learning</h2>
+                            </div>
+
+                            <div
+                                class="col-12 col-xl-5 col-lg-6 col-md-6 offset-md-1 offset-xl-2 academics-content-col">
+                                <p>At SPC, learning is more than grades: it's
+                                    about growth. We invest in quality teaching, a supportive wellbeing framework
+                                    and
+                                    learning pathways tailored to each student's strengths. From Years 5 through 12,
+                                    we
+                                    challenge our students to pursue academic excellence while developing character
+                                    and
+                                    leadership.</p>
+                                <div class="academics-buttons d-flex align-items-center">
+                                    <a href="#" class=" btn-rounded-large btn-rounded-large-outline-blue">Learning
+                                        at St
+                                        Patrick's</a>
+                                    <a href="#" class="btn-rounded-large-no-border">Student Wellbeing <svg width="12"
+                                            height="12" viewBox="0 0 12 12" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.5 2L8 5.5L4.5 9" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg></a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academics Two Column CTA Section -->
+        <section class="section two-column-cta position-relative" data-gsap-children='{
+                        "img":{"type":"image-clip-top", "start":"top 70%", "stagger":"0.15"},
+                        "h4":{"type":"fade-up", "start":"top 90%", "stagger":"0.2"}
+                    }' data-gsap-children-mobile='{
+                        "img":{"type":"image-clip-top", "start":"top 80%", "stagger":"0.2"},
+                        "h4":{"type":"fade-up", "start":"top 95%", "stagger":"0.2"}
+                    }'>
+            <div class="gradient-circle left"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <a href="#">
+                            <div class="image-wrap">
+                                <img src="assets/images/Entry Point Card-1.jpg" class="ar-680-460 full"
+                                    alt="Middle School (Years 5 to 8)" loading="eager" decoding="async">
+                            </div>
+                            <h4>Middle School (Years 5 to 8)</h4>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <a href="#">
+                            <div class="image-wrap">
+                                <img src="assets/images/Entry Point Card.jpg" class="ar-680-460 full"
+                                    alt="Senior School (Years 9 to 12)" loading="eager" decoding="async">
+                            </div>
+                            <h4>Senior School (Years 9 to 12)</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Co-Curricular Section -->
+        <section class="cocurricular-section position-relative section">
+            <div class="cocurricular-background position-absolute w-100 h-100">
+                <div class="cocurricular-bg-slide is-active">
+                    <img src="assets/images/about-image.jpg" alt="Sports" loading="lazy"
+                        onerror="this.style.display='none'">
+                </div>
+                <div class="cocurricular-bg-slide">
+                    <img src="assets/images/cocurricular-bg.jpg" alt="Performing Arts" loading="lazy"
+                        onerror="this.style.display='none'">
+                </div>
+                <div class="cocurricular-bg-slide">
+                    <img src="assets/images/CTA.jpg" alt="Justice, Peace and Advocacy" loading="lazy"
+                        onerror="this.style.display='none'">
+                </div>
+                <div class="cocurricular-bg-slide">
+                    <img src="assets/images/hero-image.jpg" alt="Cultural Engagement" loading="lazy"
+                        onerror="this.style.display='none'">
+                </div>
+                <div class="cocurricular-bg-slide">
+                    <img src="assets/images/parents-community-bg.jpg" alt="Clubs and Activities" loading="lazy"
+                        onerror="this.style.display='none'">
+                </div>
+                <div class="cocurricular-bg-slide">
+                    <img src="assets/images/strategic-bg-1.jpg" alt="Trips and Excursions" loading="lazy"
+                        onerror="this.style.display='none'">
+                </div>
+                <div class="cocurricular-overlay position-absolute w-100 h-100"></div>
+            </div>
+            <div class="container-fluid position-relative">
+                <div class="row full">
+                    <div class="col-12 cocurricular-content">
+                        <small class="cocurricular-label">CO-CURRICULAR</small>
+                        <div class="cocurricular-slides">
+                            <div class="cocurricular-slide">
+                                <div class="row full">
+                                    <div class="col-lg-6">
+                                        <div class="cocurricular-left">
+                                            <h2>Excellence on the Field and in the Pool</h2>
+                                            <p>Our students compete at local, state and national levels across more
+                                                than
+                                                20
+                                                sports. Professional coaching and a culture of teamwork develop
+                                                athletes
+                                                of
+                                                discipline and resilience.</p>
+                                            <a href="#" class="btn-rounded-large btn-rounded-large-outline-white">See
+                                                sports
+                                                opportunities</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="cocurricular-slide">
+                                <div class="row full">
+                                    <div class="col-lg-6">
+                                        <div class="cocurricular-left">
+                                            <h2>Music, Drama and Creative Expression Across the College</h2>
+                                            <p>Students take part in ensembles, bands, drama groups and productions
+                                                that
+                                                develop
+                                                skill, discipline and joy in performance.</p>
+                                            <a href="#" class="btn-rounded-large btn-rounded-large-outline-white">See
+                                                performing
+                                                arts opportunities</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cocurricular-slide">
+                                <div class="row full">
+                                    <div class="col-lg-6">
+                                        <div class="cocurricular-left">
+                                            <h2>Forming Young Men of Conscience and Action</h2>
+                                            <p>Inspired by Edmund Rice, our students engage with social justice
+                                                through
+                                                service
+                                                learning, advocacy campaigns and community partnerships.</p>
+                                            <a href="#"
+                                                class="btn-rounded-large btn-rounded-large-outline-white">Explore
+                                                justice
+                                                and peace</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cocurricular-slide">
+                                <div class="row full">
+                                    <div class="col-lg-6">
+                                        <div class="cocurricular-left">
+                                            <h2>Celebrating Diversity and Shared Heritage</h2>
+                                            <p>Through cultural events, language programs and community
+                                                celebrations,
+                                                students
+                                                develop a deep appreciation of the diverse world they will one day
+                                                lead.
+                                            </p>
+                                            <a href="#"
+                                                class="btn-rounded-large btn-rounded-large-outline-white">Discover
+                                                cultural engagement</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cocurricular-slide">
+                                <div class="row full">
+                                    <div class="col-lg-6">
+                                        <div class="cocurricular-left">
+                                            <h2>Discover Your Passion Beyond the Classroom</h2>
+                                            <p>From robotics to debating, chess to coding — our clubs give every
+                                                student
+                                                a place
+                                                to pursue interests, build friendships and develop leadership.</p>
+                                            <a href="#"
+                                                class="btn-rounded-large btn-rounded-large-outline-white">Explore
+                                                clubs
+                                                and activities</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cocurricular-slide">
+                                <div class="row full">
+                                    <div class="col-lg-6">
+                                        <div class="cocurricular-left">
+                                            <h2>Learning That Extends Beyond Our Gates</h2>
+                                            <p>From local excursions and outdoor education camps to international
+                                                immersion
+                                                tours, students broaden their horizons and deepen their
+                                                understanding of
+                                                the
+                                                world.</p>
+                                            <a href="#" class=" btn-rounded-large btn-rounded-large-outline-white">See
+                                                trips and
+                                                excursions</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 cocurricular-nav">
+                                <div class="cocurricular-nav-buttons d-flex align-items-center"
+                                    data-gsap-children='{"a":{"type":"fade-up","start":"top 110%","stagger":"0.2","ease":"back.out(1.7)"}}'
+                                    data-gsap-children-mobile='{"a":{"start":"top 90%"}}'>
+                                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-white"
+                                        data-index="0">Sports</a>
+                                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-white"
+                                        data-index="1">Performing Arts</a>
+                                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-white"
+                                        data-index="2">Justice, Peace and Advocacy</a>
+                                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-white"
+                                        data-index="3">Cultural Engagement</a>
+                                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-white"
+                                        data-index="4">Clubs and Activities</a>
+                                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-white"
+                                        data-index="5">Trips and Excursions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="statistics-section section">
+            <div class="container-fluid">
+                <div class="row ">
+                    <div class="col-12 statistics-top" data-gsap-children='{
+                        "h2":{"type":"fade-up"},
+                        "p":{"type":"fade-up"},
+                        "a":{"type":"zoom-in"}
+                    }'>
+                        <div class="row  align-items-start">
+                            <div class="col-12 col-lg-5 col-md-5 statistics-heading-col">
+                                <h2>Nearly a century of formative
+                                    education</h2>
+                            </div>
+                            <div class="col-12 col-lg-4 col-md-6 offset-md-1 offset-lg-1 statistics-content-col">
+                                <p>St Patrick's College has built
+                                    generations
+                                    of leaders grounded in faith and integrity. Our students thrive academically and
+                                    grow as people of conscience.</p>
+                                <a href="#"
+                                    class=" btn-rounded-large btn-rounded-large-outline-blue statistics-button">Discover
+                                    our Impact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 statistics-cards">
+                        <div class="row ">
+                            <div class="col-12 col-lg-3 col-md-6 statistics-card">
+                                <div class="statistics-card-divider"></div>
+                                <div class="statistics-card-content">
+                                    <p>Founded by the Christian Brothers in Strathfield</p>
+                                    <p>1928</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3 col-md-6 statistics-card">
+                                <div class="statistics-card-divider"></div>
+                                <div class="statistics-card-content">
+                                    <p>Boys enrolled from Years 5 through 12 across the
+                                        College</p>
+                                    <p>800+</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3 col-md-6 statistics-card">
+                                <div class="statistics-card-divider"></div>
+                                <div class="statistics-card-content">
+                                    <p>95% of graduates pursue tertiary education or
+                                        vocational pathways</p>
+                                    <p>95%</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3 col-md-6 statistics-card">
+                                <div class="statistics-card-divider"></div>
+                                <div class="statistics-card-content">
+                                    <p>90% of students engage in sport, culture or service
+                                        activities</p>
+                                    <p>90%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Parents and Friends Community Section -->
+        <section class="parents-community-section position-relative section">
+            <div class="parents-community-background position-absolute w-100 h-100">
+                <img src="assets/images/parents-community-bg.jpg" alt="Parents Community Background 1"
+                    class="parents-community-bg-img" loading="lazy" onerror="this.style.display='none'">
+
+                <div class="parents-community-overlay position-absolute w-100 h-100"></div>
+            </div>
+            <div class="container-fluid position-relative">
+                <div class="row ">
+                    <div class="col-lg-6 parents-community-content"
+                        data-gsap-children='{"h2":{"type":"fade-up"}, "p":{"type":"fade-up"}, "a":{"type":"zoom-in"}}'>
+                        <h2>Parents and Friends Community</h2>
+                        <p>Faith is at the heart of our life. Grounded in Gospel
+                            spirituality, we foster meaningful relationships and service. Through retreats, prayer,
+                            and
+                            community projects, our young men learn compassion, justice, and solidarity in action.
+                        </p>
+                        <a href="#" class=" btn-rounded-large btn-rounded-large-outline-white">Explore
+                            Community</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+
+        <section class="testimonials-section section">
+            <div class="testimonials-gradient position-absolute"></div>
+
+            <div class="container-fluid">
+                <div class="row ">
+                    <div class="col-12 testimonials-content">
+                        <div class="row  align-items-start">
+                            <div class="col-12 col-xl-4 col-md-5 testimonials-image-col">
+                                <div class="testimonials-image-wrapper" id="testimonialsImageWrapper">
+                                    <!-- Testimonial Images -->
+                                    <div class="testimonials-image" data-index="0"
+                                        data-gsap-children='{"img":{"type":"image-clip-top", "start":"top 60%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <img src="assets/images/testimonial-1.jpg" alt="Liam Dossi"
+                                            class="testimonials-img">
+                                    </div>
+                                    <div class="testimonials-image" data-index="1">
+                                        <img src="assets/images/about-image.jpg" alt="Michael Chen"
+                                            class="testimonials-img">
+                                    </div>
+                                    <div class="testimonials-image" data-index="2">
+                                        <img src="assets/images/parents-community-bg.jpg" alt="Catherine Walsh"
+                                            class="testimonials-img">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-5 col-md-6 offset-xl-2 offset-md-1 testimonials-text-col">
+                                <div class="testimonials-quote-wrapper" id="testimonialsContentWrapper">
+                                    <!-- Testimonial Content -->
+                                    <div class="testimonials-slide-content active" data-index="0"
+                                        data-gsap-children='{"p":{"type":"fade-up", "start":"top 60%", "stagger":"0.4"}}'
+                                        data-gsap-children-mobile='{"p":{"start":"top 80%"}}'>
+                                        <p>"St Patrick's has given me
+                                            confidence I never knew
+                                            I had.
+                                            My teachers push me, my mates back me and every day I feel like I am
+                                            becoming a
+                                            better version of myself."</p>
+                                        <p>Liam Dossi, Year 10 Student</p>
+                                    </div>
+                                    <div class="testimonials-slide-content" data-index="1">
+                                        <p>"The support I've received at SPC has shaped me in
+                                            ways I
+                                            didn't expect. The teachers here don't just teach — they genuinely care
+                                            about who
+                                            you become."</p>
+                                        <p>Michael Chen, Year 11 Student</p>
+                                    </div>
+                                    <div class="testimonials-slide-content" data-index="2">
+                                        <p>"Watching our son thrive at St Patrick's has been
+                                            remarkable. The school strikes the perfect balance between academic
+                                            excellence and
+                                            character development."</p>
+                                        <p>Catherine Walsh, Parent</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  align-items-center testimonials-bottom-row"
+                            data-gsap-children='{"a":{"type":"zoom-in", "start":"top 100%", "stagger" :"0.4"}}'
+                            data-gsap-children-mobile='{"a":{"start":"top 80%"}}'>
+                            <div class="col-6 col-lg-6 testimonials-button-col">
+                                <a href="#"
+                                    class=" btn-rounded-large btn-rounded-large-outline-blue testimonials-button">Read
+                                    more Community
+                                    Stories</a>
+                            </div>
+                            <div class="col-6 col-lg-6 testimonials-arrows-col">
+
+                                <div class="testimonials-arrows d-flex align-items-center">
+                                    <button class="testimonials-arrow-btn" id="testimonialPrev"
+                                        aria-label="Previous testimonial">
+                                      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M35.875 20.375L24.875 31.375L24.5 31.6875L23.8125 31L24.1875 30.625L34.3125 20.5H4V19.5H4.5H34.3125L24.1875 9.375L23.8125 9L24.5 8.3125L24.875 8.625L35.875 19.625L36.25 20L35.875 20.375Z" fill="#27251F"/>
+</svg>
+
+                                    </button>
+                                    <button class="testimonials-arrow-btn" id="testimonialNext"
+                                        aria-label="Next testimonial">
+                                       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M35.875 20.375L24.875 31.375L24.5 31.6875L23.8125 31L24.1875 30.625L34.3125 20.5H4V19.5H4.5H34.3125L24.1875 9.375L23.8125 9L24.5 8.3125L24.875 8.625L35.875 19.625L36.25 20L35.875 20.375Z" fill="#27251F"/>
+</svg>
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <!-- Latest News Section -->
+        <section class="latest-news-section section">
+            <div class="container-fluid">
+                <div class="row ">
+                    <div class="col-12 latest-news-top">
+                        <div class="row  align-items-start">
+                            <div class="col-12  col-xl-4 col-lg-5 col-md-5  latest-news-heading-col"
+                                data-gsap-children='{"h2":{"type":"fade-up"}}'>
+                                <h2>Latest News and Happenings</h2>
+                            </div>
+                            <div class="col-12 col-xl-5 offset-xl-2 col-lg-6 offset-lg-1 col-md-6 offset-md-1 latest-news-content-col"
+                                data-gsap-children='{"p":{"type":"fade-up"}, "a":{"type":"fade-in", "stagger":"0.4"}}'>
+                                <p>Stay up to date with what's
+                                    happening at SPC, from
+                                    Open Days and community events, to student achievements and campus news, this is
+                                    your window into our life as a college.</p>
+                                <div class="latest-news-buttons d-flex align-items-center">
+                                    <a href="#" class=" btn-rounded-large btn-rounded-large-outline-blue">View
+                                        Latest
+                                        News</a>
+                                    <a href="#" class="btn-rounded-large-no-border">Events and Bookings <svg width="12"
+                                            height="12" viewBox="0 0 12 12" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.5 2L8 5.5L4.5 9" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 latest-news-bottom">
+                        <div class="row  align-items-center latest-news-filters-row">
+                            <div class="col-12 col-lg-auto latest-news-filters-col"
+                                data-gsap-children='{"a":{"type":"fade-in", "stagger":"0.4"}}'>
+                                <div class="latest-news-filters d-flex align-items-center">
+                                    <!-- "All News" is always first and active by default -->
+                                    <a href="#"
+                                        class="btn-rounded-large btn-rounded-large-outline-black latest-news-filter-btn latest-news-filter-btn-active"
+                                        data-filter="all">All News</a>
+                                    <!-- Wagtail: {% for cat in news_categories %}
+                                    <a href="#"
+                                        class="btn-rounded-large btn-rounded-large-outline-golden latest-news-filter-btn"
+                                        data-filter="{{ cat.slug }}">{{ cat.name }}</a>
+                                    {% endfor %} -->
+                                    <a href="#"
+                                        class="btn-rounded-large btn-rounded-large-outline-golden latest-news-filter-btn"
+                                        data-filter="junior">Junior</a>
+                                    <a href="#"
+                                        class="btn-rounded-large btn-rounded-large-outline-golden latest-news-filter-btn"
+                                        data-filter="senior">Senior</a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-auto latest-news-arrows-col"
+                                data-gsap-children='{"div":{"type":"fade-in"}}'>
+                                <div class="latest-news-arrows d-flex align-items-center">
+                                    <button class="latest-news-arrow-btn latest-news-prev" id="latestNewsPrev"
+                                        aria-label="Previous news">
+                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M35.875 20.375L24.875 31.375L24.5 31.6875L23.8125 31L24.1875 30.625L34.3125 20.5H4V19.5H4.5H34.3125L24.1875 9.375L23.8125 9L24.5 8.3125L24.875 8.625L35.875 19.625L36.25 20L35.875 20.375Z" fill="#27251F"/>
+</svg>
+
+                                    </button>
+                                    <button class="latest-news-arrow-btn latest-news-next" id="latestNewsNext"
+                                        aria-label="Next news">
+                                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M35.875 20.375L24.875 31.375L24.5 31.6875L23.8125 31L24.1875 30.625L34.3125 20.5H4V19.5H4.5H34.3125L24.1875 9.375L23.8125 9L24.5 8.3125L24.875 8.625L35.875 19.625L36.25 20L35.875 20.375Z" fill="#27251F"/>
+</svg>
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="latest-news-slider">
+                            <!--
+                                Single track — all news items here, each tagged with data-categories.
+                                JS filters by toggling .latest-news-slide--hidden on non-matching slides.
+
+                                Wagtail template structure:
+                                <div class="latest-news-track" id="latestNewsTrack">
+                                  {% for item in news_items %}
+                                  <div class="latest-news-slide{% if forloop.first %} active{% endif %}"
+                                       data-categories="{% for cat in item.categories.all %}{{ cat.slug }} {% endfor %}">
+                                    <div class="latest-news-card"
+                                         {% if forloop.counter0 < 4 %}
+                                         data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%"{% if forloop.counter0 > 0 %},"delay":"0.{{ forloop.counter0|multiply:2 }}s"{% endif %}},"div":{"type":"fade-up","start":"top 150%"}}'
+                                         data-gsap-children-mobile='{"img":{"start":"top 80%"}}'
+                                         {% endif %}>
+                                      <a href="{{ item.url }}">
+                                        <img loading="lazy" src="{{ item.thumbnail.url }}" alt="{{ item.title }}" class="latest-news-image">
+                                        <div class="latest-news-card-content">
+                                          <h3>{{ item.title }}</h3>
+                                          <p>{{ item.date|date:"d.m.y" }}</p>
+                                        </div>
+                                      </a>
+                                    </div>
+                                  </div>
+                                  {% endfor %}
+                                </div>
+                            -->
+                            <div class="latest-news-track" id="latestNewsTrack">
+
+                                <div class="latest-news-slide active" data-categories="senior">
+                                    <div class="latest-news-card"
+                                        data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%"},"div":{"type":"fade-up","start":"top 150%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m3.jpg" alt="Black Tie Liturgy" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Black Tie Liturgy</h3>
+                                                <p>22.09.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card"
+                                        data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%","delay":"0.2s"},"div":{"type":"fade-up","start":"top 150%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m4.jpg" alt="Celebrating Father's Day" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Celebrating Father's Day</h3>
+                                                <p>10.09.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card"
+                                        data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%","delay":"0.4s"},"div":{"type":"fade-up","start":"top 150%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m2.jpg" alt="Farewell to the Class of 2025!" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Farewell to the Class of 2025!</h3>
+                                                <p>18.09.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card"
+                                        data-gsap-children='{"img":{"type":"image-clip-top","start":"top 60%","delay":"0.6s"},"div":{"type":"fade-up","start":"top 150%"}}'
+                                        data-gsap-children-mobile='{"img":{"start":"top 80%"}}'>
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m3.jpg" alt="Year 5 Welcome Day" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Year 5 Welcome Day</h3>
+                                                <p>05.09.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m4.jpg" alt="Year 12 Formal 2025" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Year 12 Formal 2025</h3>
+                                                <p>01.09.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m2.jpg" alt="Middle School Science Fair" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Middle School Science Fair</h3>
+                                                <p>28.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m3.jpg" alt="HSC Study Skills Day" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>HSC Study Skills Day</h3>
+                                                <p>22.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m4.jpg" alt="Junior Drama Workshop" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Junior Drama Workshop</h3>
+                                                <p>18.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m2.jpg" alt="Senior Leadership Forum" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Senior Leadership Forum</h3>
+                                                <p>15.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m3.jpg" alt="Year 8 Outdoor Education" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Year 8 Outdoor Education</h3>
+                                                <p>10.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="senior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m4.jpg" alt="Class of 2025 Assembly" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Class of 2025 Assembly</h3>
+                                                <p>05.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="latest-news-slide" data-categories="junior">
+                                    <div class="latest-news-card">
+                                        <a href="#">
+                                            <img loading="lazy" src="assets/images/m2.jpg" alt="Middle School Art Exhibition" class="latest-news-image">
+                                            <div class="latest-news-card-content">
+                                                <h3>Middle School Art Exhibition</h3>
+                                                <p>01.08.25</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section position-relative section">
+            <div class="cta-background position-absolute w-100 h-100">
+                <img src="assets/images/CTA.jpg" alt="CTA Background 1" class="cta-bg-img" loading="lazy"
+                    onerror="this.style.display='none'">
+
+                <div class="cta-overlay position-absolute w-100 h-100"></div>
+            </div>
+            <div class="container-fluid position-relative">
+                <div class="cta-block-wrap">
+                    <div class="row ">
+                        <div class="col-xl-5 col-lg-6 col-md-6 cta-content">
+                            <div class="cta-heading-wrapper" data-gsap-children='{"h1":{"type":"fade-up"}}'>
+                                <h1>Begin your journey and let your light shine
+                                </h1>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 offset-xl-6 col-lg-6 col-md-6 offset-md-6 offset-lg-6">
+                            <div class="cta-text-wrapper"
+                                data-gsap-children='{"p":{"type":"fade-up"}, "a":{"type":"zoom-in", "stagger":"0.5", "start":"top 100%"}}'>
+                                <p>Every boy who walks through our gates begins a
+                                    journey shaped by
+                                    faith,
+                                    friendship and challenge. <br>This is where confidence grows, talents emerge and
+                                    young
+                                    men learn to live with purpose and heart.</p>
+                                <div class="cta-buttons d-flex align-items-center">
+                                    <a href="#"
+                                        class="btn-rounded-large-solid cta-button-solid-white btn-book-tour">Book a
+                                        Tour</a>
+                                    <a href="#" class=" btn-rounded-large btn-rounded-large-outline-white">Enquire
+                                        Today</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="footer position-relative">
+            <div class="footer-gradient position-absolute"></div>
+            <div class="container-fluid position-relative">
+                <div class="row ">
+                    <div class="col-12 col-lg-5 col-xl-4 footer-left position-relative">
+                        <div class="footer-logo">
+                            <div class="footer-crest">
+                                <img src="assets/icons/Crest-logo.svg" alt="St Patrick's College Crest"
+                                    class="w-100 h-100">
+                            </div>
+                            <div class="footer-college-name">
+                                <h2>ST PATRICK'S COLLEGE</h2>
+                            </div>
+                        </div>
+                        <div class="footer-mission">
+                            <p>An independent Catholic day school for boys from Years 5 to 12 in the Edmund Rice
+                                tradition educating spirited men of faith and purpose.</p>
+                        </div>
+                        <div class="footer-logos d-flex align-items-center">
+                            <a href="/" target="_blank" rel="noopener noreferrer" class="footer-logo-centenary">
+                                <img src="assets/icons/Logo Centenary.svg" alt="Centenary Logo" class="w-100 h-100">
+                            </a>
+                            <div class="footer-divider-vertical"></div>
+                            <a href="https://oldboys.spc.nsw.edu.au/" target="_blank" rel="noopener noreferrer"
+                                class="footer-logo-oldboys">
+                                <img src="assets/icons/Logo Old Boys.svg" alt="Old Boys Logo" class="w-100 h-100">
+                            </a>
+                            <div class="footer-divider-vertical"></div>
+                            <a href="https://www.erea.edu.au/" target="_blank" rel="noopener noreferrer"
+                                class="footer-logo-erea">
+                                <img src="assets/icons/EREA Australia Logo Colour.svg" alt="EREA Logo"
+                                    class="w-100 h-100">
+                            </a>
+                            <div class="footer-divider-vertical"></div>
+                            <a href="https://www.theibsc.org/" target="_blank" rel="noopener noreferrer"
+                                class="footer-logo-erea">
+                                <img src="assets/icons/IBSC-Logo.svg" alt="IBSC Logo" class="w-100 h-100">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 offset-xl-2 col-xl-6 col-lg-6 offset-lg-1 footer-right">
+                        <div class="row ">
+                            <div class="col-6 col-md-4 footer-column">
+                                <h3>Address</h3>
+                                <div class="footer-address pt-2">
+                                    <p>St Patrick's College</p>
+                                    <p>Francis Street<br>Strathfield<br>2135 NSW</p>
+                                </div>
+                                <h3>Contact</h3>
+                                <div class="footer-contact">
+                                    <p>+612 9763 1000</p>
+                                    <p>Contact Details</p>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4 footer-column">
+                                <h3>Explore</h3>
+                                <div class="footer-links">
+                                    <a href="#" class="footer-link">Home</a>
+                                    <a href="#" class="footer-link">About</a>
+                                    <a href="#" class="footer-link">Identity</a>
+                                    <a href="#" class="footer-link">Learning</a>
+                                    <a href="#" class="footer-link">Co-Curricular</a>
+                                    <a href="#" class="footer-link">Community</a>
+                                    <a href="#" class="footer-link">Enrolments</a>
+                                    <a href="#" class="footer-link">Contact Us</a>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4 footer-column">
+                                <h3>Quick Links</h3>
+                                <div class="footer-links">
+                                    <a href="#" class="footer-link">Enrolment Dashboard</a>
+                                    <a href="#" class="footer-link">Pay Fees Online</a>
+                                    <a href="#" class="footer-link">Canvas</a>
+                                    <a href="#" class="footer-link">Sport Fixtures</a>
+                                    <a href="#" class="footer-link">Old Boys' Website</a>
+                                    <a href="#" class="footer-link">Edval</a>
+                                    <a href="#" class="footer-link">TASS Staff Kiosk</a>
+                                    <a href="#" class="footer-link">TASS Student Café</a>
+                                    <a href="#" class="footer-link">TASS Parent Lounge</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-12 footer-follow-wrapper">
+                                <div class="footer-follow d-flex align-items-center">
+                                    <span class="footer-follow-label">Follow Us</span>
+                                    <div class="footer-social-links d-flex align-items-center">
+                                        <a href="#" class="footer-social-link">Facebook</a>
+                                        <a href="#" class="footer-social-link">Instagram</a>
+                                        <a href="#" class="footer-social-link">Linkedin</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-10 col-lg-8 footer-acknowledgement-wrapper">
+                                <div class="footer-acknowledgement">
+                                    <p>We acknowledge the traditional owners of the land on which St Patrick's
+                                        College
+                                        stands, the Wangal clan of the Darug people.</p>
+                                </div>
+                            </div>
+                            <div class="col-2 col-lg-4 footer-arrow-wrapper">
+                                <div class="footer-arrow-up">
+                                    <button class="footer-arrow-btn" id="footerArrowUp" aria-label="Back to top">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 10L20 30M20 10L10 20M20 10L30 20" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="footer-large-text" data-marquee-duration="15" data-marquee-duration-mobile="10">
+                <h1>Let your light shine.&nbsp;</h1>
+            </div>
+            <div class="footer-bottom">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-6 footer-copyright">
+                            <p>© 2025 St Patrick's College Strathfield</p>
+                        </div>
+                        <div class="col-12 col-lg-6 footer-bottom-links d-flex justify-content-between">
+                            <div class="footer-bottom-links-left d-flex align-items-center">
+                                <span>ABN 70 273 700 830</span>
+                                <a href="#">Policies</a>
+                                <a href="#">Complaints</a>
+                                <a href="#">Safeguarding</a>
+                                <a href="#" class="footer-design-link">Design</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-decoration position-absolute w-100">
+                    <img src="assets/images/Tie.png" alt="Footer Decoration" class="w-100 h-100" loading="lazy"
+                        onerror="this.style.display='none'">
+                </div>
+            </div>
+
+        </footer>
+    </div>
+<!-- Search Overlay -->
+    <div class="search-overlay position-fixed" id="searchOverlay">
+        <div class="search-overlay-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-7 search-overlay-col--main">
+                        <h2 class="search-overlay-title">Search St Patrick's College</h2>
+                        <div class="search-overlay-input-wrap position-relative">
+                            <input type="text" id="searchInput" class="search-overlay-input searchInputDemo"
+                                placeholder="Type anything and press enter" autocomplete="off">
+                            <button type="button" class="search-overlay-input-btn is-active position-absolute"
+                                id="searchIconBtn">
+                                <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.3359 8.125C14.3359 4.6875 11.5625 1.875 8.08594 1.875C4.64844 1.875 1.83594 4.6875 1.83594 8.125C1.83594 11.5625 4.64844 14.375 8.08594 14.375C11.5625 14.375 14.3359 11.5625 14.3359 8.125ZM13.1641 14.4922C11.7578 15.5859 10 16.25 8.125 16.25C3.63281 16.25 0 12.6172 0 8.125C0 3.63281 3.63281 0 8.125 0C12.5781 0 16.25 3.63281 16.25 8.125C16.25 10.0391 15.5859 11.7969 14.4922 13.1641L19.7266 18.3984L20.3906 19.0625L19.0625 20.3906L18.3984 19.7266L13.1641 14.4922Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </button>
+                            <button type="button" class="search-overlay-input-btn position-absolute"
+                                id="searchClearBtn">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M0.664062 1.99219L0 1.32812L1.28906 0L1.95312 0.664062L7.85156 6.5625L13.75 0.664062L14.4141 0L15.7422 1.32812L15.0781 1.99219L9.17969 7.89062L15.0781 13.7891L15.7422 14.4531L14.4141 15.7812L13.75 15.1172L7.85156 9.21875L1.95312 15.1172L1.28906 15.7812L0 14.4531L0.664062 13.7891L6.5625 7.89062L0.664062 1.99219Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="search-overlay-results d-none" id="searchResults">
+                            <p class="search-overlay-label">Search Results</p>
+                            <ul class="search-overlay-results-list list-unstyled">
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img
+                                            src="assets/images/Entry Point Card-1.jpg" alt="Principal" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Principal's Welcome</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img
+                                            src="assets/images/Entry Point Card.jpg" alt="Heritage" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Heritage</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img
+                                            src="assets/images/about-image.jpg" alt="Governance" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Governance</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img
+                                            src="assets/images/social-media-image.jpg" alt="Enrolment" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Enrolment</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img src="assets/images/m2.jpg"
+                                            alt="Learning" loading="lazy" onerror="this.style.display='none'"></div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Learning at SPC</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                                <li class="search-overlay-results-item position-relative"><a href="#"
+                                        class="search-overlay-results-item-link position-absolute w-100 h-100"></a>
+                                    <div class="search-overlay-results-item-img"><img src="assets/images/m3.jpg"
+                                            alt="Co-Curricular" loading="lazy" onerror="this.style.display='none'">
+                                    </div>
+                                    <div class="search-overlay-results-item-body">
+                                        <h4 class="search-overlay-results-item-title">Co-Curricular</h4>
+                                        <p>Student life encompasses care across all areas, including spiritual,
+                                            academic, wellbeing, physical and cultural.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5 search-overlay-col--popular" id="searchPopularCol">
+                        <p class="search-overlay-label">Popular Searches</p>
+                        <ul class="search-overlay-popular-list list-unstyled">
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Enrolment</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Latest News</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Events and Calendar</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Book a Tour</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Pay Fees Online</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Canvas Login</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Sport Fixtures</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Old Boys' Network</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Annual Reports</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Term Dates</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Virtual College Tour</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="search-overlay-popular-item">
+                                <a href="#" class="search-overlay-popular-link">
+                                    <span>Contact Us</span>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L7.5 7L1 13" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        function spcRevealPage() {
+            window.spcLoaderDone = true;
+            window.dispatchEvent(new CustomEvent('spc-loader-done'));
+            var loader = document.getElementById('spcLoader');
+            if (!loader) return;
+            if (window.gsap) {
+                window.gsap.to(loader, {
+                    yPercent: -100,
+                    duration: 1.2,
+                    ease: 'power3.inOut',
+                    onComplete: function () {
+                        loader.remove();
+                        document.body.classList.remove('is-loading');
+                    }
+                });
+                return;
+            }
+
+            loader.style.transition = 'transform 1.2s ease-in-out';
+            loader.style.transform = 'translateY(-100%)';
+            setTimeout(function () {
+                loader.remove();
+                document.body.classList.remove('is-loading');
+            }, 1250);
+        }
+
+        function spcRunLoaderArc() {
+            var W = window.innerWidth;
+            var H = window.innerHeight;
+            var startX = -W * 0.15;
+            var startY = H * 1.15;
+            var midX = W * 0.32;
+            var midY = H * 0.15;
+            var endX = W * 0.55;
+            var endY = -H * 0.25;
+
+            window.gsap.set('#spcLoaderSky', { visibility: 'visible', x: startX - W / 2, y: startY - H / 2 });
+            return window.gsap.to('#spcLoaderSky', {
+                duration: 8,
+                ease: 'power1.inOut',
+                motionPath: {
+                    path: [
+                        { x: startX - W / 2, y: startY - H / 2 },
+                        { x: midX - W / 2, y: midY - H / 2 },
+                        { x: endX - W / 2, y: endY - H / 2 }
+                    ],
+                    curviness: 1.5
+                }
+            });
+        }
+
+        window.addEventListener('load', function () {
+            var hasGsap = typeof window.gsap !== 'undefined';
+            var hasMotionPath = typeof window.MotionPathPlugin !== 'undefined';
+
+            if (!hasGsap || !hasMotionPath) {
+                document.getElementById('spcLoaderSky').style.visibility = 'visible';
+                spcRevealPage();
+                return;
+            }
+
+            window.gsap.registerPlugin(window.MotionPathPlugin);
+
+            // Initial states
+            window.gsap.set('#spcLoaderLogo', { autoAlpha: 0 });
+            window.gsap.set('#spcLoaderText', { y: 16, autoAlpha: 0 });
+
+            window.gsap.timeline()
+                // 1. Logo fades in — breathing CSS handles the heartbeat
+                .to('#spcLoaderLogo', { autoAlpha: 1, duration: 1.2, ease: 'power2.out' })
+                // 2. Text fades up
+                .to('#spcLoaderText', { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '+=0.15')
+                // 3. Sun rises
+                .call(function () {
+                    var arc = spcRunLoaderArc();
+                    arc.eventCallback('onComplete', spcRevealPage);
+                }, null, );
+        });
+    </script>
+
+    <script defer src="src/scripts/animations.js"></script>
+    <script defer src="src/scripts/search-data.js"></script>
+    <script defer src="src/scripts/main.js"></script>
+</body>
+
+</html>
