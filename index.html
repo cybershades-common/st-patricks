@@ -1792,7 +1792,7 @@
                 // 1. Logo blurs in
                 .to('#spcLoaderLogo', { autoAlpha: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power3.out' })
                 // 2. Text fades up
-                .to('#spcLoaderText', { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '+=0.15')
+                .to('#spcLoaderText', { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '-=0.9')
                 // 3. Sun rises
                 .call(function () {
                     var arc = spcRunLoaderArc();
