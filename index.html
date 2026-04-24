@@ -35,12 +35,12 @@
         .spc-loader {
             position: fixed;
             inset: 0;
-            background: #fff;
+            background: var(--spc-loader-cream-5);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            z-index: 99999;
+            z-index: 9999;
             will-change: transform;
         }
 
@@ -52,7 +52,6 @@
             height: 100%;
             pointer-events: none;
             will-change: transform;
-            visibility: hidden;
         }
 
         .spc-loader__sunlight {
@@ -63,7 +62,6 @@
             height: 260%;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            opacity: 0.5;
             background: radial-gradient(circle at 50% 50%,
                     var(--spc-loader-flame) 0%,
                     var(--spc-loader-cream-1) 14%,
@@ -77,8 +75,8 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 598px;
-            height: 598px;
+            width: 360px;
+            height: 360px;
             transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
@@ -94,13 +92,13 @@
 
         .spc-loader__sun-halo {
             inset: -60%;
-            background: radial-gradient(circle, rgba(255, 240, 42, .3) 0%, rgba(255, 240, 42, .12) 40%, transparent 70%);
-            filter: blur(48px);
+            background: radial-gradient(circle, rgba(255, 240, 42, .25) 0%, rgba(255, 240, 42, .1) 35%, transparent 65%);
+            filter: blur(30px);
         }
 
         .spc-loader__sun-core {
-            background: radial-gradient(circle, var(--spc-loader-flame) 0%, #fff02add 40%, rgba(255, 240, 42, .3) 65%, transparent 100%);
-            filter: blur(22px);
+            background: radial-gradient(circle, var(--spc-loader-flame) 0%, #fff02add 45%, rgba(255, 240, 42, .4) 75%, transparent 100%);
+            filter: blur(6px);
         }
 
         .spc-loader__logo-outer {
@@ -119,39 +117,6 @@
             object-fit: contain;
             filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
             display: block;
-        }
-
-        .spc-loader__logo-breathe {
-            transform-origin: 50% 50%;
-        }
-
-        @media (max-width: 767px) {
-            .spc-loader__sun-wrap {
-                width: 260px;
-                height: 260px;
-            }
-
-            .spc-loader__sun-halo {
-                filter: blur(28px);
-            }
-
-            .spc-loader__sun-core {
-                filter: blur(12px);
-            }
-
-            .spc-loader__logo-outer {
-                transform: translate(-50%, calc(-50% - 80px));
-            }
-
-            .spc-loader__logo {
-                width: 100px;
-                height: 130px;
-            }
-
-            .spc-loader__text {
-                bottom: 32px;
-                width: 88vw;
-            }
         }
 
         body.is-loading .header {
@@ -182,17 +147,15 @@
 
 <body class="is-loading">
     <div class="spc-loader" id="spcLoader" aria-hidden="true">
-        <div class="spc-loader__sunlight"></div>
         <div class="spc-loader__sky" id="spcLoaderSky">
+            <div class="spc-loader__sunlight"></div>
             <div class="spc-loader__sun-wrap">
                 <div class="spc-loader__sun-halo"></div>
                 <div class="spc-loader__sun-core"></div>
             </div>
         </div>
         <div class="spc-loader__logo-outer" id="spcLoaderLogo">
-            <div class="spc-loader__logo-breathe">
-                <img class="spc-loader__logo" src="assets/icons/Crest-logo.svg" alt="">
-            </div>
+            <img class="spc-loader__logo" src="assets/icons/Crest-logo.svg" alt="">
         </div>
         <p class="spc-loader__text" id="spcLoaderText">We acknowledge the Traditional Custodians of the land on which St Patrick's College stands, the Wangal clan of the Darug People. We pay our respects to Elders past and present, and recognise their enduring connection to Country. As a College community, we are committed to listening, learning and walking together with First Nations peoples in a spirit of respect, justice and reconciliation.</p>
     </div>
@@ -1761,9 +1724,9 @@
             var endX = W * 0.55;
             var endY = -H * 0.25;
 
-            window.gsap.set('#spcLoaderSky', { visibility: 'visible', x: startX - W / 2, y: startY - H / 2 });
+            window.gsap.set('#spcLoaderSky', { x: startX - W / 2, y: startY - H / 2 });
             return window.gsap.to('#spcLoaderSky', {
-                duration: 5.5,
+                duration: 5,
                 ease: 'power1.inOut',
                 motionPath: {
                     path: [
@@ -1781,29 +1744,18 @@
             var hasMotionPath = typeof window.MotionPathPlugin !== 'undefined';
 
             if (!hasGsap || !hasMotionPath) {
-                document.getElementById('spcLoaderSky').style.visibility = 'visible';
                 spcRevealPage();
                 return;
             }
 
             window.gsap.registerPlugin(window.MotionPathPlugin);
 
-            // Initial states
-            window.gsap.set('#spcLoaderLogo', { autoAlpha: 0 });
-            window.gsap.set('#spcLoaderLogo .spc-loader__logo-breathe', { scale: 0.72 });
-            window.gsap.set('#spcLoaderText', { y: 16, autoAlpha: 0 });
-
             window.gsap.timeline()
-                // 1. Logo zooms in (no position shift)
-                .to('#spcLoaderLogo', { autoAlpha: 1, duration: 0.2, ease: 'none' })
-                .to('#spcLoaderLogo .spc-loader__logo-breathe', { scale: 1.2, duration: 1.4, ease: 'back.out(1)' }, '<')
-                // 2. Text fades up
-                .to('#spcLoaderText', { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '-=0.9')
-                // 3. Sun rises
-                .call(function () {
-                    var arc = spcRunLoaderArc();
-                    arc.eventCallback('onComplete', spcRevealPage);
-                }, null, );
+                .to('#spcLoaderLogo', { autoAlpha: 1, duration: 1.6, ease: 'power2.out' })
+                .to('#spcLoaderText', { autoAlpha: 1, duration: 0.9, ease: 'power2.out' }, '-=0.4');
+
+            var arc = spcRunLoaderArc();
+            arc.eventCallback('onComplete', spcRevealPage);
         });
     </script>
 
