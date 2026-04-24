@@ -935,7 +935,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create master timeline
         const heroTimeline = gsap.timeline({
-            delay: 0.3 // Small delay for page to settle
+            delay: 0.8 // Wait for loader to fully clear
         });
 
         // Set initial states - override CSS visibility immediately
@@ -1075,10 +1075,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Initialize hero animations - wait a tiny bit to ensure DOM is fully ready
-    setTimeout(function () {
-        initHeroAnimations();
-    }, 50);
+    // On the home page the loader fires 'spc-loader-done' when it starts revealing.
+    // On other pages (no loader) run immediately.
+    var isHomePage = !!document.getElementById('spcLoader');
+    if (isHomePage) {
+        function runPostLoader() {
+            initHeroAnimations();
+            initHeaderAnimations();
+        }
+        if (window.spcLoaderDone) {
+            runPostLoader();
+        } else {
+            window.addEventListener('spc-loader-done', runPostLoader, { once: true });
+        }
+    } else {
+        setTimeout(function () {
+            initHeroAnimations();
+        }, 50);
+    }
 
     // Dropdown animation: clip-path curtain + stagger items
     function initDropdownAnimations() {
@@ -1233,8 +1247,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 0); // All at position 0 = same time
     }
 
-    // Initialize header animations
-    initHeaderAnimations();
+    // Initialize header animations (home page defers to runPostLoader)
+    if (!document.getElementById('spcLoader')) {
+        initHeaderAnimations();
+    }
 
     // News detail hero navigation reveal
     function initNewsDetailHeroNavigationReveal() {

@@ -35,7 +35,7 @@
         .spc-loader {
             position: fixed;
             inset: 0;
-            background: var(--spc-loader-cream-5);
+            background: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -61,6 +61,7 @@
             width: 260%;
             height: 260%;
             transform: translate(-50%, -50%);
+            opacity: 0.75;
             background: radial-gradient(circle at 50% 50%,
                     var(--spc-loader-flame) 0%,
                     var(--spc-loader-cream-1) 14%,
@@ -74,8 +75,8 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 360px;
-            height: 360px;
+            width: 520px;
+            height: 520px;
             transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
@@ -91,13 +92,13 @@
 
         .spc-loader__sun-halo {
             inset: -60%;
-            background: radial-gradient(circle, rgba(255, 240, 42, .25) 0%, rgba(255, 240, 42, .1) 35%, transparent 65%);
+            background: radial-gradient(circle, rgba(255, 240, 42, .3) 0%, rgba(255, 240, 42, .12) 40%, transparent 70%);
             filter: blur(30px);
         }
 
         .spc-loader__sun-core {
-            background: radial-gradient(circle, var(--spc-loader-flame) 0%, #fff02add 45%, rgba(255, 240, 42, .4) 75%, transparent 100%);
-            filter: blur(6px);
+            background: radial-gradient(circle, var(--spc-loader-flame) 0%, #fff02add 40%, rgba(255, 240, 42, .3) 65%, transparent 100%);
+            filter: blur(12px);
         }
 
         .spc-loader__logo {
@@ -111,6 +112,11 @@
             object-fit: contain;
             filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
             opacity: 0;
+        }
+
+        body.is-loading .header {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .spc-loader__text {
@@ -1675,6 +1681,8 @@
 
     <script>
         function spcRevealPage() {
+            window.spcLoaderDone = true;
+            window.dispatchEvent(new CustomEvent('spc-loader-done'));
             var loader = document.getElementById('spcLoader');
             if (!loader) return;
             if (window.gsap) {
