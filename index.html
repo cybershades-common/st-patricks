@@ -62,7 +62,8 @@
             width: 260%;
             height: 260%;
             transform: translate(-50%, -50%);
-            opacity: 0.75;
+            pointer-events: none;
+            opacity: 0.5;
             background: radial-gradient(circle at 50% 50%,
                     var(--spc-loader-flame) 0%,
                     var(--spc-loader-cream-1) 14%,
@@ -102,17 +103,31 @@
             filter: blur(12px);
         }
 
-        .spc-loader__logo {
+        .spc-loader__logo-outer {
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, calc(-50% - 20px));
             z-index: 5;
+            opacity: 0;
+        }
+
+        @keyframes spcLogoBreathe {
+            0%, 100% { transform: scale(0.98); }
+            50%       { transform: scale(1.06); }
+        }
+
+        .spc-loader__logo-breathe {
+            animation: spcLogoBreathe 3.2s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .spc-loader__logo {
             width: 160px;
             height: 200px;
             object-fit: contain;
             filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
-            opacity: 0;
+            display: block;
         }
 
         @media (max-width: 767px) {
@@ -129,10 +144,13 @@
                 filter: blur(6px);
             }
 
+            .spc-loader__logo-outer {
+                transform: translate(-50%, calc(-50% - 80px));
+            }
+
             .spc-loader__logo {
                 width: 100px;
                 height: 130px;
-                transform: translate(-50%, calc(-50% - 80px));
             }
 
             .spc-loader__text {
@@ -169,14 +187,18 @@
 
 <body class="is-loading">
     <div class="spc-loader" id="spcLoader" aria-hidden="true">
+        <div class="spc-loader__sunlight"></div>
         <div class="spc-loader__sky" id="spcLoaderSky">
-            <div class="spc-loader__sunlight"></div>
             <div class="spc-loader__sun-wrap">
                 <div class="spc-loader__sun-halo"></div>
                 <div class="spc-loader__sun-core"></div>
             </div>
         </div>
-        <img class="spc-loader__logo" id="spcLoaderLogo" src="assets/icons/Crest-logo.svg" alt="">
+        <div class="spc-loader__logo-outer" id="spcLoaderLogo">
+            <div class="spc-loader__logo-breathe">
+                <img class="spc-loader__logo" src="assets/icons/Crest-logo.svg" alt="">
+            </div>
+        </div>
         <p class="spc-loader__text" id="spcLoaderText">We acknowledge the Traditional Custodians of the land on which St Patrick's College stands, the Wangal clan of the Darug People. We pay our respects to Elders past and present, and recognise their enduring connection to Country. As a College community, we are committed to listening, learning and walking together with First Nations peoples in a spirit of respect, justice and reconciliation.</p>
     </div>
 
@@ -1746,7 +1768,7 @@
 
             window.gsap.set('#spcLoaderSky', { visibility: 'visible', x: startX - W / 2, y: startY - H / 2 });
             return window.gsap.to('#spcLoaderSky', {
-                duration: 5,
+                duration: 8,
                 ease: 'power1.inOut',
                 motionPath: {
                     path: [
@@ -1770,12 +1792,21 @@
             }
 
             window.gsap.registerPlugin(window.MotionPathPlugin);
-            window.gsap.timeline()
-                .to('#spcLoaderLogo', { opacity: 1, duration: 1.6, ease: 'power2.out' })
-                .to('#spcLoaderText', { opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.4');
 
-            var arc = spcRunLoaderArc();
-            arc.eventCallback('onComplete', spcRevealPage);
+            // Initial states
+            window.gsap.set('#spcLoaderLogo', { autoAlpha: 0 });
+            window.gsap.set('#spcLoaderText', { y: 16, autoAlpha: 0 });
+
+            window.gsap.timeline()
+                // 1. Logo fades in — breathing CSS handles the heartbeat
+                .to('#spcLoaderLogo', { autoAlpha: 1, duration: 1.2, ease: 'power2.out' })
+                // 2. Text fades up
+                .to('#spcLoaderText', { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '+=0.15')
+                // 3. Sun rises
+                .call(function () {
+                    var arc = spcRunLoaderArc();
+                    arc.eventCallback('onComplete', spcRevealPage);
+                }, null, );
         });
     </script>
 
