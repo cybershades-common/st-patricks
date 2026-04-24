@@ -176,13 +176,13 @@
         }
 
         .spc-loader--animate .spc-loader__logo {
-            animation: spcLoaderLogoIn 1.2s cubic-bezier(.22, .61, .36, 1) 0.45s both;
+            animation: spcLoaderLogoIn 1s cubic-bezier(.22, .61, .36, 1) 0s both;
             opacity: 1;
             transform: scale(1);
         }
 
         .spc-loader--animate .spc-loader__text {
-            animation: spcLoaderTextIn 0.95s cubic-bezier(.22, .61, .36, 1) 0.95s both;
+            animation: spcLoaderTextIn 0.8s cubic-bezier(.22, .61, .36, 1) 0.15s both;
             opacity: 1;
             transform: translate(-50%, 0);
         }
@@ -266,7 +266,7 @@
 </head>
 
 <body class="is-loading">
-    <div class="spc-loader" id="spcLoader" aria-hidden="true">
+    <div class="spc-loader spc-loader--animate" id="spcLoader" aria-hidden="true">
         <div class="spc-loader__sky" id="spcLoaderSky">
             <div class="spc-loader__sunlight"></div>
             <div class="spc-loader__sun-wrap">
@@ -1884,11 +1884,6 @@
             }
 
             window.gsap.registerPlugin(window.MotionPathPlugin);
-            var loader = document.getElementById('spcLoader');
-            if (loader) {
-                loader.classList.add('spc-loader--animate');
-            }
-
             var arc = spcRunLoaderArc();
             arc.eventCallback('onComplete', spcRevealPage);
         });
