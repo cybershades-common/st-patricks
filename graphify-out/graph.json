@@ -14,7 +14,8 @@
       "8": "Community 8",
       "9": "Community 9",
       "10": "Community 10",
-      "11": "Community 11"
+      "11": "Community 11",
+      "12": "Community 12"
     }
   },
   "nodes": [
@@ -87,8 +88,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L225",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_animatesingle",
@@ -96,8 +97,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L251",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_animatemultiple",
@@ -105,8 +106,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L282",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_animchildren",
@@ -168,8 +169,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L606",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_zoomin",
@@ -186,8 +187,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L663",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_linesanimation",
@@ -222,8 +223,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L854",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_writingtext",
@@ -240,8 +241,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L954",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_imagecliptop",
@@ -285,8 +286,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1108",
-      "community": 2,
-      "community_name": "Community 2"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_cardrowstagger",
@@ -294,8 +295,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1195",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_cardrowcliptop",
@@ -303,8 +304,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1396",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_cardrowclipbottom",
@@ -312,8 +313,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1514",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_parallaxbg",
@@ -321,8 +322,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1636",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "main",
@@ -465,15 +466,24 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
       "source_location": "L793",
-      "community": 0,
-      "community_name": "Community 0"
+      "community": 9,
+      "community_name": "Community 9"
+    },
+    {
+      "id": "main_runpostloader",
+      "label": "runPostLoader()",
+      "file_type": "code",
+      "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
+      "source_location": "L1082",
+      "community": 9,
+      "community_name": "Community 9"
     },
     {
       "id": "main_initdropdownanimations",
       "label": "initDropdownAnimations()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1084",
+      "source_location": "L1098",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -482,16 +492,16 @@
       "label": "initHeaderAnimations()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1159",
-      "community": 0,
-      "community_name": "Community 0"
+      "source_location": "L1173",
+      "community": 9,
+      "community_name": "Community 9"
     },
     {
       "id": "main_initnewsdetailheronavigationreveal",
       "label": "initNewsDetailHeroNavigationReveal()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1240",
+      "source_location": "L1256",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -500,7 +510,7 @@
       "label": "initGradientCircleFades()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1269",
+      "source_location": "L1285",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -509,7 +519,7 @@
       "label": "initFooterGradientFade()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1292",
+      "source_location": "L1308",
       "community": 7,
       "community_name": "Community 7"
     },
@@ -518,7 +528,7 @@
       "label": "initSectionGradientFades()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1317",
+      "source_location": "L1333",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -527,16 +537,16 @@
       "label": "wrapWords()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1345",
-      "community": 9,
-      "community_name": "Community 9"
+      "source_location": "L1361",
+      "community": 10,
+      "community_name": "Community 10"
     },
     {
       "id": "main_wrapsentences",
       "label": "wrapSentences()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1374",
+      "source_location": "L1390",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -545,16 +555,16 @@
       "label": "initAboutReveal()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1386",
-      "community": 9,
-      "community_name": "Community 9"
+      "source_location": "L1402",
+      "community": 10,
+      "community_name": "Community 10"
     },
     {
       "id": "main_initlatestnewsslider",
       "label": "initLatestNewsSlider()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1437",
+      "source_location": "L1453",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -563,7 +573,7 @@
       "label": "initStatsAnimation()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1541",
+      "source_location": "L1557",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -572,7 +582,7 @@
       "label": "initContactCardsAnimation()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1704",
+      "source_location": "L1720",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -581,7 +591,7 @@
       "label": "initContactFormDropdowns()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1791",
+      "source_location": "L1807",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -590,7 +600,7 @@
       "label": "initSlides()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1938",
+      "source_location": "L1954",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -599,7 +609,7 @@
       "label": "goToSlide()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1976",
+      "source_location": "L1992",
       "community": 4,
       "community_name": "Community 4"
     },
@@ -608,7 +618,7 @@
       "label": "updateNavState()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2090",
+      "source_location": "L2106",
       "community": 4,
       "community_name": "Community 4"
     },
@@ -617,7 +627,7 @@
       "label": "nextSlide()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2100",
+      "source_location": "L2116",
       "community": 4,
       "community_name": "Community 4"
     },
@@ -626,7 +636,7 @@
       "label": "prevSlide()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2105",
+      "source_location": "L2121",
       "community": 4,
       "community_name": "Community 4"
     },
@@ -635,7 +645,7 @@
       "label": "startVideoPlayback()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2149",
+      "source_location": "L2165",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -644,7 +654,7 @@
       "label": "initFooterMarquee()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2184",
+      "source_location": "L2200",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -653,7 +663,7 @@
       "label": "initGradientCursorEffect()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2339",
+      "source_location": "L2355",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -662,7 +672,7 @@
       "label": "initFooterGradientCursorEffect()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2429",
+      "source_location": "L2445",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -671,7 +681,7 @@
       "label": "initTestimonialsGradientCursorEffect()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2525",
+      "source_location": "L2541",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -680,7 +690,7 @@
       "label": "initLatestNewsHeroSlider()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2617",
+      "source_location": "L2633",
       "community": 4,
       "community_name": "Community 4"
     },
@@ -689,7 +699,7 @@
       "label": "initCocurricularSlider()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2799",
+      "source_location": "L2815",
       "community": 0,
       "community_name": "Community 0"
     },
@@ -698,18 +708,18 @@
       "label": "liveSearch()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2977",
-      "community": 10,
-      "community_name": "Community 10"
+      "source_location": "L2993",
+      "community": 11,
+      "community_name": "Community 11"
     },
     {
       "id": "main_initsearch",
       "label": "initSearch()",
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L3002",
-      "community": 10,
-      "community_name": "Community 10"
+      "source_location": "L3018",
+      "community": 11,
+      "community_name": "Community 11"
     },
     {
       "id": "search_data",
@@ -717,8 +727,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\search-data.js",
       "source_location": "L1",
-      "community": 11,
-      "community_name": "Community 11"
+      "community": 12,
+      "community_name": "Community 12"
     }
   ],
   "links": [
@@ -1948,11 +1958,23 @@
     },
     {
       "source": "main",
+      "target": "main_runpostloader",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
+      "source_location": "L1082",
+      "weight": 1,
+      "_src": "main",
+      "_tgt": "main_runpostloader",
+      "confidence_score": 1
+    },
+    {
+      "source": "main",
       "target": "main_initdropdownanimations",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1084",
+      "source_location": "L1098",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initdropdownanimations",
@@ -1964,7 +1986,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1159",
+      "source_location": "L1173",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initheaderanimations",
@@ -1976,7 +1998,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1240",
+      "source_location": "L1256",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initnewsdetailheronavigationreveal",
@@ -1988,7 +2010,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1269",
+      "source_location": "L1285",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initgradientcirclefades",
@@ -2000,7 +2022,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1292",
+      "source_location": "L1308",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initfootergradientfade",
@@ -2012,7 +2034,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1317",
+      "source_location": "L1333",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initsectiongradientfades",
@@ -2024,7 +2046,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1345",
+      "source_location": "L1361",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_wrapwords",
@@ -2036,7 +2058,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1374",
+      "source_location": "L1390",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_wrapsentences",
@@ -2048,7 +2070,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1386",
+      "source_location": "L1402",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initaboutreveal",
@@ -2060,7 +2082,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1437",
+      "source_location": "L1453",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initlatestnewsslider",
@@ -2072,7 +2094,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1541",
+      "source_location": "L1557",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initstatsanimation",
@@ -2084,7 +2106,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1704",
+      "source_location": "L1720",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initcontactcardsanimation",
@@ -2096,7 +2118,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1791",
+      "source_location": "L1807",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initcontactformdropdowns",
@@ -2108,7 +2130,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1938",
+      "source_location": "L1954",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initslides",
@@ -2120,7 +2142,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1976",
+      "source_location": "L1992",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_gotoslide",
@@ -2132,7 +2154,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2090",
+      "source_location": "L2106",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_updatenavstate",
@@ -2144,7 +2166,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2100",
+      "source_location": "L2116",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_nextslide",
@@ -2156,7 +2178,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2105",
+      "source_location": "L2121",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_prevslide",
@@ -2168,7 +2190,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2149",
+      "source_location": "L2165",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_startvideoplayback",
@@ -2180,7 +2202,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2184",
+      "source_location": "L2200",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initfootermarquee",
@@ -2192,7 +2214,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2339",
+      "source_location": "L2355",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initgradientcursoreffect",
@@ -2204,7 +2226,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2429",
+      "source_location": "L2445",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initfootergradientcursoreffect",
@@ -2216,7 +2238,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2525",
+      "source_location": "L2541",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_inittestimonialsgradientcursoreffect",
@@ -2228,7 +2250,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2617",
+      "source_location": "L2633",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initlatestnewsheroslider",
@@ -2240,7 +2262,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2799",
+      "source_location": "L2815",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initcocurricularslider",
@@ -2252,7 +2274,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2977",
+      "source_location": "L2993",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_livesearch",
@@ -2264,7 +2286,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L3002",
+      "source_location": "L3018",
       "weight": 1,
       "_src": "main",
       "_tgt": "main_initsearch",
@@ -2391,12 +2413,36 @@
       "confidence_score": 1
     },
     {
+      "source": "main_runpostloader",
+      "target": "main_initheroanimations",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
+      "source_location": "L1083",
+      "weight": 1,
+      "_src": "main_runpostloader",
+      "_tgt": "main_initheroanimations",
+      "confidence_score": 1
+    },
+    {
+      "source": "main_runpostloader",
+      "target": "main_initheaderanimations",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
+      "source_location": "L1084",
+      "weight": 1,
+      "_src": "main_runpostloader",
+      "_tgt": "main_initheaderanimations",
+      "confidence_score": 1
+    },
+    {
       "source": "main_initfootergradientfade",
       "target": "main_ismobile",
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1297",
+      "source_location": "L1313",
       "weight": 1,
       "_src": "main_initfootergradientfade",
       "_tgt": "main_ismobile",
@@ -2408,7 +2454,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1393",
+      "source_location": "L1409",
       "weight": 1,
       "_src": "main_initaboutreveal",
       "_tgt": "main_wrapwords",
@@ -2420,7 +2466,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L1982",
+      "source_location": "L1998",
       "weight": 1,
       "_src": "main_gotoslide",
       "_tgt": "main_updatenavstate",
@@ -2432,7 +2478,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2102",
+      "source_location": "L2118",
       "weight": 1,
       "_src": "main_nextslide",
       "_tgt": "main_gotoslide",
@@ -2444,7 +2490,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2107",
+      "source_location": "L2123",
       "weight": 1,
       "_src": "main_prevslide",
       "_tgt": "main_gotoslide",
@@ -2456,7 +2502,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L2730",
+      "source_location": "L2746",
       "weight": 1,
       "_src": "main_initlatestnewsheroslider",
       "_tgt": "main_updatenavstate",
@@ -2468,7 +2514,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\main.js",
-      "source_location": "L3257",
+      "source_location": "L3273",
       "weight": 1,
       "_src": "main_initsearch",
       "_tgt": "main_livesearch",

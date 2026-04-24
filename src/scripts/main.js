@@ -935,7 +935,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create master timeline
         const heroTimeline = gsap.timeline({
-            delay: 0.4
+            delay: 0.7
         });
 
         // Set initial states - override CSS visibility immediately

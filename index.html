@@ -121,6 +121,10 @@
             display: block;
         }
 
+        .spc-loader__logo-breathe {
+            transform-origin: 50% 50%;
+        }
+
         @media (max-width: 767px) {
             .spc-loader__sun-wrap {
                 width: 260px;
@@ -1785,12 +1789,14 @@
             window.gsap.registerPlugin(window.MotionPathPlugin);
 
             // Initial states
-            window.gsap.set('#spcLoaderLogo', { autoAlpha: 0, filter: 'blur(18px)' });
+            window.gsap.set('#spcLoaderLogo', { autoAlpha: 0 });
+            window.gsap.set('#spcLoaderLogo .spc-loader__logo-breathe', { scale: 0.72 });
             window.gsap.set('#spcLoaderText', { y: 16, autoAlpha: 0 });
 
             window.gsap.timeline()
-                // 1. Logo blurs in
-                .to('#spcLoaderLogo', { autoAlpha: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power3.out' })
+                // 1. Logo zooms in (no position shift)
+                .to('#spcLoaderLogo', { autoAlpha: 1, duration: 0.2, ease: 'none' })
+                .to('#spcLoaderLogo .spc-loader__logo-breathe', { scale: 1.2, duration: 1.4, ease: 'back.out(1)' }, '<')
                 // 2. Text fades up
                 .to('#spcLoaderText', { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '-=0.9')
                 // 3. Sun rises
