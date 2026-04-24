@@ -1874,7 +1874,7 @@
         // Pre-position immediately to avoid center flicker before GSAP kicks in.
         spcPrepositionSky();
 
-        window.addEventListener('load', function () {
+        function spcStartLoader() {
             var hasGsap = typeof window.gsap !== 'undefined';
             var hasMotionPath = typeof window.MotionPathPlugin !== 'undefined';
 
@@ -1886,7 +1886,13 @@
             window.gsap.registerPlugin(window.MotionPathPlugin);
             var arc = spcRunLoaderArc();
             arc.eventCallback('onComplete', spcRevealPage);
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', spcStartLoader, { once: true });
+        } else {
+            spcStartLoader();
+        }
     </script>
 
     <script defer src="src/scripts/animations.js"></script>
