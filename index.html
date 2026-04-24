@@ -52,6 +52,7 @@
             height: 100%;
             pointer-events: none;
             will-change: transform;
+            visibility: hidden;
         }
 
         .spc-loader__sunlight {
@@ -112,6 +113,32 @@
             object-fit: contain;
             filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
             opacity: 0;
+        }
+
+        @media (max-width: 767px) {
+            .spc-loader__sun-wrap {
+                width: 260px;
+                height: 260px;
+            }
+
+            .spc-loader__sun-halo {
+                filter: blur(16px);
+            }
+
+            .spc-loader__sun-core {
+                filter: blur(6px);
+            }
+
+            .spc-loader__logo {
+                width: 100px;
+                height: 130px;
+                transform: translate(-50%, calc(-50% - 80px));
+            }
+
+            .spc-loader__text {
+                bottom: 32px;
+                width: 88vw;
+            }
         }
 
         body.is-loading .header {
@@ -1717,7 +1744,7 @@
             var endX = W * 0.55;
             var endY = -H * 0.25;
 
-            window.gsap.set('#spcLoaderSky', { x: startX - W / 2, y: startY - H / 2 });
+            window.gsap.set('#spcLoaderSky', { visibility: 'visible', x: startX - W / 2, y: startY - H / 2 });
             return window.gsap.to('#spcLoaderSky', {
                 duration: 5,
                 ease: 'power1.inOut',
@@ -1737,6 +1764,7 @@
             var hasMotionPath = typeof window.MotionPathPlugin !== 'undefined';
 
             if (!hasGsap || !hasMotionPath) {
+                document.getElementById('spcLoaderSky').style.visibility = 'visible';
                 spcRevealPage();
                 return;
             }
