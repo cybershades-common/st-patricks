@@ -118,6 +118,8 @@
             object-fit: contain;
             filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
             display: block;
+            transform-origin: 50% 50%;
+            will-change: transform, opacity;
         }
 
         body.is-loading .header {
@@ -142,6 +144,68 @@
             text-wrap: pretty;
             opacity: 0;
             z-index: 5;
+            will-change: transform, opacity;
+        }
+
+        @media (max-width: 991px) {
+            .spc-loader__logo-outer {
+                top: 40%;
+                transform: translate(-50%, -50%);
+            }
+
+            .spc-loader__logo {
+                width: 9.9rem;
+                height: 12.3rem;
+            }
+
+            .spc-loader__text {
+                bottom: clamp(6rem, 13vh, 9rem);
+                width: min(92vw, 42rem);
+                padding-inline: 0.75rem;
+                font-size: clamp(1rem, 3.2vw, 1.25rem);
+                line-height: 1.35;
+            }
+
+            .spc-loader__sun-halo {
+                inset: -72%;
+                filter: blur(28px);
+            }
+
+            .spc-loader__sun-core {
+                background: radial-gradient(circle,
+                        rgba(255, 240, 42, 0.9) 0%,
+                        rgba(255, 240, 42, 0.62) 40%,
+                        rgba(255, 240, 42, 0.2) 72%,
+                        rgba(255, 240, 42, 0) 100%);
+                filter: blur(8px);
+            }
+        }
+
+        @media (max-width: 575px) {
+            .spc-loader__logo-outer {
+                top: 37%;
+            }
+
+            .spc-loader__logo {
+                width: 8.7rem;
+                height: 10.8rem;
+            }
+
+            .spc-loader__text {
+                width: 94vw;
+                font-size: clamp(0.95rem, 4.1vw, 1.1rem);
+                line-height: 1.33;
+            }
+        }
+
+        @media (max-height: 720px) {
+            .spc-loader__logo-outer {
+                top: 34%;
+            }
+
+            .spc-loader__text {
+                bottom: 4.25rem;
+            }
         }
     </style>
 </head>
@@ -1765,9 +1829,13 @@
 
             window.gsap.registerPlugin(window.MotionPathPlugin);
 
+            window.gsap.set('#spcLoaderText', { y: 20 });
+            window.gsap.set('#spcLoaderLogo .spc-loader__logo', { scale: 0.95 });
+
             window.gsap.timeline()
-                .to('#spcLoaderLogo', { autoAlpha: 1, duration: 1.6, ease: 'power2.out' })
-                .to('#spcLoaderText', { autoAlpha: 1, duration: 0.9, ease: 'power2.out' }, '-=0.4');
+                .to('#spcLoaderLogo', { autoAlpha: 1, duration: 1.2, ease: 'power2.out' })
+                .to('#spcLoaderLogo .spc-loader__logo', { scale: 1, duration: 1.2, ease: 'power3.out' }, '<')
+                .to('#spcLoaderText', { autoAlpha: 1, y: 0, duration: 0.95, ease: 'power3.out' }, '-=0.42');
 
             var arc = spcRunLoaderArc();
             arc.eventCallback('onComplete', spcRevealPage);
