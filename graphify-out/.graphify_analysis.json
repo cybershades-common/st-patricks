@@ -29,11 +29,11 @@
       "animations_gsapanimations",
       "animations_gsapanimations_animatemultiple",
       "animations_gsapanimations_btnclipreveal",
-      "animations_gsapanimations_cardrowclipbottom",
       "animations_gsapanimations_finalizeclipreveal",
       "animations_gsapanimations_isheroelement",
       "animations_gsapanimations_linesanimation",
       "animations_gsapanimations_linesscrub",
+      "animations_gsapanimations_maskedtitle",
       "animations_gsapanimations_maskedword",
       "animations_gsapanimations_slideright",
       "animations_gsapanimations_splitlines"
@@ -54,9 +54,9 @@
     ],
     "3": [
       "animations_gsapanimations_animatesingle",
+      "animations_gsapanimations_cardrowclipbottom",
       "animations_gsapanimations_cardrowcliptop",
       "animations_gsapanimations_cardrowstagger",
-      "animations_gsapanimations_maskedtitle",
       "animations_gsapanimations_parallaxbg",
       "animations_gsapanimations_wordreveal"
     ],
