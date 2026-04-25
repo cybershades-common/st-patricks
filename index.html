@@ -106,18 +106,19 @@
         .spc-loader__sun-core {
             background:
                 radial-gradient(circle at 50% 50%,
-                    rgba(255, 255, 255, 0.95) 0%,
-                    rgba(255, 252, 220, 0.55) 6%,
-                    rgba(255, 245, 170, 0) 18%),
+                    rgba(255, 244, 150, 0.55) 0%,
+                    rgba(255, 230, 110, 0.3) 12%,
+                    rgba(255, 220, 90, 0) 28%),
                 radial-gradient(circle at 50% 50%,
-                    #fff8c8 0%,
-                    #ffeb6a 18%,
-                    #ffcf2a 40%,
-                    #ff9b1c 64%,
-                    #ff6a14 82%,
-                    rgba(255, 80, 0, 0.7) 93%,
+                    #ffe97a 0%,
+                    #ffdd55 16%,
+                    #ffc428 36%,
+                    rgba(255, 152, 28, 0.85) 56%,
+                    rgba(255, 106, 20, 0.55) 72%,
+                    rgba(255, 80, 0, 0.28) 86%,
+                    rgba(255, 60, 0, 0.08) 94%,
                     rgba(255, 60, 0, 0) 100%);
-            filter: blur(1.2px);
+            filter: blur(8px);
             box-shadow:
                 0 0 60px 8px rgba(255, 190, 50, 0.55),
                 0 0 140px 28px rgba(255, 120, 20, 0.32),
@@ -135,7 +136,7 @@
 
         .spc-loader__sun-core::before {
             background:
-                radial-gradient(ellipse 60% 40% at 32% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 32% 30%, rgba(255, 240, 140, 0.22) 0%, transparent 60%),
                 radial-gradient(ellipse 18% 12% at 65% 58%, rgba(255, 120, 20, 0.35) 0%, transparent 70%),
                 radial-gradient(ellipse 14% 10% at 40% 70%, rgba(255, 90, 10, 0.3) 0%, transparent 70%),
                 radial-gradient(ellipse 10% 8% at 70% 35%, rgba(255, 110, 20, 0.28) 0%, transparent 70%);
@@ -145,12 +146,13 @@
 
         .spc-loader__sun-core::after {
             background: radial-gradient(circle at 50% 50%,
-                    transparent 62%,
-                    rgba(255, 90, 10, 0.18) 78%,
-                    rgba(255, 60, 0, 0.32) 92%,
-                    rgba(180, 30, 0, 0.45) 100%);
+                    transparent 55%,
+                    rgba(255, 110, 20, 0.1) 70%,
+                    rgba(255, 80, 0, 0.16) 84%,
+                    rgba(255, 60, 0, 0.12) 94%,
+                    rgba(255, 60, 0, 0) 100%);
             mix-blend-mode: multiply;
-            filter: blur(2px);
+            filter: blur(10px);
         }
 
         .spc-loader__logo-outer {
@@ -278,24 +280,25 @@
             }
 
             .spc-loader__sun-core {
+                inset: 22%;
                 background:
                     radial-gradient(circle at 50% 50%,
-                        rgba(255, 255, 255, 0.85) 0%,
-                        rgba(255, 250, 210, 0.45) 7%,
-                        transparent 20%),
+                        rgba(255, 244, 150, 0.5) 0%,
+                        rgba(255, 230, 110, 0.28) 14%,
+                        rgba(255, 220, 90, 0) 32%),
                     radial-gradient(circle at 50% 50%,
-                        #fff7be 0%,
-                        #ffe85a 20%,
-                        #ffc824 44%,
-                        #ff9418 68%,
-                        #ff6612 86%,
-                        rgba(255, 80, 0, 0.55) 96%,
+                        #ffe97a 0%,
+                        #ffdd55 14%,
+                        rgba(255, 196, 40, 0.85) 32%,
+                        rgba(255, 152, 28, 0.6) 52%,
+                        rgba(255, 106, 20, 0.32) 70%,
+                        rgba(255, 80, 0, 0.12) 86%,
                         rgba(255, 60, 0, 0) 100%);
-                filter: blur(3px);
+                filter: blur(14px);
                 box-shadow:
-                    0 0 40px 6px rgba(255, 190, 50, 0.5),
-                    0 0 100px 22px rgba(255, 120, 20, 0.28),
-                    0 0 180px 50px rgba(255, 70, 0, 0.14);
+                    0 0 40px 6px rgba(255, 190, 50, 0.45),
+                    0 0 100px 22px rgba(255, 120, 20, 0.24),
+                    0 0 180px 50px rgba(255, 70, 0, 0.12);
             }
         }
 
@@ -1910,7 +1913,7 @@
 
             window.gsap.set('#spcLoaderSky', { x: startX - W / 2, y: startY - H / 2 });
             return window.gsap.to('#spcLoaderSky', {
-                duration: 5,
+                duration: 6,
                 ease: 'power1.inOut',
                 motionPath: {
                     path: [
