@@ -277,8 +277,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1083",
-      "community": 2,
-      "community_name": "Community 2"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_imagefadein",
@@ -295,8 +295,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1195",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_cardrowcliptop",
@@ -304,8 +304,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1396",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_cardrowclipbottom",
@@ -313,8 +313,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1514",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_parallaxbg",

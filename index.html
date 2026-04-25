@@ -93,12 +93,63 @@
 
         .spc-loader__sun-halo {
             inset: -60%;
-            background: radial-gradient(circle, rgba(255, 240, 42, .25) 0%, rgba(255, 240, 42, .1) 35%, transparent 65%);
-            filter: blur(16px);
+            background:
+                radial-gradient(circle,
+                    rgba(255, 210, 90, 0.38) 0%,
+                    rgba(255, 150, 40, 0.22) 22%,
+                    rgba(255, 95, 10, 0.12) 42%,
+                    rgba(255, 60, 0, 0.05) 60%,
+                    transparent 72%);
+            filter: blur(22px);
         }
 
         .spc-loader__sun-core {
-            background: radial-gradient(circle, var(--spc-loader-flame) 0%, #fff02add 45%, rgba(255, 240, 42, .4) 75%, transparent 100%);
+            background:
+                radial-gradient(circle at 50% 50%,
+                    rgba(255, 255, 255, 0.95) 0%,
+                    rgba(255, 252, 220, 0.55) 6%,
+                    rgba(255, 245, 170, 0) 18%),
+                radial-gradient(circle at 50% 50%,
+                    #fff8c8 0%,
+                    #ffeb6a 18%,
+                    #ffcf2a 40%,
+                    #ff9b1c 64%,
+                    #ff6a14 82%,
+                    rgba(255, 80, 0, 0.7) 93%,
+                    rgba(255, 60, 0, 0) 100%);
+            filter: blur(1.2px);
+            box-shadow:
+                0 0 60px 8px rgba(255, 190, 50, 0.55),
+                0 0 140px 28px rgba(255, 120, 20, 0.32),
+                0 0 240px 60px rgba(255, 70, 0, 0.16);
+        }
+
+        .spc-loader__sun-core::before,
+        .spc-loader__sun-core::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .spc-loader__sun-core::before {
+            background:
+                radial-gradient(ellipse 60% 40% at 32% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 60%),
+                radial-gradient(ellipse 18% 12% at 65% 58%, rgba(255, 120, 20, 0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 14% 10% at 40% 70%, rgba(255, 90, 10, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse 10% 8% at 70% 35%, rgba(255, 110, 20, 0.28) 0%, transparent 70%);
+            mix-blend-mode: overlay;
+            filter: blur(3px);
+        }
+
+        .spc-loader__sun-core::after {
+            background: radial-gradient(circle at 50% 50%,
+                    transparent 62%,
+                    rgba(255, 90, 10, 0.18) 78%,
+                    rgba(255, 60, 0, 0.32) 92%,
+                    rgba(180, 30, 0, 0.45) 100%);
+            mix-blend-mode: multiply;
             filter: blur(2px);
         }
 
@@ -223,16 +274,28 @@
 
             .spc-loader__sun-halo {
                 inset: -72%;
-                filter: blur(28px);
+                filter: blur(30px);
             }
 
             .spc-loader__sun-core {
-                background: radial-gradient(circle,
-                        rgba(255, 240, 42, 0.9) 0%,
-                        rgba(255, 240, 42, 0.62) 40%,
-                        rgba(255, 240, 42, 0.2) 72%,
-                        rgba(255, 240, 42, 0) 100%);
-                filter: blur(8px);
+                background:
+                    radial-gradient(circle at 50% 50%,
+                        rgba(255, 255, 255, 0.85) 0%,
+                        rgba(255, 250, 210, 0.45) 7%,
+                        transparent 20%),
+                    radial-gradient(circle at 50% 50%,
+                        #fff7be 0%,
+                        #ffe85a 20%,
+                        #ffc824 44%,
+                        #ff9418 68%,
+                        #ff6612 86%,
+                        rgba(255, 80, 0, 0.55) 96%,
+                        rgba(255, 60, 0, 0) 100%);
+                filter: blur(3px);
+                box-shadow:
+                    0 0 40px 6px rgba(255, 190, 50, 0.5),
+                    0 0 100px 22px rgba(255, 120, 20, 0.28),
+                    0 0 180px 50px rgba(255, 70, 0, 0.14);
             }
         }
 
