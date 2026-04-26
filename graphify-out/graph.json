@@ -88,8 +88,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L225",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_animatesingle",
@@ -97,8 +97,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L251",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_animatemultiple",
@@ -106,8 +106,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L282",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_animchildren",
@@ -169,8 +169,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L606",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_zoomin",
@@ -187,8 +187,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L663",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_linesanimation",
@@ -214,8 +214,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L791",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_maskedword",
@@ -223,8 +223,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L854",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_writingtext",
@@ -241,8 +241,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L954",
-      "community": 1,
-      "community_name": "Community 1"
+      "community": 3,
+      "community_name": "Community 3"
     },
     {
       "id": "animations_gsapanimations_imagecliptop",
@@ -277,8 +277,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1083",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 2,
+      "community_name": "Community 2"
     },
     {
       "id": "animations_gsapanimations_imagefadein",
@@ -304,8 +304,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1396",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "animations_gsapanimations_cardrowclipbottom",
@@ -322,8 +322,8 @@
       "file_type": "code",
       "source_file": "D:\\Kailash\\st-patricks\\src\\scripts\\animations.js",
       "source_location": "L1636",
-      "community": 3,
-      "community_name": "Community 3"
+      "community": 1,
+      "community_name": "Community 1"
     },
     {
       "id": "main",

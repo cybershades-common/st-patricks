@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controlled Logo Text Sun Loader</title>
+
+  <style>
+    :root {
+      /* =====================================================
+         MASTER CONTROL PANEL
+         Change only these values
+      ===================================================== */
+
+      /* Loader background */
+      --loader-bg: #f6f3ec;
+
+      /* Whole loader wipe */
+      --wipe-start-delay: 9000ms;
+      --wipe-duration: 1200ms;
+
+      /* Logo timing */
+      --logo-delay: 200ms;
+      --logo-duration: 1300ms;
+      --logo-start-scale: 0.7;
+      --logo-end-scale: 1;
+      --logo-size: clamp(90px, 10vw, 150px);
+
+      /* Text timing */
+      --text-delay: 1250ms;
+      --text-duration: 1400ms;
+      --text-start-y: 26px;
+      --text-max-width: 980px;
+      --text-size: clamp(16px, 1.9vw, 27px);
+      --text-line-height: 1.46;
+      --text-color: #24211c;
+
+      /* Content position */
+      --content-padding: 34px;
+      --content-gap: clamp(28px, 4vw, 48px);
+
+      /* Sun / gradient timing */
+      --sun-delay: 1500ms;
+      --sun-duration: 50000ms;
+
+      /* Sun size and movement */
+      --sun-size: 320px;
+      --sun-start-scale: 0.05;
+      --sun-end-scale: 9.4;
+
+      /*
+        Sun origin:
+        JS automatically sets these values to the logo centre.
+        You usually do not need to touch these.
+      */
+      --sun-origin-x: 50vw;
+      --sun-origin-y: 50vh;
+
+      /*
+        Extra movement after starting from logo centre:
+        0px = grows exactly from logo centre.
+        Positive Y = starts slightly lower.
+        Negative Y = starts slightly higher.
+      */
+      --sun-start-x: 0px;
+      --sun-start-y: 0px;
+      --sun-end-x: 0px;
+      --sun-end-y: 0px;
+
+      /* Sun opacity */
+      --sun-start-opacity: 0;
+      --sun-visible-opacity: 1;
+      --sun-final-opacity: 0.46;
+
+      /* When sun starts becoming lighter */
+      --lighten-start-delay: 4700ms;
+      --lighten-duration: 2600ms;
+
+      /* Lighter yellow sun colours */
+      --spc-sun-center-soft: #fff8a8;
+      --spc-sun-center: #fff15c;
+      --spc-sun-center-end: 16%;
+
+      --spc-sun-peak: #ffe45c;
+      --spc-sun-peak-at: 36%;
+
+      --spc-sun-limb: #ffd84d;
+      --spc-sun-limb-at: 58%;
+
+      --spc-sun-fade: rgba(255, 222, 88, 0.18);
+
+      /* Final soft light wash behind logo/text */
+      --light-wash-color: rgba(255, 248, 185, 0.52);
+      --light-wash-final-opacity: 1;
+
+      /* Blur controls */
+      --sun-outer-blur-start: 20px;
+      --sun-outer-blur-end: 42px;
+
+      --sun-inner-blur-start: 6px;
+      --sun-inner-blur-end: 20px;
+
+      /* Brightness controls */
+      --sun-outer-final-brightness: 1.3;
+      --sun-inner-final-brightness: 1.38;
+
+      /* Final softness */
+      --sun-outer-final-opacity: 0.3;
+      --sun-inner-final-opacity: 0.28;
+
+      /* Website reveal */
+      --website-reveal-duration: 900ms;
+    }
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    body.loaded {
+      overflow: auto;
+    }
+
+    /* =====================================================
+       WEBSITE CONTENT
+    ===================================================== */
+
+    .website {
+      min-height: 100vh;
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .website-content {
+      max-width: 900px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity var(--website-reveal-duration) ease,
+        transform var(--website-reveal-duration) ease;
+    }
+
+    body.loaded .website-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .website h1 {
+      font-size: clamp(44px, 8vw, 120px);
+      line-height: 0.95;
+      letter-spacing: -4px;
+      color: #111111;
+      margin-bottom: 18px;
+    }
+
+    .website p {
+      font-size: 18px;
+      color: #666666;
+      line-height: 1.6;
+    }
+
+    /* =====================================================
+       FULL SCREEN LOADER
+    ===================================================== */
+
+    .site-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--loader-bg);
+      overflow: hidden;
+
+      transform: translate3d(0, 0, 0);
+      transition:
+        transform var(--wipe-duration)
+        cubic-bezier(0.76, 0, 0.24, 1);
+
+      will-change: transform;
+    }
+
+    .site-loader.loader-wipe-up {
+      transform: translate3d(0, -100%, 0);
+    }
+
+    /* =====================================================
+       GRADIENT LAYER
+       This stays BEHIND logo and text
+    ===================================================== */
+
+    .loader-gradient-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .sun-loader {
+      position: absolute;
+
+      /* Sun now starts from logo centre */
+      top: var(--sun-origin-y);
+      left: var(--sun-origin-x);
+
+      width: var(--sun-size);
+      height: var(--sun-size);
+      border-radius: 50%;
+
+      opacity: var(--sun-start-opacity);
+
+      transform:
+        translate3d(
+          calc(-50% + var(--sun-start-x)),
+          calc(-50% + var(--sun-start-y)),
+          0
+        )
+        scale(var(--sun-start-scale));
+
+      transform-origin: center center;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+
+      animation:
+        sunRiseAndGrow
+        var(--sun-duration)
+        cubic-bezier(0.16, 1, 0.3, 1)
+        forwards;
+
+      animation-delay: var(--sun-delay);
+    }
+
+    .sun-loader::before {
+      content: "";
+      position: absolute;
+      inset: -34%;
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          var(--spc-sun-center-soft) 0%,
+          var(--spc-sun-center) var(--spc-sun-center-end),
+          var(--spc-sun-peak) var(--spc-sun-peak-at),
+          var(--spc-sun-limb) var(--spc-sun-limb-at),
+          var(--spc-sun-fade) 74%,
+          rgba(255, 242, 150, 0.08) 86%,
+          rgba(255, 255, 255, 0) 100%
+        );
+
+      filter:
+        blur(var(--sun-outer-blur-start))
+        brightness(1);
+
+      transform: translateZ(0);
+      will-change: opacity, filter;
+
+      animation:
+        sunOuterLighten
+        var(--lighten-duration)
+        ease
+        forwards;
+
+      animation-delay: var(--lighten-start-delay);
+    }
+
+    .sun-loader::after {
+      content: "";
+      position: absolute;
+      inset: 3%;
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          var(--spc-sun-center-soft) 0%,
+          var(--spc-sun-center) 20%,
+          var(--spc-sun-peak) var(--spc-sun-peak-at),
+          var(--spc-sun-limb) var(--spc-sun-limb-at),
+          rgba(255, 225, 88, 0.14) 72%,
+          rgba(255, 255, 255, 0) 96%
+        );
+
+      filter:
+        blur(var(--sun-inner-blur-start))
+        brightness(1);
+
+      transform: translateZ(0);
+      will-change: opacity, filter;
+
+      animation:
+        sunInnerLighten
+        var(--lighten-duration)
+        ease
+        forwards;
+
+      animation-delay: var(--lighten-start-delay);
+    }
+
+    .loader-light-wash {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: var(--light-wash-color);
+      opacity: 0;
+      pointer-events: none;
+
+      animation:
+        lightWashIn
+        var(--lighten-duration)
+        ease
+        forwards;
+
+      animation-delay: var(--lighten-start-delay);
+    }
+
+    /* =====================================================
+       LOGO + TEXT LAYER
+       This stays ABOVE the gradient
+    ===================================================== */
+
+    .loader-content {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: var(--content-padding);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .loader-logo {
+      width: var(--logo-size);
+      height: auto;
+
+      opacity: 0;
+      transform: scale(var(--logo-start-scale));
+      transform-origin: center center;
+
+      animation:
+        logoSmoothZoom
+        var(--logo-duration)
+        cubic-bezier(0.16, 1, 0.3, 1)
+        forwards;
+
+      animation-delay: var(--logo-delay);
+    }
+
+    .loader-text {
+      margin-top: var(--content-gap);
+      max-width: var(--text-max-width);
+
+      font-size: var(--text-size);
+      line-height: var(--text-line-height);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--text-color);
+
+      opacity: 0;
+      transform: translateY(var(--text-start-y));
+
+      animation:
+        textSmoothFadeUp
+        var(--text-duration)
+        cubic-bezier(0.16, 1, 0.3, 1)
+        forwards;
+
+      animation-delay: var(--text-delay);
+    }
+
+    /* =====================================================
+       ANIMATIONS
+    ===================================================== */
+
+    @keyframes logoSmoothZoom {
+      0% {
+        opacity: 0;
+        transform: scale(var(--logo-start-scale));
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(var(--logo-end-scale));
+      }
+    }
+
+    @keyframes textSmoothFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(var(--text-start-y));
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes sunRiseAndGrow {
+      0% {
+        opacity: var(--sun-start-opacity);
+        transform:
+          translate3d(
+            calc(-50% + var(--sun-start-x)),
+            calc(-50% + var(--sun-start-y)),
+            0
+          )
+          scale(var(--sun-start-scale));
+      }
+
+      10% {
+        opacity: var(--sun-visible-opacity);
+      }
+
+      100% {
+        opacity: var(--sun-final-opacity);
+        transform:
+          translate3d(
+            calc(-50% + var(--sun-end-x)),
+            calc(-50% + var(--sun-end-y)),
+            0
+          )
+          scale(var(--sun-end-scale));
+      }
+    }
+
+    @keyframes sunOuterLighten {
+      0% {
+        opacity: 1;
+        filter:
+          blur(var(--sun-outer-blur-start))
+          brightness(1);
+      }
+
+      100% {
+        opacity: var(--sun-outer-final-opacity);
+        filter:
+          blur(var(--sun-outer-blur-end))
+          brightness(var(--sun-outer-final-brightness));
+      }
+    }
+
+    @keyframes sunInnerLighten {
+      0% {
+        opacity: 1;
+        filter:
+          blur(var(--sun-inner-blur-start))
+          brightness(1);
+      }
+
+      100% {
+        opacity: var(--sun-inner-final-opacity);
+        filter:
+          blur(var(--sun-inner-blur-end))
+          brightness(var(--sun-inner-final-brightness));
+      }
+    }
+
+    @keyframes lightWashIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: var(--light-wash-final-opacity);
+      }
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 768px) {
+      :root {
+        --logo-size: clamp(78px, 24vw, 112px);
+
+        --text-size: clamp(14px, 4.2vw, 19px);
+        --text-max-width: 92vw;
+        --text-line-height: 1.52;
+
+        --sun-size: 240px;
+        --sun-end-scale: 10.8;
+
+        --wipe-start-delay: 9800ms;
+      }
+
+      .website h1 {
+        letter-spacing: -2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       LOADER
+  ===================================================== -->
+
+  <div class="site-loader" id="siteLoader">
+
+    <!-- Gradient stays behind logo/text -->
+    <div class="loader-gradient-layer">
+      <div class="sun-loader"></div>
+      <div class="loader-light-wash"></div>
+    </div>
+
+    <!-- Logo and text stay visible above the gradient -->
+    <div class="loader-content">
+
+      <!-- Dummy SVG logo: replace this with your real logo -->
+      <svg
+        class="loader-logo"
+        id="loaderLogo"
+        viewBox="0 0 120 120"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Dummy logo"
+      >
+        <circle cx="60" cy="60" r="54" fill="#24211C" />
+        <path
+          d="M37 78V38H62C75 38 84 45 84 58C84 71 75 78 62 78H37ZM50 66H61C67 66 71 63 71 58C71 53 67 50 61 50H50V66Z"
+          fill="#F6F3EC"
+        />
+      </svg>
+
+      <p class="loader-text">
+        We acknowledge the Traditional Custodians of the land on which St Patrick's College stands, the Wangal clan of the Darug People. We pay our respects to Elders past and present, and recognise their enduring connection to Country. As a College community, we are committed to listening, learning and walking together with First Nations peoples in a spirit of respect, justice and reconciliation
+      </p>
+
+    </div>
+  </div>
+
+  <!-- =====================================================
+       WEBSITE CONTENT
+  ===================================================== -->
+
+  <main class="website">
+    <div class="website-content">
+      <h1>Your Website</h1>
+      <p>Replace this section with your real website content.</p>
+    </div>
+  </main>
+
+  <script>
+    const loader = document.getElementById("siteLoader");
+    const logo = document.getElementById("loaderLogo");
+    const root = document.documentElement;
+    const rootStyles = getComputedStyle(root);
+
+    function getMilliseconds(variableName) {
+      const value = rootStyles.getPropertyValue(variableName).trim();
+
+      if (value.endsWith("ms")) return parseFloat(value);
+      if (value.endsWith("s")) return parseFloat(value) * 1000;
+
+      return parseFloat(value);
+    }
+
+    function setSunOriginToLogoCenter() {
+      if (!logo) return;
+
+      const logoRect = logo.getBoundingClientRect();
+
+      const logoCenterX = logoRect.left + logoRect.width / 2;
+      const logoCenterY = logoRect.top + logoRect.height / 2;
+
+      root.style.setProperty("--sun-origin-x", `${logoCenterX}px`);
+      root.style.setProperty("--sun-origin-y", `${logoCenterY}px`);
+    }
+
+    const wipeStartDelay = getMilliseconds("--wipe-start-delay");
+    const wipeDuration = getMilliseconds("--wipe-duration");
+
+    /*
+      Set sun origin immediately.
+      Because logo uses transform scale, the centre point stays the same.
+      We still recalculate a few times to be extra safe.
+    */
+    setSunOriginToLogoCenter();
+
+    requestAnimationFrame(() => {
+      setSunOriginToLogoCenter();
+    });
+
+    window.addEventListener("load", () => {
+      setSunOriginToLogoCenter();
+
+      setTimeout(() => {
+        setSunOriginToLogoCenter();
+      }, 400);
+
+      setTimeout(() => {
+        setSunOriginToLogoCenter();
+      }, 1400);
+
+      setTimeout(() => {
+        loader.classList.add("loader-wipe-up");
+        document.body.classList.add("loaded");
+      }, wipeStartDelay);
+
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, wipeStartDelay + wipeDuration + 150);
+    });
+
+    window.addEventListener("resize", () => {
+      setSunOriginToLogoCenter();
+    });
+  </script>
+
+</body>
+</html>

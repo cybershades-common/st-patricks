@@ -1,4 +1,4 @@
-# Graph Report - .  (2026-04-25)
+# Graph Report - .  (2026-04-26)
 
 ## Corpus Check
 - 3 files · ~0 words
@@ -34,15 +34,15 @@ Cohesion: 0.1
 Nodes (1): main.js
 
 ### Community 1 - "Community 1"
-Cohesion: 0.24
+Cohesion: 0.28
 Nodes (2): animations.js, GSAPAnimations
 
 ### Community 2 - "Community 2"
-Cohesion: 0.29
+Cohesion: 0.27
 Nodes (0): 
 
 ### Community 3 - "Community 3"
-Cohesion: 0.33
+Cohesion: 0.4
 Nodes (0): 
 
 ### Community 4 - "Community 4"
