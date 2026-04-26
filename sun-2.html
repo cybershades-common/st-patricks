@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St Patrick's College Loader</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Newsreader:opsz,wght@6..72,400;500&display=swap");
+
+    :root {
+      --primary-yellow: #ffdd00;
+      --primary-yellow-bright: #fff02a;
+      --primary-gold: #84754e;
+      --primary-gold-bright: #a29061;
+      --primary-gold-1: #dad2be;
+      --primary-gold-3: #eeeae0;
+      --primary-gold-4: #f6f3ec;
+
+      --text-main: var(--primary-gold);
+      --text-soft: var(--primary-gold-bright);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: var(--text-main);
+      background:
+        radial-gradient(92vmax 92vmax at 85% 15%, rgba(255, 240, 42, 0.34) 0%, rgba(255, 240, 42, 0) 58%),
+        radial-gradient(100vmax 100vmax at 12% 88%, rgba(218, 210, 190, 0.52) 0%, rgba(218, 210, 190, 0) 60%),
+        linear-gradient(165deg, var(--primary-gold-4) 0%, var(--primary-gold-3) 56%, var(--primary-gold-1) 100%);
+      font-family: "Newsreader", Georgia, serif;
+    }
+
+    .sun-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 26vmax;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255, 240, 42, 0.62) 0%, rgba(255, 221, 0, 0.35) 48%, rgba(255, 221, 0, 0) 100%);
+      filter: blur(1px);
+      z-index: 0;
+    }
+
+    .loader {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: clamp(1.25rem, 4vw, 3rem);
+      isolation: isolate;
+    }
+
+    .loader-bloom {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 42vmax;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.02);
+      opacity: 0;
+      background:
+        radial-gradient(circle,
+          rgba(255, 240, 42, 0.94) 0%,
+          rgba(255, 221, 0, 0.76) 28%,
+          rgba(255, 221, 0, 0.46) 48%,
+          rgba(162, 144, 97, 0.18) 68%,
+          rgba(162, 144, 97, 0.05) 80%,
+          rgba(162, 144, 97, 0) 100%);
+      filter: blur(2px);
+      z-index: 0;
+      animation: center-wave 5.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+    }
+
+    .loader-bloom.layer-2 {
+      animation-delay: -1.4s;
+    }
+
+    .loader-bloom.layer-3 {
+      animation-delay: -2.8s;
+    }
+
+    .loader-bloom.layer-4 {
+      width: 48vmax;
+      animation-delay: -4.2s;
+    }
+
+    .loader-content {
+      position: relative;
+      z-index: 1;
+      width: min(940px, 100%);
+      text-align: center;
+      padding: clamp(1.2rem, 4vw, 2.3rem);
+      text-shadow: 0 2px 12px rgba(255, 221, 0, 0.24);
+    }
+
+    .logo-wrap {
+      display: grid;
+      place-items: center;
+      margin-bottom: clamp(1rem, 2.4vw, 1.35rem);
+    }
+
+    .logo-wrap img {
+      width: clamp(100px, 18vw, 190px);
+      height: auto;
+      filter:
+        drop-shadow(0 0 18px rgba(255, 221, 0, 0.52))
+        drop-shadow(0 8px 20px rgba(162, 144, 97, 0.28));
+    }
+
+    .acknowledgement {
+      margin: 0 auto;
+      max-width: 74ch;
+      line-height: 1.58;
+      font-size: clamp(0.92rem, 1.7vw, 1.06rem);
+      color: var(--text-soft);
+      text-wrap: pretty;
+    }
+
+    .loading-line {
+      width: min(380px, 72%);
+      height: 2px;
+      margin: clamp(1rem, 2.4vw, 1.35rem) auto 0;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(132, 117, 78, 0.24);
+    }
+
+    .loading-line::before {
+      content: "";
+      display: block;
+      width: 45%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(255, 221, 0, 0), rgba(255, 240, 42, 0.95), rgba(255, 221, 0, 0));
+      animation: sweep 2.7s ease-in-out infinite;
+    }
+
+    @keyframes center-wave {
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(0.02);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.58;
+      }
+      45% {
+        opacity: 0.36;
+      }
+      99.9% {
+        transform: translate(-50%, -50%) scale(2.55);
+        opacity: 0;
+      }
+    }
+
+    @keyframes sweep {
+      0% {
+        transform: translateX(-150%);
+      }
+      100% {
+        transform: translateX(320%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .loader-bloom,
+      .loading-line::before {
+        animation: none;
+      }
+
+      .loader-bloom {
+        transform: translate(-50%, -50%) scale(1.25);
+        opacity: 0.35;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="loader" aria-label="Page loading">
+    <div class="sun-core" aria-hidden="true"></div>
+    <div class="loader-bloom layer-1" aria-hidden="true"></div>
+    <div class="loader-bloom layer-2" aria-hidden="true"></div>
+    <div class="loader-bloom layer-3" aria-hidden="true"></div>
+    <div class="loader-bloom layer-4" aria-hidden="true"></div>
+
+    <article class="loader-content">
+      <div class="logo-wrap">
+        <img src="Crest-logo.svg" alt="St Patrick's College crest logo" />
+      </div>
+      <p class="acknowledgement">
+        We acknowledge the Traditional Custodians of the land on which St Patrick's College stands, the Wangal clan of the Darug People. We pay our respects to Elders past and present, and recognise their enduring connection to Country. As a College community, we are committed to listening, learning and walking together with First Nations peoples in a spirit of respect, justice and reconciliation.
+      </p>
+      <div class="loading-line" aria-hidden="true"></div>
+    </article>
+  </section>
+</body>
+</html>

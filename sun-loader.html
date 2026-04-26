@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun Loader — Let Your Light Shine</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #f6f3ec;
+            overflow: hidden;
+            font-family: 'Helvetica Neue LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        /* ═══════════════════════════════════════════
+           DESIGN TOKENS — from _variables.less
+        ═════════════════════════���═════════════════ */
+        :root {
+            --primary-yellow:        #ffdd00;
+            --primary-yellow-bright: #fff02a;
+            --primary-gold:          #84754e;
+            --primary-gold-bright:   #a29061;
+            --primary-gold-1:        #dad2be;
+            --primary-gold-3:        #eeeae0;
+            --primary-gold-4:        #f6f3ec;
+            --basic-white:           #ffffff;
+            --basic-black:           #27251f;
+            --font-weight-light:     300;
+            --font-weight-regular:   400;
+            --font-size-b1:          1.25rem;
+            --line-height-b1:        1.4;
+            --letter-spacing-label-2: 0.3125rem;
+
+            /* ── Sun bloom config ── tune these ── */
+            --spl-bg:           var(--primary-gold-4);
+            --spl-core:         #ffe566;                    /* hottest point */
+            --spl-inner:        var(--primary-yellow-bright); /* #fff02a */
+            --spl-mid:          var(--primary-yellow);        /* #ffdd00 */
+            --spl-outer:        #ffb822;                    /* warm golden edge */
+            --spl-ray:          rgba(255, 220, 60, 0.08);   /* ray brightness */
+            --spl-halo:         rgba(255, 245, 160, 0.55);  /* inner halo */
+        }
+
+        /* ═══════════════════════════════════════════
+           LOADER SHELL
+        ═══════════════════════════════════════════ */
+        .spl-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--spl-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 9999;
+            will-change: transform;
+        }
+
+        /* ═══════════════════════════════════════════
+           BLOOM — rises from the bottom like a sunrise
+        ═══════════════════════════════════════════ */
+        .spl-loader__bloom {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 240vmax;
+            height: 240vmax;
+            transform: translate(-50%, -50%);
+            transform-origin: center center;
+            border-radius: 50%;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        .spl-loader__bloom-fill {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 50%,
+                var(--spl-core)                0%,
+                var(--spl-inner)               14%,
+                var(--spl-mid)                 28%,
+                var(--spl-outer)               44%,
+                rgba(255, 170, 30, 0.28)       57%,
+                rgba(255, 145, 10, 0.09)       70%,
+                transparent                    80%);
+        }
+
+        /* Rotating light rays */
+        .spl-loader__rays {
+            position: absolute;
+            inset: -5%;
+            border-radius: 50%;
+            background: repeating-conic-gradient(
+                var(--spl-ray) 0deg 14deg,
+                transparent   14deg 26deg
+            );
+            filter: blur(12px);
+            will-change: transform;
+            opacity: 0;
+        }
+
+        /* Inner halo — tight bright ring around the disc */
+        .spl-loader__halo {
+            position: absolute;
+            inset: 30%;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                var(--spl-halo) 0%,
+                rgba(255, 235, 80, 0.25) 45%,
+                transparent 72%);
+            filter: blur(16px);
+        }
+
+
+        /* ═══════════════════════════════════════════
+           LOGO
+        ═══════════════════════════════════════════ */
+        .spl-loader__logo-wrap {
+            position: relative;
+            z-index: 5;
+            opacity: 0;
+            margin-bottom: 20px;
+            will-change: opacity, transform;
+        }
+
+        .spl-loader__logo {
+            width: 160px;
+            height: 200px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 0 24px rgba(255, 185, 20, 0.45))
+                    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.12));
+        }
+
+
+        /* ═══════════════════════════════════════════
+           ACKNOWLEDGEMENT TEXT
+        ═══════════════════════════════════════════ */
+        .spl-loader__text {
+            position: absolute;
+            left: 50%;
+            bottom: 100px;
+            transform: translateX(-50%);
+            width: min(900px, 86vw);
+            margin: 0;
+            text-align: center;
+            font-size: var(--font-size-b1);
+            font-weight: var(--font-weight-light);
+            line-height: var(--line-height-b1);
+            letter-spacing: 0;
+            color: var(--basic-black);
+            text-wrap: pretty;
+            opacity: 0;
+            z-index: 5;
+            will-change: opacity, transform;
+        }
+
+        /* ════════════════════════════���══════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════ */
+        @media (max-width: 991px) {
+            .spl-loader__logo { width: 9.9rem; height: 12.3rem; }
+
+
+            .spl-loader__text {
+                bottom: clamp(6rem, 13vh, 9rem);
+                width: min(92vw, 42rem);
+                padding-inline: 0.75rem;
+                font-size: clamp(1rem, 3.2vw, 1.25rem);
+                line-height: 1.35;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .spl-loader__logo { width: 8.7rem; height: 10.8rem; }
+            .spl-loader__text {
+                width: 94vw;
+                font-size: clamp(0.95rem, 4.1vw, 1.1rem);
+                line-height: 1.33;
+            }
+        }
+
+        @media (max-height: 720px) {
+            .spl-loader__text { bottom: 4.25rem; }
+        }
+    </style>
+</head>
+<body class="is-loading">
+
+    <div class="spl-loader" id="splLoader" aria-hidden="true">
+
+        <!-- Sun bloom — grows from centre -->
+        <div class="spl-loader__bloom" id="splBloom">
+            <div class="spl-loader__rays" id="splRays"></div>
+            <div class="spl-loader__bloom-fill"></div>
+            <div class="spl-loader__halo"></div>
+        </div>
+
+        <!-- Logo revealed as light rises -->
+        <div class="spl-loader__logo-wrap" id="splLogo">
+            <img class="spl-loader__logo" src="assets/icons/Crest-logo.svg" alt="St Patrick's College">
+        </div>
+
+
+        <!-- Acknowledgement -->
+        <p class="spl-loader__text" id="splText">We acknowledge the Traditional Custodians of the land on which
+            St Patrick's College stands, the Wangal clan of the Darug People. We pay our respects to Elders past
+            and present, and recognise their enduring connection to Country. As a College community, we are
+            committed to listening, learning and walking together with First Nations peoples in a spirit of
+            respect, justice and reconciliation.</p>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        function splRevealPage() {
+            window.splLoaderDone = true;
+            window.dispatchEvent(new CustomEvent('spl-loader-done'));
+
+            var loader = document.getElementById('splLoader');
+            if (!loader) return;
+
+            if (window.gsap) {
+                window.gsap.to(loader, {
+                    yPercent: -100,
+                    duration: 1.2,
+                    ease: 'power3.inOut',
+                    onComplete: function () {
+                        loader.remove();
+                        document.body.classList.remove('is-loading');
+                    }
+                });
+                return;
+            }
+
+            loader.style.transition = 'transform 1.2s ease-in-out';
+            loader.style.transform = 'translateY(-100%)';
+            setTimeout(function () {
+                loader.remove();
+                document.body.classList.remove('is-loading');
+            }, 1250);
+        }
+
+        function splStartLoader() {
+            var bloom   = document.getElementById('splBloom');
+            var rays    = document.getElementById('splRays');
+            var logo    = document.getElementById('splLogo');
+
+            var text    = document.getElementById('splText');
+
+            if (!window.gsap) {
+                splRevealPage();
+                return;
+            }
+
+            /* Rays spin continuously */
+            window.gsap.to(rays, {
+                rotation: 360,
+                duration: 20,
+                ease: 'none',
+                repeat: -1
+            });
+
+            var tl = window.gsap.timeline({ onComplete: splRevealPage });
+
+            /* 1 ── Bloom grows at a perfectly steady pace — sine.inOut is
+                     barely-there ease, no visible fast/slow phases */
+            tl.fromTo(bloom,
+                { scale: 0, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 4.5, ease: 'sine.inOut' }
+            )
+
+            /* 2 ── Rays drift in quietly during the bloom */
+            .to(rays, { opacity: 1, duration: 2.5, ease: 'none' }, 0.8)
+
+            /* 3 ── Logo and text fade in almost together — 0.2s apart */
+            .fromTo(logo,
+                { opacity: 0, y: 12 },
+                { opacity: 1, y: 0, duration: 1.1, ease: 'power1.out' },
+                3.0
+            )
+            .fromTo(text,
+                { opacity: 0, y: 10 },
+                { opacity: 1, y: 0, duration: 1.1, ease: 'power1.out' },
+                3.2
+            )
+
+            /* 4 ── Hold */
+            .to({}, { duration: 3.0 });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', splStartLoader, { once: true });
+        } else {
+            splStartLoader();
+        }
+    </script>
+
+</body>
+</html>
