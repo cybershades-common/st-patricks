@@ -26,6 +26,39 @@
             --spc-loader-cream-3: #f7efb8;
             --spc-loader-cream-4: #faf3c4;
             --spc-loader-cream-5: #fbf6d8;
+
+            /* ════════════════════════════════════════
+               SUN CONTROLS — tweak any variable below
+               ════════════════════════════════════════
+
+               DISC — the circular sun body
+            ─────────────────────────────────────── */
+            --spc-sun-center:      #ffe066;            /* centre colour */
+            --spc-sun-center-end:  12%;                /* how far centre colour holds */
+            --spc-sun-peak:        #ffaa33;            /* mid-disc colour */
+            --spc-sun-peak-at:     34%;                /* position of peak colour */
+            --spc-sun-limb:        #ff8833;            /* limb-darkening colour */
+            --spc-sun-limb-at:     56%;                /* position of limb colour */
+            --spc-sun-fade:        rgba(215,95,0,0.30); /* disc fade-out colour */
+            --spc-sun-fade-at:     68%;                /* disc fade-out position */
+            --spc-sun-disc-end:    76%;                /* fully transparent beyond here */
+            --spc-sun-blur:        2px;                /* disc edge softness (keep ≤4px) */
+
+            /* CORONA — box-shadow glow layers (inner → outer)
+            ─────────────────────────────────────── */
+            --spc-sun-rim:         rgba(255,170,50,0.50);  /* 1 — tight rim around disc */
+            --spc-sun-corona-1:    rgba(255,140,30,0.80);  /* 2 — inner glow */
+            --spc-sun-corona-2:    rgba(230,120,10,0.38);  /* 3 — inner corona */
+            --spc-sun-corona-3:    rgba(210,85,0,  0.14);  /* 4 — mid corona */
+            --spc-sun-corona-4:    rgba(180,55,0,  0.05);  /* 5 — far atmosphere */
+
+            /* HALO — soft atmospheric layer behind the disc
+            ─────────────────────────────────────── */
+            --spc-sun-halo-size:   -70%;               /* inset — more negative = bigger */
+            --spc-sun-halo-c1:     rgba(255,190,70,0.38);  /* halo centre colour */
+            --spc-sun-halo-c2:     rgba(225,120,20,0.16);  /* halo mid colour */
+            --spc-sun-halo-c3:     rgba(195,70,0,  0.05);  /* halo edge colour */
+            --spc-sun-halo-blur:   32px;               /* halo softness */
         }
 
         body.is-loading {
@@ -92,67 +125,30 @@
         }
 
         .spc-loader__sun-halo {
-            inset: -60%;
-            background:
-                radial-gradient(circle,
-                    rgba(255, 210, 90, 0.38) 0%,
-                    rgba(255, 150, 40, 0.22) 22%,
-                    rgba(255, 95, 10, 0.12) 42%,
-                    rgba(255, 60, 0, 0.05) 60%,
-                    transparent 72%);
-            filter: blur(22px);
+            inset: -70%;
+            background: radial-gradient(circle,
+                rgba(255, 238, 100, 0.38) 0%,
+                rgba(255, 212, 55, 0.16) 36%,
+                rgba(255, 182, 18, 0.05) 62%,
+                transparent 76%);
+            filter: blur(32px);
         }
 
         .spc-loader__sun-core {
-            background:
-                radial-gradient(circle at 50% 50%,
-                    rgba(255, 244, 150, 0.55) 0%,
-                    rgba(255, 230, 110, 0.3) 12%,
-                    rgba(255, 220, 90, 0) 28%),
-                radial-gradient(circle at 50% 50%,
-                    #ffe97a 0%,
-                    #ffdd55 16%,
-                    #ffc428 36%,
-                    rgba(255, 152, 28, 0.85) 56%,
-                    rgba(255, 106, 20, 0.55) 72%,
-                    rgba(255, 80, 0, 0.28) 86%,
-                    rgba(255, 60, 0, 0.08) 94%,
-                    rgba(255, 60, 0, 0) 100%);
-            filter: blur(8px);
-            box-shadow:
-                0 0 60px 8px rgba(255, 190, 50, 0.55),
-                0 0 140px 28px rgba(255, 120, 20, 0.32),
-                0 0 240px 60px rgba(255, 70, 0, 0.16);
-        }
-
-        .spc-loader__sun-core::before,
-        .spc-loader__sun-core::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .spc-loader__sun-core::before {
-            background:
-                radial-gradient(ellipse 60% 40% at 32% 30%, rgba(255, 240, 140, 0.22) 0%, transparent 60%),
-                radial-gradient(ellipse 18% 12% at 65% 58%, rgba(255, 120, 20, 0.35) 0%, transparent 70%),
-                radial-gradient(ellipse 14% 10% at 40% 70%, rgba(255, 90, 10, 0.3) 0%, transparent 70%),
-                radial-gradient(ellipse 10% 8% at 70% 35%, rgba(255, 110, 20, 0.28) 0%, transparent 70%);
-            mix-blend-mode: overlay;
-            filter: blur(3px);
-        }
-
-        .spc-loader__sun-core::after {
             background: radial-gradient(circle at 50% 50%,
-                    transparent 55%,
-                    rgba(255, 110, 20, 0.1) 70%,
-                    rgba(255, 80, 0, 0.16) 84%,
-                    rgba(255, 60, 0, 0.12) 94%,
-                    rgba(255, 60, 0, 0) 100%);
-            mix-blend-mode: multiply;
-            filter: blur(10px);
+                var(--spc-sun-center)       0%,
+                var(--spc-sun-center)       12%,
+                var(--spc-sun-peak)         34%,
+                var(--spc-sun-limb)         56%,
+                rgba(255, 148, 0, 0.45)     68%,
+                transparent                 76%);
+            filter: blur(var(--spc-sun-blur));
+            box-shadow:
+                0 0 0 3px   rgba(255, 195, 30, 0.5),
+                0 0 22px 8px   rgba(255, 210, 50, 0.88),
+                0 0 60px 24px  rgba(255, 175, 18, 0.46),
+                0 0 120px 50px rgba(255, 138, 0, 0.18),
+                0 0 210px 90px rgba(255, 108, 0, 0.06);
         }
 
         .spc-loader__logo-outer {
@@ -274,31 +270,18 @@
                 line-height: 1.35;
             }
 
+            .spc-loader__sun-wrap {
+                width: clamp(200px, 55vw, 300px);
+                height: clamp(200px, 55vw, 300px);
+            }
+
             .spc-loader__sun-halo {
                 inset: -72%;
-                filter: blur(30px);
+                filter: blur(26px);
             }
 
             .spc-loader__sun-core {
-                inset: 22%;
-                background:
-                    radial-gradient(circle at 50% 50%,
-                        rgba(255, 244, 150, 0.5) 0%,
-                        rgba(255, 230, 110, 0.28) 14%,
-                        rgba(255, 220, 90, 0) 32%),
-                    radial-gradient(circle at 50% 50%,
-                        #ffe97a 0%,
-                        #ffdd55 14%,
-                        rgba(255, 196, 40, 0.85) 32%,
-                        rgba(255, 152, 28, 0.6) 52%,
-                        rgba(255, 106, 20, 0.32) 70%,
-                        rgba(255, 80, 0, 0.12) 86%,
-                        rgba(255, 60, 0, 0) 100%);
-                filter: blur(14px);
-                box-shadow:
-                    0 0 40px 6px rgba(255, 190, 50, 0.45),
-                    0 0 100px 22px rgba(255, 120, 20, 0.24),
-                    0 0 180px 50px rgba(255, 70, 0, 0.12);
+                filter: blur(var(--spc-sun-blur));
             }
         }
 
