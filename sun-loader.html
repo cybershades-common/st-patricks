@@ -97,12 +97,12 @@
             border-radius: 50%;
             background: radial-gradient(circle at 50% 50%,
                 var(--spl-core)                0%,
-                var(--spl-inner)               14%,
-                var(--spl-mid)                 28%,
-                var(--spl-outer)               44%,
-                rgba(255, 210, 40, 0.20)       57%,
-                rgba(255, 190, 20, 0.07)       70%,
-                transparent                    80%);
+                var(--spl-inner)               13%,
+                var(--spl-mid)                 26%,
+                rgba(255, 208, 0, 0.55)        38%,
+                rgba(255, 225, 80, 0.16)       52%,
+                rgba(255, 240, 160, 0.04)      64%,
+                transparent                    74%);
         }
 
         /* Rotating light rays */
@@ -283,12 +283,9 @@
 
             var tl = window.gsap.timeline({ onComplete: splRevealPage });
 
-            /* 1 ── Bloom grows at a perfectly steady pace — sine.inOut is
-                     barely-there ease, no visible fast/slow phases */
-            tl.fromTo(bloom,
-                { scale: 0, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 4.5, ease: 'sine.inOut' }
-            )
+            /* 1 ── Bloom: scale grows linearly the full duration, opacity in fast */
+            tl.fromTo(bloom, { scale: 0 }, { scale: 1.3, duration: 4.5, ease: 'none' })
+              .fromTo(bloom, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'power1.out' }, 0)
 
             /* 2 ── Rays drift in quietly during the bloom */
             .to(rays, { opacity: 1, duration: 2.5, ease: 'none' }, 0.8)
