@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sun Loader — Let Your Light Shine</title>
+    <link rel="preload" href="assets/fonts/HelveticaNeueLTProLt.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/HelveticaNeueLTProRoman.woff2" as="font" type="font/woff2" crossorigin>
     <style>
+        @font-face {
+            font-family: 'Helvetica Neue LT Pro';
+            src: url('assets/fonts/HelveticaNeueLTProLt.woff2') format('woff2'),
+                 url('assets/fonts/HelveticaNeueLTProLt.woff') format('woff');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Helvetica Neue LT Pro';
+            src: url('assets/fonts/HelveticaNeueLTProRoman.woff2') format('woff2'),
+                 url('assets/fonts/HelveticaNeueLTProRoman.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -34,12 +52,12 @@
 
             /* ── Sun bloom config ── tune these ── */
             --spl-bg:           var(--primary-gold-4);
-            --spl-core:         #ffe566;                    /* hottest point */
+            --spl-core:         #fffbe0;                    /* hottest point */
             --spl-inner:        var(--primary-yellow-bright); /* #fff02a */
             --spl-mid:          var(--primary-yellow);        /* #ffdd00 */
-            --spl-outer:        #ffb822;                    /* warm golden edge */
-            --spl-ray:          rgba(255, 220, 60, 0.08);   /* ray brightness */
-            --spl-halo:         rgba(255, 245, 160, 0.55);  /* inner halo */
+            --spl-outer:        #ffd000;                    /* warm golden edge */
+            --spl-ray:          rgba(255, 230, 60, 0.07);   /* ray brightness */
+            --spl-halo:         rgba(255, 248, 180, 0.50);  /* inner halo */
         }
 
         /* ═══════════════════════════════════════════
@@ -82,8 +100,8 @@
                 var(--spl-inner)               14%,
                 var(--spl-mid)                 28%,
                 var(--spl-outer)               44%,
-                rgba(255, 170, 30, 0.28)       57%,
-                rgba(255, 145, 10, 0.09)       70%,
+                rgba(255, 210, 40, 0.20)       57%,
+                rgba(255, 190, 20, 0.07)       70%,
                 transparent                    80%);
         }
 
