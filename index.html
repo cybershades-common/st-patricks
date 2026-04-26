@@ -252,6 +252,16 @@
         }
 
         @media (max-width: 61.9375rem) {
+            .spc-loader__sunlight {
+                -webkit-transform: translate3d(-50%, -50%, 0);
+                transform: translate3d(-50%, -50%, 0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                background-repeat: no-repeat;
+                filter: blur(0.015625rem);
+                outline: 0.0625rem solid transparent;
+            }
+
             .spc-loader__logo-outer {
                 top: calc(40% - 2rem);
                 transform: translate(-50%, -50%);
