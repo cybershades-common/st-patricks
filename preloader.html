@@ -6,39 +6,26 @@
             --spc-loader-cream-3: #f7efb8;
             --spc-loader-cream-4: #faf3c4;
             --spc-loader-cream-5: #fbf6d8;
-
-            /* ════════════════════════════════════════
-               SUN CONTROLS — tweak any variable below
-               ════════════════════════════════════════
-
-               DISC — the circular sun body
-            ─────────────────────────────────────── */
-            --spc-sun-center:      #fff02a;            /* centre colour — primary-yellow-bright */
-            --spc-sun-center-end:  12%;                /* how far centre colour holds */
-            --spc-sun-peak:        #ffdd00;            /* mid-disc colour — primary-yellow */
-            --spc-sun-peak-at:     34%;                /* position of peak colour */
-            --spc-sun-limb:        #ffd000;            /* limb-darkening colour */
-            --spc-sun-limb-at:     56%;                /* position of limb colour */
-            --spc-sun-fade:        rgba(255,208,0,0.22); /* disc fade-out colour */
-            --spc-sun-fade-at:     68%;                /* disc fade-out position */
-            --spc-sun-disc-end:    76%;                /* fully transparent beyond here */
-            --spc-sun-blur:        2px;                /* disc edge softness (keep ≤4px) */
-
-            /* CORONA — box-shadow glow layers (inner → outer)
-            ─────────────────────────────────────── */
-            --spc-sun-rim:         rgba(255,221,0, 0.55);  /* 1 — tight rim around disc */
-            --spc-sun-corona-1:    rgba(255,221,0, 0.65);  /* 2 — inner glow */
-            --spc-sun-corona-2:    rgba(255,208,0, 0.28);  /* 3 — inner corona */
-            --spc-sun-corona-3:    rgba(240,190,0, 0.09);  /* 4 — mid corona */
-            --spc-sun-corona-4:    rgba(220,170,0, 0.03);  /* 5 — far atmosphere */
-
-            /* HALO — soft atmospheric layer behind the disc
-            ─────────────────────────────────────── */
-            --spc-sun-halo-size:   -70%;               /* inset — more negative = bigger */
-            --spc-sun-halo-c1:     rgba(255,240,42,0.35);  /* halo centre — #fff02a */
-            --spc-sun-halo-c2:     rgba(255,221,0, 0.14);  /* halo mid — #ffdd00 */
-            --spc-sun-halo-c3:     rgba(240,200,0, 0.04);  /* halo edge colour */
-            --spc-sun-halo-blur:   32px;               /* halo softness */
+            --spc-sun-center:      #fff02a;
+            --spc-sun-center-end:  12%;
+            --spc-sun-peak:        #ffdd00;
+            --spc-sun-peak-at:     34%;
+            --spc-sun-limb:        #ffd000;
+            --spc-sun-limb-at:     56%;
+            --spc-sun-fade:        rgba(255,208,0,0.22);
+            --spc-sun-fade-at:     68%;
+            --spc-sun-disc-end:    76%;
+            --spc-sun-blur:        0.125rem;
+            --spc-sun-rim:         rgba(255,221,0, 0.55);
+            --spc-sun-corona-1:    rgba(255,221,0, 0.65);
+            --spc-sun-corona-2:    rgba(255,208,0, 0.28);
+            --spc-sun-corona-3:    rgba(240,190,0, 0.09);
+            --spc-sun-corona-4:    rgba(220,170,0, 0.03);
+            --spc-sun-halo-size:   -70%;
+            --spc-sun-halo-c1:     rgba(255,240,42,0.35);
+            --spc-sun-halo-c2:     rgba(255,221,0, 0.14);
+            --spc-sun-halo-c3:     rgba(240,200,0, 0.04);
+            --spc-sun-halo-blur:   2rem;
         }
 
         body.is-loading {
@@ -89,8 +76,8 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 250px;
-            height: 250px;
+            width: 15.625rem;
+            height: 15.625rem;
             transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
@@ -111,7 +98,7 @@
                 rgba(255, 212, 55, 0.16) 36%,
                 rgba(255, 182, 18, 0.05) 62%,
                 transparent 76%);
-            filter: blur(32px);
+            filter: blur(2rem);
         }
 
         .spc-loader__sun-core {
@@ -124,28 +111,28 @@
                 transparent                 76%);
             filter: blur(var(--spc-sun-blur));
             box-shadow:
-                0 0 0 3px   rgba(255, 195, 30, 0.5),
-                0 0 22px 8px   rgba(255, 210, 50, 0.88),
-                0 0 60px 24px  rgba(255, 175, 18, 0.46),
-                0 0 120px 50px rgba(255, 138, 0, 0.18),
-                0 0 210px 90px rgba(255, 108, 0, 0.06);
+                0 0 0 0.1875rem rgba(255, 195, 30, 0.5),
+                0 0 1.375rem 0.5rem rgba(255, 210, 50, 0.88),
+                0 0 3.75rem 1.5rem rgba(255, 175, 18, 0.46),
+                0 0 7.5rem 3.125rem rgba(255, 138, 0, 0.18),
+                0 0 13.125rem 5.625rem rgba(255, 108, 0, 0.06);
         }
 
         .spc-loader__logo-outer {
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(-50%, calc(-50% - 20px));
+            transform: translate(-50%, calc(-50% - 4rem));
             z-index: 5;
             opacity: 0;
         }
 
 
         .spc-loader__logo {
-            width: 160px;
-            height: 200px;
+            width: 10rem;
+            height: 12.5rem;
             object-fit: contain;
-            filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
+            filter: drop-shadow(0 0.25rem 1.125rem rgba(0, 0, 0, .18));
             display: block;
             transform-origin: 50% 50%;
             will-change: transform, opacity;
@@ -159,9 +146,9 @@
         .spc-loader__text {
             position: absolute;
             left: 50%;
-            bottom: 100px;
+            bottom: 8.125rem;
             transform: translateX(-50%);
-            width: min(900px, 86vw);
+            width: min(56.25rem, 86vw);
             margin: 0;
             text-align: center;
             font-family: var(--font-family-helvetica-neue);
@@ -179,19 +166,19 @@
         @keyframes spcLoaderLogoIn {
             from {
                 opacity: 0;
-                transform: scale(0.95);
+                transform: translateY(1.875rem);
             }
 
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
             }
         }
 
         @keyframes spcLoaderTextIn {
             from {
                 opacity: 0;
-                transform: translate(-50%, 20px);
+                transform: translate(-50%, 1.875rem);
             }
 
             to {
@@ -205,13 +192,13 @@
         }
 
         .spc-loader--animate .spc-loader__logo {
-            animation: spcLoaderLogoIn 1s cubic-bezier(.22, .61, .36, 1) 0s both;
+            animation: spcLoaderLogoIn 1s cubic-bezier(.22, .61, .36, 1) 0.35s both;
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(0);
         }
 
         .spc-loader--animate .spc-loader__text {
-            animation: spcLoaderTextIn 0.8s cubic-bezier(.22, .61, .36, 1) 0.15s both;
+            animation: spcLoaderTextIn 0.8s cubic-bezier(.22, .61, .36, 1) 0.55s both;
             opacity: 1;
             transform: translate(-50%, 0);
         }
@@ -224,16 +211,26 @@
         }
 
         .spc-loader--exiting .spc-loader__logo {
-            transform: scale(1) !important;
+            transform: translateY(0) !important;
         }
 
         .spc-loader--exiting .spc-loader__text {
             transform: translate(-50%, 0) !important;
         }
 
-        @media (max-width: 991px) {
+        @media (max-width: 61.9375rem) {
+            .spc-loader__sunlight {
+                -webkit-transform: translate3d(-50%, -50%, 0);
+                transform: translate3d(-50%, -50%, 0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                background-repeat: no-repeat;
+                filter: blur(0.015625rem);
+                outline: 0.0625rem solid transparent;
+            }
+
             .spc-loader__logo-outer {
-                top: 40%;
+                top: calc(40% - 2rem);
                 transform: translate(-50%, -50%);
             }
 
@@ -243,7 +240,7 @@
             }
 
             .spc-loader__text {
-                bottom: clamp(6rem, 13vh, 9rem);
+                bottom: calc(clamp(6rem, 13vh, 9rem) + 1.625rem);
                 width: min(92vw, 42rem);
                 padding-inline: 0.75rem;
                 font-size: clamp(1rem, 3.2vw, 1.25rem);
@@ -251,13 +248,13 @@
             }
 
             .spc-loader__sun-wrap {
-                width: clamp(200px, 55vw, 300px);
-                height: clamp(200px, 55vw, 300px);
+                width: clamp(12.5rem, 55vw, 18.75rem);
+                height: clamp(12.5rem, 55vw, 18.75rem);
             }
 
             .spc-loader__sun-halo {
                 inset: -72%;
-                filter: blur(26px);
+                filter: blur(1.625rem);
             }
 
             .spc-loader__sun-core {
@@ -265,9 +262,9 @@
             }
         }
 
-        @media (max-width: 575px) {
+        @media (max-width: 35.9375rem) {
             .spc-loader__logo-outer {
-                top: 37%;
+                top: calc(37% - 2rem);
             }
 
             .spc-loader__logo {
@@ -282,13 +279,13 @@
             }
         }
 
-        @media (max-height: 720px) {
+        @media (max-height: 45rem) and (max-width: 61.9375rem) {
             .spc-loader__logo-outer {
-                top: 34%;
+                top: calc(34% - 2rem);
             }
 
             .spc-loader__text {
-                bottom: 4.25rem;
+                bottom: calc(4.25rem + 1.625rem);
             }
         }
     </style>
@@ -373,12 +370,12 @@
             sky.style.visibility = 'visible';
         }
 
-        // Pre-position immediately to avoid center flicker before GSAP kicks in.
         spcPrepositionSky();
 
         function spcStartLoader() {
             var hasGsap = typeof window.gsap !== 'undefined';
             var hasMotionPath = typeof window.MotionPathPlugin !== 'undefined';
+            var introDelayMs = 400;
 
             if (!hasGsap || !hasMotionPath) {
                 spcRevealPage();
@@ -386,8 +383,10 @@
             }
 
             window.gsap.registerPlugin(window.MotionPathPlugin);
-            var arc = spcRunLoaderArc();
-            arc.eventCallback('onComplete', spcRevealPage);
+            setTimeout(function () {
+                var arc = spcRunLoaderArc();
+                arc.eventCallback('onComplete', spcRevealPage);
+            }, introDelayMs);
         }
 
         if (document.readyState === 'loading') {

@@ -1,0 +1,327 @@
+<style>
+        :root {
+            --loader-bg: #f6f3ec;
+            --wipe-start-delay: 7000ms;
+            --wipe-duration: 1200ms;
+
+            --logo-delay: 200ms;
+            --logo-duration: 2300ms;
+            --logo-start-scale: 0.7;
+            --logo-end-scale: 1;
+
+            --text-delay: 1250ms;
+            --text-duration: 1400ms;
+            --text-start-y: 1.625rem;
+            --text-max-width: 56.25rem;
+
+            --content-padding: 2.125rem;
+            --content-gap: clamp(1.75rem, 4vw, 3rem);
+
+            --sun-delay: 1500ms;
+            --sun-duration: 70000ms;
+            --sun-size: 20rem;
+            --sun-start-scale: 0.05;
+            --sun-end-scale: 9.4;
+
+            --sun-origin-x: 50vw;
+            --sun-origin-y: 50vh;
+            --sun-start-x: 0rem;
+            --sun-start-y: 0rem;
+            --sun-end-x: 0rem;
+            --sun-end-y: 0rem;
+
+            --sun-start-opacity: 0;
+            --sun-visible-opacity: 1;
+            --sun-final-opacity: 0.46;
+
+            --lighten-start-delay: 4700ms;
+            --lighten-duration: 2600ms;
+
+            --spc-sun-center-soft: #fff8a8;
+            --spc-sun-center: #fff15c;
+            --spc-sun-center-end: 16%;
+            --spc-sun-peak: #ffe45c;
+            --spc-sun-peak-at: 36%;
+            --spc-sun-limb: #ffd84d;
+            --spc-sun-limb-at: 58%;
+            --spc-sun-fade: rgba(255, 222, 88, 0.18);
+
+            --light-wash-color: rgba(255, 248, 185, 0.52);
+            --light-wash-final-opacity: 1;
+
+            --sun-outer-blur-start: 1.25rem;
+            --sun-outer-blur-end: 2.625rem;
+            --sun-inner-blur-start: 0.375rem;
+            --sun-inner-blur-end: 1.25rem;
+            --sun-outer-final-brightness: 1.3;
+            --sun-inner-final-brightness: 1.38;
+            --sun-outer-final-opacity: 0.3;
+            --sun-inner-final-opacity: 0.28;
+        }
+
+        body.is-loading {
+            overflow: hidden;
+        }
+
+        body.is-loading .header {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .site-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: var(--loader-bg);
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+            transition: transform var(--wipe-duration) cubic-bezier(0.76, 0, 0.24, 1);
+            will-change: transform;
+        }
+
+        .site-loader.loader-wipe-up {
+            transform: translate3d(0, -100%, 0);
+        }
+
+        .loader-gradient-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .sun-loader {
+            position: absolute;
+            top: var(--sun-origin-y);
+            left: var(--sun-origin-x);
+            width: var(--sun-size);
+            height: var(--sun-size);
+            border-radius: 50%;
+            opacity: var(--sun-start-opacity);
+            transform: translate3d(calc(-50% + var(--sun-start-x)), calc(-50% + var(--sun-start-y)), 0) scale(var(--sun-start-scale));
+            transform-origin: center center;
+            backface-visibility: hidden;
+            will-change: transform, opacity;
+            animation: sunRiseAndGrow var(--sun-duration) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: var(--sun-delay);
+        }
+
+        .sun-loader::before {
+            content: "";
+            position: absolute;
+            inset: -34%;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    var(--spc-sun-center-soft) 0%,
+                    var(--spc-sun-center) var(--spc-sun-center-end),
+                    var(--spc-sun-peak) var(--spc-sun-peak-at),
+                    var(--spc-sun-limb) var(--spc-sun-limb-at),
+                    var(--spc-sun-fade) 74%,
+                    rgba(255, 242, 150, 0.08) 86%,
+                    rgba(255, 255, 255, 0) 100%);
+            filter: blur(var(--sun-outer-blur-start)) brightness(1);
+            transform: translateZ(0);
+            will-change: opacity, filter;
+            animation: sunOuterLighten var(--lighten-duration) ease forwards;
+            animation-delay: var(--lighten-start-delay);
+        }
+
+        .sun-loader::after {
+            content: "";
+            position: absolute;
+            inset: 3%;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    var(--spc-sun-center-soft) 0%,
+                    var(--spc-sun-center) 20%,
+                    var(--spc-sun-peak) var(--spc-sun-peak-at),
+                    var(--spc-sun-limb) var(--spc-sun-limb-at),
+                    rgba(255, 225, 88, 0.14) 72%,
+                    rgba(255, 255, 255, 0) 96%);
+            filter: blur(var(--sun-inner-blur-start)) brightness(1);
+            transform: translateZ(0);
+            will-change: opacity, filter;
+            animation: sunInnerLighten var(--lighten-duration) ease forwards;
+            animation-delay: var(--lighten-start-delay);
+        }
+
+        .loader-light-wash {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: var(--light-wash-color);
+            opacity: 0;
+            pointer-events: none;
+            animation: lightWashIn var(--lighten-duration) ease forwards;
+            animation-delay: var(--lighten-start-delay);
+        }
+
+        .loader-content {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--content-padding);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            width: 10rem;
+            height: 12.5rem;
+            object-fit: contain;
+            opacity: 0;
+            transform: scale(var(--logo-start-scale));
+            transform-origin: center center;
+            animation: logoSmoothZoom var(--logo-duration) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: var(--logo-delay);
+            filter: drop-shadow(0 0.25rem 1.125rem rgba(0, 0, 0, .18));
+        }
+
+        .loader-text {
+            margin-top: var(--content-gap);
+            max-width: var(--text-max-width);
+            font-family: var(--font-family-helvetica-neue);
+            font-size: var(--font-size-b1);
+            font-weight: var(--font-weight-light);
+            line-height: var(--line-height-b1);
+            letter-spacing: 0;
+            color: var(--basic-black);
+            text-wrap: pretty;
+            opacity: 0;
+            transform: translateY(var(--text-start-y));
+            animation: textSmoothFadeUp var(--text-duration) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: var(--text-delay);
+        }
+
+        @keyframes logoSmoothZoom {
+            0% { opacity: 0; transform: scale(var(--logo-start-scale)); }
+            100% { opacity: 1; transform: scale(var(--logo-end-scale)); }
+        }
+
+        @keyframes textSmoothFadeUp {
+            0% { opacity: 0; transform: translateY(var(--text-start-y)); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes sunRiseAndGrow {
+            0% {
+                opacity: var(--sun-start-opacity);
+                transform: translate3d(calc(-50% + var(--sun-start-x)), calc(-50% + var(--sun-start-y)), 0) scale(var(--sun-start-scale));
+            }
+            10% { opacity: var(--sun-visible-opacity); }
+            100% {
+                opacity: var(--sun-final-opacity);
+                transform: translate3d(calc(-50% + var(--sun-end-x)), calc(-50% + var(--sun-end-y)), 0) scale(var(--sun-end-scale));
+            }
+        }
+
+        @keyframes sunOuterLighten {
+            0% { opacity: 1; filter: blur(var(--sun-outer-blur-start)) brightness(1); }
+            100% { opacity: var(--sun-outer-final-opacity); filter: blur(var(--sun-outer-blur-end)) brightness(var(--sun-outer-final-brightness)); }
+        }
+
+        @keyframes sunInnerLighten {
+            0% { opacity: 1; filter: blur(var(--sun-inner-blur-start)) brightness(1); }
+            100% { opacity: var(--sun-inner-final-opacity); filter: blur(var(--sun-inner-blur-end)) brightness(var(--sun-inner-final-brightness)); }
+        }
+
+        @keyframes lightWashIn {
+            0% { opacity: 0; }
+            100% { opacity: var(--light-wash-final-opacity); }
+        }
+
+        @media (max-width: 61.9375rem) {
+            .loader-logo {
+                width: 9.9rem;
+                height: 12.3rem;
+            }
+
+            .loader-text {
+                width: min(92vw, 42rem);
+                padding-inline: 0.75rem;
+                font-size: clamp(1rem, 3.2vw, 1.25rem);
+                line-height: 1.35;
+            }
+        }
+
+        @media (max-width: 35.9375rem) {
+            .loader-logo {
+                width: 8.7rem;
+                height: 10.8rem;
+            }
+
+            .loader-text {
+                width: 94vw;
+                font-size: clamp(0.95rem, 4.1vw, 1.1rem);
+                line-height: 1.33;
+            }
+        }
+    </style>
+
+<div class="site-loader" id="spcLoader" aria-hidden="true">
+    <div class="loader-gradient-layer">
+        <div class="sun-loader"></div>
+        <div class="loader-light-wash"></div>
+    </div>
+
+    <div class="loader-content">
+        <img class="loader-logo" id="loaderLogo" src="assets/icons/Crest-logo.svg" alt="St Patrick's College">
+        <p class="loader-text">We acknowledge the Traditional Custodians of the land on which St Patrick's College stands, the Wangal clan of the Darug People. We pay our respects to Elders past and present, and recognise their enduring connection to Country. As a College community, we are committed to listening, learning and walking together with First Nations peoples in a spirit of respect, justice and reconciliation.</p>
+    </div>
+</div>
+
+<script>
+        (function () {
+            const loader = document.getElementById("spcLoader");
+            const logo = document.getElementById("loaderLogo");
+            if (!loader) return;
+
+            const root = document.documentElement;
+
+            function getMilliseconds(variableName) {
+                const value = getComputedStyle(root).getPropertyValue(variableName).trim();
+                if (value.endsWith("ms")) return parseFloat(value);
+                if (value.endsWith("s")) return parseFloat(value) * 1000;
+                return parseFloat(value) || 0;
+            }
+
+            function setSunOriginToLogoCenter() {
+                if (!logo) return;
+                const logoRect = logo.getBoundingClientRect();
+                const logoCenterX = logoRect.left + logoRect.width / 2;
+                const logoCenterY = logoRect.top + logoRect.height / 2;
+                root.style.setProperty("--sun-origin-x", `${logoCenterX}px`);
+                root.style.setProperty("--sun-origin-y", `${logoCenterY}px`);
+            }
+
+            const wipeStartDelay = getMilliseconds("--wipe-start-delay");
+            const wipeDuration = getMilliseconds("--wipe-duration");
+
+            setSunOriginToLogoCenter();
+            requestAnimationFrame(setSunOriginToLogoCenter);
+
+            window.addEventListener("load", () => {
+                setSunOriginToLogoCenter();
+                setTimeout(setSunOriginToLogoCenter, 400);
+                setTimeout(setSunOriginToLogoCenter, 1400);
+
+                setTimeout(() => {
+                    loader.classList.add("loader-wipe-up");
+                    document.body.classList.remove("is-loading");
+                    window.spcLoaderDone = true;
+                    window.dispatchEvent(new CustomEvent("spc-loader-done"));
+                }, wipeStartDelay);
+
+                setTimeout(() => {
+                    loader.remove();
+                }, wipeStartDelay + wipeDuration + 150);
+            });
+
+            window.addEventListener("resize", setSunOriginToLogoCenter, { passive: true });
+        })();
+    </script>
