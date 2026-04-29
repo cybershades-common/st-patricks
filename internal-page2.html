@@ -430,6 +430,7 @@
                     <style>
 
                     /* --- Triggers ---------------------------------------------- */
+                    .popup-trigger-wrap{width:100%}
                     .popup-trigger-btns{display:flex;flex-wrap:wrap;gap:1rem}
 
                     /* --- Overlay ----------------------------------------------- */
@@ -475,22 +476,39 @@
                     <!-- ─────────────────── TRIGGERS ─────────────────────────── -->
                     <!-- Each button's data-popup-target="x" must match          -->
                     <!-- the id="x" of its corresponding TEMPLATE below.         -->
-                    <div class="internal-content-single-text"
-                        data-gsap-children='{"a":{"type":"fade-up","stagger":"0.12"}}'
-                        data-gsap-children-mobile='{"a":{"stagger":"0.08"}}'>
+                    <!-- Standalone — drop .popup-trigger-wrap anywhere on page. -->
+                    <div class="popup-trigger-wrap"
+                        data-gsap-children='{"a":{"type":"fade-up","stagger":"0.08"}}'
+                        data-gsap-children-mobile='{"a":{"stagger":"0.06"}}'>
                         <div class="popup-trigger-btns">
                             <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
                                 data-popup-title="Beginnings"
                                 data-popup-target="popup-beginnings"
-                                aria-haspopup="dialog">
-                                Beginnings
-                            </a>
+                                aria-haspopup="dialog">Beginnings</a>
                             <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
                                 data-popup-title="Growth and Expansion"
                                 data-popup-target="popup-growth"
-                                aria-haspopup="dialog">
-                                Growth and Expansion
-                            </a>
+                                aria-haspopup="dialog">Growth and Expansion</a>
+                            <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
+                                data-popup-title="Mission and Values"
+                                data-popup-target="popup-mission"
+                                aria-haspopup="dialog">Mission and Values</a>
+                            <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
+                                data-popup-title="Edmund Rice Heritage"
+                                data-popup-target="popup-heritage"
+                                aria-haspopup="dialog">Edmund Rice Heritage</a>
+                            <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
+                                data-popup-title="Catholic Tradition"
+                                data-popup-target="popup-catholic"
+                                aria-haspopup="dialog">Catholic Tradition</a>
+                            <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
+                                data-popup-title="Student Wellbeing"
+                                data-popup-target="popup-wellbeing"
+                                aria-haspopup="dialog">Student Wellbeing</a>
+                            <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
+                                data-popup-title="Governance"
+                                data-popup-target="popup-governance"
+                                aria-haspopup="dialog">Governance</a>
                         </div>
                     </div>
                     <!-- ─────────────────── END TRIGGERS ─────────────────────── -->
@@ -531,6 +549,31 @@
                         <p>A movement takes root across the world.</p>
                         <p>Edmund Rice's commitment to the education of the poor rapidly spread beyond Ireland. By the 1820s, the Brothers had established schools throughout Ireland and were soon called upon to extend their mission to England and beyond. The congregation was officially recognised by Rome in 1820 as the Institute of the Brothers of the Christian Schools of Ireland — later known as the Christian Brothers.</p>
                         <p>The Brothers arrived in Australia in 1868, establishing schools in New South Wales, Victoria and South Australia, planting the seeds of what would become an international network spanning over 20 countries today. St Patrick's College Strathfield stands proudly as part of this enduring legacy of faith-led, transformative education.</p>
+                    </template>
+
+                    <template id="popup-mission">
+                        <p>Our mission is to provide an excellent learning environment grounded in faith, integrity and respect for every individual.</p>
+                        <p>St Patrick's College is guided by four core touchstones: Liberating Education, Gospel Spirituality, Inclusive Community, and Justice and Solidarity. These values shape every decision we make — from the classroom to the community — and define what it means to be part of St Patrick's College Strathfield.</p>
+                    </template>
+
+                    <template id="popup-heritage">
+                        <p>Blessed Edmund Rice founded the first school for poor boys in Waterford, Ireland in 1802, driven by a profound compassion for those on the margins of society.</p>
+                        <p>His legacy lives on through the Edmund Rice Education Australia (EREA) network — 54 schools, 1 Early Childhood Centre and 34 Associated schools across Australia, and over 20 countries worldwide through Edmund Rice Education Beyond Borders. St Patrick's College is proud to be part of this enduring mission.</p>
+                    </template>
+
+                    <template id="popup-catholic">
+                        <p>As a Catholic school in the Edmund Rice tradition, faith is woven into everything we do at St Patrick's College Strathfield.</p>
+                        <p>Our Catholic identity is expressed through liturgy, service, prayer and a commitment to the common good. We welcome students of all backgrounds and faiths, inviting them to engage with the spiritual and moral dimensions of a life well lived. Our faith community supports students to grow not only academically, but as people of conscience and purpose.</p>
+                    </template>
+
+                    <template id="popup-wellbeing">
+                        <p>At St Patrick's College, the safety and wellbeing of every student is our highest priority.</p>
+                        <p>We take our responsibilities for child safeguarding extremely seriously and maintain policies and practices that make our College both safe and inclusive. Our wellbeing programs are designed specifically for boys — addressing their spiritual, physical, emotional and academic needs. Student voice and agency are central to our approach, ensuring every young man feels heard, valued and supported throughout his journey at St Patrick's.</p>
+                    </template>
+
+                    <template id="popup-governance">
+                        <p>St Patrick's College Strathfield is governed by a Board of Directors committed to upholding the College's mission, values and long-term strategic direction.</p>
+                        <p>The Board works in partnership with the Principal and Leadership Team to ensure responsible stewardship of the College's resources and community. Governance structures are regularly reviewed to ensure compliance with regulatory requirements and alignment with best practice in Catholic education. Our Annual Reports provide full transparency on the College's operations and performance.</p>
                     </template>
                     <!-- ─────────────────── END CONTENT TEMPLATES ────────────── -->
 
