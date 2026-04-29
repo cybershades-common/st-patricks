@@ -418,6 +418,194 @@
                         <p>&nbsp;</p>
                         <p><strong>Dr Vittoria Lavorato</strong><br>Principal</p>
                     </div>
+
+                    <!-- ============================================================ -->
+                    <!-- POPUP ACCORDION COMPONENT START                            -->
+                    <!-- Self-contained: Style + Triggers + Overlay + Panel +       -->
+                    <!-- Templates + Script. Cut this entire block to reuse.        -->
+                    <!-- ============================================================ -->
+
+
+                    <!-- ─────────────────── STYLE ─────────────────────────────── -->
+                    <style>
+
+                    /* --- Accordion Triggers ------------------------------------ */
+                    .popup-accordion{display:flex;flex-direction:column;gap:0;width:100%}
+                    .popup-accordion-item{border-top:1px solid rgba(16,6,159,.2)}
+                    .popup-accordion-item:last-child{border-bottom:1px solid rgba(16,6,159,.2)}
+                    .popup-accordion-btn{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;padding:1.5rem 0;cursor:pointer;gap:1rem;text-align:left;transition:color .3s ease;color:var(--basic-black)}
+                    .popup-accordion-btn:hover{color:var(--primary-blue)}
+                    .popup-accordion-btn .popup-accordion-label{font-family:var(--font-family-helvetica-neue);font-size:var(--font-size-h4);font-weight:var(--font-weight-light);line-height:1.1;letter-spacing:-.02em}
+                    .popup-accordion-btn .popup-accordion-icon{flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:transform .65s cubic-bezier(.34,1.56,.64,1)}
+                    .popup-accordion-btn:hover .popup-accordion-icon{transform:scale(1.4)}
+                    .popup-accordion-btn .popup-accordion-icon svg{display:block}
+
+                    /* --- Overlay ----------------------------------------------- */
+                    .popup-accordion-overlay{position:fixed;inset:0;background:rgba(39,37,31,.55);z-index:1200;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s ease;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+                    .popup-accordion-overlay.is-open{opacity:1;visibility:visible}
+
+                    /* --- Panel ------------------------------------------------- */
+                    .popup-accordion-panel{position:fixed;top:50%;left:50%;width:min(42rem,90vw);max-height:85vh;background:#fff;z-index:1201;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translate(-50%,-50%) scale(.96);transition:opacity .4s ease,visibility .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1);overflow:hidden;border-radius:.25rem}
+                    .popup-accordion-panel.is-open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+                    .popup-accordion-panel-header{display:flex;align-items:flex-end;justify-content:space-between;padding:3rem 3rem 1.5rem;border-bottom:1px solid rgba(16,6,159,.12);flex-shrink:0;gap:1rem}
+                    .popup-accordion-panel-title{font-family:var(--font-family-helvetica-neue);font-size:2.625rem;font-weight:var(--font-weight-light);line-height:1.05;letter-spacing:-.04em;color:var(--basic-black);margin:0}
+                    .popup-accordion-close-btn{flex-shrink:0;width:2.75rem;height:2.75rem;border-radius:50%;border:1.5px solid var(--basic-black);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--basic-black);padding:0;align-self:flex-start;margin-top:-.5rem;transition:background .3s ease,color .3s ease}
+                    .popup-accordion-close-btn:hover{background:var(--basic-black);color:#fff}
+                    .popup-accordion-close-btn svg{display:block}
+                    .popup-accordion-panel-body{flex:1;overflow-y:auto;padding:2.5rem 3rem 3rem;-webkit-overflow-scrolling:touch}
+                    .popup-accordion-panel-body p{font-family:var(--font-family-helvetica-neue);font-size:var(--font-size-b1);font-weight:var(--font-weight-light);line-height:var(--line-height-b1);color:var(--basic-black-secondary);margin:0 0 1.25rem}
+                    .popup-accordion-panel-body p:last-child{margin-bottom:0}
+
+                    /* --- Content fade-in --------------------------------------- */
+                    .popup-accordion-panel-body .popup-content-inner{opacity:0;transform:translateY(1.5rem);transition:opacity .4s ease .3s,transform .4s ease .3s}
+                    .popup-accordion-panel.is-open .popup-accordion-panel-body .popup-content-inner{opacity:1;transform:translateY(0)}
+
+                    /* --- Responsive ------------------------------------------- */
+                    @media(max-width:991px){
+                        .popup-accordion-btn .popup-accordion-label{font-size:1.5rem}
+                        .popup-accordion-panel-header{padding:2rem 1.5rem 1.25rem}
+                        .popup-accordion-panel-title{font-size:2rem}
+                        .popup-accordion-panel-body{padding:1.75rem 1.5rem 2.5rem}
+                    }
+                    @media(max-width:767px){
+                        .popup-accordion-panel{width:92vw;max-height:80vh}
+                        .popup-accordion-btn .popup-accordion-label{font-size:1.25rem}
+                        .popup-accordion-panel-title{font-size:1.75rem}
+                    }
+
+                    </style>
+                    <!-- ─────────────────── END STYLE ────────────────────────── -->
+
+
+                    <!-- ─────────────────── TRIGGERS ─────────────────────────── -->
+                    <div class="internal-content-single-text"
+                        data-gsap-children='{".popup-accordion-item":{"type":"fade-up","stagger":"0.15"}}'
+                        data-gsap-children-mobile='{".popup-accordion-item":{"stagger":"0.1"}}'>
+                        <div class="popup-accordion" role="list">
+
+                            <div class="popup-accordion-item" role="listitem">
+                                <button class="popup-accordion-btn" type="button"
+                                    data-popup-title="Beginnings"
+                                    data-popup-target="popup-beginnings"
+                                    aria-haspopup="dialog">
+                                    <span class="popup-accordion-label">Beginnings</span>
+                                    <span class="popup-accordion-icon" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+
+                            <div class="popup-accordion-item" role="listitem">
+                                <button class="popup-accordion-btn" type="button"
+                                    data-popup-title="Growth and Expansion"
+                                    data-popup-target="popup-growth"
+                                    aria-haspopup="dialog">
+                                    <span class="popup-accordion-label">Growth and Expansion</span>
+                                    <span class="popup-accordion-icon" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ─────────────────── END TRIGGERS ─────────────────────── -->
+
+
+                    <!-- ─────────────────── OVERLAY ──────────────────────────── -->
+                    <div class="popup-accordion-overlay" id="popupAccordionOverlay" aria-hidden="true"></div>
+                    <!-- ─────────────────── END OVERLAY ─────────────────────── -->
+
+
+                    <!-- ─────────────────── PANEL ────────────────────────────── -->
+                    <div class="popup-accordion-panel" id="popupAccordionPanel" role="dialog" aria-modal="true" aria-labelledby="popupAccordionPanelTitle">
+                        <div class="popup-accordion-panel-header">
+                            <h2 class="popup-accordion-panel-title" id="popupAccordionPanelTitle"></h2>
+                            <button class="popup-accordion-close-btn" id="popupAccordionCloseBtn" aria-label="Close">
+                                <svg width="17" height="17" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="popup-accordion-panel-body">
+                            <div class="popup-content-inner" id="popupAccordionBody"></div>
+                        </div>
+                    </div>
+                    <!-- ─────────────────── END PANEL ────────────────────────── -->
+
+
+                    <!-- ─────────────────── CONTENT TEMPLATES ────────────────── -->
+                    <template id="popup-beginnings">
+                        <p>The vision takes shape.</p>
+                        <p>Edmund's new school, Mt Sion, opened in Waterford in 1804. To provide the basic daily needs of the children, a bakery and tailor were set up, as well as a residence for staff. Edmund, determined to bring the most modern of teaching methods, enlisted financial support from his business colleagues. The numbers of poor Catholics wanting education for their children grew quickly.</p>
+                        <p>By 1807, three schools, including brothers' residences, were operating in Mt Sion, Dungarvan and Carrick-on-Suir. In 1808, with the help of the bishop, Dr Power, the congregation began to take shape, initially taking vows as Brothers of the Presentation.</p>
+                    </template>
+
+                    <template id="popup-growth">
+                        <p>A movement takes root across the world.</p>
+                        <p>Edmund Rice's commitment to the education of the poor rapidly spread beyond Ireland. By the 1820s, the Brothers had established schools throughout Ireland and were soon called upon to extend their mission to England and beyond. The congregation was officially recognised by Rome in 1820 as the Institute of the Brothers of the Christian Schools of Ireland — later known as the Christian Brothers.</p>
+                        <p>The Brothers arrived in Australia in 1868, establishing schools in New South Wales, Victoria and South Australia, planting the seeds of what would become an international network spanning over 20 countries today. St Patrick's College Strathfield stands proudly as part of this enduring legacy of faith-led, transformative education.</p>
+                    </template>
+                    <!-- ─────────────────── END CONTENT TEMPLATES ────────────── -->
+
+
+                    <!-- ─────────────────── SCRIPT ───────────────────────────── -->
+                    <script>
+                    (function () {
+                        var overlay  = document.getElementById('popupAccordionOverlay');
+                        var panel    = document.getElementById('popupAccordionPanel');
+                        var titleEl  = document.getElementById('popupAccordionPanelTitle');
+                        var bodyEl   = document.getElementById('popupAccordionBody');
+                        var closeBtn = document.getElementById('popupAccordionCloseBtn');
+                        var prevFocus = null;
+
+                        /* Move overlay & panel to <body> so CSS transforms on
+                           ancestor elements (e.g. GSAP) don't break position:fixed */
+                        document.body.appendChild(overlay);
+                        document.body.appendChild(panel);
+
+                        function openPopup(btn) {
+                            var tpl = document.getElementById(btn.getAttribute('data-popup-target'));
+                            if (!tpl) return;
+                            titleEl.textContent = btn.getAttribute('data-popup-title');
+                            bodyEl.innerHTML = '';
+                            bodyEl.appendChild(tpl.content.cloneNode(true));
+                            prevFocus = btn;
+                            overlay.setAttribute('aria-hidden', 'false');
+                            overlay.classList.add('is-open');
+                            panel.classList.add('is-open');
+                            document.body.style.overflow = 'hidden';
+                            setTimeout(function () { closeBtn.focus(); }, 560);
+                        }
+
+                        function closePopup() {
+                            overlay.classList.remove('is-open');
+                            panel.classList.remove('is-open');
+                            overlay.setAttribute('aria-hidden', 'true');
+                            document.body.style.overflow = '';
+                            if (prevFocus) prevFocus.focus();
+                        }
+
+                        document.querySelectorAll('.popup-accordion-btn').forEach(function (btn) {
+                            btn.addEventListener('click', function () { openPopup(btn); });
+                        });
+                        closeBtn.addEventListener('click', closePopup);
+                        overlay.addEventListener('click', closePopup);
+                        document.addEventListener('keydown', function (e) {
+                            if (e.key === 'Escape' && panel.classList.contains('is-open')) closePopup();
+                        });
+                    })();
+                    </script>
+                    <!-- ─────────────────── END SCRIPT ──────────────────────── -->
+
+
+                    <!-- ============================================================ -->
+                    <!-- POPUP ACCORDION COMPONENT END                               -->
+                    <!-- ============================================================ -->
                 </div>
             </div>
         </section>
