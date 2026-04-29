@@ -431,7 +431,7 @@
 
                     /* --- Triggers ---------------------------------------------- */
                     .popup-trigger-wrap{width:100%}
-                    .popup-trigger-btns{display:flex;flex-wrap:wrap;gap:1rem}
+                    .popup-trigger-btns{display:flex;flex-wrap:wrap;gap:var(--spacing-super-small);align-items:flex-start;justify-content:center}
 
                     /* --- Overlay ----------------------------------------------- */
                     .popup-accordion-overlay{position:fixed;inset:0;background:rgba(39,37,31,.55);z-index:1200;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s ease;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
@@ -477,10 +477,9 @@
                     <!-- Each button's data-popup-target="x" must match          -->
                     <!-- the id="x" of its corresponding TEMPLATE below.         -->
                     <!-- Standalone — drop .popup-trigger-wrap anywhere on page. -->
-                    <div class="popup-trigger-wrap"
-                        data-gsap-children='{"a":{"type":"fade-up","stagger":"0.08"}}'
-                        data-gsap-children-mobile='{"a":{"stagger":"0.06"}}'>
-                        <div class="popup-trigger-btns">
+                    <div class="popup-trigger-wrap">
+                        <div class="popup-trigger-btns"
+                            data-gsap-children='{"a":{"type":"fade-in","stagger":"0.08","start":"top bottom","delay":0.6}}'>
                             <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
                                 data-popup-title="Beginnings"
                                 data-popup-target="popup-beginnings"
