@@ -429,16 +429,8 @@
                     <!-- ─────────────────── STYLE ─────────────────────────────── -->
                     <style>
 
-                    /* --- Accordion Triggers ------------------------------------ */
-                    .popup-accordion{display:flex;flex-direction:column;gap:0;width:100%}
-                    .popup-accordion-item{border-top:1px solid rgba(16,6,159,.2)}
-                    .popup-accordion-item:last-child{border-bottom:1px solid rgba(16,6,159,.2)}
-                    .popup-accordion-btn{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;padding:1.5rem 0;cursor:pointer;gap:1rem;text-align:left;transition:color .3s ease;color:var(--basic-black)}
-                    .popup-accordion-btn:hover{color:var(--primary-blue)}
-                    .popup-accordion-btn .popup-accordion-label{font-family:var(--font-family-helvetica-neue);font-size:var(--font-size-h4);font-weight:var(--font-weight-light);line-height:1.1;letter-spacing:-.02em}
-                    .popup-accordion-btn .popup-accordion-icon{flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:transform .65s cubic-bezier(.34,1.56,.64,1)}
-                    .popup-accordion-btn:hover .popup-accordion-icon{transform:scale(1.4)}
-                    .popup-accordion-btn .popup-accordion-icon svg{display:block}
+                    /* --- Triggers ---------------------------------------------- */
+                    .popup-trigger-btns{display:flex;flex-wrap:wrap;gap:1rem}
 
                     /* --- Overlay ----------------------------------------------- */
                     .popup-accordion-overlay{position:fixed;inset:0;background:rgba(39,37,31,.55);z-index:1200;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s ease;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
@@ -478,39 +470,24 @@
 
 
                     <!-- ─────────────────── TRIGGERS ─────────────────────────── -->
+                    <!-- Each button's data-popup-target="x" must match          -->
+                    <!-- the id="x" of its corresponding TEMPLATE below.         -->
                     <div class="internal-content-single-text"
-                        data-gsap-children='{".popup-accordion-item":{"type":"fade-up","stagger":"0.15"}}'
-                        data-gsap-children-mobile='{".popup-accordion-item":{"stagger":"0.1"}}'>
-                        <div class="popup-accordion" role="list">
-
-                            <div class="popup-accordion-item" role="listitem">
-                                <button class="popup-accordion-btn" type="button"
-                                    data-popup-title="Beginnings"
-                                    data-popup-target="popup-beginnings"
-                                    aria-haspopup="dialog">
-                                    <span class="popup-accordion-label">Beginnings</span>
-                                    <span class="popup-accordion-icon" aria-hidden="true">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                        </svg>
-                                    </span>
-                                </button>
-                            </div>
-
-                            <div class="popup-accordion-item" role="listitem">
-                                <button class="popup-accordion-btn" type="button"
-                                    data-popup-title="Growth and Expansion"
-                                    data-popup-target="popup-growth"
-                                    aria-haspopup="dialog">
-                                    <span class="popup-accordion-label">Growth and Expansion</span>
-                                    <span class="popup-accordion-icon" aria-hidden="true">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                        </svg>
-                                    </span>
-                                </button>
-                            </div>
-
+                        data-gsap-children='{"a":{"type":"fade-up","stagger":"0.12"}}'
+                        data-gsap-children-mobile='{"a":{"stagger":"0.08"}}'>
+                        <div class="popup-trigger-btns">
+                            <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
+                                data-popup-title="Beginnings"
+                                data-popup-target="popup-beginnings"
+                                aria-haspopup="dialog">
+                                Beginnings
+                            </a>
+                            <a class="popup-accordion-btn btn-rounded-large btn-rounded-large-outline-blue" href="#"
+                                data-popup-title="Growth and Expansion"
+                                data-popup-target="popup-growth"
+                                aria-haspopup="dialog">
+                                Growth and Expansion
+                            </a>
                         </div>
                     </div>
                     <!-- ─────────────────── END TRIGGERS ─────────────────────── -->
@@ -539,6 +516,8 @@
 
 
                     <!-- ─────────────────── CONTENT TEMPLATES ────────────────── -->
+                    <!-- Each template id="x" must match a trigger's            -->
+                    <!-- data-popup-target="x". Add/remove pairs as needed.     -->
                     <template id="popup-beginnings">
                         <p>The vision takes shape.</p>
                         <p>Edmund's new school, Mt Sion, opened in Waterford in 1804. To provide the basic daily needs of the children, a bakery and tailor were set up, as well as a residence for staff. Edmund, determined to bring the most modern of teaching methods, enlisted financial support from his business colleagues. The numbers of poor Catholics wanting education for their children grew quickly.</p>
@@ -591,7 +570,7 @@
                         }
 
                         document.querySelectorAll('.popup-accordion-btn').forEach(function (btn) {
-                            btn.addEventListener('click', function () { openPopup(btn); });
+                            btn.addEventListener('click', function (e) { e.preventDefault(); openPopup(btn); });
                         });
                         closeBtn.addEventListener('click', closePopup);
                         overlay.addEventListener('click', closePopup);
