@@ -444,7 +444,10 @@
                     .popup-accordion-close-btn{flex-shrink:0;width:2.75rem;height:2.75rem;border-radius:50%;border:1.5px solid var(--basic-black);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--basic-black);padding:0;align-self:flex-start;margin-top:-.5rem;transition:background .3s ease,color .3s ease}
                     .popup-accordion-close-btn:hover{background:var(--basic-black);color:#fff}
                     .popup-accordion-close-btn svg{display:block}
-                    .popup-accordion-panel-body{flex:1;overflow-y:auto;padding:2.5rem 3rem 3rem;-webkit-overflow-scrolling:touch}
+                    .popup-accordion-panel-body{flex:1;overflow-y:auto;padding:2.5rem 3rem 3rem;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--primary-gold-1) transparent}
+                    .popup-accordion-panel-body::-webkit-scrollbar{width:.5rem}
+                    .popup-accordion-panel-body::-webkit-scrollbar-track{background:transparent}
+                    .popup-accordion-panel-body::-webkit-scrollbar-thumb{background-color:var(--primary-gold-1);border-radius:999px;border:.125rem solid transparent;background-clip:content-box}
                     .popup-accordion-panel-body p{font-family:var(--font-family-helvetica-neue);font-size:var(--font-size-b1);font-weight:var(--font-weight-light);line-height:var(--line-height-b1);color:var(--basic-black-secondary);margin:0 0 1.25rem}
                     .popup-accordion-panel-body p:last-child{margin-bottom:0}
 
