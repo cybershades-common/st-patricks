@@ -43,7 +43,13 @@
     });
 
     document.querySelectorAll('.spc-children > *:not(blockquote)').forEach(function (el) {
-        el.classList.add('spc-item', 'spc-item--rise');
+        var p = el.parentElement;
+        var useAppear = !!(p && p.classList && p.classList.contains('spc-children--appear'));
+        el.classList.add('spc-item', useAppear ? 'spc-item--appear' : 'spc-item--rise');
+        if (p && p.classList && p.classList.contains('spc-auto')) {
+            el.classList.add('spc-auto');
+            if (p.dataset && p.dataset.spcDelay) el.dataset.spcDelay = p.dataset.spcDelay;
+        }
     });
 
     document.querySelectorAll('.spc-card-grid').forEach(function (grid) {
@@ -138,9 +144,9 @@
         gsap.set('.spc-item--up', { y: '-15%', autoAlpha: 0 });
     }
 
-    function animateItem(card, index) {
+    function animateItem(card, index, baseDelay) {
         var ease  = 'power1.out';
-        var delay = index * 0.1;
+        var delay = (baseDelay || 0) + index * 0.1;
 
         if (card.classList.contains('spc-item--btn')) {
             gsap.to(card, {
@@ -249,28 +255,47 @@
         }
     }
 
-    ScrollTrigger.batch('.spc-item:not(.spc-item--hero):not(.spc-trigger--late)', {
+    ScrollTrigger.batch('.spc-item:not(.spc-auto):not(.spc-item--hero):not(.spc-trigger--late)', {
         start: 'top bottom-=100',
         once: true,
         onEnter: function (batch) {
-            batch.forEach(function (card, index) { animateItem(card, index); });
+            batch.forEach(function (card, index) { animateItem(card, index, 0); });
         }
     });
 
-    ScrollTrigger.batch('.spc-item.spc-trigger--late', {
+    ScrollTrigger.batch('.spc-item:not(.spc-auto).spc-trigger--late', {
         start: 'top 65%',
         once: true,
         onEnter: function (batch) {
-            batch.forEach(function (card, index) { animateItem(card, index); });
+            batch.forEach(function (card, index) { animateItem(card, index, 0); });
         }
     });
 
-    ScrollTrigger.batch('.spc-item--hero', {
+    ScrollTrigger.batch('.spc-item--hero:not(.spc-auto)', {
         start: 'top bottom',
         once: true,
         onEnter: function (batch) {
-            batch.forEach(function (card, index) { animateItem(card, index); });
+            batch.forEach(function (card, index) { animateItem(card, index, 0); });
         }
+    });
+
+    var autoGroups = new Map();
+    document.querySelectorAll('.spc-item.spc-auto').forEach(function (el) {
+        var parent = el.parentElement || document.body;
+        if (!autoGroups.has(parent)) autoGroups.set(parent, []);
+        autoGroups.get(parent).push(el);
+    });
+
+    autoGroups.forEach(function (els, parent) {
+        var baseDelay = 0.8;
+        if (parent && parent.dataset && parent.dataset.spcDelay) {
+            var v = parseFloat(parent.dataset.spcDelay);
+            if (!Number.isNaN(v)) baseDelay = v;
+        } else if (els[0] && els[0].dataset && els[0].dataset.spcDelay) {
+            var v2 = parseFloat(els[0].dataset.spcDelay);
+            if (!Number.isNaN(v2)) baseDelay = v2;
+        }
+        els.forEach(function (card, index) { animateItem(card, index, baseDelay); });
     });
 
     document.querySelectorAll('.spc-parallax').forEach(function (el) {
