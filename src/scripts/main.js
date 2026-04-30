@@ -1970,15 +1970,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (index === 0) {
                     slide.classList.add('active');
-                    const tl = gsap.timeline({ delay: 0.3 });
-                    tl.fromTo(quote,
-                        { opacity: 0, y: 40 },
-                        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
-                    ).fromTo(attr,
-                        { opacity: 0, y: 20 },
-                        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-                        '-=0.4'
-                    );
+                    gsap.set(quote, { opacity: 0, y: 40 });
+                    gsap.set(attr, { opacity: 0, y: 20 });
+                    ScrollTrigger.create({
+                        trigger: contentWrapper,
+                        start: 'top 70%',
+                        once: true,
+                        onEnter: () => {
+                            const tl = gsap.timeline({ delay: 0.2 });
+                            tl.to(quote, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+                              .to(attr,  { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4');
+                        }
+                    });
                 } else {
                     slide.classList.remove('active');
                     gsap.set([quote, attr], { opacity: 0 });
