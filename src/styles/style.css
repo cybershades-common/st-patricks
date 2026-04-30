@@ -2102,7 +2102,6 @@ body.search-is-open {
   color: var(--basic-white);
   margin: 0;
   padding: 0;
-  visibility: hidden;
 }
 /*
 body:has(.hero-internal) .header:not(.menu-open),

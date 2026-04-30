@@ -106,6 +106,9 @@
     //    spc-card-grid → card grids helper:
     //      - images get spc-item + spc-item--clip (clip reveal)
     //      - card content gets spc-item + spc-item--appear (fade-in)
+    //
+    //    spc-grid-zoom → grid zoom helper:
+    //      - cards/items fade-in while zooming out (scale to 1), staggered by batch index
     // ------------------------------------------------------------------
     document.querySelectorAll('.spc-block').forEach(function (el) {
         el.classList.add('spc-item', 'spc-item--appear');
@@ -140,6 +143,22 @@
             // Headings fade-in (about-nav cards)
             var h5 = card.querySelector('h5');
             if (h5) h5.classList.add('spc-item', 'spc-item--appear');
+        });
+    });
+
+    // Grid zoom (fade-in + zoom-out) helper
+    // Usage: add class "spc-grid-zoom" on the parent container of a grid.
+    // It will promote known grid card/item elements to `spc-item spc-item--img`.
+    // Animation: scale 1.08→1 + opacity 0→1, staggered via ScrollTrigger.batch index.
+    document.querySelectorAll('.spc-grid-zoom').forEach(function (grid) {
+        var isLate = grid.classList.contains('spc-trigger--late');
+        var items = grid.querySelectorAll(
+            '.latest-news-list-card, .about-nav-card, .news-detail-keep-reading-card, .news-detail-gallery-item'
+        );
+        if (!items.length) return;
+        items.forEach(function (el) {
+            el.classList.add('spc-item', 'spc-item--img');
+            if (isLate) el.classList.add('spc-trigger--late');
         });
     });
 
