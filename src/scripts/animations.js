@@ -8,9 +8,10 @@
 //   spc-item--appear    fade-in: opacity 0→1, no movement
 //   spc-item--text      heading text — split lines, animate line-by-line
 //   spc-item--img       single standalone image: scale 1.08→1 + fade
-//   spc-item--clip      grid/slider images: clip-reveal from bottom, staggered
+//   spc-item--clip      grid/slider images: clip-reveal bottom-to-top, staggered
 //   spc-item--right     slide in from right: x 15%→0 + fade
 //   spc-item--up        slide in from above: y -15%→0 + fade
+//   spc-item--btn       button zoom-in: scale 0.8→1 + opacity 0→1, smooth pop
 //   spc-item--hero      above-fold item: trigger fires as soon as it enters view
 //
 //   spc-children        parent shortcut — every direct child → spc-item spc-item--rise
@@ -125,6 +126,9 @@
             transformOrigin: '50% 50%', force3D: true
         });
     }
+    if (document.querySelectorAll('.spc-item--btn').length) {
+        gsap.set('.spc-item--btn', { scale: 0.9, autoAlpha: 0, transformOrigin: '50% 50%' });
+    }
     if (document.querySelectorAll('.spc-item--right').length) {
         gsap.set('.spc-item--right', { x: '15%', autoAlpha: 0 });
     }
@@ -138,6 +142,16 @@
     function animateItem(card, index) {
         var ease  = 'power1.out';
         var delay = index * 0.1;
+
+        // button zoom-in
+        if (card.classList.contains('spc-item--btn')) {
+            gsap.to(card, {
+                scale: 1, autoAlpha: 1, duration: 1,
+                ease: 'back.out(1.1)', delay: delay, force3D: true,
+                onComplete: function () { card.classList.add('spc-done'); }
+            });
+            return;
+        }
 
         // fade-up
         if (card.classList.contains('spc-item--rise')) {
