@@ -1,76 +1,17 @@
-// ==========================================================================
-// SPC Animation System — St Patrick's College
-// ==========================================================================
-// Class reference (all classes use spc- prefix):
-//
-//   spc-item            base marker — every animated element needs this
-//   spc-item--rise      fade-up: y 30→0 + opacity 0→1
-//   spc-item--appear    fade-in: opacity 0→1, no movement
-//   spc-item--text      heading text — split lines, animate line-by-line
-//   spc-item--img       single standalone image: scale 1.08→1 + fade
-//   spc-item--clip      grid/slider images: clip-reveal bottom-to-top, staggered
-//   spc-item--right     slide in from right: x 15%→0 + fade
-//   spc-item--up        slide in from above: y -15%→0 + fade
-//   spc-item--btn       button zoom-in: scale 0.8→1 + opacity 0→1, smooth pop
-//   spc-item--hero      above-fold item: trigger fires as soon as it enters view
-//   spc-item--quote-write "writing" quote: SplitText chars reveal (typing feel)
-//
-// Trigger modifiers (combine with any spc-item):
-//   spc-trigger--late   fires when element top hits 65% down viewport (element more visible first)
-//
-//   spc-children        parent shortcut — every direct child → spc-item spc-item--rise
-//   spc-block           standalone block shortcut → spc-item spc-item--appear at runtime
-//
-//   spc-split           marks an element for SplitText processing
-//   spc-split--lines    split into rendered lines
-//   spc-split--chars    split into individual characters
-//   spc-line            generated line wrapper (set by SplitText linesClass)
-//   spc-char            generated char wrapper (set by SplitText charsClass)
-//
-// Quote helper:
-//   spc-quote-write     add to any quote container OR the text element itself;
-//                       script promotes the best text node to spc-item--quote-write + SplitText chars.
-//
-//   spc-clip-done       added on clip animation complete (removes CSS clip-path)
-//
-// Parallax classes (data attrs):
-//   spc-parallax        root parallax element
-//   spc-parallax--img   oversized image for parallax
-//   spc-parallax--block block offset parallax
-//   spc-parallax--y     move on Y axis   (data-spc-parallax="<value>")
-//   spc-parallax--x     move on X axis
-//   spc-parallax--scale scale parallax
-//   spc-parallax--reverse reverse direction
-//   spc-parallax--trigger  use nearest .spc-parallax-wrap as scroll trigger
-//   spc-parallax-wrap   scroll trigger container for spc-parallax--trigger
-// ==========================================================================
-
 (function () {
     if (typeof gsap === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
     if (typeof SplitText !== 'undefined') gsap.registerPlugin(SplitText);
 
-    // ------------------------------------------------------------------
-    // 0. Quote "writing" helper promotion (runs before SplitText)
-    //    Add `spc-quote-write` to any element; we will find the best text
-    //    node and prepare it for SplitText chars + animation.
-    // ------------------------------------------------------------------
     if (typeof SplitText !== 'undefined') {
         document.querySelectorAll('.spc-quote-write').forEach(function (host) {
-            // Prefer a direct <blockquote> or <p> child; otherwise use host.
             var target =
                 host.matches('blockquote, p') ? host :
                 (host.querySelector('blockquote') || host.querySelector('p') || host);
-
-            // Avoid splitting a wrapper that contains multiple complex nodes.
-            // If host contains a blockquote/p, we split that text node only.
             target.classList.add('spc-item', 'spc-item--quote-write', 'spc-split', 'spc-split--chars');
         });
     }
 
-    // ------------------------------------------------------------------
-    // 1. SplitText — text line / char splitting
-    // ------------------------------------------------------------------
     if (typeof SplitText !== 'undefined') {
         document.querySelectorAll('.spc-split').forEach(function (el) {
             if (el.classList.contains('spc-split--lines')) {
@@ -83,7 +24,6 @@
                     new SplitText(el, { type: 'lines', linesClass: 'spc-line', aria: 'none' });
                 }
             } else if (el.classList.contains('spc-split--chars')) {
-                // Quote writing: chars only (no line wrappers) to preserve layout + link underlines
                 if (el.classList.contains('spc-item--quote-write')) {
                     new SplitText(el, { type: 'chars', charsClass: 'spc-char', aria: 'none' });
                 } else {
@@ -98,58 +38,32 @@
         });
     }
 
-    // ------------------------------------------------------------------
-    // 2. Runtime class promotion
-    //    spc-block    → spc-item + spc-item--appear
-    //    spc-children → direct children get spc-item + spc-item--rise
-    //
-    //    spc-card-grid → card grids helper:
-    //      - images get spc-item + spc-item--clip (clip reveal)
-    //      - card content gets spc-item + spc-item--appear (fade-in)
-    //
-    //    spc-grid-zoom → grid zoom helper:
-    //      - cards/items fade-in while zooming out (scale to 1), staggered by batch index
-    // ------------------------------------------------------------------
     document.querySelectorAll('.spc-block').forEach(function (el) {
         el.classList.add('spc-item', 'spc-item--appear');
     });
 
-    // Regular children
     document.querySelectorAll('.spc-children > *:not(blockquote)').forEach(function (el) {
         el.classList.add('spc-item', 'spc-item--rise');
     });
 
-    // Card grids (universal helper)
-    // Usage: add class "spc-card-grid" on the parent container of a card grid.
-    // This avoids needing to manually sprinkle spc-item classes in each card.
     document.querySelectorAll('.spc-card-grid').forEach(function (grid) {
-        // Known card patterns across the site
         var cards = grid.querySelectorAll(
             '.about-nav-card, .latest-news-list-card, .news-detail-keep-reading-card'
         );
         if (!cards.length) return;
 
         cards.forEach(function (card) {
-            // Primary image clip (scoped to common wrappers to avoid icons)
             var img = card.querySelector(
                 '.about-nav-card-image img, .latest-news-list-card-image img'
             );
             if (img) img.classList.add('spc-item', 'spc-item--clip');
-
-            // Content fade-in
             var content = card.querySelector('.latest-news-list-card-content');
             if (content) content.classList.add('spc-item', 'spc-item--appear');
-
-            // Headings fade-in (about-nav cards)
             var h5 = card.querySelector('h5');
             if (h5) h5.classList.add('spc-item', 'spc-item--appear');
         });
     });
 
-    // Grid zoom (fade-in + zoom-out) helper
-    // Usage: add class "spc-grid-zoom" on the parent container of a grid.
-    // It will promote known grid card/item elements to `spc-item spc-item--img`.
-    // Animation: scale 1.08→1 + opacity 0→1, staggered via ScrollTrigger.batch index.
     document.querySelectorAll('.spc-grid-zoom').forEach(function (grid) {
         var isLate = grid.classList.contains('spc-trigger--late');
         var items = grid.querySelectorAll(
@@ -162,7 +76,6 @@
         });
     });
 
-    // Blockquote children — wrap with decorative lines
     document.querySelectorAll('.spc-children > blockquote').forEach(function (el) {
         var wrapper = document.createElement('div');
         wrapper.classList.add('spc-bq-wrap');
@@ -181,11 +94,15 @@
         wrapper.classList.add('spc-item', 'spc-item--bq');
     });
 
-    // ------------------------------------------------------------------
-    // 3. GSAP initial states — hide before animation fires
-    // ------------------------------------------------------------------
     var items = document.querySelectorAll('.spc-item');
     if (!items.length) return;
+
+    if (document.querySelectorAll('.spc-item--text.spc-split--lines').length) {
+        gsap.set('.spc-item--text.spc-split--lines', { autoAlpha: 1 });
+    }
+    if (document.querySelectorAll('.spc-item--text.spc-split--chars').length) {
+        gsap.set('.spc-item--text.spc-split--chars', { autoAlpha: 1 });
+    }
 
     if (document.querySelectorAll('.spc-item--text.spc-split--lines .spc-line').length) {
         gsap.set('.spc-item--text.spc-split--lines .spc-line', { y: 30, autoAlpha: 0 });
@@ -194,7 +111,6 @@
         gsap.set('.spc-item--text.spc-split--chars .spc-char', { autoAlpha: 0 });
     }
     if (document.querySelectorAll('.spc-item--quote-write .spc-char').length) {
-        // opacity-only: avoids layout shifts and keeps underlines continuous
         gsap.set('.spc-item--quote-write .spc-char', { autoAlpha: 0 });
     }
     if (document.querySelectorAll('.spc-item--rise').length) {
@@ -222,14 +138,10 @@
         gsap.set('.spc-item--up', { y: '-15%', autoAlpha: 0 });
     }
 
-    // ------------------------------------------------------------------
-    // 4. Animation function — called per item in each batch
-    // ------------------------------------------------------------------
     function animateItem(card, index) {
         var ease  = 'power1.out';
         var delay = index * 0.1;
 
-        // button zoom-in
         if (card.classList.contains('spc-item--btn')) {
             gsap.to(card, {
                 scale: 1, autoAlpha: 1, duration: 1,
@@ -239,7 +151,6 @@
             return;
         }
 
-        // quote writing / typing reveal
         if (card.classList.contains('spc-item--quote-write')) {
             var charsQ = card.querySelectorAll('.spc-char');
             if (charsQ && charsQ.length) {
@@ -252,13 +163,11 @@
                     onComplete: function () { card.classList.add('spc-done'); }
                 });
             } else {
-                // Fallback if SplitText isn't available or didn't run
                 gsap.to(card, { duration: 0.5, ease: ease, autoAlpha: 1, delay: delay });
             }
             return;
         }
 
-        // fade-up
         if (card.classList.contains('spc-item--rise')) {
             gsap.to(card, { duration: 0.7, ease: ease, x: 0, y: 0, delay: delay });
             gsap.to(card, {
@@ -269,13 +178,11 @@
             return;
         }
 
-        // fade-in only
         if (card.classList.contains('spc-item--appear')) {
             gsap.to(card, { duration: 0.5, ease: ease, autoAlpha: 1, delay: delay });
             return;
         }
 
-        // single standalone image — gentle scale + fade
         if (card.classList.contains('spc-item--img')) {
             gsap.to(card, {
                 scale: 1, autoAlpha: 1, duration: 0.9,
@@ -288,7 +195,6 @@
             return;
         }
 
-        // grid/slider images — clip reveal from bottom, staggered by batch index
         if (card.classList.contains('spc-item--clip')) {
             gsap.fromTo(card,
                 { '--spc-clip': '100%' },
@@ -305,7 +211,6 @@
             return;
         }
 
-        // heading text — animate split lines
         if (card.classList.contains('spc-item--text')) {
             if (card.classList.contains('spc-split--lines')) {
                 var lines = card.querySelectorAll('.spc-line');
@@ -319,7 +224,6 @@
             return;
         }
 
-        // blockquote special
         if (card.classList.contains('spc-item--bq')) {
             var bq = card.querySelector('blockquote');
             if (bq) {
@@ -333,24 +237,18 @@
             return;
         }
 
-        // slide from right
         if (card.classList.contains('spc-item--right')) {
             gsap.to(card, { duration: 0.7, ease: ease, x: 0, y: 0, delay: delay });
             gsap.to(card, { duration: 0.5, ease: ease, autoAlpha: 1, delay: delay + 0.1 });
             return;
         }
 
-        // slide from above
         if (card.classList.contains('spc-item--up')) {
             gsap.to(card, { duration: 0.7, ease: ease, x: 0, y: 0, delay: delay });
             gsap.to(card, { duration: 0.5, ease: ease, autoAlpha: 1, delay: delay + 0.1 });
         }
     }
 
-    // ------------------------------------------------------------------
-    // 5. ScrollTrigger batch registration
-    // ------------------------------------------------------------------
-    // Regular items: trigger 100px before viewport edge
     ScrollTrigger.batch('.spc-item:not(.spc-item--hero):not(.spc-trigger--late)', {
         start: 'top bottom-=100',
         once: true,
@@ -359,7 +257,6 @@
         }
     });
 
-    // Late-trigger items: fire when element top hits 65% down the viewport
     ScrollTrigger.batch('.spc-item.spc-trigger--late', {
         start: 'top 65%',
         once: true,
@@ -368,7 +265,6 @@
         }
     });
 
-    // Hero items: trigger as soon as they scroll into view (above-fold)
     ScrollTrigger.batch('.spc-item--hero', {
         start: 'top bottom',
         once: true,
@@ -377,9 +273,6 @@
         }
     });
 
-    // ------------------------------------------------------------------
-    // 6. Parallax system
-    // ------------------------------------------------------------------
     document.querySelectorAll('.spc-parallax').forEach(function (el) {
         var isImg     = el.classList.contains('spc-parallax--img');
         var isBlock   = el.classList.contains('spc-parallax--block');

@@ -38,6 +38,12 @@ video {
   display: inline;
 }
 
+/* SplitText titles/quotes — prevent first-paint flash before GSAP sets lines */
+.spc-item--text.spc-split--lines,
+.spc-item--text.spc-split--chars {
+  opacity: 0;
+}
+
 .full {
   width: 100%;
 }

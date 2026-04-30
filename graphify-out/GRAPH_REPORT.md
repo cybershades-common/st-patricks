@@ -22,30 +22,34 @@
 10. `CanvasGraphics` - 92 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `incrementalUpdate()` --calls--> `log2()`  [EXTRACTED]
+- `executeOpTree()` --calls--> `setFillRGBColor()`  [EXTRACTED]
+  D:\Kailash\st-patricks\wcc\assets\pdf-viewer\build\pdf.js → D:\Kailash\st-patricks\wcc\assets\pdf-viewer\build\pdf.js  _Bridges community 3 → community 4_
+- `getXfaFontWidths()` --calls--> `getXfaFontName()`  [EXTRACTED]
   D:\Kailash\st-patricks\wcc\assets\pdf-viewer\build\pdf.worker.js → D:\Kailash\st-patricks\wcc\assets\pdf-viewer\build\pdf.worker.js  _Bridges community 1 → community 0_
+- `parseExpression()` --calls--> `parseIndex()`  [EXTRACTED]
+  D:\Kailash\st-patricks\wcc\assets\pdf-viewer\build\pdf.worker.js → D:\Kailash\st-patricks\wcc\assets\pdf-viewer\build\pdf.worker.js  _Bridges community 0 → community 14_
 
 ## Communities
 
 ### Community 0 - "Community 0"
 Cohesion: 0
-Nodes (522): pdf.worker.js, A, AbortException, Acrobat, Acrobat7, ADBE_JSConsole, ADBE_JSDebugger, addHTML() (+514 more)
+Nodes (515): pdf.worker.js, A, AbortException, Acrobat, Acrobat7, ADBE_JSConsole, ADBE_JSDebugger, addHTML() (+507 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.01
-Nodes (101): addChildren(), adjustMapping(), AESBaseCipher, Annotation, AnnotationBorderStyle, AnnotationFactory, BaseLocalCache, BasePdfManager (+93 more)
+Nodes (108): addChildren(), adjustMapping(), AESBaseCipher, Annotation, AnnotationBorderStyle, AnnotationFactory, BasePdfManager, Border (+100 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.01
-Nodes (212): pdf.js, AbortException, addFontStyle(), AnnotationElement, AnnotationElementFactory, AnnotationLayer, appendText(), applyBoundingBox() (+204 more)
+Nodes (132): viewer.js, abort(), AnnotationEditorLayerBuilder, AnnotationEditorParams, AnnotationLayerBuilder, AppOptions, AutomationEventBus, backtrackBeforeAllVisibleElements() (+124 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.01
-Nodes (132): viewer.js, abort(), AnnotationEditorLayerBuilder, AnnotationEditorParams, AnnotationLayerBuilder, AppOptions, AutomationEventBus, backtrackBeforeAllVisibleElements() (+124 more)
+Nodes (203): pdf.js, AbortException, addFontStyle(), AnnotationElementFactory, AnnotationLayer, appendText(), applyBoundingBox(), assert() (+195 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.02
-Nodes (16): AnnotationEditor, AnnotationEditorLayer, AnnotationEditorUIManager, AnnotationStorage, BaseRangeReader, bindEvents(), CachedCanvases, CheckboxWidgetAnnotationElement (+8 more)
+Cohesion: 0.01
+Nodes (30): AnnotationEditor, AnnotationEditorLayer, AnnotationEditorUIManager, AnnotationElement, AnnotationStorage, BaseRangeReader, BaseSVGFactory, bindEvents() (+22 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.03
@@ -65,27 +69,27 @@ Nodes (157): libraries.js, A(), Aa(), ab(), advance(), ae(), Animation(), _asser
 
 ### Community 9 - "Community 9"
 Cohesion: 0.02
-Nodes (32): Ascii85Stream, AsciiHexStream, BaseStream, CipherTransform, DecodeStream, decrypt(), decryptAscii(), DecryptStream (+24 more)
+Nodes (34): Ascii85Stream, AsciiHexStream, BaseStream, decodeAndClamp(), DecodeStream, decrypt(), decryptAscii(), DecryptStream (+26 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.01
-Nodes (46): applyAssist(), Arc, Area, ariaLabel(), BooleanElement, Br, Button, Caption (+38 more)
+Cohesion: 0.02
+Nodes (11): parseUrl(), PDFDataRangeTransport, PDFDataTransportStream, PDFDataTransportStreamRangeReader, PDFDocumentProxy, PDFFetchStream, PDFNetworkStream, PDFNodeStream (+3 more)
 
 ### Community 11 - "Community 11"
+Cohesion: 0.02
+Nodes (41): applyAssist(), Arc, Area, ariaLabel(), BooleanElement, Br, Button, Caption (+33 more)
+
+### Community 12 - "Community 12"
 Cohesion: 0.01
 Nodes (1): ConfigNamespace
 
-### Community 12 - "Community 12"
-Cohesion: 0.02
-Nodes (2): TemplateNamespace, XFAFactory
-
 ### Community 13 - "Community 13"
-Cohesion: 0.03
-Nodes (13): Binder, CCITTFaxDecoder, CCITTFaxStream, createText(), Exclude, getRatio(), MetadataParser, Packets (+5 more)
+Cohesion: 0.02
+Nodes (1): TemplateNamespace
 
 ### Community 14 - "Community 14"
-Cohesion: 0.04
-Nodes (3): PDFDocumentProxy, PDFPageProxy, WorkerTransport
+Cohesion: 0.05
+Nodes (13): BaseLocalCache, CFFCompiler, CFFDict, CFFFDSelect, CFFOffsetTracker, CFFParser, CFFPrivateDict, CFFStrings (+5 more)
 
 ### Community 15 - "Community 15"
 Cohesion: 0.04
@@ -97,99 +101,99 @@ Nodes (40): swiper.min.js, a(), applyScaleEffect(), b(), c(), ce(), d(), de() (+
 
 ### Community 17 - "Community 17"
 Cohesion: 0.04
-Nodes (28): main.js, animateMenuText(), closeMenu(), getMenuDirection(), goToSlide(), initAboutReveal(), initFooterGradientFade(), initHeaderAnimations() (+20 more)
+Nodes (5): Binder, CCITTFaxDecoder, CCITTFaxStream, createText(), XFAObject
 
 ### Community 18 - "Community 18"
+Cohesion: 0.04
+Nodes (28): main.js, animateMenuText(), closeMenu(), getMenuDirection(), goToSlide(), initAboutReveal(), initFooterGradientFade(), initHeaderAnimations() (+20 more)
+
+### Community 19 - "Community 19"
+Cohesion: 0.05
+Nodes (5): CFFFont, CMap, convertCidString(), IdentityCMap, IdentityToUnicodeMap
+
+### Community 20 - "Community 20"
 Cohesion: 0.08
 Nodes (21): pdf.sandbox.js, a(), B(), ba(), d(), fa(), G(), I() (+13 more)
 
-### Community 19 - "Community 19"
+### Community 21 - "Community 21"
 Cohesion: 0.07
 Nodes (7): DatasetReader, DatasetXMLParser, isWhiteSpace(), isWhitespaceString(), SimpleXMLParser, XFAParser, XMLParserBase
 
-### Community 20 - "Community 20"
-Cohesion: 0.11
-Nodes (3): CFFCompiler, CFFOffsetTracker, CFFStrings
-
-### Community 21 - "Community 21"
-Cohesion: 0.09
-Nodes (7): AlternateCS, decodeAndClamp(), DeviceRgbCS, IndexedCS, PDFImage, resizeImageMask(), resizeRgbImage()
-
 ### Community 22 - "Community 22"
-Cohesion: 0.16
-Nodes (12): bezier, chordLengthParameterize(), computeMaxError(), createTangent(), find_t(), fitCubic(), fitCurve(), generateAndReport() (+4 more)
+Cohesion: 0.09
+Nodes (5): AlternateCS, ColorSpace, DeviceRgbCS, IndexedCS, resizeRgbImage()
 
 ### Community 23 - "Community 23"
-Cohesion: 0.07
-Nodes (2): CMap, IdentityCMap
-
-### Community 24 - "Community 24"
 Cohesion: 0.08
 Nodes (7): AstArgument, AstBinaryOperation, AstLiteral, AstMin, AstVariable, AstVariableDefinition, ExpressionBuilderVisitor
 
-### Community 25 - "Community 25"
+### Community 24 - "Community 24"
 Cohesion: 0.08
 Nodes (1): LocaleSetNamespace
 
-### Community 26 - "Community 26"
+### Community 25 - "Community 25"
 Cohesion: 0.25
 Nodes (16): venobox.min.js, be(), ce(), de(), ee(), G(), ie(), J() (+8 more)
 
-### Community 27 - "Community 27"
+### Community 26 - "Community 26"
 Cohesion: 0.12
 Nodes (3): PDFWorkerStream, PDFWorkerStreamRangeReader, PDFWorkerStreamReader
 
-### Community 28 - "Community 28"
+### Community 27 - "Community 27"
 Cohesion: 0.13
 Nodes (3): Color, Stipple, Util
 
-### Community 29 - "Community 29"
+### Community 28 - "Community 28"
 Cohesion: 0.13
 Nodes (1): XhtmlNamespace
 
-### Community 30 - "Community 30"
+### Community 29 - "Community 29"
 Cohesion: 0.14
 Nodes (1): ConnectionSetNamespace
 
-### Community 31 - "Community 31"
+### Community 30 - "Community 30"
 Cohesion: 0.21
 Nodes (2): ColorConverters, makeColorComp()
 
-### Community 32 - "Community 32"
-Cohesion: 0.47
-Nodes (1): LinkAnnotationElement
+### Community 31 - "Community 31"
+Cohesion: 0.18
+Nodes (1): Word64
 
-### Community 33 - "Community 33"
+### Community 32 - "Community 32"
 Cohesion: 0.36
 Nodes (1): JpegImage
 
-### Community 34 - "Community 34"
+### Community 33 - "Community 33"
 Cohesion: 0.25
 Nodes (1): ToUnicodeMap
 
-### Community 35 - "Community 35"
+### Community 34 - "Community 34"
 Cohesion: 0.25
 Nodes (1): XFAAttribute
 
-### Community 36 - "Community 36"
+### Community 35 - "Community 35"
 Cohesion: 0.38
 Nodes (1): StructTreeLayerBuilder
 
-### Community 37 - "Community 37"
+### Community 36 - "Community 36"
 Cohesion: 0.53
 Nodes (2): FeatureTest, shadow()
 
-### Community 38 - "Community 38"
-Cohesion: 0.4
-Nodes (2): AES128Cipher, AES256Cipher
+### Community 37 - "Community 37"
+Cohesion: 0.33
+Nodes (1): CFFIndex
 
-### Community 39 - "Community 39"
+### Community 38 - "Community 38"
 Cohesion: 0.4
 Nodes (1): WorkerTask
 
-### Community 40 - "Community 40"
+### Community 39 - "Community 39"
 Cohesion: 0.6
 Nodes (1): ARCFourCipher
+
+### Community 40 - "Community 40"
+Cohesion: 0.4
+Nodes (1): PageSet
 
 ### Community 41 - "Community 41"
 Cohesion: 1
@@ -360,11 +364,11 @@ Nodes (1): who-we-are.php
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `pdf.worker.js` connect `Community 0` to `Community 39`, `Community 1`, `Community 37`, `Community 28`, `Community 19`, `Community 9`, `Community 21`, `Community 23`, `Community 13`, `Community 33`, `Community 20`, `Community 34`, `Community 24`, `Community 40`, `Community 10`, `Community 38`, `Community 12`, `Community 35`, `Community 11`, `Community 30`, `Community 25`, `Community 29`, `Community 27`?**
+- **Why does `pdf.worker.js` connect `Community 0` to `Community 38`, `Community 1`, `Community 36`, `Community 27`, `Community 21`, `Community 9`, `Community 22`, `Community 19`, `Community 17`, `Community 32`, `Community 14`, `Community 37`, `Community 33`, `Community 23`, `Community 39`, `Community 31`, `Community 34`, `Community 11`, `Community 40`, `Community 13`, `Community 12`, `Community 29`, `Community 24`, `Community 28`, `Community 26`?**
   _High betweenness centrality (0.213) - this node is a cross-community bridge._
-- **Why does `pdf.js` connect `Community 2` to `Community 14`, `Community 4`, `Community 22`, `Community 32`, `Community 31`?**
+- **Why does `pdf.js` connect `Community 3` to `Community 4`, `Community 10`, `Community 30`?**
   _High betweenness centrality (0.032) - this node is a cross-community bridge._
-- **Why does `ConfigNamespace` connect `Community 11` to `Community 0`, `Community 20`?**
+- **Why does `ConfigNamespace` connect `Community 12` to `Community 0`, `Community 1`?**
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **What connects `animations.js`, `search-data.js`, `Gruntfile.js` to the rest of the system?**
   _28 weakly-connected nodes found - possible documentation gaps or missing edges._
