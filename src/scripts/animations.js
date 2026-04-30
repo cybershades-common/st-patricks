@@ -13,6 +13,7 @@
 //   spc-item--up        slide in from above: y -15%→0 + fade
 //   spc-item--btn       button zoom-in: scale 0.8→1 + opacity 0→1, smooth pop
 //   spc-item--hero      above-fold item: trigger fires as soon as it enters view
+//   spc-item--quote-write "writing" quote: SplitText chars reveal (typing feel)
 //
 // Trigger modifiers (combine with any spc-item):
 //   spc-trigger--late   fires when element top hits 65% down viewport (element more visible first)
@@ -25,6 +26,10 @@
 //   spc-split--chars    split into individual characters
 //   spc-line            generated line wrapper (set by SplitText linesClass)
 //   spc-char            generated char wrapper (set by SplitText charsClass)
+//
+// Quote helper:
+//   spc-quote-write     add to any quote container OR the text element itself;
+//                       script promotes the best text node to spc-item--quote-write + SplitText chars.
 //
 //   spc-clip-done       added on clip animation complete (removes CSS clip-path)
 //
@@ -46,6 +51,24 @@
     if (typeof SplitText !== 'undefined') gsap.registerPlugin(SplitText);
 
     // ------------------------------------------------------------------
+    // 0. Quote "writing" helper promotion (runs before SplitText)
+    //    Add `spc-quote-write` to any element; we will find the best text
+    //    node and prepare it for SplitText chars + animation.
+    // ------------------------------------------------------------------
+    if (typeof SplitText !== 'undefined') {
+        document.querySelectorAll('.spc-quote-write').forEach(function (host) {
+            // Prefer a direct <blockquote> or <p> child; otherwise use host.
+            var target =
+                host.matches('blockquote, p') ? host :
+                (host.querySelector('blockquote') || host.querySelector('p') || host);
+
+            // Avoid splitting a wrapper that contains multiple complex nodes.
+            // If host contains a blockquote/p, we split that text node only.
+            target.classList.add('spc-item', 'spc-item--quote-write', 'spc-split', 'spc-split--chars');
+        });
+    }
+
+    // ------------------------------------------------------------------
     // 1. SplitText — text line / char splitting
     // ------------------------------------------------------------------
     if (typeof SplitText !== 'undefined') {
@@ -60,12 +83,17 @@
                     new SplitText(el, { type: 'lines', linesClass: 'spc-line', aria: 'none' });
                 }
             } else if (el.classList.contains('spc-split--chars')) {
-                new SplitText(el, {
-                    type: 'chars,lines',
-                    linesClass: 'spc-line',
-                    charsClass: 'spc-char',
-                    aria: 'none'
-                });
+                // Quote writing: chars only (no line wrappers) to preserve layout + link underlines
+                if (el.classList.contains('spc-item--quote-write')) {
+                    new SplitText(el, { type: 'chars', charsClass: 'spc-char', aria: 'none' });
+                } else {
+                    new SplitText(el, {
+                        type: 'chars,lines',
+                        linesClass: 'spc-line',
+                        charsClass: 'spc-char',
+                        aria: 'none'
+                    });
+                }
             }
         });
     }
@@ -146,6 +174,10 @@
     if (document.querySelectorAll('.spc-item--text.spc-split--chars .spc-char').length) {
         gsap.set('.spc-item--text.spc-split--chars .spc-char', { autoAlpha: 0 });
     }
+    if (document.querySelectorAll('.spc-item--quote-write .spc-char').length) {
+        // opacity-only: avoids layout shifts and keeps underlines continuous
+        gsap.set('.spc-item--quote-write .spc-char', { autoAlpha: 0 });
+    }
     if (document.querySelectorAll('.spc-item--rise').length) {
         gsap.set('.spc-item--rise', { y: 30, autoAlpha: 0 });
     }
@@ -185,6 +217,25 @@
                 ease: 'back.out(1.1)', delay: delay, force3D: true,
                 onComplete: function () { card.classList.add('spc-done'); }
             });
+            return;
+        }
+
+        // quote writing / typing reveal
+        if (card.classList.contains('spc-item--quote-write')) {
+            var charsQ = card.querySelectorAll('.spc-char');
+            if (charsQ && charsQ.length) {
+                gsap.to(charsQ, {
+                    autoAlpha: 1,
+                    duration: 0.25,
+                    ease: 'none',
+                    stagger: 0.015,
+                    delay: delay,
+                    onComplete: function () { card.classList.add('spc-done'); }
+                });
+            } else {
+                // Fallback if SplitText isn't available or didn't run
+                gsap.to(card, { duration: 0.5, ease: ease, autoAlpha: 1, delay: delay });
+            }
             return;
         }
 

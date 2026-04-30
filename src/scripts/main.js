@@ -794,10 +794,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const heroContent = document.querySelector('.hero-content');
         const heroTextContainer = document.querySelector('.hero-text');
 
-        // Skip hardcoded animations if hero is driven by the SPC class-based animation system
-        // (prevents double-animating elements that are already marked as spc-item / spc-children).
-        if (heroContent?.querySelector?.('.spc-item, .spc-children') ||
-            heroTextContainer?.querySelector?.('.spc-item, .spc-children')) {
+        // Skip hardcoded animations if hero uses data-gsap-children (variant-based animations)
+        if (heroContent?.hasAttribute('data-gsap-children') ||
+            heroTextContainer?.hasAttribute('data-gsap-children')) {
             // Still animate hero media and gradient if needed
             const heroMedia = document.querySelector('.hero-media-wrapper');
             const heroGradient = document.querySelector('.hero-gradient');
