@@ -283,7 +283,7 @@
                     <div class="news-detail-hero-navigation">
                         <a href="#" class="news-detail-hero-back-link"> <i class="fa-solid fa-arrow-left"></i> All
                             News</a>
-                        <div class="news-detail-hero-category" data-gsap-children='{"div":{"type":"fade-in"}}'>
+                        <div class="news-detail-hero-category spc-children">
                             <a href="#" class="news-detail-hero-category-bold">News</a>
                             <span>Sport</span>
                         </div>
@@ -323,7 +323,7 @@
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3">
                         <!-- Lead Paragraph -->
-                        <div class="news-detail-lead" data-gsap-children='{"p":{"type":"fade-up"}}'>
+                        <div class="news-detail-lead spc-children">
                             <p>This is a significant milestone in the school life of our students and the
                                 sanctity of the occasion is celebrated with the Black Tie Liturgy.</p>
                         </div>
@@ -332,7 +332,7 @@
                         <div class="news-detail-divider"></div>
 
                         <!-- Body Paragraphs -->
-                        <div class="news-detail-body" data-gsap-children='{"p":{"type":"fade-up","stagger":"0.2"}}'>
+                        <div class="news-detail-body spc-children">
                             <p>During the Liturgy, we reflected on the letter St Paul wrote to the Corinthians
                                 about LOVE. Dr Lavorato broke down the meaning of agape love, explaining that as
                                 leaders of the College, our Year 12 students are called to think before they act
@@ -350,13 +350,11 @@
 
                         <!-- Photo Gallery Grid -->
                         <div class="news-detail-gallery">
-                            <div class="news-detail-gallery-grid row"
-                                data-gsap-children='{".news-detail-gallery-item":{"type":"card-row-stagger","start":"top 70%"}}'
-                                data-gsap-children-mobile='{".news-detail-gallery-item":{"type":"card-row-stagger","start":"top 80%"}}'>
+                            <div class="news-detail-gallery-grid row">
 
                                 <div class="col-md-4 col-6">
                                     <div class="news-detail-gallery-item">
-                                        <img src="assets/images/m3.jpg" alt="Gallery Image" class="w-100 h-100"
+                                        <img src="assets/images/m3.jpg" alt="Gallery Image" class="w-100 h-100 spc-item spc-item--clip"
                                             loading="lazy">
                                         <div class="news-detail-gallery-overlay">
                                             <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
@@ -370,7 +368,7 @@
                                 <div class="col-md-4 col-6">
                                     <div class="news-detail-gallery-item ">
 
-                                        <img src="assets/images/m2.jpg" alt="Gallery Image" class="w-100 h-100"
+                                        <img src="assets/images/m2.jpg" alt="Gallery Image" class="w-100 h-100 spc-item spc-item--clip"
                                             loading="lazy">
                                         <div class="news-detail-gallery-overlay">
                                             <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
@@ -383,7 +381,7 @@
                                 </div>
                                 <div class="col-md-4 col-6 ">
                                     <div class="news-detail-gallery-item ">
-                                        <img src="assets/images/m4.jpg" alt="Gallery Image" class="w-100 h-100"
+                                        <img src="assets/images/m4.jpg" alt="Gallery Image" class="w-100 h-100 spc-item spc-item--clip"
                                             loading="lazy">
                                         <div class="news-detail-gallery-overlay">
                                             <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
@@ -517,9 +515,8 @@
 
                     <div class="col-lg-6 offset-lg-3">
                         <!-- Quote Section -->
-                        <div class="news-detail-quote"
-                            data-gsap-children='{"p":{"type":"word-reveal"}, "svg":{"type":"zoom-in"}, "img":{"type":"image-clip-left"}}'>
-                            <div class="news-detail-quote-icon">
+                        <div class="news-detail-quote">
+                            <div class="news-detail-quote-icon spc-item spc-item--appear">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="54" height="40" viewBox="0 0 54 40"
                                     fill="none">
                                     <path
@@ -527,18 +524,18 @@
                                         fill="#E4DECE" />
                                 </svg>
                             </div>
-                            <p class="news-detail-quote-text">We strive to animate our delivery of learning,
+                            <p class="news-detail-quote-text spc-item spc-item--rise">We strive to animate our delivery of learning,
                                 teaching and wellbeing, as one which is innovative and creative, underpinned by
                                 contemporary and relevant pedagogy.</p>
                             <div class="news-detail-quote-decoration">
                                 <img src="assets/images/Tie.png" alt="Decorative Tie"
-                                    style="width: 12.5rem; height: 0.625rem;" loading="lazy"
+                                    style="width: 12.5rem; height: 0.625rem;" class="spc-item spc-item--clip" loading="lazy"
                                     onerror="this.style.display='none'">
                             </div>
                         </div>
 
                         <!-- More Body Paragraphs -->
-                        <div class="news-detail-body" data-gsap-children='{"p":{"type":"fade-up"}}'>
+                        <div class="news-detail-body spc-children">
                             <p>During the Liturgy, we reflected on the letter St Paul wrote to the Corinthians
                                 about
                                 LOVE. Dr Lavorato broke down the meaning of agape love, explaining that as
@@ -553,11 +550,10 @@
                         </div>
 
                         <!-- Buttons -->
-                        <div class="news-detail-buttons"
-                            data-gsap-children='{"button":{"type":"zoom-in","stagger":"0.2"}, "a":{"type":"zoom-in","stagger":"0.3"}}'>
-                            <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue">Primary CTA
+                        <div class="news-detail-buttons">
+                            <a href="#" class="btn-rounded-large btn-rounded-large-outline-blue spc-item spc-item--btn">Primary CTA
                                 Button</a>
-                            <a href="#" class="btn-rounded-large-no-border">
+                            <a href="#" class="btn-rounded-large-no-border spc-item spc-item--btn">
                                 Secondary CTA Button
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -570,9 +566,8 @@
                         <!-- Footer Section -->
                         <div class="news-detail-footer">
                             <div class="news-detail-divider"></div>
-                            <div class="news-detail-footer-content"
-                                data-gsap-children='{"a":{"type":"fade-in","stagger":"0.12","duration":"0.6","ease":"power3.out","start":"top 90%"}}'>
-                                <a href="latest-news.html" class="news-detail-footer-back">
+                            <div class="news-detail-footer-content">
+                                <a href="latest-news.html" class="news-detail-footer-back spc-item spc-item--btn">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15 10H5M5 10L10 5M5 10L10 15" stroke="currentColor" stroke-width="1.5"
@@ -581,7 +576,7 @@
                                     <span>All News</span>
                                 </a>
                                 <div class="news-detail-footer-social">
-                                    <a href="#" aria-label="Facebook">
+                                    <a href="#" aria-label="Facebook" class="spc-item spc-item--btn">
                                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -589,7 +584,7 @@
                                                 fill="currentColor" />
                                         </svg>
                                     </a>
-                                    <a href="#" aria-label="Instagram">
+                                    <a href="#" aria-label="Instagram" class="spc-item spc-item--btn">
                                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -597,7 +592,7 @@
                                                 fill="currentColor" />
                                         </svg>
                                     </a>
-                                    <a href="#" aria-label="LinkedIn">
+                                    <a href="#" aria-label="LinkedIn" class="spc-item spc-item--btn">
                                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -618,17 +613,13 @@
             <div class="gradient-circle right-bottom" style="opacity: 1; visibility: inherit;"></div>
             <div class="container-fluid">
                 <div class="news-detail-keep-reading-inner">
-                    <div class="news-detail-keep-reading-header" data-gsap-children='{"h3":{"type":"fade-up"}}'>
-                        <h3 class="news-detail-keep-reading-title">Keep Reading</h3>
+                    <div class="news-detail-keep-reading-header">
+                        <h3 class="news-detail-keep-reading-title spc-item spc-item--rise">Keep Reading</h3>
                     </div>
-                    <div class="news-detail-keep-reading-cards" data-gsap-children='{
-                        ".latest-news-list-card":{"type":"card-row-stagger", "start":"top 70%", "stagger":"0.15"}
-                    }' data-gsap-children-mobile='{
-                        ".latest-news-list-card":{"type":"card-row-stagger", "start":"top 80%", "stagger":"0.2"}
-                    }'>
+                    <div class="news-detail-keep-reading-cards spc-card-grid">
                         <article class="news-detail-keep-reading-card latest-news-list-card">
                             <div class="latest-news-list-card-image">
-                                <img src="assets/images/m3.jpg" alt="News Article" class="w-100 h-100" loading="lazy"
+                                <img src="assets/images/m3.jpg" alt="News Article" class="w-100 h-100 spc-item spc-item--clip" loading="lazy"
                                     onerror="this.style.display='none'">
                             </div>
                             <div class="latest-news-list-card-content">
@@ -641,7 +632,7 @@
                         </article>
                         <article class="news-detail-keep-reading-card latest-news-list-card">
                             <div class="latest-news-list-card-image">
-                                <img src="assets/images/m2.jpg" alt="News Article" class="w-100 h-100" loading="lazy"
+                                <img src="assets/images/m2.jpg" alt="News Article" class="w-100 h-100 spc-item spc-item--clip" loading="lazy"
                                     onerror="this.style.display='none'">
                             </div>
                             <div class="latest-news-list-card-content">
@@ -654,7 +645,7 @@
                         </article>
                         <article class="news-detail-keep-reading-card latest-news-list-card">
                             <div class="latest-news-list-card-image">
-                                <img src="assets/images/m4.jpg" alt="News Article" class="w-100 h-100" loading="lazy"
+                                <img src="assets/images/m4.jpg" alt="News Article" class="w-100 h-100 spc-item spc-item--clip" loading="lazy"
                                     onerror="this.style.display='none'">
                             </div>
                             <div class="latest-news-list-card-content">
@@ -668,7 +659,7 @@
                         </article>
                         <article class="news-detail-keep-reading-card latest-news-list-card">
                             <div class="latest-news-list-card-image">
-                                <img src="assets/images/m3.jpg" alt="News Article" class="w-100 h-100" loading="lazy"
+                                <img src="assets/images/m3.jpg" alt="News Article" class="w-100 h-100 spc-item spc-item--clip" loading="lazy"
                                     onerror="this.style.display='none'">
                             </div>
                             <div class="latest-news-list-card-content">
@@ -697,8 +688,8 @@
                 <div class="cta-block-wrap">
                     <div class="row ">
                         <div class="col-xl-5 col-lg-6 col-md-6 cta-content">
-                            <div class="cta-heading-wrapper" data-gsap-children='{"h1":{"type":"fade-up"}}'>
-                                <h1>Begin your journey and let your light shine
+                            <div class="cta-heading-wrapper">
+                                <h1 class="spc-item spc-item--text spc-split spc-split--lines">Begin your journey and let your light shine
                                 </h1>
                             </div>
 
@@ -706,9 +697,8 @@
                     </div>
                     <div class="row">
                         <div class="col-xl-4 offset-xl-6 col-lg-6 col-md-6 offset-md-6 offset-lg-6">
-                            <div class="cta-text-wrapper"
-                                data-gsap-children='{"p":{"type":"fade-up"}, "a":{"type":"zoom-in", "stagger":"0.5", "start":"top 100%"}}'>
-                                <p>Every boy who walks through our gates begins a
+                            <div class="cta-text-wrapper">
+                                <p class="spc-item spc-item--rise">Every boy who walks through our gates begins a
                                     journey shaped by
                                     faith,
                                     friendship and challenge. <br>This is where confidence grows, talents emerge and
@@ -718,9 +708,9 @@
 
 
                                     <a href="#"
-                                        class="btn-rounded-large-solid cta-button-solid-white btn-book-tour">Book a
+                                        class="btn-rounded-large-solid cta-button-solid-white btn-book-tour spc-item spc-item--btn">Book a
                                         Tour</a>
-                                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-white">Enquire
+                                    <a href="#" class="btn-rounded-large btn-rounded-large-outline-white spc-item spc-item--btn">Enquire
                                         Today</a>
                                 </div>
                             </div>
@@ -1113,6 +1103,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 
     <script defer src="src/scripts/animations.js"></script>
     <script defer src="src/scripts/search-data.js"></script>

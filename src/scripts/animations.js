@@ -74,6 +74,10 @@
     // 2. Runtime class promotion
     //    spc-block    → spc-item + spc-item--appear
     //    spc-children → direct children get spc-item + spc-item--rise
+    //
+    //    spc-card-grid → card grids helper:
+    //      - images get spc-item + spc-item--clip (clip reveal)
+    //      - card content gets spc-item + spc-item--appear (fade-in)
     // ------------------------------------------------------------------
     document.querySelectorAll('.spc-block').forEach(function (el) {
         el.classList.add('spc-item', 'spc-item--appear');
@@ -82,6 +86,33 @@
     // Regular children
     document.querySelectorAll('.spc-children > *:not(blockquote)').forEach(function (el) {
         el.classList.add('spc-item', 'spc-item--rise');
+    });
+
+    // Card grids (universal helper)
+    // Usage: add class "spc-card-grid" on the parent container of a card grid.
+    // This avoids needing to manually sprinkle spc-item classes in each card.
+    document.querySelectorAll('.spc-card-grid').forEach(function (grid) {
+        // Known card patterns across the site
+        var cards = grid.querySelectorAll(
+            '.about-nav-card, .latest-news-list-card, .news-detail-keep-reading-card'
+        );
+        if (!cards.length) return;
+
+        cards.forEach(function (card) {
+            // Primary image clip (scoped to common wrappers to avoid icons)
+            var img = card.querySelector(
+                '.about-nav-card-image img, .latest-news-list-card-image img'
+            );
+            if (img) img.classList.add('spc-item', 'spc-item--clip');
+
+            // Content fade-in
+            var content = card.querySelector('.latest-news-list-card-content');
+            if (content) content.classList.add('spc-item', 'spc-item--appear');
+
+            // Headings fade-in (about-nav cards)
+            var h5 = card.querySelector('h5');
+            if (h5) h5.classList.add('spc-item', 'spc-item--appear');
+        });
     });
 
     // Blockquote children — wrap with decorative lines
