@@ -14,6 +14,9 @@
 //   spc-item--btn       button zoom-in: scale 0.8→1 + opacity 0→1, smooth pop
 //   spc-item--hero      above-fold item: trigger fires as soon as it enters view
 //
+// Trigger modifiers (combine with any spc-item):
+//   spc-trigger--late   fires when element top hits 65% down viewport (element more visible first)
+//
 //   spc-children        parent shortcut — every direct child → spc-item spc-item--rise
 //   spc-block           standalone block shortcut → spc-item spc-item--appear at runtime
 //
@@ -40,6 +43,7 @@
 (function () {
     if (typeof gsap === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
+    if (typeof SplitText !== 'undefined') gsap.registerPlugin(SplitText);
 
     // ------------------------------------------------------------------
     // 1. SplitText — text line / char splitting
@@ -246,8 +250,17 @@
     // 5. ScrollTrigger batch registration
     // ------------------------------------------------------------------
     // Regular items: trigger 100px before viewport edge
-    ScrollTrigger.batch('.spc-item:not(.spc-item--hero)', {
+    ScrollTrigger.batch('.spc-item:not(.spc-item--hero):not(.spc-trigger--late)', {
         start: 'top bottom-=100',
+        once: true,
+        onEnter: function (batch) {
+            batch.forEach(function (card, index) { animateItem(card, index); });
+        }
+    });
+
+    // Late-trigger items: fire when element top hits 65% down the viewport
+    ScrollTrigger.batch('.spc-item.spc-trigger--late', {
+        start: 'top 65%',
         once: true,
         onEnter: function (batch) {
             batch.forEach(function (card, index) { animateItem(card, index); });
