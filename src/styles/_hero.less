@@ -251,6 +251,8 @@
       padding: 5rem 0 0;
       height: auto;
       min-height: auto;
+      // Safe static gradient - no filter:blur() so no iOS freeze
+      background: radial-gradient(ellipse 80% 60% at -10% 110%, rgba(255, 240, 42, 0.35) 0%, transparent 70%);
     }
   }
 
