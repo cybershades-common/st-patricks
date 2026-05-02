@@ -233,6 +233,11 @@
   }
 }
 
+// ─── Mobile hero gradient position controls ───────────────────────
+@mobile-gradient-x: 15%;   // left ← → right
+@mobile-gradient-y: 110%;  // top  ↑ ↓ bottom  (>100% = below section edge)
+// ──────────────────────────────────────────────────────────────────
+
 @media (max-width: 991px) {
   // Hide gradient on mobile - massive blur filter causes iOS Safari freeze
   .hero-gradient {
@@ -253,9 +258,7 @@
       min-height: auto;
     }
 
-    // Gradient on the section so it reaches the bottom edge flush with hero-media
-    // radial-gradient layered over the solid bg — no filter:blur() so no iOS freeze
-    background: radial-gradient(ellipse 170% 80% at 15% 110%, rgba(255, 240, 42, 0.95) 0%, transparent 60%), var(--primary-gold-4);
+    background: radial-gradient(ellipse 170% 80% at @mobile-gradient-x @mobile-gradient-y, rgba(255, 240, 42, 0.95) 0%, transparent 60%), var(--primary-gold-4);
   }
 
   .hero .container-fluid {
