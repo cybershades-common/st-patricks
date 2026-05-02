@@ -251,9 +251,11 @@
       padding: 5rem 0 0;
       height: auto;
       min-height: auto;
-      // Safe static gradient - no filter:blur() so no iOS freeze
-      background: radial-gradient(ellipse 80% 60% at -10% 110%, rgba(255, 240, 42, 0.35) 0%, transparent 70%);
     }
+
+    // Gradient on the section so it reaches the bottom edge flush with hero-media
+    // radial-gradient layered over the solid bg — no filter:blur() so no iOS freeze
+    background: radial-gradient(ellipse 170% 80% at 15% 60%, rgba(255, 240, 42, 0.95) 0%, transparent 60%), var(--primary-gold-4);
   }
 
   .hero .container-fluid {
