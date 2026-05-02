@@ -1975,7 +1975,7 @@ body.search-is-open {
   }
   .hero {
     padding-top: 7.5rem;
-    background: radial-gradient(ellipse 170% 80% at 15% 60%, rgba(255, 240, 42, 0.95) 0%, transparent 60%), var(--primary-gold-4);
+    background: radial-gradient(ellipse 170% 80% at 15% 110%, rgba(255, 240, 42, 0.95) 0%, transparent 60%), var(--primary-gold-4);
   }
   .hero .hero-title {
     font-size: 6.375rem;
