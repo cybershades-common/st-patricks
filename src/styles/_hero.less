@@ -258,7 +258,19 @@
       min-height: auto;
     }
 
-    background: radial-gradient(ellipse 170% 80% at @mobile-gradient-x @mobile-gradient-y, rgba(255, 240, 42, 0.95) 0%, transparent 60%), var(--primary-gold-4);
+    background: var(--primary-gold-4);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 170% 80% at @mobile-gradient-x @mobile-gradient-y, rgba(255, 240, 42, 0.95) 0%, transparent 60%);
+      opacity: 0;
+      animation: mobile-hero-gradient-in 1.2s ease-out forwards;
+      animation-delay: 1.9s;
+      pointer-events: none;
+      z-index: 1;
+    }
   }
 
   .hero .container-fluid {
@@ -343,4 +355,9 @@
       }
     }
   }
+}
+
+@keyframes mobile-hero-gradient-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
